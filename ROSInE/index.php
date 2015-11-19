@@ -7,11 +7,11 @@
 	*  This program is free software; you can redistribute it and/or modify it *
 	*  under the terms of the GNU General Public License as published by the   *
 	*  Free Software Foundation; version 2 of the License.                     *
-	*  date of this file: 2015-11-14											*
+	*  date of this file: 2015-11-19  										   *
 	\**************************************************************************/
 
 
-$GLOBALS['phpgw_info']['flags']['currentapp'] = 'invoice';
+$GLOBALS['phpgw_info']['flags']['currentapp'] = 'rosine';
 include('../header.inc.php');
 // importierung von Stylesheets
 echo ' <link rel="stylesheet" type="text/css" href="invoice.css" media="all">';
