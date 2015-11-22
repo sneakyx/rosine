@@ -12,7 +12,7 @@
 
 
 $GLOBALS['phpgw_info']['flags']['currentapp'] = 'rosine';
-include('../header.inc.php');
+include('inc/header.inc.php');
 // importierung von Stylesheets
 echo ' <link rel="stylesheet" type="text/css" href="rosine.css" media="all">';
 
