@@ -1,10 +1,9 @@
 <?
 echo'
 <a href="#">
-<div>
-ROSInE
-<span></span>
-</div>
+<h1>ROSInE</h1>
+
+
 </a>
 ';
 
