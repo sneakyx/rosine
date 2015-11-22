@@ -1,8 +1,11 @@
 @CHARSET "UTF-8";
 a.rosine_header {
   text-align: center;
-  font-size: 40px; }
+  font-size: 30px; }
 div.rosine_header {
 	align: center;
-	border: 1px dotted;
+	border: 2px dotted black;
+}
+p.rosine_header {
+	align: center;
 }
