@@ -3,5 +3,6 @@ a.rosine_header {
   text-align: center;
   font-size: 40px; }
 div.rosine_header {
-	align="center"
+	align: center;
+	border: 1px dotted;
 }
