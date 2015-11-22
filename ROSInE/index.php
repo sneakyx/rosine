@@ -12,7 +12,7 @@
 
 
 $GLOBALS['phpgw_info']['flags']['currentapp'] = 'rosine';
-include('inc/header.inc.php');
+include('../header.inc.php');
 // importierung von Stylesheets
 echo ' <link rel="stylesheet" type="text/css" href="rosine.css" media="all">';
 
@@ -20,7 +20,7 @@ echo ' <link rel="stylesheet" type="text/css" href="rosine.css" media="all">';
 // Eigene Verbindung zur Datenbank
 @$db = mysql_connect($egw_info["server"]["db_host"], $egw_info["server"]["db_user"], $egw_info["server"]["db_pass"]) OR die("Fehler mit Datenbank");
 @mysql_select_db($egw_info["server"]["db_name"],$db) OR die ("Falsche Datenbank!");
-
+include 'inc/header.inc.php';
 
 ?>
 

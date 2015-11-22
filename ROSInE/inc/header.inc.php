@@ -1,4 +1,5 @@
 <?
+echo'
 <a href="#">
 <svg viewBox="0 0 100 100" class="icon">
 <use xlink:href="#leaf">
@@ -10,7 +11,7 @@ ROSInE
 <span></span>
 </div>
 </a>
-
+';
 
 
 ?>
