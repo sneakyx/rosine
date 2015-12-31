@@ -9,7 +9,7 @@ body {
 	background: #FAFAFA;
 	font-family: "Palatino Linotype","Book Antiqua", Palatino, serif;
 }
-header, nav, footer article, section, aside{
+header, nav, footer article, section, aside, .rosine_input {
 	clear: left;
 }
 a {
@@ -232,4 +232,60 @@ aside{
 	padding: 2px 3px;
 	background:#B0CFE1;
 }
+#rosine_input_wrap{
+	margin: 20px 0;
+	height: 80%;
+}
+.rosine_input {
+	border: 1px solid #679FD2;
+	border-radius: 10px;
+	background-color:#CDCDCD;
+	width:85%;
+	margin:auto;
+	height: 16em;
+	padding:5px;
+}
+.rosine_input_header {
+	font-size: 2em;
+	font-weight: bold;
+	margin: auto;
+	text-align: center;
+	padding: 0.25em;
+	background: #679FD2;
+	border-radius: 10px;
+}
+.rosine_input textarea{
+	background-color: #FAFAFA;
+	border-radius: 10px;
+}
+.rosine_input input {
+	background-color: #FAFAFA;
+	border-radius: 5px;
+}
 
+#rosine_input_right {
+	float:right;	
+	margin-top: 5px;
+}
+#rosine_input_left {
+	float:left;	
+	margin-top: 5px;
+}
+.rosine_back{
+	border-radius: 5px;
+	float: right;
+	border-bottom: 1px solid #000;
+	padding: 3px;
+	background-color: #FAFAFA;
+	border-right: 1px solid #000;
+	font-family: Arial,nonserif;
+	margin-top: 5px;
+	text-align: left;
+}
+.rosine_button {
+	float: left;
+	font-size: 2em;
+	width: 50%;
+	text-align: right;
+	
+}
