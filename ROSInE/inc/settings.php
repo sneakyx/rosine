@@ -14,12 +14,22 @@
 @$rosine_db = mysql_connect($egw_info["server"]["db_host"], $egw_info["server"]["db_user"], $egw_info["server"]["db_pass"]) OR die("Fehler mit Datenbank");
 @mysql_select_db($egw_info["server"]["db_name"],$rosine_db) OR die ("Falsche Datenbank!");
 $rosine_db_prefix="rosine_";
-
+mysql_query("SET NAMES 'utf8'");
 function trimhtml (&$value, $key) {
 	$value = trim(htmlspecialchars($value, ENT_QUOTES));
 }
 array_walk ($_GET, 'trimhtml');
 array_walk ($_POST, 'trimhtml');
 
+//for error-and OK-Bar (if nothing to show, they don't show up!
+$error="";
+$OK="";
+
+// some important things
+$currency="€";
+$items_per_page="3";
+
 $rosine_db_query['insert_article']="INSERT INTO ".$rosine_db_prefix."articles (ART_NUMBER, ART_UNIT, ART_NAME, ART_PRICE, ART_TAX, ART_STOCKNR, ART_INSTOCK, ART_NOTE, GENERATED, CHANGED) VALUES ";
+$rosine_db_query['get_articles']="SELECT * FROM ".$rosine_db_prefix."articles WHERE ";
+$rosine_db_query['get_article_ammount']="SELECT COUNT(*) FROM ".$rosine_db_prefix."articles WHERE ";
 ?>

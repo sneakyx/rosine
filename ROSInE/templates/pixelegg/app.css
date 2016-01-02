@@ -289,15 +289,49 @@ aside{
 	text-align: right;
 	
 }
-#rosine_added {
+#rosine_OK {
 	margin:auto;
 	background-color:green;
 }
-#rosine_added p, #rosine_error p {
+#rosine_OK p, #rosine_error p {
 	text-align: center;
 }
 
 #rosine_error {
 	margin: auto;
 	background-color: red;
+}
+#rosine_tabelle {
+	border:1px solid black;
+	margin: 10px auto;
+	padding: 5px;
+	background-color: #b0cfe1;
+
+}
+#rosine_tabelle td{
+	padding: 2px;
+	border: 1px solid grey;
+	text-align: right;
+	font-size: 1.2em; 
+	border-radius: 5px;
+}
+
+#rosine_tabelle tr:hover{
+	background-color:#679fd2;
+}
+#rosine_tabelle th{
+	padding: 2px;
+	border: 1px solid grey;
+	text-align: center;
+	font-size: 1.2em; 
+}
+#rosine_table_note {
+	text-align:center;
+	margin: 5px;
+}
+#rosine_table_note a{
+	text-decoration: none;
+}
+#rosine_table_note a:hover {
+	background-color: grey;
 }

@@ -19,10 +19,3 @@
 		</div>
 
 	<div id="bottom"></div>
-
-<div id="rosine_OK">
-		<p>{$OK}</p>
-</div>
-<div id="rosine_error">
-		<p>{$error}</p>
-</div>

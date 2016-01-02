@@ -24,6 +24,8 @@ $lang['taxes']="Steuersätze";
 
 // for articles
 $lang['insert_new_article']       = "Neuen Artikel einfügen";
+$lang['insert_again_new_article'] = "Weiteren Artikel einfügen";
+$lang['change_article'] = "Artikel ändern";
 $lang['notes'] = "Hinweise";
 $lang['back']        = "zurück";
 $lang['article_number']="Artikelnummer";
@@ -31,7 +33,6 @@ $lang['unity']="Einheit";
 $lang['article_name']="Artikelbezeichnung";
 $lang['price']="Preis";
 $lang['tax']='MwSt';
-$lang['insert_article']="Artikel einfügen";
 $lang['stock_location']="Lagerort";
 $lang['stock']="Bestand";
 
@@ -39,4 +40,11 @@ $lang['stock']="Bestand";
 $lang['number_missing']="Nummer fehlt";
 $lang['name_missing']="Name fehlt";
 
+// OK messages
+$lang['article_inserted']="Artikel eingefügt";
+
+// for lists
+$lang['delete']="löschen";
+$lang['change']="ändern";
+		
 ?>
