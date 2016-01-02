@@ -7,23 +7,20 @@
 	*  This program is free software; you can redistribute it and/or modify it *
 	*  under the terms of the GNU General Public License as published by the   *
 	*  Free Software Foundation; version 2 of the License.                     *
-	*  date of this file: 2016-01-01  										   *
+	*  date of this file: 2015-12-31  										   *
 	\**************************************************************************/
 
 
 $GLOBALS['phpgw_info']['flags']['currentapp'] = 'rosine';
 include('../header.inc.php');
-include ('inc/template.class.php');
+include ('inc/settings.php');
 
 $tpl = new Rosine_Template();
-$tpl->load("mainmenu.html");
+$tpl->load("articlelist.html");
 $lang[] = "de.php";
 $lang = $tpl->loadLanguage($lang);
 
 $tpl->display();
-// Variablenumwandlung und Deklaration
-// Eigene Verbindung zur Datenbank
-
 
 ?>
 

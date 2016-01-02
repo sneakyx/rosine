@@ -1,0 +1,47 @@
+{*Header einbinden*}
+{include file="head.html"}
+	<div id="wrap">
+		<aside>
+			<div id="ribbon">
+				<h3 >{L_MAIN_MENUE}</h3>			
+			</div>
+			<div id="boxes">
+				<article onclick="window.location='offers_new.php'">
+					<h3>{L_OFFERS}</h3>
+					<a href="offers_new.php" >{L_MAKE_NEW_OFFER}</a> <br>
+					<a href="offers.php">{L_OFFER_LIST}</a>
+				</article>
+				<article>
+					<h3>{L_ORDERS}</h3>
+					<a href="orders_new.php" >{L_INPUT_NEW_ORDER}</a><br> 
+					<a href="orders.php">{L_ORDERS_LIST}</a>
+				</article>
+				<article>
+					<h3>{L_DELIVERY_NOTES}</h3>
+					<a href="deliveries_new.php" >{L_GENERATE_NEW_DELIVERY_NOTE}</a><br> 
+					<a href="deliveries.php">{L_DELIVERY_NOTE_LIST}</a>
+				</article>
+				<article>
+					<h3>{L_INVOICES}</h3>
+					<a href="invoices_new.php" >{L_GENERATE_NEW_INVOICE}</a><br>
+					<a href="invoices.php">{L_INVOICE_LIST}</a>									
+				</article>
+				<article>
+					<h3>{L_PAYMENTS}</h3>
+					<a href="payments_new.php">{L_INPUT_NEW_PAYMENT}</a><br>
+					<a href="payments.php">{L_UNPAID_INVOICES}</a>
+					<a href="dunnings.php">{L_DUNNINGS}</a>									
+				</article>
+				<article>
+					<h3>{L_ARTICLES}</h3>
+					<a href="articles_new.php">{L_INSERT_NEW_ARTICLE}</a><br>
+					<a href="articles.php">{L_ARTICLE_LIST}</a>
+					<a href="taxes.php">{L_TAXES}</a>									
+				</article>
+		
+				<div class="clear"></div>
+			</div>
+		</aside>
+	</div>	
+{*Footer einbinden*}
+{include file="footer.html"}

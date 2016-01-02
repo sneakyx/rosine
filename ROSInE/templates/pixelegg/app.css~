@@ -293,11 +293,6 @@ aside{
 	margin:auto;
 	background-color:green;
 }
-#rosine_added p, #rosine_error p {
+#rosine_added p {
 	text-align: center;
-}
-
-#rosine_error {
-	margin: auto;
-	background-color: red;
 }

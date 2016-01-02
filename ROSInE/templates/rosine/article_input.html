@@ -1,0 +1,28 @@
+<div id="rosine_input_wrap">
+	<form action="articles_new.php" method="POST">
+		<div class="rosine_input">
+			<p class="rosine_input_header">{L_INSERT_NEW_ARTICLE}</p> 
+				<div id="rosine_input_right">	
+				{L_NOTES}:<br>	
+				<textarea name="notes" rows="5" cols="40"></textarea><br>
+				<p class="rosine_back"><a href="articles.php" >{L_BACK}</a></p>			
+				</div>
+				<div id="rosine_input_left">		
+				{L_ARTICLE_NUMBER}: <input type="text" name="number" size="10" maxlength="40"> 
+				{L_UNITY}: <input type="text" name="unity" size="10" maxlength="20"><br>
+				{L_ARTICLE_NAME}: <input type="text" name="article_name" size="30" maxlength="255"><br>
+				<br>
+				{L_PRICE}: <input type="text" name="price" size="10" maxlength="20">
+				{L_TAX}: {$selector_tax}<br>
+				{L_STOCK_LOCATION}: {$selector_stock}  
+				{L_STOCK}: <input type="text" name="stock" size="10" maxlength="20"><br>
+				<br>
+				<input type="hidden" name="next_function" value="{$next_function}">				
+				<input type="submit" title="insert_article" value="{L_INSERT_ARTICLE}">
+				</div>
+				<div style="clear:both;">
+							
+				</div>
+			</div>
+		</form>
+</div>
