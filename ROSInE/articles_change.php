@@ -7,14 +7,14 @@
 	*  This program is free software; you can redistribute it and/or modify it *
 	*  under the terms of the GNU General Public License as published by the   *
 	*  Free Software Foundation; version 2 of the License.                     *
-	*  date of this file: 2016-01-02 										   *
+	*  date of this file: 2016-01-12 										   *
 	\**************************************************************************/
 $GLOBALS['phpgw_info']['flags']['currentapp'] = 'rosine';
 include('../header.inc.php');
 include ('inc/settings.php');
 include ('inc/template.class.php');
 $tpl = new Rosine_Template();
-$lang[] = "de.php";
+$lang[] = $language;
 
 $tpl->load("insert_article.html");
 $lang = $tpl->loadLanguage($lang);
@@ -76,7 +76,9 @@ switch ($_POST['next_function']){
 		}
 		else {
 			$row = @mysql_fetch_array($result);
-			$tpl->assign("number", $row['ART_NUMBER']);
+			$tpl->assign("number", $row['ART_NUMBER'].
+					'" > <input type="hidden" name="oldnumber" value="'.$row['ART_NUMBER'].'"');
+					//this is to have the possibiliity to change even the article number!
 			$tpl->assign("unity", $row['ART_UNIT']);
 			$tpl->assign("article_name",$row['ART_NAME']);
 			$tpl->assign("price", $row['ART_PRICE']);
@@ -92,6 +94,21 @@ switch ($_POST['next_function']){
 		 * return to articles.php?
 		 * should be the best!
 		 */
+		$result=mysql_query($rosine_db_query['update_article'].
+							' ART_NUMBER="'.$_POST['number'].'", 
+							 ART_NAME="'.$_POST['article_name'].'",
+							 ART_UNIT="'.$_POST['unity'].'",
+							 ART_PRICE='.$_POST['price'].',
+							 ART_INSTOCK='.$_POST['stock'].',
+							 CHANGED="'.date("Y-m-d-H-i-s").'"		
+							 WHERE ART_NUMBER="'.$_POST['oldnumber'].'"');
+		if (mysql_errno($rosine_db)!=0) {
+			// Error in mysql detected
+			$error.="4: ".mysql_error($rosine_db);
+		}
+		else {
+			$OK.=$lang['article_changed'];	
+		}
 		
 	
 	default:

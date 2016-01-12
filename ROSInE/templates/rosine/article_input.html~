@@ -18,7 +18,7 @@
 				{L_STOCK}: <input type="text" name="stock" value="{$stock}" size="10" maxlength="20"><br>
 				<br>
 				<input type="hidden" name="next_function" value="{$next_function}">				
-				<input type="submit" title="insert_article" value="{L_INSERT_ARTICLE}">
+				<input type="submit" title="insert_article" value="{$what_to_do}">
 				</div>
 				<div style="clear:both;">
 							

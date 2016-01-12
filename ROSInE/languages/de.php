@@ -1,4 +1,17 @@
 <?php
+
+/**************************************************************************\
+ * Rothaar Systems Open Source Invoice for Egroupware (ROSInE)              *
+ * http://www.rothaarsystems.de                                             *
+ * Author: info@rothaarsystems.de                                           *
+ * --------------------------------------------                             *
+ *  This program is free software; you can redistribute it and/or modify it *
+ *  under the terms of the GNU General Public License as published by the   *
+ *  Free Software Foundation; version 2 of the License.                     *
+ *  date of this file: 2016-01-12 										   *
+ \**************************************************************************/
+
+
 // for main menue
 $lang['main_menue']="Hauptmenü";
 $lang['offers']="Angebote";
@@ -20,6 +33,7 @@ $lang['dunnings']="Mahnungen";
 $lang['articles']="Artikel";
 $lang['article_list']="Artikelliste";
 $lang['taxes']="Steuersätze";
+$lang['number']="Nummer";
 
 
 // for articles
@@ -42,9 +56,23 @@ $lang['name_missing']="Name fehlt";
 
 // OK messages
 $lang['article_inserted']="Artikel eingefügt";
-
+$lang['article_changed']="Artikel geändert!";
+$lang['article_deleted']="Artikel gelöscht";
 // for lists
 $lang['delete']="löschen";
 $lang['change']="ändern";
+$lang['really_delete']="wirklich löschen";
 		
+// for taxes
+$lang['tax_deleted']="Steuersatz gelöscht";
+$lang['tax_id']="Nummer";
+$lang['tax_name']="Bezeichnung";
+$lang['tax_percentage']="Prozentsatz";
+$lang['insert_new_tax']="Neue Steuer einfügen";
+$lang['insert_again_new_tax']="Weitere Steuer einfügen";
+$lang['tax_changed']="Steuersatz geändert";
+$lang['tax_inserted']="Steuersatz eingefügt";
+$lang['change_tax']="Steuersatz ändern";
+
+
 ?>

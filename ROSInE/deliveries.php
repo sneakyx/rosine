@@ -7,7 +7,7 @@
 	*  This program is free software; you can redistribute it and/or modify it *
 	*  under the terms of the GNU General Public License as published by the   *
 	*  Free Software Foundation; version 2 of the License.                     *
-	*  date of this file: 2015-12-29  										   *
+	*  date of this file: 2016-01-11  										   *
 	\**************************************************************************/
 
 
@@ -19,7 +19,7 @@ include('../header.inc.php');
 echo file_get_contents("inc/head.html");
 //echo file_get_contents('inc/mainmenu.html');
 
-echo"Angebotsliste";
+echo"Liste der Lieferungen";
 echo file_get_contents("inc/footer.html");
 // Variablenumwandlung und Deklaration
 // Eigene Verbindung zur Datenbank

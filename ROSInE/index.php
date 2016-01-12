@@ -22,6 +22,7 @@ $lang = $tpl->loadLanguage($lang);
 $tpl->assign("OK", "");
 $tpl->assign("error", "");
 $tpl->display();
+
 // Variablenumwandlung und Deklaration
 // Eigene Verbindung zur Datenbank
 
