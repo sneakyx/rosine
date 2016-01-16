@@ -1,0 +1,25 @@
+<div id="rosine_input_wrap">
+	<form action="#" method="POST">
+		<div class="rosine_input">
+			<p class="rosine_input_header">{$what_to_do}</p> 
+				<div id="rosine_input_right">	
+				<br>	
+				<br>
+				<p class="rosine_back"><a href="taxes.php" >{L_BACK}</a></p>			
+				</div>
+				<div id="rosine_input_left">		
+				{L_TAX_ID}: <input type="text" name="tax_id" size="2" maxlength="4" value="{$tax_id}" > 
+				{L_TAX_NAME}: <input type="text" name="tax_name" value="{$tax_name}" size="30" maxlength="255"><br>
+				<br>
+				{L_TAX_PERCENTAGE}: <input type="text" name="tax_percentage" value="{$tax_percentage}" size="10" maxlength="20">
+				<br>
+				<br>
+				<input type="hidden" name="next_function" value="{$next_function}">				
+				<input type="submit" title="insert_tax" value="{$what_to_do}">
+				</div>
+				<div style="clear:both;">
+							
+				</div>
+			</div>
+		</form>
+</div>

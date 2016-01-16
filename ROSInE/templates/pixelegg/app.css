@@ -12,6 +12,9 @@ body {
 header, nav, footer article, section, aside, .rosine_input {
 	clear: left;
 }
+footer {
+	clear: both;
+}
 a {
 	text-decoration: none;
 	
@@ -245,8 +248,8 @@ aside{
 	height: 16em;
 	padding:5px;
 }
-.rosine_input_header {
-	font-size: 2em;
+.rosine_input_header, .rosine_paperwork h3 {
+	font-size: 1.2em;
 	font-weight: bold;
 	margin: auto;
 	text-align: center;
@@ -334,4 +337,45 @@ aside{
 }
 #rosine_table_note a:hover {
 	background-color: grey;
+}
+
+#rosine_paperwork_form_new {
+	border: red solid 10px;
+	height: 40%;
+	border: 1px solid #679FD2;
+	border-radius: 10px;
+	background-color:#CDCDCD;
+	margin: 5px;
+	padding: 3px;
+
+}
+#rosine_paperwork_form_edit {
+	border: none;
+	height: 35%;
+
+}
+
+#rosine_paperwork_form_change {
+	float: left;
+	width: 70%;
+	min-width: 400px;
+	padding: 3px;
+	overflow-y: scroll;
+	height:90%;
+	border: 1px solid #679FD2;
+	border-radius: 10px;
+	background-color:#CDCDCD;
+	margin: 5px;
+}
+#rosine_paperwork_form_buttons {
+	float: right;
+	width:20%;
+	padding: 3px;
+	border: 1px solid #679FD2;
+	border-radius: 10px;
+	background-color:#CDCDCD;
+	margin: 5px;
+}
+#rosine_paperwork_form_buttons p {
+	text-align: center;
 }

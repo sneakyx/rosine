@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2016-01-12										   *
+ *  date of this file: 2016-01-14										   *
  \**************************************************************************/
 
 
@@ -30,15 +30,25 @@ $language="de.php";
 $currency="€";
 $items_per_page="10";
 
+//mysql for articles
 $rosine_db_query['insert_article']="INSERT INTO ".$rosine_db_prefix."articles (ART_NUMBER, ART_UNIT, ART_NAME, ART_PRICE, ART_TAX, ART_STOCKNR, ART_INSTOCK, ART_NOTE, GENERATED, CHANGED) VALUES ";
 $rosine_db_query['get_articles']="SELECT * FROM ".$rosine_db_prefix."articles WHERE ";
 $rosine_db_query['get_article_ammount']="SELECT COUNT(*) FROM ".$rosine_db_prefix."articles WHERE ";
 $rosine_db_query['update_article']="UPDATE ".$rosine_db_prefix."articles SET ";
 $rosine_db_query['delete_article']="DELETE FROM ".$rosine_db_prefix."articles WHERE ";
+
+// mysql for taxes
 $rosine_db_query['get_tax_ammount']="SELECT COUNT(*) FROM ".$rosine_db_prefix."taxes WHERE ";
 $rosine_db_query['get_taxes']="SELECT * FROM ".$rosine_db_prefix."taxes WHERE ";
 $rosine_db_query['update_tax']="UPDATE ".$rosine_db_prefix."taxes SET ";
 $rosine_db_query['delete_tax']="DELETE FROM ".$rosine_db_prefix."taxes WHERE ";
 $rosine_db_query['insert_tax']="INSERT INTO ".$rosine_db_prefix."taxes (TAX_ID, TAX_NAME, TAX_PERCENTAGE, GENERATED, CHANGED) VALUES ";
+
+// mysql for locations
+$rosine_db_query['get_locations_ammount']="SELECT COUNT(*) FROM ".$rosine_db_prefix."locations WHERE ";
+$rosine_db_query['get_locations']="SELECT * FROM ".$rosine_db_prefix."locations WHERE ";
+$rosine_db_query['update_location']="UPDATE ".$rosine_db_prefix."locations SET ";
+$rosine_db_query['delete_location']="DELETE FROM ".$rosine_db_prefix."locations WHERE ";
+$rosine_db_query['insert_location']="INSERT INTO ".$rosine_db_prefix."locations (LOC_ID, LOC_NAME, LOC_NOTE, GENERATED, CHANGED) VALUES ";
 
 ?>

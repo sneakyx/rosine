@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2016-01-12  										   *
+ *  date of this file: 2016-01-14  										   *
  \**************************************************************************/
 
 
@@ -18,24 +18,24 @@ include ('inc/settings.php');
 include ('inc/template.class.php');
 
 $tpl = new Rosine_Template();
-$tpl->load("taxlist.html");
+$tpl->load("locationlist.html");
 $lang[] = $language;
 $lang = $tpl->loadLanguage($lang);
-// should there be one tax really deleted?
+// should there be one articles really deleted?
 if ($_POST['next_function']=="really_delete"){
-	$result=mysql_query($rosine_db_query['delete_tax'].' TAX_ID='.$_POST['tax_id'].' LIMIT 1');
+	$result=mysql_query($rosine_db_query['delete_location'].' LOC_ID='.$_POST['loc_id'].' LIMIT 1');
 	if (mysql_errno($rosine_db)!=0) {
 		// Error in mysql detected
 		$error.="1: ".mysql_error($rosine_db);
 	}
 	else {
-		$OK.=$lang['tax_deleted']." ".$lang['number']." ".$_POST['tax_id'];
+		$OK.=$lang['location_deleted']." ".$lang['number']." ".$_POST['loc_id'];
 	}
 
 }
 
-// get ammount of taxes in database
-$result=mysql_query($rosine_db_query['get_tax_ammount']." 1");
+// get ammount of locations in database
+$result=mysql_query($rosine_db_query['get_locations_ammount']." 1");
 $liste="";
 if (mysql_errno($rosine_db)!=0) {
 	// Error in mysql detected
@@ -54,7 +54,7 @@ if ($from < 0)
 	$from=0;
 	if ($max_rows<$from+$items_per_page)
 		$items_per_page=$max_rows-$from;
-		$result=mysql_query($rosine_db_query['get_taxes']."1 LIMIT $from,$items_per_page");
+		$result=mysql_query($rosine_db_query['get_locations']."1 LIMIT $from,$items_per_page");
 
 		if ($from >0) //zurueckblaettern anzeigen wenn moeglich
 			$tpl->assign("backward", '<a href="?from='.($from-$items_per_page).'">&lt;&lt;</a>');
@@ -77,16 +77,15 @@ if ($from < 0)
 						else {
 							$liste.='<table id="rosine_tabelle">';
 							$liste.='<tr>
-				<th>'.$lang['tax_id'].'</th>
-				<th>'.$lang['tax_name'].'</th>
-				<th>'.$lang['tax_percentage'].'</th>
+				<th>'.$lang['location_id'].'</th>
+				<th>'.$lang['location_name'].'</th>
 				<th>'.$lang['delete'].'</th>
 				<th>'.$lang['change'].'</th>
 			</tr>';
 
 							while($f = @mysql_fetch_array($result)) {
 								$liste.="<tr>";
-								if ($_POST['next_function']=="delete" & $_POST['tax_id']==$f['TAX_ID']){
+								if ($_POST['next_function']=="delete" & $_POST['loc_id']==$f['LOC_ID']){
 									//Sicherheitsabfrage!
 									$next_function="really_delete";
 									$delete=$lang['really_delete'];
@@ -96,21 +95,20 @@ if ($from < 0)
 									$delete=$lang['delete'];
 									$next_function="delete";
 								}
-								$liste.="<td>".$f['TAX_ID']."</td>".
-										'<td style="text-align:center;">'.$f['TAX_NAME']."</td>
-			<td>".$f['TAX_PERCENTAGE']." %</td>".'
+								$liste.='<td>'.$f['LOC_ID'].'</td>'.
+										'<td style="text-align:center;">'.$f['LOC_NAME'].'</td>
 			<td>
 					<form action="#" method="post">
 						<input type="hidden" name="next_function" value="'.$next_function.'">
 						<input type="submit" title="'.$delete.'" value="'.$delete.'">
-						<input type="hidden" name="tax_id" value="'.$f['TAX_ID'].'">
+						<input type="hidden" name="loc_id" value="'.$f['LOC_ID'].'">
 					</form>
 			</td>
 			<td>
-					<form action="taxes_change.php" method="post">
+					<form action="locations_change.php" method="post">
 						<input type="hidden" name="next_function" value="change">
 						<input type="submit" title="'.$lang['change'].'" value="'.$lang['change'].'">
-						<input type="hidden" name="tax_id" value="'.$f['TAX_ID'].'">
+						<input type="hidden" name="loc_id" value="'.$f['LOC_ID'].'">
 					</form>
 			</td>';
 								$liste.="</tr>";
@@ -118,7 +116,7 @@ if ($from < 0)
 							$liste.="</table>";
 
 						}
-						$tpl->assign('taxlist', $liste);
+						$tpl->assign('locationlist', $liste);
 						$tpl->assign("OK", $OK);
 						$tpl->assign("error", $error);
 						$tpl->display();

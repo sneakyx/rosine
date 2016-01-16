@@ -8,7 +8,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2016-01-12 										   *
+ *  date of this file: 2016-01-14   		 								*
  \**************************************************************************/
 
 
@@ -31,11 +31,12 @@ $lang['input_new_payment']="Zahlungseingänge verbuchen";
 $lang['unpaid_invoices']="offene Rechnungen";
 $lang['dunnings']="Mahnungen";
 $lang['articles']="Artikel";
-$lang['article_list']="Artikelliste";
+$lang['article']="Artikel";
 $lang['taxes']="Steuersätze";
 $lang['number']="Nummer";
-
-
+$lang['stock_locations']="Lagerorte";
+$lang['generate_articles']="Artikel erstellen";
+$lang['articles_list']="Artikelliste";
 // for articles
 $lang['insert_new_article']       = "Neuen Artikel einfügen";
 $lang['insert_again_new_article'] = "Weiteren Artikel einfügen";
@@ -74,5 +75,14 @@ $lang['tax_changed']="Steuersatz geändert";
 $lang['tax_inserted']="Steuersatz eingefügt";
 $lang['change_tax']="Steuersatz ändern";
 
+// for locations
+$lang['location_deleted']="Lagerort gelöscht";
+$lang['location_id']="Lagernummer";
+$lang['location_name']="Lagername";
+$lang['insert_new_location']="Neuen Lagerort hinzufügen";
+$lang['insert_again_new_location']="Weiteren Lagerort einfügen";
+$lang['location_changed']="Lagerort geändert";
+$lang['location_inserted']="Lagerort eingefügt";
+$lang['change_location']="Lagerort ändern";
 
 ?>
