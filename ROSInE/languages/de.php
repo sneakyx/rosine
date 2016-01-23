@@ -8,7 +8,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2016-01-14   		 								*
+ *  date of this file: 2016-01-23   		 								*
  \**************************************************************************/
 
 
@@ -85,4 +85,11 @@ $lang['location_changed']="Lagerort geändert";
 $lang['location_inserted']="Lagerort eingefügt";
 $lang['change_location']="Lagerort ändern";
 
+
+//for offers / orders etc
+$lang['cancel']="Abbrechen";
+$lang['next_step']="Weiter";
+$lang['what_s_next']="Und jetzt?";
+$lang['favorite_articles']="Beliebte Artikel";
+$lang['offer']="Angebot";
 ?>

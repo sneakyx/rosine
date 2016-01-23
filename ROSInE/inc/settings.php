@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2016-01-14										   *
+ *  date of this file: 2016-01-23  										    *
  \**************************************************************************/
 
 
@@ -29,6 +29,7 @@ $language="de.php";
 // some important things
 $currency="€";
 $items_per_page="10";
+$articles_per_page=10;
 
 //mysql for articles
 $rosine_db_query['insert_article']="INSERT INTO ".$rosine_db_prefix."articles (ART_NUMBER, ART_UNIT, ART_NAME, ART_PRICE, ART_TAX, ART_STOCKNR, ART_INSTOCK, ART_NOTE, GENERATED, CHANGED) VALUES ";

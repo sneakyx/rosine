@@ -1,6 +1,6 @@
 {*Header einbinden*}
 {include file="head.html"}
-<form action="#" method="POST">
+
 <div id="rosine_paperwork_form_new" class="rosine_paperwork">
 	<h3>Artikel in {$paperwork} einfügen</h3>
 	<br>
@@ -19,12 +19,12 @@
 	<div id="rosine_paperwork_form_buttons" class="rosine_paperwork">
 	<h3>{L_WHAT_S_NEXT}</h3>	
 	<p><br>
-
+	<form action="#" method="POST">
 	<button>{L_NEXT_STEP}</button><br>
 	<button>{L_CANCEL}</button></p>
-	
+	</form>
 	</div>
 </div>
-</form>
+
 {*Footer einbinden*}
 {include file="footer.html"}

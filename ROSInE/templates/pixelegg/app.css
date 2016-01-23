@@ -1,5 +1,7 @@
 @charset "utf-8";
-
+/*
+Version 2016-01-23
+*/
 * {
 	margin:0;
 	padding:0;
@@ -361,7 +363,7 @@ aside{
 	min-width: 400px;
 	padding: 3px;
 	overflow-y: scroll;
-	height:90%;
+	height:15em;
 	border: 1px solid #679FD2;
 	border-radius: 10px;
 	background-color:#CDCDCD;
@@ -375,6 +377,7 @@ aside{
 	border-radius: 10px;
 	background-color:#CDCDCD;
 	margin: 5px;
+	height: 15em;
 }
 #rosine_paperwork_form_buttons p {
 	text-align: center;
