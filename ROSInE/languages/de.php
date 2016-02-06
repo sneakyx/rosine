@@ -8,10 +8,10 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2016-01-23   		 								*
+ *  date of this file: 2016-02-06  		 								*
  \**************************************************************************/
 
-
+$lang['page_buttons']='{$backward} {$from} bis {$to} von insgesamt {$max} {$foreward}';
 // for main menue
 $lang['main_menue']="Hauptmenü";
 $lang['offers']="Angebote";
@@ -92,4 +92,11 @@ $lang['next_step']="Weiter";
 $lang['what_s_next']="Und jetzt?";
 $lang['favorite_articles']="Beliebte Artikel";
 $lang['offer']="Angebot";
+$lang['customer']="Kunde";
+$lang['insert_into_paperwork']='Artikel in {$paperwork} einfügen';
+$lang['change_paperwork']='{$paperwork} ändern';
+$lang['paperwork_for_customer']='{$paperwork} für Kunde';
+
+$lang['paperwork_inserted']='{$paperwork} eingefügt';
+
 ?>

@@ -382,3 +382,6 @@ aside{
 #rosine_paperwork_form_buttons p {
 	text-align: center;
 }
+#rosine_paperwork_search_customers {
+	text-align: center;
+}

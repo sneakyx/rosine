@@ -7,13 +7,14 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2016-01-23  										    *
+ *  date of this file: 2016-02-06  										    *
  \**************************************************************************/
 
 
 @$rosine_db = mysql_connect($egw_info["server"]["db_host"], $egw_info["server"]["db_user"], $egw_info["server"]["db_pass"]) OR die("Fehler mit Datenbank");
 @mysql_select_db($egw_info["server"]["db_name"],$rosine_db) OR die ("Falsche Datenbank!");
 $rosine_db_prefix="rosine_";
+$egw_db_prefix="egw_";
 mysql_query("SET NAMES 'utf8'");
 function trimhtml (&$value, $key) {
 	$value = trim(htmlspecialchars($value, ENT_QUOTES));
@@ -28,8 +29,9 @@ $language="de.php";
 
 // some important things
 $currency="€";
-$items_per_page="10";
-$articles_per_page=10;
+$items_per_page="10"; // list of articles per page, etc
+$articles_per_page=10; // ammount of input fields in new offer, order, invoice
+$customers_per_page=10; // ammount of shown customers in new offer, order, invoice
 
 //mysql for articles
 $rosine_db_query['insert_article']="INSERT INTO ".$rosine_db_prefix."articles (ART_NUMBER, ART_UNIT, ART_NAME, ART_PRICE, ART_TAX, ART_STOCKNR, ART_INSTOCK, ART_NOTE, GENERATED, CHANGED) VALUES ";
@@ -52,4 +54,10 @@ $rosine_db_query['update_location']="UPDATE ".$rosine_db_prefix."locations SET "
 $rosine_db_query['delete_location']="DELETE FROM ".$rosine_db_prefix."locations WHERE ";
 $rosine_db_query['insert_location']="INSERT INTO ".$rosine_db_prefix."locations (LOC_ID, LOC_NAME, LOC_NOTE, GENERATED, CHANGED) VALUES ";
 
+// mysql for search customers
+$rosine_db_query['search_customers_ammount']="SELECT COUNT(*) FROM ".$egw_db_prefix."addressbook WHERE ";
+$rosine_db_query['get_customers']="SELECT * FROM ".$egw_db_prefix."addressbook WHERE ";
+
+// mysql for offers
+$rosine_db_query['insert_offer']="INSERT INTO ".$rosine_db_prefix."offers (OFFER_DATE,OFFER_CUSTOMER,OFFER_CUSTOMER_PRIVATE,OFFER_AMMOUNT,OFFER_STATUS,GENERATED) VALUES ";
 ?>

@@ -2,7 +2,7 @@
 {include file="head.html"}
 <form action="#" method="POST">
 <div id="rosine_paperwork_form_new" class="rosine_paperwork">
-	<h3>Artikel in {$paperwork} einfügen</h3>
+	<h3>{L_INSERT_INTO_PAPERWORK}</h3>
 	<br>
 	{$input_fields}
 	<br>
@@ -13,15 +13,15 @@
 </div>
 <div id="rosine_paperwork_form_edit" class="rosine_paperwork">
 	<div id="rosine_paperwork_form_change" class="rosine_paperwork">
-	<h3>{$paperwork} {L_CHANGE}</h3>
+	<h3>{L_CHANGE_PAPERWORK}</h3>
 		
 	</div>
 	<div id="rosine_paperwork_form_buttons" class="rosine_paperwork">
 	<h3>{L_WHAT_S_NEXT}</h3>	
 	<p><br>
-
+	{L_PAPERWORK_FOR_CUSTOMER} <br> <b>{$customer}</b> [{$ID}]<br><br>
 	<button>{L_NEXT_STEP}</button><br>
-	<button>{L_CANCEL}</button></p>
+	<button>{L_CANCEL}</button></p><br>
 	
 	</div>
 </div>
