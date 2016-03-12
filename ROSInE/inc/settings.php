@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2016-02-06  										    *
+ *  date of this file: 2016-02-13  										    *
  \**************************************************************************/
 
 
@@ -59,5 +59,7 @@ $rosine_db_query['search_customers_ammount']="SELECT COUNT(*) FROM ".$egw_db_pre
 $rosine_db_query['get_customers']="SELECT * FROM ".$egw_db_prefix."addressbook WHERE ";
 
 // mysql for offers
-$rosine_db_query['insert_offer']="INSERT INTO ".$rosine_db_prefix."offers (OFFER_DATE,OFFER_CUSTOMER,OFFER_CUSTOMER_PRIVATE,OFFER_AMMOUNT,OFFER_STATUS,GENERATED) VALUES ";
+$rosine_db_query['insert_offer']="INSERT INTO ".$rosine_db_prefix."offers (OFFER_ID,OFFER_DATE,OFFER_CUSTOMER,OFFER_CUSTOMER_PRIVATE,OFFER_AMMOUNT,OFFER_STATUS,GENERATED) VALUES ";
+$rosine_db_query['get_highest_number']="SELECT MAX(%singular%_id) AS maximum FROM ".$rosine_db_prefix."%plural% WHERE 1";
+
 ?>

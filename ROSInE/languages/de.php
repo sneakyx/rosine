@@ -96,6 +96,7 @@ $lang['customer']="Kunde";
 $lang['insert_into_paperwork']='Artikel in {$paperwork} einfügen';
 $lang['change_paperwork']='{$paperwork} ändern';
 $lang['paperwork_for_customer']='{$paperwork} für Kunde';
+$lang['ammount']="Stück";
 
 $lang['paperwork_inserted']='{$paperwork} eingefügt';
 

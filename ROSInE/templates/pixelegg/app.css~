@@ -343,7 +343,7 @@ aside{
 
 #rosine_paperwork_form_new {
 	border: red solid 10px;
-	height: 40%;
+	height: 80%;
 	border: 1px solid #679FD2;
 	border-radius: 10px;
 	background-color:#CDCDCD;
@@ -384,4 +384,15 @@ aside{
 }
 #rosine_paperwork_search_customers {
 	text-align: center;
+}
+.rosine_paperwork_input_line {
+	white-space: nowrap;
+	float: left;
+}
+.rosine_input_ammount{
+	width:40px;
+}
+
+#rosine_paperwork_input_wrap{
+	height:100%;
 }

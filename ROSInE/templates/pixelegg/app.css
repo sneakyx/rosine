@@ -385,3 +385,14 @@ aside{
 #rosine_paperwork_search_customers {
 	text-align: center;
 }
+.rosine_paperwork_input_line {
+	white-space: nowrap;
+	float: left;
+}
+.rosine_input_ammount{
+	width:40px;
+}
+
+#rosine_paperwork_input_wrap{
+	height:8em;
+}

@@ -7,12 +7,14 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2016-02-06 										   *
+ *  date of this file: 2016-03-12 										   *
  \**************************************************************************/
 $GLOBALS['phpgw_info']['flags']['currentapp'] = 'rosine';
 include('../header.inc.php');
 include ('inc/settings.php');
 include ('inc/template.class.php');
+
+//2. Dimension von $GEt und $post durchsuchen!!!!
 
 $tpl = new Rosine_Template();
 
@@ -20,31 +22,23 @@ switch ($_POST['next_function']) {
 	case "insert_offer":
 			//insert an empty offer- just to fill in next step
 			
-		/*
-		 * Was fehlt- für nächste Funktion noch die Nummer des Angebots!!!!
-		 * 
-		 */
+			// choose either address one or two if to use customers address one or two
 			if (ucfirst(substr($_POST['contact_id'],0,1))=="P")
 				$customer_private=1;
 			else 
 				$customer_private=0;
-			
-			$result=mysql_query($rosine_db_query['insert_offer'].
-					'(now(), '.
+			/* here we get the highest number of offers from the database
+			 * this ist just for the use in the next functions
+			 */
+			//hier einfuegen 
+			$_POST['offer_id']=rosine_highest_number("offer")+1;
+			$result=rosine_database_query($rosine_db_query['insert_offer'].'('.
+					$_POST['offer_id'].', now(), '.
 				substr($_POST['contact_id'],2).
-				','.$customer_private.',0,"empty","'.date("Y-m-d-H-i-s").'")');
-			if (mysql_errno($rosine_db)!=0) {
-				// Error in mysql detected
-				$error.="0: ".mysql_error($rosine_db);
-				$error.=$rosine_db_query['insert_offer'].
-					'(now(), '.
-				substr($_POST['contact_id'],2).
-				','.$customer_private.',0,"empty","'.date("Y-m-d-H-i-s").'")';
-			
-			} // Error in mysql detected
-			else {
-				$ok.=$lang['paperwork_inserted'];
-			}// no error in inserting an empty offer
+				','.$customer_private.',0,"empty","'.date("Y-m-d-H-i-s").'")',0);
+			if ($result!=false)
+				// aus irgendeinem Grund geht das noch nicht!
+				$OK.=$lang['paperwork_inserted'];
 			
 				/* 
 				 * although case insert_offer ends here, after inserting empty offer, 
@@ -67,11 +61,14 @@ switch ($_POST['next_function']) {
 		} // Error in mysql detected
 		else {
 			$customer_details = @mysql_fetch_array($result);
-		
+			$input_fields.='<div id="rosine_paperwork_input_wrap">';
 			for ($i=0;$i<$articles_per_page;$i++){
-				$input_fields.='<input name="articles['.$i.']" type="text" width="30" maxwidth="50" placeholder="'.
-						$lang['article'].' '.($i+1).'">';
+				$input_fields.='<div class="rosine_paperwork_input_line"><input class="rosine_input_ammount" name="ammount['.$i.']" type="text" width="5" maxwidth="10" placeholder="'.
+						$lang['ammount'].'"><input name="articles['.$i.']" type="text" width="30" maxwidth="50" placeholder="'.					
+						$lang['article'].' '.($i+1).'"> | </div>
+								';
 			}
+			$input_fields.='</div>';
 			$tpl->assign("next_function", '<input type="hidden" name="next_function" value="change">');
 			$tpl->assign("customer", $customer_details['n_fn']);
 			$tpl->assign("ID", $customer_details['contact_id']);
