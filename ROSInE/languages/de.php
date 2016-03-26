@@ -8,7 +8,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2016-02-06  		 								*
+ *  date of this file: 2016-03-25   		 								*
  \**************************************************************************/
 
 $lang['page_buttons']='{$backward} {$from} bis {$to} von insgesamt {$max} {$foreward}';
@@ -97,7 +97,7 @@ $lang['insert_into_paperwork']='Artikel in {$paperwork} einfügen';
 $lang['change_paperwork']='{$paperwork} ändern';
 $lang['paperwork_for_customer']='{$paperwork} für Kunde';
 $lang['ammount']="Stück";
-
+$lang['nothing_found']="nichts gefunden";
 $lang['paperwork_inserted']='{$paperwork} eingefügt';
 
 ?>

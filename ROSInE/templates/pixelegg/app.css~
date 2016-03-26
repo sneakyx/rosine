@@ -394,5 +394,11 @@ aside{
 }
 
 #rosine_paperwork_input_wrap{
-	height:100%;
+	height:8em;
+}
+.rosine_change_paperwork_list{
+	border: 10px solid red;
+}
+.rosine_change_paperwork_list{
+	border: 1px solid black;
 }

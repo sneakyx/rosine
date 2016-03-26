@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2016-02-13  										    *
+ *  date of this file: 2016-03-25  										    *
  \**************************************************************************/
 
 
@@ -17,7 +17,10 @@ $rosine_db_prefix="rosine_";
 $egw_db_prefix="egw_";
 mysql_query("SET NAMES 'utf8'");
 function trimhtml (&$value, $key) {
-	$value = trim(htmlspecialchars($value, ENT_QUOTES));
+	//if ($key !="articles" || $key != "ammount")
+	//	$value = trim(htmlspecialchars($value, ENT_QUOTES));
+	// das funktioniert im Moment noch nicht mit den 2 dimensionalen Aarrays!
+	// Da muss ich mir noch was ausdenken!
 }
 array_walk ($_GET, 'trimhtml');
 array_walk ($_POST, 'trimhtml');
@@ -60,6 +63,10 @@ $rosine_db_query['get_customers']="SELECT * FROM ".$egw_db_prefix."addressbook W
 
 // mysql for offers
 $rosine_db_query['insert_offer']="INSERT INTO ".$rosine_db_prefix."offers (OFFER_ID,OFFER_DATE,OFFER_CUSTOMER,OFFER_CUSTOMER_PRIVATE,OFFER_AMMOUNT,OFFER_STATUS,GENERATED) VALUES ";
-$rosine_db_query['get_highest_number']="SELECT MAX(%singular%_id) AS maximum FROM ".$rosine_db_prefix."%plural% WHERE 1";
+$rosine_db_query['get_highest_number']="SELECT MAX(%singular%_id) AS maximum FROM ".$rosine_db_prefix."%plural% WHERE %1%";
 
+$rosine_db_query['insert_article_into_offer']='INSERT INTO '.$rosine_db_prefix.'offers_positions (OFFER_ID, POSI_ID, ART_NUMBER, POSI_AMMOUNT, POSI_UNIT, POSI_PRICE, POSI_LOCATION, POSI_SERIAL, POSI_TEXT, POSI_TAX) VALUES ';
+// mysql for paperwork
+
+$rosine_db_query['get_articles_from_paperwork']="SELECT * FROM ".$rosine_db_prefix;
 ?>
