@@ -86,6 +86,7 @@ else {
 		
 	while($f = @mysql_fetch_array($result)) {
 		$liste.="<tr>";
+		
 		if ($_POST['next_function']=="delete" & $_POST['number']==$f['ART_NUMBER']){
 			//Sicherheitsabfrage!
 			$next_function="really_delete";

@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2016-03-25  										    *
+ *  date of this file: 2016-03-30  										    *
  \**************************************************************************/
 
 
@@ -32,10 +32,10 @@ $language="de.php";
 
 // some important things
 $currency="€";
-$items_per_page="10"; // list of articles per page, etc
+$items_per_page=10; // list of articles per page, etc
 $articles_per_page=10; // ammount of input fields in new offer, order, invoice
 $customers_per_page=10; // ammount of shown customers in new offer, order, invoice
-
+$favorite_articles=5; // how many favorite articles 
 //mysql for articles
 $rosine_db_query['insert_article']="INSERT INTO ".$rosine_db_prefix."articles (ART_NUMBER, ART_UNIT, ART_NAME, ART_PRICE, ART_TAX, ART_STOCKNR, ART_INSTOCK, ART_NOTE, GENERATED, CHANGED) VALUES ";
 $rosine_db_query['get_articles']="SELECT * FROM ".$rosine_db_prefix."articles WHERE ";
@@ -61,12 +61,24 @@ $rosine_db_query['insert_location']="INSERT INTO ".$rosine_db_prefix."locations 
 $rosine_db_query['search_customers_ammount']="SELECT COUNT(*) FROM ".$egw_db_prefix."addressbook WHERE ";
 $rosine_db_query['get_customers']="SELECT * FROM ".$egw_db_prefix."addressbook WHERE ";
 
-// mysql for offers
-$rosine_db_query['insert_offer']="INSERT INTO ".$rosine_db_prefix."offers (OFFER_ID,OFFER_DATE,OFFER_CUSTOMER,OFFER_CUSTOMER_PRIVATE,OFFER_AMMOUNT,OFFER_STATUS,GENERATED) VALUES ";
-$rosine_db_query['get_highest_number']="SELECT MAX(%singular%_id) AS maximum FROM ".$rosine_db_prefix."%plural% WHERE %1%";
+// mysql for special lists
+$rosine_db_query['most_used_articles']="SELECT art_name, count(p.art_number) as counter,p.art_number as art_number from ".$rosine_db_prefix."%plural%_positions as p JOIN ".$rosine_db_prefix."articles AS a ON a.art_number=p.art_number where 1 group by art_number ORDER BY counter DESC LIMIT ".$favorite_articles;
+$rosine_db_query['paperwork_not_used']='SELECT r.%singular%_id AS %singular%_id, GROUP_CONCAT(concat (p.posi_ammount, " ", a.art_name)) AS contents, r.changed AS changed, COUNT(p.posi_id) AS ammount, r.%singular%_ammount AS money FROM '.$rosine_db_prefix.'offers AS r JOIN '.$rosine_db_prefix.'%plural%_positions as p on r.%singular%_id = p.%singular%_id JOIN '.$rosine_db_prefix.'articles AS a ON a.art_number=p.art_number WHERE %singular%_status="changed" AND %singular%_customer=%customer% GROUP BY %singular%_id ORDER BY changed DESC'; 
 
-$rosine_db_query['insert_article_into_offer']='INSERT INTO '.$rosine_db_prefix.'offers_positions (OFFER_ID, POSI_ID, ART_NUMBER, POSI_AMMOUNT, POSI_UNIT, POSI_PRICE, POSI_LOCATION, POSI_SERIAL, POSI_TEXT, POSI_TAX) VALUES ';
 // mysql for paperwork
-
+$rosine_db_query['insert_paperwork']="INSERT INTO ".$rosine_db_prefix."%plural% (%singular%_ID,%singular%_DATE,%singular%_CUSTOMER,%singular%_CUSTOMER_PRIVATE,%singular%_AMMOUNT,%singular%_STATUS,GENERATED) VALUES ";
+$rosine_db_query['get_highest_number']="SELECT MAX(%singular%_id) AS maximum FROM ".$rosine_db_prefix."%plural% WHERE %1%";
+$rosine_db_query['insert_article_into_paperwork']='INSERT INTO '.$rosine_db_prefix.'%plural%_positions (%singular%_ID, POSI_ID, ART_NUMBER, POSI_AMMOUNT, POSI_UNIT, POSI_PRICE, POSI_LOCATION, POSI_SERIAL, POSI_TEXT, POSI_TAX) VALUES ';
 $rosine_db_query['get_articles_from_paperwork']="SELECT * FROM ".$rosine_db_prefix;
+$rosine_db_query['delete_article_from_paperwork']="DELETE FROM ".$rosine_db_prefix."%paperwork%_positions WHERE ";
+$rosine_db_query['correct_numbers_from_paperwork']="UPDATE ".$rosine_db_prefix."%plural%_positions r,(SELECT @n := 0) m SET r.posi_id = @n := @n + 1 WHERE r.%singular%_id=%id%;";
+$rosine_db_query['update_paperwork_ammount']="UPDATE ".$rosine_db_prefix."%plural% SET %singular%_AMMOUNT = ( SELECT sum( posi_price * posi_ammount ) AS %singular%_ammount FROM ".$rosine_db_prefix."%plural%_positions WHERE %singular%_id =%id% ) , CHANGED = now( ) WHERE %singular%_id =%id%";
+$rosine_db_query['get_ammount_of_paperworks']="SELECT count(*) FROM ".$rosine_db_prefix."%paperwork% WHERE ";
+$rosine_db_query['get_paperworks']="SELECT * FROM ".$rosine_db_prefix."%plural%  JOIN ".$egw_db_prefix."addressbook ON %singular%_customer = contact_id WHERE ";
+$rosine_db_query['delete_paperwork']="DELETE FROM ".$rosine_db_prefix."%plural% WHERE %singular%_ID=%ID% LIMIT 1";
+$rosine_db_query['delete_paperwork_positions']="DELETE FROM ".$rosine_db_prefix."%plural%_positions WHERE %singular%_ID=%ID%";
+$rosine_db_query['count_real_number']="SELECT count( * ) FROM ".$rosine_db_prefix."%plural% WHERE %singular%_ID <=";
+$rosine_db_query['set_paperwork_status']="UPDATE ".$rosine_db_prefix.'%plural% SET %singular%_status="%status%" WHERE %singular%_ID=%ID% LIMIT 1';
+
+$rosine_db_query['insert_paperwork_into_paperwork']='set @n= (select max(POSI_ID) from '.$rosine_db_prefix.'%plural2%_positions WHERE %singular2%_id=%ID2%); INSERT INTO '.$rosine_db_prefix.'%plural2%_positions SELECT %ID2%,(@n:=@n+1) as POSI_ID , ART_NUMBER, POSI_AMMOUNT, POSI_UNIT, POSI_PRICE, POSI_LOCATION, POSI_SERIAL, CONCAT("%infotext% ",POSI_TEXT), POSI_TAX FROM '.$rosine_db_prefix.'%plural1%_positions WHERE %singular1%_id=%ID1%';
 ?>

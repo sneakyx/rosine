@@ -7,8 +7,7 @@
 	{$input_fields}
 	<br>
 	<br>
-	<h3>{L_FAVORITE_ARTICLES}</h3>
-	{$input_favorites}
+	{$additional}
 	{$next_function}
 </div>
 <div id="rosine_paperwork_form_edit" class="rosine_paperwork">
@@ -20,9 +19,9 @@
 	<h3>{L_WHAT_S_NEXT}</h3>	
 	<p><br>
 	{L_PAPERWORK_FOR_CUSTOMER} <br> <b>{$customer}</b> [{$ID}]<br><br>
-	<button>{L_NEXT_STEP}</button><br>
-	<button>{L_CANCEL}</button></p><br>
-	
+	<p><button class="rosine_button_next">{L_NEXT_STEP}</button></p>
+	<p class="rosine_back"><a href="{$paperwork_file}.php?from={$this_number}" >{L_READY}</a></p>
+	</p>
 	</div>
 </div>
 </form>

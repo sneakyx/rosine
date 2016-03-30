@@ -14,15 +14,15 @@
 <div id="rosine_paperwork_form_edit" class="rosine_paperwork">
 	<div id="rosine_paperwork_form_change" class="rosine_paperwork">
 	<h3>{L_CHANGE_PAPERWORK}</h3>
-		
+		{$paperwork_list}
 	</div>
 	<div id="rosine_paperwork_form_buttons" class="rosine_paperwork">
 	<h3>{L_WHAT_S_NEXT}</h3>	
 	<p><br>
-	{L_PAPERWORK_FOR_CUSTOMER} <br>{$customer} [{$ID}]<br><br>
-	<button>{L_NEXT_STEP}</button><br>
-	<button>{L_CANCEL}</button></p><br>
-	
+	{L_PAPERWORK_FOR_CUSTOMER} <br> <b>{$customer}</b> [{$ID}]<br><br>
+	<p><button class="rosine_button_next">{L_NEXT_STEP}</button></p>
+	<p class="rosine_back"><a href="{$paperwork_file}.php?from={$this_number}" >{L_READY}</a></p>
+	</p>
 	</div>
 </div>
 </form>

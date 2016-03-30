@@ -8,7 +8,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2016-03-25   		 								*
+ *  date of this file: 2016-03-30   		 								*
  \**************************************************************************/
 
 $lang['page_buttons']='{$backward} {$from} bis {$to} von insgesamt {$max} {$foreward}';
@@ -63,6 +63,7 @@ $lang['article_deleted']="Artikel gelöscht";
 $lang['delete']="löschen";
 $lang['change']="ändern";
 $lang['really_delete']="wirklich löschen";
+$lang['make_new']="neu erstellen";
 		
 // for taxes
 $lang['tax_deleted']="Steuersatz gelöscht";
@@ -92,12 +93,28 @@ $lang['next_step']="Weiter";
 $lang['what_s_next']="Und jetzt?";
 $lang['favorite_articles']="Beliebte Artikel";
 $lang['offer']="Angebot";
+$lang['order']="Bestellung";
+$lang['delivery']="Lieferung";
+$lang['invoice']="Rechnung";
 $lang['customer']="Kunde";
 $lang['insert_into_paperwork']='Artikel in {$paperwork} einfügen';
 $lang['change_paperwork']='{$paperwork} ändern';
 $lang['paperwork_for_customer']='{$paperwork} für Kunde';
-$lang['ammount']="Stück";
+$lang['ammount']="Menge";
 $lang['nothing_found']="nichts gefunden";
 $lang['paperwork_inserted']='{$paperwork} eingefügt';
-
+$lang['added']=' hinzugefügt!';
+$lang['numbers_corrected']="Nummern korrigiert";
+$lang['paperwork_positions_deleted']="Artikel in %paperwork% gelöscht ";
+$lang['paperwork_deleted']="%paperwork% gelöscht ";
+$lang['posi_id']="Position";
+$lang['ready']="Fertig";
+$lang['print']="drucken";
+$lang['offer_number']="Nummer";
+$lang['private']="(Privat)";
+$lang['company']="Status";
+$lang['date']="Datum";
+$lang['status']="Status";
+$lang['add_articles_from_other_tables']="Artikel aus anderen Tabllen einfügen";
+$lang['from_paperwork']='Aus %paperwork%: %ID1%';
 ?>

@@ -268,6 +268,18 @@ aside{
 	border-radius: 5px;
 }
 
+.rosine_button_next {
+	border-radius: 5px;
+	float: left;
+	border-bottom: 1px solid #000;
+	padding: 3px;
+	background-color: #FAFAFA;
+	border-right: 1px solid #000;
+	font-family: Arial,nonserif;
+	margin-top: 5px;
+	text-align: left;
+}
+
 #rosine_input_right {
 	float:right;	
 	margin-top: 5px;
@@ -280,13 +292,21 @@ aside{
 	border-radius: 5px;
 	float: right;
 	border-bottom: 1px solid #000;
-	padding: 3px;
+	padding: 4px;
 	background-color: #FAFAFA;
 	border-right: 1px solid #000;
 	font-family: Arial,nonserif;
 	margin-top: 5px;
 	text-align: left;
 }
+.rosine_back a{
+	color: #1979D0;
+}
+.rosine_back:hover, .rosine_back a:hover{
+	background-color: #CDCDCD;
+	text-decoration: none;
+}
+
 .rosine_button {
 	float: left;
 	font-size: 2em;
@@ -377,7 +397,7 @@ aside{
 	border-radius: 10px;
 	background-color:#CDCDCD;
 	margin: 5px;
-	height: 15em;
+	height: 11em;
 }
 #rosine_paperwork_form_buttons p {
 	text-align: center;
@@ -390,7 +410,7 @@ aside{
 	float: left;
 }
 .rosine_input_ammount{
-	width:40px;
+	width:40 px;
 }
 
 #rosine_paperwork_input_wrap{
