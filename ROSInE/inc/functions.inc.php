@@ -8,8 +8,94 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2016-03-30   		 								*
+ *  date of this file: 2016-03-31   		 								*
  \**************************************************************************/
+function rosine_create_tax_list($taxID){
+	$liste='<select name="posi_tax">';
+	$result=mysql_query($GLOBALS['rosine_db_query']['get_taxes']." 1");
+	if (mysql_errno()!=0){
+		//Error 206 in mysql
+		$GLOBALS['error'].="206: ".mysql_error($rosine_db);
+		$GLOBALS['error'].=$GLOBALS['rosine_db_query']['get_taxes']." 1";
+		$liste="206: ".mysql_error($rosine_db);
+	}// Error in mysql detected
+	else {
+		while($f = @mysql_fetch_array($result)) {
+			if ($taxID==$f['TAX_ID']){
+				$liste.='<option selected value="'.$f['TAX_ID'].'">'.substr($f['TAX_NAME'],0,10).' '.$f['TAX_PERCENTAGE']."%";
+			}// if tax id matches
+			else {
+				$liste.='<option value="'.$f['TAX_ID'].'">'.substr($f['TAX_NAME'],0,10).' '.$f['TAX_PERCENTAGE']."%";
+			}// tax id doesn't match
+			$liste.="</option>";
+		}// end while
+	}// no error in mysql
+	$liste.='</select>';
+	return $liste;
+}//endfunc taxlist
+
+function rosine_create_location_list($locationID){
+	$liste='<select name="posi_location">';
+	$result=mysql_query($GLOBALS['rosine_db_query']['get_locations']." 1");
+	if (mysql_errno()!=0){
+		//Error 206 in mysql
+		$GLOBALS['error'].="206: ".mysql_error($rosine_db);
+		$GLOBALS['error'].=$GLOBALS['rosine_db_query']['get_locations']." 1";
+		$liste="206: ".mysql_error($rosine_db);
+	}// Error in mysql detected
+	else {
+		while($f = @mysql_fetch_array($result)) {
+			if ($locationID==$f['LOC_ID']){
+				$liste.='<option selected value="'.$f['LOC_ID'].'">'.substr($f['LOC_NAME'],0,30)." ";
+			}// if loc id matches
+			else {
+				$liste.='<option value="'.$f['LOC_ID'].'">'.substr($f['LOC_NAME'],0,10)." ";
+			}// loc id doesn't match
+			$liste.="</option>";
+		}// end while
+	}// no error in mysql
+	$liste.='</select>';
+	return $liste;
+}//endfunc taxlist
+
+function rosine_create_items_list($singular,$ID){
+	/*
+	 * This function creates the list of the items that are already in an offer/order etc 
+	 * and shows it for changing or deleting items
+	 * $singular = offer/order...
+	 * $ID - the ID of the order/offer etc
+	 */
+	$plural=rosine_get_plural($singular);
+	$result=mysql_query($GLOBALS['rosine_db_query']['get_articles_from_paperwork'].$plural."_positions WHERE ".strtoupper($singular)."_ID=".$ID);
+	if (mysql_errno()!=0){
+		//Error 5 in mysql
+		$GLOBALS['error'].="205: ".mysql_error($rosine_db);
+		$GLOBALS['error'].=$GLOBALS['rosine_db_query']['get_articles_from_paperwork'].$plural."_positions WHERE ".strtoupper($singular)."_ID=".$ID;
+		$liste="205: ".mysql_error($rosine_db);
+	}// Error in mysql detected
+	else {
+		$liste="<table id='rosine_tabelle'>";
+		$liste.="<tr><th></th>
+						<th>".$GLOBALS['lang']['posi_id']."<br> ".$GLOBALS['lang']['delete']."</th>
+						<th width='55%'>".$GLOBALS['lang']['article']."</th>
+						<th>".$GLOBALS['lang']['ammount']."</th>
+						<th>".$GLOBALS['lang']['price']."</th></tr>";
+		while($f = @mysql_fetch_array($result)) {
+			$liste.='<td><p class="rosine_back" style="margin:0px;"><a href="paperwork_item_change.php?paperwork='.$singular.'&paperwork_id='.$ID.'&posi_id='.$f['POSI_ID'].'" >'.$GLOBALS['lang']['change'].'</a></p></td>';
+			$liste.='<td><input type="checkbox" name="delete['.$f['POSI_ID'].']" value="'.$f['POSI_ID'].'"> '.$f['POSI_ID']."</td>".
+					"<td><center>".$f['ART_NUMBER'].': '.$f['POSI_TEXT'].'</center></td>
+									<td>'.str_replace(".000", "", $f['POSI_AMMOUNT']).' '.$f['POSI_UNIT'].'</td>
+									<td>à '.$f['POSI_PRICE']." ".$GLOBALS['currency'].'</td>';
+			$liste.="<tr>
+							";
+		}//get rows with articles in database
+		$liste.="</table>";
+		
+	}//no error 5 in mysql
+			
+	return $liste;
+}//endfunc rosine_create_items_list
+
 function rosine_add_complete_paperwork($singular1,$ID1,$singular2,$ID2,$complete=true){
 	// this adds a complete paperwork into another paperwork eg an offer into an order
 	/*
@@ -35,7 +121,13 @@ function rosine_add_complete_paperwork($singular1,$ID1,$singular2,$ID2,$complete
 	$query=str_replace("%ID1%", $ID1, $query);
 	$query=str_replace("%ID2%", $ID2, $query);
 	$query=explode(";", $query);
-	$result1=mysql_query($query[0]); // query to set MySQL-Variable @n
+	$query0=str_replace("%singular%", $singular2, $GLOBALS['rosine_db_query']['get_highest_number']);
+	$query0=str_replace("%plural%",$plural2,$max);
+	$query0=str_replace("%1%", $singular2."_id=".$ID2, $max);
+	$result0=mysql_query($query0); 
+	$max=mysql_fetch_row($result0);
+	$max[0]+=1;
+	$result1=mysql_query(str_replace("%max%",$max[0],$query[0])); // query to set MySQL-Variable @n
 	$result2=mysql_query($query[1]); // query to add the paperwork items to the new paperwork
 	if ($complete){
 		rosine_set_status_paperwork($singular1,$ID1,$singular2." ".$ID2);
@@ -50,8 +142,8 @@ function rosine_add_paperworklist($singular,$customer){
 	$zeile='<select name="'.$singular.'">';
 	$zeile.='<option selected value="" >'.$GLOBALS['lang'][$singular].'</option>';
 	while ($f=mysql_fetch_array($result)){
-		$zeile.='<option value="'.$f['offer_id'].'" title="'.str_replace(",000","",str_replace(".",",",str_replace(',', '; ', $f['contents']))).
-			'">'.$GLOBALS['lang'][$singular].':'.$f['offer_id'].' - '.$GLOBALS['lang']['articles'].
+		$zeile.='<option value="'.$f[$singular.'_id'].'" title="'.str_replace(",000","",str_replace(".",",",str_replace(',', '; ', $f['contents']))).
+			'">'.$GLOBALS['lang'][$singular].':'.$f[$singular.'_id'].' - '.$GLOBALS['lang']['articles'].
 		':'.$f['ammount'].' ('.$f['money'].'€)</option>';
 	
 	}//end while
@@ -172,6 +264,7 @@ function rosine_delete_positions ($value, $key, $query){
 }//endfunction delete_positions
 
 function rosine_correct_numbers ($singular, $ID){
+	// this function corrects IDs of items after deleting etc
 	$query=$GLOBALS['rosine_db_query']['correct_numbers_from_paperwork'];
 	
 	$plural=rosine_get_plural($singular);
@@ -185,7 +278,13 @@ function rosine_correct_numbers ($singular, $ID){
 		$result=false;
 		$GLOBALS['error'].="200: ".mysql_error($GLOBALS['rosine_db'])."<br>".$query;
 	}//if there is an error
-	
+	$max=rosine_highest_number($singular." positions", $ID);
+	if ($max>0){
+		rosine_set_status_paperwork($singular, $ID, "changed");
+	}//minimum of 1 article in paperwork with this id
+	else{
+		rosine_set_status_paperwork($singular, $ID, "empty");
+	}// paperwork is empty
 }//endfunction correct_numbers
 
 function rosine_highest_number ($singular, $ID=0){
@@ -240,6 +339,11 @@ function rosine_database_query ($query, $error_number){
 	}
 	return $result;
 }//endfunction rosine_database_query
-
+function rosine_next_article_number(){
+	$result=mysql_query($GLOBALS['rosine_db_query']['get_next_article_number']);
+	$f=mysql_fetch_array($result);
+	
+	return $f['maximum']+1;
+}//endfunc next article number
 
 ?>

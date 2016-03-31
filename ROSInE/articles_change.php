@@ -7,7 +7,7 @@
 	*  This program is free software; you can redistribute it and/or modify it *
 	*  under the terms of the GNU General Public License as published by the   *
 	*  Free Software Foundation; version 2 of the License.                     *
-	*  date of this file: 2016-01-12 										   *
+	*  date of this file: 2016-03-31 										   *
 	\**************************************************************************/
 $GLOBALS['phpgw_info']['flags']['currentapp'] = 'rosine';
 include('../header.inc.php');
@@ -23,7 +23,8 @@ $lang = $tpl->loadLanguage($lang);
 switch ($_POST['next_function']){
 	
 	case "new": 
-	
+		if (!$_POST['stock'])
+			$_POST['stock']="0";
 		$tpl->assign("next_function", "new");
 		$tpl->assign("what_to_do", $lang['insert_again_new_article']);
 		if ($_POST['number']=="")
@@ -36,15 +37,25 @@ switch ($_POST['next_function']){
 							'("'.$_POST[number].'","'.
 							$_POST[unity].'","'.
 							$_POST[article_name].'", '.
-							$_POST[price].', 
-							1 , 
-							1, '.
+							$_POST[price].','. 
+							$_POST['posi_tax'].','.
+							$_POST['posi_location'].','.
 							$_POST[stock].', "'.
 							$_POST[notes].'", "'.
 							date("Y-m-d-H-i-s").'","")');
 		if (mysql_errno($rosine_db)!=0) {
 			// Error in mysql detected
-			$error.=mysql_error($rosine_db);
+			$error.="0: ".mysql_error($rosine_db);
+			$error.="<br>".$rosine_db_query['insert_article'].
+							'("'.$_POST[number].'","'.
+							$_POST[unity].'","'.
+							$_POST[article_name].'", '.
+							$_POST[price].','. 
+							$_POST['posi_tax'].','.
+							$_POST['posi_location'].','.
+							$_POST[stock].', "'.
+							$_POST[notes].'", "'.
+							date("Y-m-d-H-i-s").'","")';
 			$OK="";
 			$tpl->assign("number", $_POST['number']);
 			$tpl->assign("unity", $_POST['unity']);
@@ -83,6 +94,8 @@ switch ($_POST['next_function']){
 			$tpl->assign("article_name",$row['ART_NAME']);
 			$tpl->assign("price", $row['ART_PRICE']);
 			$tpl->assign("stock", $row['ART_INSTOCK']);
+			$_POST['posi_location']=$row['ART_STOCKNR'];
+			$_POST['posi_tax']=$row['ART_TAX'];
 		}
 	break;
 	
@@ -100,6 +113,8 @@ switch ($_POST['next_function']){
 							 ART_UNIT="'.$_POST['unity'].'",
 							 ART_PRICE='.$_POST['price'].',
 							 ART_INSTOCK='.$_POST['stock'].',
+							 ART_STOCKNR='.$_POST['posi_location'].',
+							 ART_TAX='.$_POST['posi_tax'].',
 							 CHANGED="'.date("Y-m-d-H-i-s").'"		
 							 WHERE ART_NUMBER="'.$_POST['oldnumber'].'"');
 		if (mysql_errno($rosine_db)!=0) {
@@ -121,8 +136,11 @@ switch ($_POST['next_function']){
 		$tpl->assign("article_name","");
 		$tpl->assign("price", "");
 		$tpl->assign("stock", "");
+		
 }//end case select what happens with the data
 $tpl->assign("error", $error);
 $tpl->assign("OK", $OK);
+$tpl->assign("selector_tax", rosine_create_tax_list($_POST['posi_tax']));
+$tpl->assign("selector_stock",rosine_create_location_list($_POST['posi_location']));
 $tpl->display();
 ?>

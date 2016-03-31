@@ -8,7 +8,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2016-03-30   		 								*
+ *  date of this file: 2016-03-31   		 								*
  \**************************************************************************/
 
 $lang['page_buttons']='{$backward} {$from} bis {$to} von insgesamt {$max} {$foreward}';
@@ -22,7 +22,7 @@ $lang['input_new_order']="Neue Bestellung eingeben";
 $lang['orders_list']="Liste der Bestellungen";
 $lang['delivery_notes']="Lieferscheine";
 $lang['generate_new_delivery_note']="Neuen Lieferschein anlegen";
-$lang['delivery_note_list']="Liefrscheinliste";
+$lang['delivery_note_list']="Lieferscheinliste";
 $lang['invoices']="Rechnungen";
 $lang['generate_new_invoice']="Neue Rechnung anlegen";
 $lang['invoice_list']="Rechnungsliste";
@@ -115,6 +115,11 @@ $lang['private']="(Privat)";
 $lang['company']="Status";
 $lang['date']="Datum";
 $lang['status']="Status";
-$lang['add_articles_from_other_tables']="Artikel aus anderen Tabllen einfügen";
+$lang['add_articles_from_other_tables']="Artikel aus anderen Tabellen einfügen";
 $lang['from_paperwork']='Aus %paperwork%: %ID1%';
+$lang['change_item_in_paperwork']='{$paperwork}-Artikel ändern';
+$lang['item_text']="Artikeltext";
+$lang['position']="Position";
+$lang['plus']="zzgl.";
+$lang['item_changed']="Position geändert!";
 ?>
