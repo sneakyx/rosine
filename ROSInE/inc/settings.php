@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2016-03-31  										    *
+ *  date of this file: 2016-04-09  										    *
  \**************************************************************************/
 
 
@@ -35,7 +35,8 @@ $currency="€";
 $items_per_page=10; // list of articles per page, etc
 $articles_per_page=10; // ammount of input fields in new offer, order, invoice
 $customers_per_page=10; // ammount of shown customers in new offer, order, invoice
-$favorite_articles=5; // how many favorite articles 
+$favorite_articles=5; // how many favorite articles
+$favorite_payment_selected=1;
 //mysql for articles
 $rosine_db_query['insert_article']="INSERT INTO ".$rosine_db_prefix."articles (ART_NUMBER, ART_UNIT, ART_NAME, ART_PRICE, ART_TAX, ART_STOCKNR, ART_INSTOCK, ART_NOTE, GENERATED, CHANGED) VALUES ";
 $rosine_db_query['get_articles']="SELECT * FROM ".$rosine_db_prefix."articles WHERE ";
@@ -82,4 +83,11 @@ $rosine_db_query['set_paperwork_status']="UPDATE ".$rosine_db_prefix.'%plural% S
 $rosine_db_query['insert_paperwork_into_paperwork']='set @n= %max%; INSERT INTO '.$rosine_db_prefix.'%plural2%_positions SELECT %ID2%,(@n:=@n+1) as POSI_ID , ART_NUMBER, POSI_AMMOUNT, POSI_UNIT, POSI_PRICE, POSI_LOCATION, POSI_SERIAL, CONCAT("%infotext% ",POSI_TEXT), POSI_TAX FROM '.$rosine_db_prefix.'%plural1%_positions WHERE %singular1%_id=%ID1%';
 $rosine_db_query['get_customer_name_by_paperwork_id']='SELECT e.n_fn as customer_name, %singular%_customer as customer_id  FROM '.$egw_db_prefix.'addressbook AS e JOIN '.$rosine_db_prefix.'%plural% as r ON e.contact_id=%singular%_CUSTOMER WHERE r.%singular%_id=%ID%';
 $rosine_db_query['update_paperwork_item']='UPDATE '.$rosine_db_prefix.'%plural%_positions SET %set% WHERE %singular%_id=%paperwork_id% AND posi_id=%posi_id% LIMIT 1';
+
+//mysql for payments
+$rosine_db_query['get_unpaid_invoices']='SELECT e.n_fn AS name, i.INVOICE_CUSTOMER AS invoice_customer, i.INVOICE_ID AS invoice_id, i.INVOICE_AMMOUNT AS invoice_ammount, sum( p.PAYMENT_AMMOUNT ) AS already_paid FROM '.$rosine_db_prefix.'invoices AS i NATURAL LEFT JOIN '.$rosine_db_prefix.'payments AS p JOIN '.$egw_db_prefix.'addressbook as e ON i.INVOICE_CUSTOMER=e.contact_id WHERE i.invoice_status = "changed" GROUP BY i.INVOICE_ID ORDER BY i.INVOICE_ID';
+$rosine_db_query['get_payment_methods']='SELECT * FROM '.$rosine_db_prefix.'payments_methods WHERE 1';
+$rosine_db_query['insert_payment']='INSERT INTO '.$rosine_db_prefix.'payments (PAYMENT_ID , INVOICE_ID , PAYMENT_DATE , METH_ID , PAYMENT_AMMOUNT , PAYMENT_NOTE ) VALUES ';
+$rosine_db_query['get_open_money']='SELECT sum(p.PAYMENT_AMMOUNT) as already_payed, i.INVOICE_AMMOUNT as invoice_ammount from '.$rosine_db_prefix.'payments as p JOIN '.$rosine_db_prefix.'invoices as i on i.INVOICE_ID=p.INVOICE_ID WHERE p.INVOICE_ID=';
+
 ?>

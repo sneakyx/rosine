@@ -1,0 +1,6 @@
+{*Header einbinden*}
+{include file="head.html"}
+<div>
+</div>
+{*Footer einbinden*}
+{include file="footer.html"}

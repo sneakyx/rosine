@@ -1,0 +1,32 @@
+{*Header einbinden*}
+{include file="head.html"}
+<div id="rosine_input_wrap">
+	<form action="#" method="POST">
+		<div class="rosine_input">
+			<p class="rosine_input_header">{$what_to_do}</p> 
+				<div id="rosine_input_right">	<br>
+				{L_item_text}:<br>	
+				<textarea name="posi_text" rows="5" cols="40">{$posi_text}</textarea><br>
+				</div>
+				
+				<div id="rosine_input_left">		
+				<br>
+				{L_PRICE}: <input type="text" name="posi_price" value="{$posi_price}" size="10" maxlength="20"> {$currency} 
+				{L_PLUS}{L_TAX}: {$selector_tax}<br>
+				{L_STOCK_LOCATION}: {$selector_stock} <br>
+				{L_UNITY}: <input type="text" name="posi_unit" size="10" value="{$posi_unit}" maxlength="20"> 
+				{L_AMMOUNT}: <input type="text" name="posi_ammount" value="{$posi_ammount}" size="10" maxlength="20"><br>
+				<br>
+				{$paperwork}: {$paperwork_id} - {L_CUSTOMER}: {$customer}<br>
+				{L_POSITION}: {$posi_id}<br>
+				<input type="hidden" name="next_function" value="{$next_function}">
+				{$hidden_fields}				
+				<input type="submit" title="insert_article" value="{$what_to_do}">
+				</div>
+				<div style="clear:both;">
+							
+				</div>
+			</div>
+		</form>
+</div>{*Footer einbinden*}
+{include file="footer.html"}

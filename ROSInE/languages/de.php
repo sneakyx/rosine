@@ -8,7 +8,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2016-03-31   		 								*
+ *  date of this file: 2016-04-09   		 								*
  \**************************************************************************/
 
 $lang['page_buttons']='{$backward} {$from} bis {$to} von insgesamt {$max} {$foreward}';
@@ -122,4 +122,17 @@ $lang['item_text']="Artikeltext";
 $lang['position']="Position";
 $lang['plus']="zzgl.";
 $lang['item_changed']="Position geändert!";
+$lang['customer_list']="Kundenliste";
+$lang['more_functions']="weitere Funktionen";
+$lang['customers_with_most_sales']="Kunden mit den meisten Umsatz";
+$lang['customers_with_most_paperwork']="Kunden mit den meisten %paperwork%";
+$lang['last_customers']="Die letzen Kunden";
+$lang['customer_name_or_number']="Kundenname oder Nummer";
+$lang['choose_invoice_for_payment']="Zahlung eintragen";
+$lang['insert_payment']="Zahlung einfügen";
+$lang['unpayed_ammount']="unbezahlter Betrag: ";
+$lang['from']="von";
+$lang['payment_inserted']="Zahlung eingefügt!";
+$lang['payed_money']="Zahlung";
+$lang['invoice_payed']="Rechnung ist bezahlt!";
 ?>
