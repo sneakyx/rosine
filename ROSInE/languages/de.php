@@ -135,4 +135,10 @@ $lang['from']="von";
 $lang['payment_inserted']="Zahlung eingefügt!";
 $lang['payed_money']="Zahlung";
 $lang['invoice_payed']="Rechnung ist bezahlt!";
+$lang['ammount_due']="Betrag";
+$lang['terms']="Bedingungen";
+$lang['ammount_netto']="Gesamt (netto)";
+$lang['ammount_tax']="MwSt";
+$lang['ammount_brutto']="Gesamt";
+$lang['customer_id']="Kundennummer";
 ?>

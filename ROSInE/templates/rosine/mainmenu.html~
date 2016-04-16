@@ -29,7 +29,7 @@
 				<article id="button5">
 					<h3>{L_PAYMENTS}</h3>
 					<a href="payments_change.php">{L_INPUT_NEW_PAYMENT}</a><br>
-					<a href="payments.php">{L_PAYMENT_METHODS}</a>
+					<a href="payments.php">{L_UNPAID_INVOICES}</a>
 					<a href="dunnings.php">{L_DUNNINGS}</a>									
 				</article>
 				<article id="button6">

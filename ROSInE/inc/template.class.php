@@ -264,5 +264,14 @@ class Rosine_Template
     public function display() {
         echo $this->template;
     }
+    /**
+     * Das "fertige Template" als Rückgabewert.
+     *
+     * @access    public
+     * @uses      $template
+     */
+    public function return_html(){
+    	return $this->template;	
+    }
 }
 ?>

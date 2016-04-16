@@ -133,7 +133,8 @@ if ($from < 0)
 						<input type="hidden" name="contact_id" value="::'.$f['INVOICE_CUSTOMER'].'">		
 					</form>
 			</td>'; //ob das mit den zwei Doppelpunkten stimmt?
-								$liste.="<td>n.y.i.</td>";
+								$liste.='<td><a href="print_paperwork.php?paperwork=invoice&paperwork_id='.
+										$f['INVOICE_ID'].'" target="_blank">'.$lang['print'].'</a></td>';
 								$liste.="</tr>";
 							}
 							$liste.="</table>";

@@ -7,7 +7,7 @@
 	*  This program is free software; you can redistribute it and/or modify it *
 	*  under the terms of the GNU General Public License as published by the   *
 	*  Free Software Foundation; version 2 of the License.                     *
-	*  date of this file: 2016-03-31  										   *
+	*  date of this file: 2016-04-16  										   *
 	\**************************************************************************/
 
 $GLOBALS['phpgw_info']['flags']['currentapp'] = 'rosine';
@@ -133,7 +133,8 @@ if ($from < 0)
 						<input type="hidden" name="contact_id" value="::'.$f['DELIVERY_CUSTOMER'].'">		
 					</form>
 			</td>'; //ob das mit den zwei Doppelpunkten stimmt?
-								$liste.="<td>n.y.i.</td>";
+								$liste.='<td><a href="print_paperwork.php?paperwork=delivery&paperwork_id='.
+										$f['DELIVERY_ID'].'" target="_blank">'.$lang['print'].'</a></td>';
 								$liste.="</tr>";
 							}
 							$liste.="</table>";
