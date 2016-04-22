@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2016-03-31  										    *
+ *  date of this file: 2016-04-22  										    *
  \**************************************************************************/
 $GLOBALS['phpgw_info']['flags']['currentapp'] = 'rosine';
 include('../header.inc.php');
@@ -15,7 +15,6 @@ include ('inc/settings.php');
 include ('inc/template.class.php');
 $tpl = new Rosine_Template();
 // order list, add items etc
-
 switch ($_POST['next_function']){
 	case "changed":
 		// form was filled, now it has to be changed
@@ -92,9 +91,10 @@ switch ($_POST['next_function']){
 }//end switch "next_function"
 
 $tpl->assign("next_function", $_POST['next_function']);
-$tpl->assign('currency', $currency);
+$tpl->assign('currency', $config['currency']);
 $tpl->assign("OK", $OK);
 $tpl->assign("error", $error);
+$tpl->assign('paperwork_type', $_POST['paperwork']);
 $tpl->display();
 
 

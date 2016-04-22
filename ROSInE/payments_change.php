@@ -88,7 +88,7 @@ switch ($_POST['next_function']) {
 						
 			while($f = @mysql_fetch_array($result)) {
 				$input_fields.='<option value="'.$f['invoice_id'].'">'.$lang['invoice'].' '.$f['invoice_id'].' - '.
-					$f['name'].' ('.$f['invoice_customer'].') '.$lang['unpayed_ammount'].number_format(($f['invoice_ammount']-$f['already_paid']),2,".","").' '.$lang['from'].' '.$f['invoice_ammount'].$currency.'</option>
+					$f['name'].' ('.$f['invoice_customer'].') '.$lang['unpayed_ammount'].number_format(($f['invoice_ammount']-$f['already_paid']),2,".","").' '.$lang['from'].' '.$f['invoice_ammount'].$config['currency'].'</option>
 							';
 			}//endwhile
 			$input_fields.='</select>';
@@ -101,7 +101,7 @@ switch ($_POST['next_function']) {
 			else {
 				$input_fields.='<select name="meth_id" size="10">';
 				while($f = @mysql_fetch_array($result)) {
-					if ($f['METH_ID']==$favorite_payment_selected)
+					if ($f['METH_ID']==$config['favorite_payment_selected'])
 							$input_fields.='<option selected value="'.$f['METH_ID'].'">'.$f['METH_NAME'].'('.
 								$f['METH_ID'].') </option>
 								';
@@ -122,7 +122,7 @@ $tpl->assign("OK", $OK);
 $tpl->assign("error", $error);
 $tpl->assign("input_fields", $input_fields);
 $tpl->assign("paperwork", $lang['payment']);
-$tpl->assign("currency", $currency);
+$tpl->assign("currency", $config['currency']);
 $tpl->assign("date",date("Y-m-d"));
 
 // $tpl->assign("this_number",rosine_get_real_number("payment",$_POST['payment_id']));

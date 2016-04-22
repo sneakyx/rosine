@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2016-04-16  										    *
+ *  date of this file: 2016-04-20  										    *
  \**************************************************************************/
 
 
@@ -31,18 +31,20 @@ $OK="";
 $language="de.php";
 
 // some important things
-$currency="€";
-$items_per_page=10; // list of articles per page, etc
-$articles_per_page=10; // ammount of input fields in new offer, order, invoice
-$customers_per_page=10; // ammount of shown customers in new offer, order, invoice
-$favorite_articles=5; // how many favorite articles
-$favorite_payment_selected=1;
 $paperwork_terms="Zahlbar innerhalb von 14 Tagen. Falls nicht anders angegeben, ist Rechnungsdatum auch Lieferdatum!";
-$company_name="Rothaar Systems";
-$company_street="Hauptstr. 29";
-$company_zip="57319";
-$company_city="Bad Berleburg";
-$company_country="";
+
+// mysql to get config
+$rosine_db_query['get_config']='SELECT * FROM '.$rosine_db_prefix.'config WHERE user_id =0 OR user_id ='.$egw_info['user']['account_id'].' GROUP BY config desc';
+$result=mysql_query($rosine_db_query['get_config']);
+if (mysql_errno($rosine_db)!=0) {
+	// Error in mysql detected
+	echo "1000: ".mysql_error($rosine_db);
+	echo $rosine_db_query['get_config'];
+}
+while ($f= mysql_fetch_array($result)) {
+	$config[$f['config']]=$f['value'];
+//	echo $f['config'].": ".$f['value']."<br>"; // this is just to get an output for the configuration in the database
+}// put config into array
 //mysql for articles
 $rosine_db_query['insert_article']="INSERT INTO ".$rosine_db_prefix."articles (ART_NUMBER, ART_UNIT, ART_NAME, ART_PRICE, ART_TAX, ART_STOCKNR, ART_INSTOCK, ART_NOTE, GENERATED, CHANGED) VALUES ";
 $rosine_db_query['get_articles']="SELECT * FROM ".$rosine_db_prefix."articles WHERE ";
@@ -69,7 +71,7 @@ $rosine_db_query['search_customers_ammount']="SELECT COUNT(*) FROM ".$egw_db_pre
 $rosine_db_query['get_customers']="SELECT * FROM ".$egw_db_prefix."addressbook WHERE ";
 
 // mysql for special lists
-$rosine_db_query['most_used_articles']="SELECT art_name, count(p.art_number) as counter,p.art_number as art_number from ".$rosine_db_prefix."%plural%_positions as p JOIN ".$rosine_db_prefix."articles AS a ON a.art_number=p.art_number where 1 group by art_number ORDER BY counter DESC LIMIT ".$favorite_articles;
+$rosine_db_query['most_used_articles']="SELECT art_name, count(p.art_number) as counter,p.art_number as art_number from ".$rosine_db_prefix."%plural%_positions as p JOIN ".$rosine_db_prefix."articles AS a ON a.art_number=p.art_number where 1 group by art_number ORDER BY counter DESC LIMIT ".$config['favorite_articles'];
 $rosine_db_query['paperwork_not_used']='SELECT r.%singular%_id AS %singular%_id, GROUP_CONCAT(concat (p.posi_ammount, " ", a.art_name)) AS contents, r.changed AS changed, COUNT(p.posi_id) AS ammount, r.%singular%_ammount AS money FROM '.$rosine_db_prefix.'%plural% AS r JOIN '.$rosine_db_prefix.'%plural%_positions as p on r.%singular%_id = p.%singular%_id JOIN '.$rosine_db_prefix.'articles AS a ON a.art_number=p.art_number WHERE %singular%_status="changed" AND %singular%_customer=%customer% GROUP BY %singular%_id ORDER BY changed DESC'; 
 
 // mysql for paperwork

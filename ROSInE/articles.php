@@ -7,7 +7,7 @@
 	*  This program is free software; you can redistribute it and/or modify it *
 	*  under the terms of the GNU General Public License as published by the   *
 	*  Free Software Foundation; version 2 of the License.                     *
-	*  date of this file: 2016-01-12  										   *
+	*  date of this file: 2016-04-20  										   *
 	\**************************************************************************/
 
 
@@ -51,22 +51,22 @@ else {
 $from=(intval($_GET['from']));
 if ($from < 0)
 	$from=0;
-if ($max_rows<$from+$items_per_page)
-	$items_per_page=$max_rows-$from;
-$result=mysql_query($rosine_db_query['get_articles']."1 LIMIT $from,$items_per_page");
+if ($max_rows<$from+$config['items_per_page'])
+	$config['items_per_page']=$max_rows-$from;
+$result=mysql_query($rosine_db_query['get_articles']."1 LIMIT $from,".$config['items_per_page']);
 
 if ($from >0) //zurueckblaettern anzeigen wenn moeglich
-	$tpl->assign("backward", '<a href="?from='.($from-$items_per_page).'">&lt;&lt;</a>');
+	$tpl->assign("backward", '<a href="?from='.($from-$config['items_per_page']).'">&lt;&lt;</a>');
 else 
 	$tpl->assign("backward", "");
 
-if ($from < $max_rows-$items_per_page) //vorblaettern anzeigen wenn notwendig
-	$tpl->assign("foreward", '<a href="?from='.($from+$items_per_page).'">&gt;&gt;</a>');
+if ($from < $max_rows-$config['items_per_page']) //vorblaettern anzeigen wenn notwendig
+	$tpl->assign("foreward", '<a href="?from='.($from+$config['items_per_page']).'">&gt;&gt;</a>');
 else 
 	$tpl->assign("foreward", "");
 
 $tpl->assign('from', $from);
-$tpl->assign("to", ($from+$items_per_page));
+$tpl->assign("to", ($from+$config['items_per_page']));
 $tpl->assign("max", $max_rows);
 
 if (mysql_errno($rosine_db)!=0) {
@@ -99,7 +99,7 @@ else {
 		}
 		$liste.="<td>".$f['ART_NUMBER']."</td>".
 			'<td style="text-align:center;">'.$f['ART_NAME']."</td>
-			<td>".$f['ART_PRICE']." ".$currency."</td>
+			<td>".$f['ART_PRICE']." ".$config['currency']."</td>
 			<td>".$f['INSTOCK'].'</td>
 			<td>
 					<form action="#" method="post">

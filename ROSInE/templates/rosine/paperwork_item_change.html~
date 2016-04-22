@@ -19,8 +19,11 @@
 				<br>
 				{$paperwork}: {$paperwork_id} - {L_CUSTOMER}: {$customer}<br>
 				{L_POSITION}: {$posi_id}<br>
-				<input type="hidden" name="next_function" value="{$next_function}">				
+				<input type="hidden" name="next_function" value="{$next_function}">
+				<input type="hidden" name="paperwork" value="{$paperwork-type}">				
+				{$hidden_fields}				
 				<input type="submit" title="insert_article" value="{$what_to_do}">
+				
 				</div>
 				<div style="clear:both;">
 							

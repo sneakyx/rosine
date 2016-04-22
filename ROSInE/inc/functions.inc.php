@@ -8,7 +8,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2016-03-31   		 								*
+ *  date of this file: 2016-04-22   		 								*
  \**************************************************************************/
 function rosine_create_tax_list($taxID){
 	$liste='<select name="posi_tax">';
@@ -122,13 +122,31 @@ function rosine_add_complete_paperwork($singular1,$ID1,$singular2,$ID2,$complete
 	$query=str_replace("%ID2%", $ID2, $query);
 	$query=explode(";", $query);
 	$query0=str_replace("%singular%", $singular2, $GLOBALS['rosine_db_query']['get_highest_number']);
-	$query0=str_replace("%plural%",$plural2,$max);
-	$query0=str_replace("%1%", $singular2."_id=".$ID2, $max);
+	$query0=str_replace("%plural%",$plural2,$query0);
+	$query0=str_replace("%1%", $singular2."_id=".$ID2, $query0);
 	$result0=mysql_query($query0); 
+	if (mysql_errno()!=0){
+		//Error 5 in mysql
+		$GLOBALS['error'].="401: ".mysql_error($rosine_db);
+		$GLOBALS['error'].="<br>Query: ".$query0;
+		$liste="401: ".mysql_error($rosine_db);
+	}// Error in mysql detected
 	$max=mysql_fetch_row($result0);
 	$max[0]+=1;
 	$result1=mysql_query(str_replace("%max%",$max[0],$query[0])); // query to set MySQL-Variable @n
+	if (mysql_errno()!=0){
+		//Error 5 in mysql
+		$GLOBALS['error'].="402: ".mysql_error($rosine_db);
+		$liste="402: ".mysql_error($rosine_db);
+		$GLOBALS['error'].="<br>".str_replace("%max%",$max[0],$query[0]);
+	}// Error in mysql detected
 	$result2=mysql_query($query[1]); // query to add the paperwork items to the new paperwork
+	if (mysql_errno()!=0){
+		//Error 5 in mysql
+		$GLOBALS['error'].="403: ".mysql_error($rosine_db);
+		$liste="403: ".mysql_error($rosine_db);
+		$GLOBALS['error'].="<br>".$query[1];
+	}// Error in mysql detected
 	if ($complete){
 		rosine_set_status_paperwork($singular1,$ID1,$singular2." ".$ID2);
 	}// if the complete paperwork is added, we have to set the new status
@@ -197,7 +215,7 @@ function rosine_most_used_articles($singular){
 		$result=false;
 		echo $error_number.": ".mysql_error()."<br>".$query;
 	}// there is no error
-	$i=$GLOBALS['items_per_page'];
+	$i=$GLOBALS['config']['items_per_page'];
 	while ($f= mysql_fetch_array($result,MYSQL_ASSOC)){
 		$liste.='<div class="rosine_paperwork_input_line"><input type="text" style="width:40px;" max-width="10" name="ammount['.$i.']">'
 			.'<input type="hidden" name="articles['.$i.']" value="#'.$f['art_number'].'">'	

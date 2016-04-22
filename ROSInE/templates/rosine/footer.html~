@@ -1,10 +1,10 @@
 <footer>
-	[<a href="index.php">Hauptmenü</a>] 
-	[<a href="offers.php">Angebote</a>] 
-	[<a href="orders.php">Bestellungen</a>] 
-	[<a href="deliveries.php">Lieferscheine</a>] 
-	[<a href="invoices.php">Rechnungen</a>] 
-	[<a href="payments.php">Zahlungen</a>]
-	[<a href="articles.php">Artikel</a>]
+	[<a href="index.php">{L_MAIN_MENUE}</a>] 
+	[<a href="offers.php">{L_OFFERS}</a>] 
+	[<a href="orders.php">{L_ORDERS}</a>] 
+	[<a href="deliveries.php">{L_DELIVERY_NOTES}</a>] 
+	[<a href="invoices.php">{L_INVOICES}</a>] 
+	[<a href="payments.php">{L_PAYMENTS}</a>]
+	[<a href="articles.php">{L_ARTICLES}</a>]
 </footer>
 </html>
