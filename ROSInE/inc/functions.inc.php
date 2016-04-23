@@ -8,7 +8,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2016-04-22   		 								*
+ *  date of this file: 2016-04-23   		 								*
  \**************************************************************************/
 function rosine_create_tax_list($taxID){
 	$liste='<select name="posi_tax">';
@@ -105,6 +105,7 @@ function rosine_add_complete_paperwork($singular1,$ID1,$singular2,$ID2,$complete
 	 * $paperwork_ID2 = which ID has the destination paperwork
 	 * 
 	 */
+	
 	$plural1=rosine_get_plural($singular1);
 	$plural2=rosine_get_plural($singular2);
 	$query=str_replace("%singular1%", $singular1, $GLOBALS['rosine_db_query']['insert_paperwork_into_paperwork']);
@@ -120,7 +121,7 @@ function rosine_add_complete_paperwork($singular1,$ID1,$singular2,$ID2,$complete
 	$query=str_replace("%paperwork%", $GLOBALS['lang'][$singular1], $query);
 	$query=str_replace("%ID1%", $ID1, $query);
 	$query=str_replace("%ID2%", $ID2, $query);
-	$query=explode(";", $query);
+	
 	$query0=str_replace("%singular%", $singular2, $GLOBALS['rosine_db_query']['get_highest_number']);
 	$query0=str_replace("%plural%",$plural2,$query0);
 	$query0=str_replace("%1%", $singular2."_id=".$ID2, $query0);
@@ -133,23 +134,14 @@ function rosine_add_complete_paperwork($singular1,$ID1,$singular2,$ID2,$complete
 	}// Error in mysql detected
 	$max=mysql_fetch_row($result0);
 	$max[0]+=1;
-	$result1=mysql_query(str_replace("%max%",$max[0],$query[0])); // query to set MySQL-Variable @n
-	if (mysql_errno()!=0){
-		//Error 5 in mysql
-		$GLOBALS['error'].="402: ".mysql_error($rosine_db);
-		$liste="402: ".mysql_error($rosine_db);
-		$GLOBALS['error'].="<br>".str_replace("%max%",$max[0],$query[0]);
-	}// Error in mysql detected
-	$result2=mysql_query($query[1]); // query to add the paperwork items to the new paperwork
-	if (mysql_errno()!=0){
-		//Error 5 in mysql
-		$GLOBALS['error'].="403: ".mysql_error($rosine_db);
-		$liste="403: ".mysql_error($rosine_db);
-		$GLOBALS['error'].="<br>".$query[1];
-	}// Error in mysql detected
+	$query=str_replace("%max%", $max[0], $query);
+	$query=explode(";", $query);
+	
+	array_walk($query, 'rosine_database_query');
 	if ($complete){
 		rosine_set_status_paperwork($singular1,$ID1,$singular2." ".$ID2);
 	}// if the complete paperwork is added, we have to set the new status
+	
 }//endfunc add complete paperwork 
 
 function rosine_add_paperworklist($singular,$customer){
@@ -180,8 +172,8 @@ function rosine_paperwork_add_article($singular, $ammount,$ID, $where){
 	$lines=mysql_num_rows($result);
 	if ($lines==1){
 		$f = mysql_fetch_array($result);
-		if (! $f['ART_INSTOCKNR'])
-			$f['ART_INSTOCKNR']="0";
+		if (! $f['ART_STOCKNR'])
+			$f['ART_STOCKNR']="0";
 		$query=rosine_correct_query($singular, $GLOBALS['rosine_db_query']['insert_article_into_paperwork']);		
 		$result2=mysql_query($query.
 				'("'.$ID.'", "'.
@@ -190,7 +182,7 @@ function rosine_paperwork_add_article($singular, $ammount,$ID, $where){
 				$ammount.', "'.
 				$f['ART_UNIT'].'", '.
 				$f['ART_PRICE'].', '.
-				$f['ART_INSTOCKNR'].',
+				$f['ART_STOCKNR'].',
 										"","'. //theres no possibility to add Seriennummer (yet)
 				$f['ART_NAME'].'",'.
 				$f['ART_TAX'].')');
@@ -207,8 +199,10 @@ function rosine_set_status_paperwork($singular,$ID,$status){
 	$result=rosine_database_query($query,"210");
 }// end function set status paperwork
 
-function rosine_most_used_articles($singular){
+function rosine_most_used_articles($singular, $location=""){
 	$query=rosine_correct_query($singular, $GLOBALS['rosine_db_query']['most_used_articles']);
+	if ($location!="") // when there is a limitation by stocknr
+		str_replace("WHERE 1", "WHERE a.STOCKNR=".$location, $query);		
 	$result=mysql_query($query);
 	if (mysql_errno()!=0){
 		// Error in mysql detected
@@ -258,6 +252,8 @@ function rosine_correct_query($singular,$query,$paperwork=""){
 	$plural=rosine_get_plural($singular);
 	$query=str_replace("%singular%", $singular, $query);
 	$query=str_replace("%plural%", $plural, $query);
+	$query=str_replace("%SINGULAR%", strtoupper($singular), $query);
+	$query=str_replace("%PLURAL%", strtoupper($plural), $query);
 	$query=str_replace("%paperwork%", $paperwork, $query);
 	return $query;
 	
@@ -350,6 +346,7 @@ function rosine_database_query ($query, $error_number){
 	 * this function gives executes the selected mysql-query and returns also an error
 	 */
 	$result=mysql_query($query);
+//	echo "<br>".$query."<br>";
 	if (mysql_errno($GLOBALS['rosine_db'])!=0){ 
 		// Error in mysql detected
 		$result=false;
@@ -357,6 +354,7 @@ function rosine_database_query ($query, $error_number){
 	}
 	return $result;
 }//endfunction rosine_database_query
+
 function rosine_next_article_number(){
 	$result=mysql_query($GLOBALS['rosine_db_query']['get_next_article_number']);
 	$f=mysql_fetch_array($result);

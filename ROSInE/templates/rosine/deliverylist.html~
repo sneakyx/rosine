@@ -1,9 +1,0 @@
-{*Header einbinden*}
-{include file="head.html"}
-<div>
-<p id="rosine_table_note"> {L_DELIVERY} {L_PAGE_BUTTONS} <a href="deliveries_change.php">{L_MAKE_NEW}</a> </p>
-
-{$deliverylist}
-</div>
-{*Footer einbinden*}
-{include file="footer.html"}

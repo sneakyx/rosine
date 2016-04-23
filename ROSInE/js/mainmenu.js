@@ -1,17 +1,17 @@
 function LadeSeite1() {
-	window.location = "offers.php";
+	window.location = "paperwork_change.php?paperwork=offer";
 return;
 }
 function LadeSeite2() {
-	window.location = "orders.php";
+	window.location = "paperwork_change.php?paperwork=order";
 return;
 }
 function LadeSeite3() {
-	window.location = "deliveries.php";
+	window.location = "paperwork_change.php?paperwork=delivery";
 return;
 }
 function LadeSeite4() {
-	window.location = "invoices.php";
+	window.location = "paperwork_change.php?paperwork=invoice";
 return;
 }
 function LadeSeite5() {
