@@ -18,7 +18,7 @@ include ('inc/template.class.php');
 
 $tpl = new Rosine_Template();
 $tpl->load("articlelist.html");
-$lang[] = $language;
+$lang[] = $config['language'];
 $lang = $tpl->loadLanguage($lang);
 // should there be one articles really deleted?
 if ($_POST['next_function']=="really_delete"){

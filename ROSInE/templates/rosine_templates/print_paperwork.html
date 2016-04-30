@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+	
+	<title>{$paperwork}</title>
+	
+	<link rel='stylesheet' type='text/css' href='templates/rosine/print.css' />	
+</head>
+
+<body>
+{$error}
+	<div id="page-wrap">
+
+		<textarea id="header">{$paperwork}</textarea>
+		
+		<div id="identity">
+		
+            <textarea id="address">{$config[company_name]}
+{$config[company_street]}
+{$config[company_zip]} {$config[company_city]}
+
+</textarea>
+
+            <div id="logo">
+              <img id="image" src="img/logo.png" alt="logo" />
+            </div>
+		
+		</div>
+		
+		<div style="clear:both"></div>
+		
+		<div id="customer">
+
+            <textarea id="customer-title">{$customer_name}
+{$customer_street}
+{$customer_zip} {$customer_city}</textarea>
+
+            <table id="meta">
+                <tr>
+                    <td class="meta-head" style="border-radius:10px 0 0 0;">{$paperwork}</td>
+                    <td style="border-radius:0 10px 0 0;">{$paperwork_id}</td>
+                </tr>
+                <tr>
+
+                    <td class="meta-head" >{L_DATE}</td>
+                    <td>{$day}.{$month}.{$year}</td>
+                </tr>
+                <tr>
+                    <td class="meta-head" style="border-radius:0  0 0 10px;">{L_CUSTOMER_ID}</td>
+                    <td style="border-radius:0 0 10px 0;"><div class="due">{$customer_id}</div></td>
+                </tr>
+
+            </table>
+		
+		</div>
+		
+		<table id="items">
+		
+		  <tr>
+		  		<th>Pos.</th>
+		      <th>Artikel</th>
+		      <th>Beschreibung</th>
+		      <th>Einzelpreis</th>
+		      <th colspan="2">Menge</th>
+		      <th>Gesamtpreis</th>
+		  </tr>
+		  
+{$rows}
+
+		  <tr>
+		      <td colspan="3" class="blank"> </td>
+		      <td colspan="3" class="total-line">{L_AMMOUNT_NETTO}:</td>
+		      <td class="total-value">{$sum_all_netto}{$config[currency]}</td>
+		  </tr>
+		  <tr>
+
+		      <td colspan="3" class="blank"> </td>
+		      <td colspan="3" class="total-line">{L_AMMOUNT_TAX}:</td>
+		      <td class="total-value">{$sum_tax}{$config[currency]}</td>
+		  </tr>
+		  <tr>
+		      <td colspan="4" class="blank"> </td>
+		      <td colspan="2" class="total-line balance">{L_AMMOUNT_BRUTTO}:</td>
+		      <td class="total-value balance">{$sum_all_brutto}{$config[currency]}</td>
+		  </tr>
+		
+		</table>
+		
+		<div id="terms">
+		  <h5>{L_TERMS}</h5>
+		  {$paperwork_terms}
+		</div>
+	
+	</div>
+	<script src='js/print_now.js'></script>
+</body>
+
+</html>

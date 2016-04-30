@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2016-04-23  										    *
+ *  date of this file: 2016-04-30  										    *
  \**************************************************************************/
 
 
@@ -17,21 +17,14 @@ $rosine_db_prefix="rosine_";
 $egw_db_prefix="egw_";
 mysql_query("SET NAMES 'utf8'");
 function trimhtml (&$value, $key) {
-	//if ($key !="articles" || $key != "ammount")
-	//	$value = trim(htmlspecialchars($value, ENT_QUOTES));
-	// das funktioniert im Moment noch nicht mit den 2 dimensionalen Aarrays!
-	// Da muss ich mir noch was ausdenken!
+	$value = trim(htmlspecialchars($value, ENT_QUOTES));
 }
-array_walk ($_GET, 'trimhtml');
-array_walk ($_POST, 'trimhtml');
+array_walk_recursive($_GET, 'trimhtml');
+array_walk_recursive ($_POST, 'trimhtml');
 
 //for error-and OK-Bar (if nothing to show, they don't show up!
 $error="";
 $OK="";
-$language="de.php";
-
-// some important things
-$paperwork_terms="Zahlbar innerhalb von 14 Tagen. Falls nicht anders angegeben, ist Rechnungsdatum auch Lieferdatum!";
 
 // mysql to get config
 $rosine_db_query['get_config']='SELECT * FROM '.$rosine_db_prefix.'config WHERE user_id =0 OR user_id ='.$egw_info['user']['account_id'].' GROUP BY config desc';
@@ -75,7 +68,7 @@ $rosine_db_query['most_used_articles']="SELECT art_name, count(p.art_number) as 
 $rosine_db_query['paperwork_not_used']='SELECT r.%singular%_id AS %singular%_id, GROUP_CONCAT(concat (p.posi_ammount, " ", a.art_name)) AS contents, r.changed AS changed, COUNT(p.posi_id) AS ammount, r.%singular%_ammount AS money FROM '.$rosine_db_prefix.'%plural% AS r JOIN '.$rosine_db_prefix.'%plural%_positions as p on r.%singular%_id = p.%singular%_id JOIN '.$rosine_db_prefix.'articles AS a ON a.art_number=p.art_number WHERE %singular%_status="changed" AND %singular%_customer=%customer% GROUP BY %singular%_id ORDER BY changed DESC'; 
 
 // mysql for paperwork
-$rosine_db_query['insert_paperwork']="INSERT INTO ".$rosine_db_prefix."%plural% (%SINGULAR%_ID,%SINGULAR%_DATE,%SINGULAR%_CUSTOMER,%SINGULAR%_CUSTOMER_PRIVATE,%SINGULAR%_AMMOUNT,%SINGULAR%_STATUS,GENERATED) VALUES ";
+$rosine_db_query['insert_paperwork']="INSERT INTO ".$rosine_db_prefix."%plural% (%SINGULAR%_ID,%SINGULAR%_DATE,%SINGULAR%_CUSTOMER,%SINGULAR%_CUSTOMER_PRIVATE,%SINGULAR%_AMMOUNT,%SINGULAR%_STATUS,GENERATED,%SINGULAR%_NOTE) VALUES ";
 $rosine_db_query['get_highest_number']="SELECT MAX(%singular%_id) AS maximum FROM ".$rosine_db_prefix."%plural% WHERE %1%";
 $rosine_db_query['insert_article_into_paperwork']='INSERT INTO '.$rosine_db_prefix.'%plural%_positions (%SINGULAR%_ID, POSI_ID, ART_NUMBER, POSI_AMMOUNT, POSI_UNIT, POSI_PRICE, POSI_LOCATION, POSI_SERIAL, POSI_TEXT, POSI_TAX) VALUES ';
 $rosine_db_query['get_articles_from_paperwork']="SELECT * FROM ".$rosine_db_prefix;
@@ -94,11 +87,14 @@ $rosine_db_query['update_paperwork_item']='UPDATE '.$rosine_db_prefix.'%plural%_
 $rosine_db_query['get_articles_from_paperwork_with_all']='SELECT * FROM '.$rosine_db_prefix.'%plural%_positions AS r JOIN '.$rosine_db_prefix.'locations AS l ON r.POSI_LOCATION=l.LOC_ID JOIN '.$rosine_db_prefix.'taxes AS t ON r.POSI_TAX=TAX_ID WHERE ';
 $rosine_db_query['get_unfinished_paperwork']='SELECT r.%SINGULAR%_ID as paperwork_id, r.%SINGULAR%_CUSTOMER_PRIVATE as customer_private, e.n_fn, sum(p.POSI_AMMOUNT) AS ammount , p.POSI_LOCATION as location FROM '.$rosine_db_prefix.'%plural% as r JOIN '.$egw_db_prefix.'addressbook AS e ON r.%SINGULAR%_CUSTOMER=e.contact_id JOIN '.$rosine_db_prefix.'%plural%_positions AS p ON r.%SINGULAR%_ID=p.%SINGULAR%_ID  WHERE (r.%SINGULAR%_STATUS ="changed" OR r.%SINGULAR%_STATUS LIKE "%partly%") AND p.POSI_LOCATION=%location% AND p.DONE=false group by paperwork_id';
 $rosine_db_query['get_ammount_unfinished_items']='SELECT count(*) as number FROM '.$rosine_db_prefix.'%plural%_positions WHERE %SINGULAR%_ID=2 and done=false';
-
+$rosine_db_query['get_standard_note']='SELECT n.NOTE_TEXT as text, n.NOTE_ID as id FROM '.$rosine_db_prefix.'notes AS n JOIN '.$rosine_db_prefix.'config AS c ON n.NOTE_ID=c.value WHERE c.config="note_%singular%" AND n.LANGUAGE="%language%"';
+$rosine_db_query['get_all_notes']='SELECT * FROM '.$rosine_db_prefix.'notes WHERE';
+$rosine_db_query['update_paperwork_note']='UPDATE '.$rosine_db_prefix.'%plural% SET %SINGULAR%_NOTE="%paperwork%" WHERE %SINGULAR%_ID=';
 //mysql for payments
 $rosine_db_query['get_unpaid_invoices']='SELECT e.n_fn AS name, i.INVOICE_CUSTOMER AS invoice_customer, i.INVOICE_ID AS invoice_id, i.INVOICE_AMMOUNT AS invoice_ammount, sum( p.PAYMENT_AMMOUNT ) AS already_paid FROM '.$rosine_db_prefix.'invoices AS i NATURAL LEFT JOIN '.$rosine_db_prefix.'payments AS p JOIN '.$egw_db_prefix.'addressbook as e ON i.INVOICE_CUSTOMER=e.contact_id WHERE i.invoice_status = "changed" GROUP BY i.INVOICE_ID ORDER BY i.INVOICE_ID';
 $rosine_db_query['get_payment_methods']='SELECT * FROM '.$rosine_db_prefix.'payments_methods WHERE 1';
 $rosine_db_query['insert_payment']='INSERT INTO '.$rosine_db_prefix.'payments (PAYMENT_ID , INVOICE_ID , PAYMENT_DATE , METH_ID , PAYMENT_AMMOUNT , PAYMENT_NOTE ) VALUES ';
 $rosine_db_query['get_open_money']='SELECT sum(p.PAYMENT_AMMOUNT) as already_payed, i.INVOICE_AMMOUNT as invoice_ammount from '.$rosine_db_prefix.'payments as p JOIN '.$rosine_db_prefix.'invoices as i on i.INVOICE_ID=p.INVOICE_ID WHERE p.INVOICE_ID=';
+
 
 ?>

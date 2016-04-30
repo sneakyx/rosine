@@ -7,21 +7,19 @@
 	*  This program is free software; you can redistribute it and/or modify it *
 	*  under the terms of the GNU General Public License as published by the   *
 	*  Free Software Foundation; version 2 of the License.                     *
-	*  date of this file: 2016-04-30  										   *
+	*  date of this file: 2016-04-23  										   *
 	\**************************************************************************/
-
 
 $GLOBALS['phpgw_info']['flags']['currentapp'] = 'rosine';
 include('../header.inc.php');
-@$db = mysql_connect($egw_info["server"]["db_host"], $egw_info["server"]["db_user"], $egw_info["server"]["db_pass"]) OR die("Fehler mit Datenbank");
-@mysql_select_db($egw_info["server"]["db_name"],$db) OR die ("Falsche Datenbank!");
-
-echo file_get_contents("templates/rosine/head.html");
-//echo file_get_contents('inc/mainmenu.html');
-
-echo"not yet implemented!";
-echo file_get_contents("template/rosine/footer.html");
-// Variablenumwandlung und Deklaration
-// Eigene Verbindung zur Datenbank
-
+include ('inc/settings.php');
+include ('inc/template.class.php');
+if ($_GET['paperwork']!="")
+	/* this must be the first call of this file, so it is called by another
+	 * file, like main menue
+* But this $_POST variable is used everywhere in this file
+*/
+	$_POST['paperwork']=$_GET['paperwork'];
+	
+include ('inc/paperwork_list_inc_'.$config[$_POST['paperwork'].'_list_form'].'.php');
 ?>

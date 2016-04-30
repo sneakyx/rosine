@@ -19,7 +19,7 @@ switch ($_POST['next_function']){
 	case "changed":
 		// form was filled, now it has to be changed
 		$tpl->load("paperwork_item_changed.html");
-		$lang[] = $language;
+		$lang[] = $config['language'];
 		$lang = $tpl->loadLanguage($lang);
 		$OK="";
 		$error="";
@@ -50,7 +50,7 @@ switch ($_POST['next_function']){
 	default:
 	//if next function is empty then the item most be loaded from database
 	$tpl->load("paperwork_item_change.html");
-	$lang[] = $language;
+	$lang[] = $config['language'];
 	$lang = $tpl->loadLanguage($lang);
 	$OK="";
 	$error="";

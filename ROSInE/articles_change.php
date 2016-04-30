@@ -14,7 +14,7 @@ include('../header.inc.php');
 include ('inc/settings.php');
 include ('inc/template.class.php');
 $tpl = new Rosine_Template();
-$lang[] = $language;
+$lang[] = $config['language'];
 
 $tpl->load("insert_article.html");
 $lang = $tpl->loadLanguage($lang);

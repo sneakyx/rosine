@@ -8,7 +8,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2016-04-23   		 								*
+ *  date of this file: 2016-04-30   		 								*
  \**************************************************************************/
 function rosine_create_tax_list($taxID){
 	$liste='<select name="posi_tax">';
@@ -354,6 +354,17 @@ function rosine_database_query ($query, $error_number){
 	}
 	return $result;
 }//endfunction rosine_database_query
+
+function rosine_get_field_database($query,$field, $error_numer=0){
+	$result=rosine_database_query($query, $error_number);
+	if ($result!=false){
+		$result=mysql_fetch_array($result);
+		return $result[$field];
+	}//there was no error
+	else {
+		return false;
+	}//there was an error
+}//endfunction rosine_get_field_database
 
 function rosine_next_article_number(){
 	$result=mysql_query($GLOBALS['rosine_db_query']['get_next_article_number']);

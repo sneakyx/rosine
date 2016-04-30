@@ -1,0 +1,5 @@
+
+
+To get articles from phprechnungen into Your Rosine Table:
+
+INSERT INTO rosine_articles SELECT POSITIONID, POS_TEXT, POS_NAME, POS_PREIS, POS_MWST, 0, 0, NOTE, CONCAT( CURDATE( ) , CURTIME( ) ) , "" FROM position WHERE 1 

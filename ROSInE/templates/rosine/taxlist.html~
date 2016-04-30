@@ -1,9 +1,0 @@
-{*Header einbinden*}
-{include file="head.html"}
-<div>
-<p id="rosine_table_note"> {$backward} {$from} bis {$to} von insgesamt {$max} {$foreward}  </p>
-
-{$articlelist}
-</div>
-{*Footer einbinden*}
-{include file="footer_taxes.html"}

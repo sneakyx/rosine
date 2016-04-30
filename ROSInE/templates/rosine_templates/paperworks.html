@@ -19,9 +19,10 @@
 	<h3>{L_WHAT_S_NEXT}</h3>	
 	<p><br>
 	{L_PAPERWORK_FOR_CUSTOMER} <br> <b>{$customer}</b> [{$ID}]<br><br>
-	<p><button class="rosine_button_next">{L_NEXT_STEP}</button></p>
-	<p class="rosine_back"><a href="paperwork_list.php?from={$this_number}&paperwork={$paperwork_type}" >{L_READY}</a></p>
-	</p>
+	<input type="text" value="{$note_text}" name="note_text" size="15"><br><br>
+	<p><button class="rosine_button_next">{L_SAVE}</button></p>
+	<p class="rosine_back"><a href="paperwork_list.php?from={$this_number}&paperwork={$paperwork_type}" >{L_CANCEL} / {L_BACK}</a></p>
+	</p><br>
 	</div>
 </div>
 </form>

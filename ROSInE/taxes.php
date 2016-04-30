@@ -19,7 +19,7 @@ include ('inc/template.class.php');
 
 $tpl = new Rosine_Template();
 $tpl->load("taxlist.html");
-$lang[] = $language;
+$lang[] = $config['language'];
 $lang = $tpl->loadLanguage($lang);
 // should there be one tax really deleted?
 if ($_POST['next_function']=="really_delete"){

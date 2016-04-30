@@ -1,5 +1,0 @@
-<footer>
-	[<a href="index.php">{L_MAIN_MENUE}</a>] 
-	[<a href="taxes_change.php">{L_OFFERS}</a>] 
-</footer>
-</html>

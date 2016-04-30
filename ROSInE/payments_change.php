@@ -21,7 +21,7 @@ $OK="";
 $error="";
 $tpl = new Rosine_Template();
 $tpl->load("select_invoice_payment.html");
-$lang[] = $language;
+$lang[] = $config['language'];
 $lang = $tpl->loadLanguage($lang);
 
 

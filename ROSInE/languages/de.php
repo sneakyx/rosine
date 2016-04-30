@@ -8,12 +8,14 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2016-04-09   		 								*
+ *  date of this file: 2016-04-30   		 								*
  \**************************************************************************/
 
 $lang['page_buttons']='{$backward} {$from} bis {$to} von insgesamt {$max} {$foreward}';
+$lang['just_write_invoices']="Rechnungen einfach schreiben!";
 // for main menue
 $lang['main_menue']="Hauptmenü";
+$lang['configurations']="Einstellungen";
 $lang['offers']="Angebote";
 $lang['make_new_offer']="Neues Angebot erstellen";
 $lang['offer_list']="Angebotsliste";
@@ -148,5 +150,6 @@ $lang['money']="Betrag";
 $lang['what_is_packed']="Folgendes muss noch eingepackt und gespeichert werden!";
 $lang['more_fields']="weitere Felder";
 $lang['save']="speichern";
+$lang['select_note']="Hinweistext auswählen";
 
 ?>

@@ -397,7 +397,7 @@ aside{
 	border-radius: 10px;
 	background-color:#CDCDCD;
 	margin: 5px;
-	height: 11em;
+	height: 14em;
 }
 #rosine_paperwork_form_buttons p {
 	text-align: center;

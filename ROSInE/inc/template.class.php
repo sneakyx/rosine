@@ -273,5 +273,19 @@ class Rosine_Template
     public function return_html(){
     	return $this->template;	
     }
+	
+    public function assign_array($replace,$replacement){
+    	/**
+    	 * this function assign all variables in array $a to the template 
+    	 * the fields must be named like the variables in array
+    	 * $replace   name of the array in template
+    	 * $replacement     array with field which has to be assigned 
+    	 */
+    	array_walk($replacement, array($this,"assign_array_fields"), $replace);
+    }
+
+    private function assign_array_fields($value, $key, $replace){
+    	$this->assign($replace.'['.$key.']', $value);
+    }
 }
 ?>
