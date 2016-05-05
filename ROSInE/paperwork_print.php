@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2016-04-30  										    *
+ *  date of this file: 2016-05-05  										    *
  \**************************************************************************/
 
 /*
@@ -27,7 +27,10 @@
  * $customer_zip = the customers' zip (postal code)
  * $customer_city = the customers' city
  * $customer_country = the customers' country
- * $paperwork_id = number of paperwork 
+ * $paperwork_id = number of paperwork
+ * $paperwork_variable = this can be used for many things, for example if you print a 
+ * 						delivery and want to use $config[delivery_prefix] just write
+ * 						{$config[{$paperwork_variable}_prefix]}  
  * $config['company_name'] = name of Your company
  * $config['company_street'] = Street+ number of Your company
  * $config['company_zip'] = postal code of your company
@@ -150,6 +153,7 @@ else {
 			$sum_all_netto+=$items_netto;
 			$sum_tax+=$items_tax;
 			$rows.=$row->return_html();
+			$tax_percentage=$f['TAX_PERCENTAGE'];
 		}// get every item line by line from this paperwork id
 		
 		//$row.=$paperwork->return_html();
@@ -168,6 +172,8 @@ $paperwork->assign("OK", $OK);
 $paperwork->assign("error", $error);
 $paperwork->assign("rows", $rows);
 $paperwork->assign('paperwork_id', $_GET['paperwork_id']);
+$paperwork->assign("paperwork_prefix", $config[$_GET['paperwork'].'_prefix']);
+$paperwork->assign('tax_percentage', $tax_percentage);
 $paperwork->assign_array('config', $config);
 
 $paperwork->display();

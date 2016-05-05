@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2016-04-30  										    *
+ *  date of this file: 2016-05-03  										    *
  \**************************************************************************/
 $tpl = new Rosine_Template();
 // paperwork list, add items etc
@@ -250,7 +250,8 @@ switch ($_POST['next_function']) {
 						<input type="hidden" name="next_function" value="insert">
 						<input type="hidden" name="paperwork" value="'.$_POST['paperwork'].'">
 						<input type="hidden" name="old_paperwork" value="order">';
-			
+			if (mysql_affected_rows()==0)
+				$input_fields.=$lang['nothing_to_show']."<br>";
 			while($f = @mysql_fetch_array($result)) {
 				$input_fields.='<button name="old_paperwork_id" value="'.$f["paperwork_id"].
 						'" type="submit" >'.$f['n_fn'].'  ['.$lang['ammount'].': '.$f['ammount'].']</button>';

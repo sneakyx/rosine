@@ -151,5 +151,6 @@ $lang['what_is_packed']="Folgendes muss noch eingepackt und gespeichert werden!"
 $lang['more_fields']="weitere Felder";
 $lang['save']="speichern";
 $lang['select_note']="Hinweistext auswählen";
-
+$lang['nothing_to_show']="Nichts vorhanden!";
+$lang['tax_nr']="Steuernummer:";
 ?>
