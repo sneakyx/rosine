@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2016-05-05  										    *
+ *  date of this file: 2016-05-12  										    *
  \**************************************************************************/
 
 /*
@@ -76,7 +76,8 @@ include ('inc/template.class.php');
 $OK="";
 $error="";
 $paperwork = new Rosine_Template();
-$paperwork->load("print_paperwork.html");
+$paperwork->load($config['print_template_'.$_GET['paperwork']]);
+
 $lang[] = $config['language'];
 $lang = $paperwork->loadLanguage($lang);
 $paperwork->assign('paperwork', $lang[$_GET['paperwork']]);
@@ -103,7 +104,7 @@ else {
 		$paperwork->assign('customer_name',$result['n_fn']);
 		$nr="one";
 	}// customer is organisation
-	$paperwork->assign('customer_street',$result['adr_'.$nr.'_street']); // depending on private / organisation
+	$paperwork->assign('customer_street',$result['adr_one_street']); // depending on private / organisation
 	$paperwork->assign('customer_zip',$result['adr_'.$nr.'_postalcode']);// depending on private / organisation
 	$paperwork->assign('customer_city',$result['adr_'.$nr.'_locality']);// depending on private / organisation
 	$paperwork->assign('customer_country', $result['adr_'.$nr.'_countryname']);// depending on private / organisation
@@ -126,7 +127,7 @@ else {
 		$rows="";
 		while($f = @mysql_fetch_array($result)) {
 			$row = new Rosine_Template();
-			$row->load("print_paperwork_row.html");
+			$row->load(str_replace('.html', '_row.html', $config['print_template_'.$_GET['paperwork']]));
 			$lang[] = $config['language'];
 			$lang = $row->loadLanguage($lang);
 			$row->assign('item_id', $f['POSI_ID']);

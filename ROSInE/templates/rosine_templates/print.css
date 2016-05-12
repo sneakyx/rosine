@@ -58,6 +58,11 @@ table th {
 #customer { 
 	overflow: hidden; 
 	}
+	
+#customer-title{
+height: 5em;
+width: 22em;
+}
 
 #logo { 
 	max-width: 540px;
