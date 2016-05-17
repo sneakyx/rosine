@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2016-04-22  										    *
+ *  date of this file: 2016-05-17  										    *
  \**************************************************************************/
 $tpl = new Rosine_Template();
 // paperwork list, add items etc
@@ -161,7 +161,7 @@ switch ($_POST['next_function']) {
 					$_POST['paperwork_id']), strtoupper($_POST['paperwork'])."_NOTE"));
 			// update paperwork_ammount in table rosine paperwork
 			rosine_update_ammount_paperwork($_POST['paperwork'], $_POST['paperwork_id']);
-				
+			
 		}// no error in mysql for getting customer details
 	break;
 		

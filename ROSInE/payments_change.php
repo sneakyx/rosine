@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2016-04-16  										    *
+ *  date of this file: 2016-05-17 										    *
  \**************************************************************************/
 
 
@@ -65,8 +65,9 @@ switch ($_POST['next_function']) {
 				$error.="7: ".mysql_error();
 				
 					/*
-					 * although case insert_payment ends here, after inserting empty payment,
-					 * this has to be filled with articles, so this break isn't used!
+					 * although case insert_payment ends here, 
+					 * you can add directly another payment,
+					 * so this break isn't used!
 					 *
 					 */
 							
@@ -122,11 +123,10 @@ $tpl->assign("OK", $OK);
 $tpl->assign("error", $error);
 $tpl->assign("input_fields", $input_fields);
 $tpl->assign("paperwork", $lang['payment']);
-$tpl->assign("currency", $config['currency']);
 $tpl->assign("date",date("Y-m-d"));
 
 // $tpl->assign("this_number",rosine_get_real_number("payment",$_POST['payment_id']));
 $tpl->assign("paperwork_file", "payments");
+$tpl->assign_array('config', $config);
 $tpl->display();
-
 ?>

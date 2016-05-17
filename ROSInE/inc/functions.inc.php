@@ -8,7 +8,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2016-04-30   		 								*
+ *  date of this file: 2016-05-17   		 								*
  \**************************************************************************/
 function rosine_create_tax_list($taxID){
 	$liste='<select name="posi_tax">';
@@ -263,13 +263,8 @@ function rosine_update_ammount_paperwork($singular,$ID){
 	$query=$GLOBALS['rosine_db_query']['update_paperwork_ammount'];
 	$query=rosine_correct_query($singular, $query);
 	$query=str_replace("%id%", $ID, $query);
-	$result=mysql_query($query);
-	if (mysql_errno($GLOBALS['rosine_db'])!=0){
-		// Error in mysql detected
-		$result=false;
-		$GLOBALS['error'].="210: ".mysql_error($GLOBALS['rosine_db'])."<br>".$query;
-	}//endif there's an error
-	
+	rosine_database_query($query, 520);
+	rosine_database_query(rosine_correct_query($singular, $GLOBALS['rosine_db_query']['update_brutto_ammount_paperwork'],$ID), 521);
 }// endfunction update the ammount (of money) in paperwork
 
 function rosine_delete_positions ($value, $key, $query){

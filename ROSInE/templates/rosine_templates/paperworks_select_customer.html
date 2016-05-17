@@ -4,11 +4,13 @@
 <div id="rosine_paperwork_form_new" class="rosine_paperwork">
 	<h3>{L_CUSTOMER_LIST}</h3>
 	<p id="rosine_table_note"> {L_PAGE_BUTTONS}  </p>
-	<br>
+	
 	<form action="#" method="post">
+<b>{L_SELECT_NOTE}:</b> {$note_field}<br>	
+	<br>	
 	<input type="hidden" name="next_function" value="insert">
 	{$input_fields}
-	<br>{L_SELECT_NOTE}: {$note_field}	
+		
 	</form>
 	<br><form action="#" method="POST">
 	
