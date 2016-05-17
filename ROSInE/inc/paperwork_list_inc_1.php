@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2016-04-23  										    *
+ *  date of this file: 2016-05-17  										    *
  \**************************************************************************/
 $tpl = new Rosine_Template();
 $tpl->load("paperworklist.html");
@@ -57,7 +57,7 @@ if ($from < 0)
 	$from=0;
 	if ($max_rows<$from+$config['items_per_page'])
 		$config['items_per_page']=$max_rows-$from;
-		$result=mysql_query(rosine_correct_query($_POST['paperwork'], $rosine_db_query['get_paperworks'],$_POST['paperwork'])."1 ORDER BY ".strtoupper($_POST['paperwork'])."_ID LIMIT $from,".$config['items_per_page']);
+		$result=mysql_query(rosine_correct_query($_POST['paperwork'], $rosine_db_query['get_paperworks'],$_POST['paperwork'])."1 ORDER BY ".strtoupper($_POST['paperwork'])."_ID DESC LIMIT $from,".$config['items_per_page']);
 
 		if ($from >0) //zurueckblaettern anzeigen wenn moeglich
 			$tpl->assign("backward", '<a href="?from='.($from-$config['items_per_page']).'&paperwork='.$_POST['paperwork'].'">&lt;&lt;</a>');

@@ -15,3 +15,17 @@ Tax List, add, delete, etc works
 2016-01-12 to 2016-04-16 
 everything works except printing
 
+2016-04 to 2016-05 
+printing works
+adding specialised versions for printing und working with paperwork
+
+2016-05-17
+minor change: lists to be sorted descending
+
+to do list:
+- different colors for offer, order, invoice and delivery note
+- payments to work with brutto ammount
+- special version for Kapplermühle for adding things to delivery note
+- invoices not to be deleted (not allowed in germany)
+- icons for printed, delivered and so on...
+- 
