@@ -8,7 +8,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2016-05-17   		 								*
+ *  date of this file: 2016-05-18   		 								*
  \**************************************************************************/
 function rosine_create_tax_list($taxID){
 	$liste='<select name="posi_tax">';
@@ -161,12 +161,13 @@ function rosine_add_paperworklist($singular,$customer){
 	return $zeile;
 }//endfunc rosine_add_paperworklist
 
-function rosine_paperwork_add_article($singular, $ammount,$ID, $where){
+function rosine_paperwork_add_article($singular, $ammount,$ID, $where,$unity=""){
 	// singular = %paperwork%
 	// number =  article number
 	// ammount = ammount to add
 	// $ID = $_POST[%paperwork%_id]
 	// $where = where clause in MySQL
+	// unity = unit to add
 
 	$result=mysql_query($GLOBALS['rosine_db_query']['get_articles'].$where);
 	$lines=mysql_num_rows($result);
@@ -174,20 +175,24 @@ function rosine_paperwork_add_article($singular, $ammount,$ID, $where){
 		$f = mysql_fetch_array($result);
 		if (! $f['ART_STOCKNR'])
 			$f['ART_STOCKNR']="0";
-		$query=rosine_correct_query($singular, $GLOBALS['rosine_db_query']['insert_article_into_paperwork']);		
-		$result2=mysql_query($query.
-				'("'.$ID.'", "'.
-				(rosine_highest_number($singular." positions",$ID)+1).'", "'.
-				$f['ART_NUMBER'].'", '.
-				$ammount.', "'.
-				$f['ART_UNIT'].'", '.
-				$f['ART_PRICE'].', '.
-				$f['ART_STOCKNR'].',
-										"","'. //theres no possibility to add Seriennummer (yet)
-				$f['ART_NAME'].'",'.
-				$f['ART_TAX'].')');
+		$query=rosine_correct_query($singular, $GLOBALS['rosine_db_query']['insert_article_into_paperwork']).		
+		'("'.$ID.'", "'.
+		(rosine_highest_number($singular." positions",$ID)+1).'", "'.
+		$f['ART_NUMBER'].'", '.
+		$ammount.', "';
+		if ($unity!="")
+				$query.=$unity.'",';
+		else 
+				$query.=$f['ART_UNIT'].'", ';
+		$query.=$f['ART_PRICE'].', '.
+			$f['ART_STOCKNR'].',
+				"","'. //theres no possibility to add Seriennummer (yet)
+						$f['ART_NAME'].'",'.
+						$f['ART_TAX'].')';
+		$result2=mysql_query($query);
+
 	}// endif affected rows is exactly 1
-	// echo $GLOBALS['rosine_db_query']['get_articles'].$where; //only for testing
+	
 	return array("lines"=>$lines,'ART_NAME'=> $f['ART_NAME'],'ART_UNIT'=>$f['ART_UNIT'],"result"=>$result);
 }//endfunction rosine_paperwork_add_article
 
@@ -199,10 +204,10 @@ function rosine_set_status_paperwork($singular,$ID,$status){
 	$result=rosine_database_query($query,"210");
 }// end function set status paperwork
 
-function rosine_most_used_articles($singular, $location=""){
+function rosine_most_used_articles($singular, $location="",$unity=""){
 	$query=rosine_correct_query($singular, $GLOBALS['rosine_db_query']['most_used_articles']);
-	if ($location!="") // when there is a limitation by stocknr
-		str_replace("WHERE 1", "WHERE a.STOCKNR=".$location, $query);		
+	if ($location!=0) // when there is a limitation by stocknr
+		$query=str_replace("WHERE 1", "WHERE a.ART_STOCKNR=".$location, $query);		
 	$result=mysql_query($query);
 	if (mysql_errno()!=0){
 		// Error in mysql detected
@@ -212,8 +217,11 @@ function rosine_most_used_articles($singular, $location=""){
 	$i=$GLOBALS['config']['items_per_page'];
 	while ($f= mysql_fetch_array($result,MYSQL_ASSOC)){
 		$liste.='<div class="rosine_paperwork_input_line"><input type="text" style="width:40px;" max-width="10" name="ammount['.$i.']">'
-			.'<input type="hidden" name="articles['.$i.']" value="#'.$f['art_number'].'">'	
-			.$f['art_name'].'('.$f['art_number'].')&nbsp;&nbsp;&nbsp;&nbsp;</div> ';
+			.'<input type="hidden" name="articles['.$i.']" value="#'.$f['art_number'].'">';
+		if ($unity!="")
+			$liste.='<input class="rosine_input_ammount" style="width:40px;" name="unity['.$i.']" type="text" width="5" maxwidth="10" 
+					value="'.$f['art_unit'].'">';
+		$liste.=$f['art_name'].'('.$f['art_number'].')&nbsp;&nbsp;&nbsp;&nbsp;</div> ';
 		$i+=1;
 	}//add rows to the return
 	$liste.="<br><br>";

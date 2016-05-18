@@ -12,6 +12,10 @@
 /*
  * This form works the following way:
  * You have to mark the things you have packed and click on save.
+ * But there's another option: You can change the unit and the ammount
+ * This way the customer can order for example 4 sausages and you can deliver 500 gramms
+ * To change the delivery unit, just change the variable config['delivery_unit_change'] in database
+ * table rosine_config!
  * When You finished all things that can be delivered you can print the delivery and
  * return to the list
  */
@@ -66,15 +70,16 @@ switch ($_POST['next_function']) {
 		// first edit the changes - if there are any
 		for ($i=0;$i<$config['items_per_page'];$i++){
 			$ammount="";
+			$unity="";
 			$select_article=false;
 						
 			if ($_POST['articles'][$i]!="") {
 				// if field is not empty
 				if (substr($_POST['articles'][$i], 0,1)=="#"){
-					$result=rosine_paperwork_add_article($_POST['paperwork'],$_POST['ammount'][$i],$_POST['paperwork_id'],' ART_NUMBER = "'.substr($_POST['articles'][$i],1).'"');
+					$result=rosine_paperwork_add_article($_POST['paperwork'],$_POST['ammount'][$i],$_POST['paperwork_id'],' ART_NUMBER = "'.substr($_POST['articles'][$i],1).'"',$_POST['unity'][$i]);
 				}// # is used to search directly for an article number
 				else {
-					$result=rosine_paperwork_add_article($_POST['paperwork'],$_POST['ammount'][$i],$_POST['paperwork_id'],' ART_NAME  LIKE "%'.$_POST['articles'][$i].'%" OR ART_NUMBER LIKE "%'.$_POST['articles'][$i].'%"');
+					$result=rosine_paperwork_add_article($_POST['paperwork'],$_POST['ammount'][$i],$_POST['paperwork_id'],' ART_NAME  LIKE "%'.$_POST['articles'][$i].'%" OR ART_NUMBER LIKE "%'.$_POST['articles'][$i].'%"',$_POST['unity'][$i]);
 				}// if no # in the beginning
 				
 				switch ($result['lines']){
@@ -84,24 +89,28 @@ switch ($_POST['next_function']) {
 						break;
 					case 1:
 						$_POST['articles'][$i]= $result['ART_NAME'].$lang['added']; 
-						$_POST['ammount'][$i].= " ".$result['ART_UNIT'];
+						
 						break;
 					default:				
 						$_POST['articles'][$i]="too much possibilities"; //must be changed	
 						$ammount=$_POST['ammount'][$i];
+						$unity=$_POST['unity'][$i];
 						$select_article=true;
 				}//end switch $result['lines']
 			}// if field is not empty
 			else {
 				$_POST['articles'][$i]=$lang['article'].($i+1);
 				$_POST['ammount'][$i]=$lang['ammount'];
-				
+				$_POST['unity'][$i]=$lang['unity'];
 			}// if field is empty
 			$input_fields.='<div class="rosine_paperwork_input_line">';
 			$input_fields.='<input class="rosine_input_ammount" style="width:40px;" name="ammount['.$i.']" type="text" width="5" maxwidth="10" placeholder="'.
 					$_POST['ammount'][$i].'" value="'.$ammount.'">';
+			$input_fields.='<input class="rosine_input_ammount" style="width:40px;" name="unity['.$i.']" type="text" width="5" maxwidth="10" placeholder="'.
+					$_POST['unity'][$i].'" value="'.$unity.'">';
+								
 			if ($select_article){
-				// select fields must be displayed in paperwork to select the right
+				// select fields must be displayed in paperwork to select the right one
 				$input_fields.='<select name="articles['.$i.']" style="width:16.5em;">';
 				$input_fields.='<option selected>---------</option>';
 				while ($f = @mysql_fetch_array($result['result'])){
@@ -120,7 +129,7 @@ switch ($_POST['next_function']) {
 		for ($i=$config['items_per_page'];$i<($config['items_per_page']+$config['favorite_articles']);$i++){
 			//add favorite articles
 			if ($_POST['ammount'][$i]>0){
-				rosine_paperwork_add_article($_POST['paperwork'], $_POST['ammount'][$i], $_POST['paperwork_id'],' ART_NUMBER = '.substr($_POST['articles'][$i],1));
+				rosine_paperwork_add_article($_POST['paperwork'], $_POST['ammount'][$i], $_POST['paperwork_id'],' ART_NUMBER = '.substr($_POST['articles'][$i],1),$_POST['unity'][$i]);
 			}//endif ammount field is not empty
 		}// endfor add favorite articles
 
@@ -132,38 +141,33 @@ switch ($_POST['next_function']) {
 			$result= rosine_database_query(rosine_correct_query($GLOBALS['_POST']['old_paperwork'], $GLOBALS['rosine_db_query']['get_articles_from_paperwork'].
 				'%plural%_positions WHERE %SINGULAR%_ID='.$GLOBALS['_POST']['old_paperwork_id'].
 					' AND POSI_ID='.$value),"6-".$value);
-			$GLOBALS['_POST']['old_posi_ammount'][$value]=str_replace(',','.',$GLOBALS['_POST']['old_posi_ammount'][$value]);
+			$GLOBALS['_POST']['old_posi_ammount'][$key]=str_replace(',','.',$GLOBALS['_POST']['old_posi_ammount'][$key]);
 			if ($result){
 				$f=mysql_fetch_array($result);
 				// insert new paperwork
-				rosine_paperwork_add_article($GLOBALS['_POST']['paperwork'],$GLOBALS['_POST']['old_posi_ammount'][$value] , $GLOBALS['_POST']['paperwork_id'],' ART_NUMBER='.$value);
+			
+				rosine_paperwork_add_article($GLOBALS['_POST']['paperwork'],
+						$GLOBALS['_POST']['old_posi_ammount'][$key] , 
+						$GLOBALS['_POST']['paperwork_id'],' ART_NUMBER="'.$f['ART_NUMBER'].'"',
+						$GLOBALS['_POST']['old_posi_unity'][$key]);
 				
-				// check if added ammount is smaller than the "old" ammount
-				$f['POSI_AMMOUNT']=floatval($f['POSI_AMMOUNT']);
-				$GLOBALS['_POST']['old_posi_ammount'][$value]=floatval($GLOBALS['_POST']['old_posi_ammount'][$value]);
-				if ($GLOBALS['_POST']['old_posi_ammount'][$value] < $f['POSI_AMMOUNT']){
-					$query=rosine_correct_query($GLOBALS['_POST']['old_paperwork'], $GLOBALS['rosine_db_query']['update_paperwork_item']);
-					$query=str_replace("%set%", ('POSI_AMMOUNT='.
-							($f['POSI_AMMOUNT']-
-							$GLOBALS['_POST']['old_posi_ammount'][$value])),$query);
-					$query=str_replace("%paperwork_id%", $GLOBALS['_POST']['old_paperwork_id'], $query);
-					$query=str_replace('%posi_id%',$value,$query);
-					rosine_database_query($query, "7-".$value);
-				}// new ammount is smaller than the newer
-				else {
-					$query=rosine_correct_query($GLOBALS['_POST']['old_paperwork'], $GLOBALS['rosine_db_query']['update_paperwork_item']);
-					$query=str_replace("%set%", 'DONE=true',$query);
-					$query=str_replace("%paperwork_id%", $GLOBALS['_POST']['old_paperwork_id'], $query);
-					$query=str_replace('%posi_id%',$value,$query);
-					rosine_database_query($query, "8-".$value);
-				}// new ammount is equal or greater than old
+				// set the article to delivered 
+				$query=rosine_correct_query($GLOBALS['_POST']['old_paperwork'], 
+						$GLOBALS['rosine_db_query']['update_paperwork_item']);
+				$query=str_replace("%set%", 'DONE=true',$query);
+				$query=str_replace("%paperwork_id%", $GLOBALS['_POST']['old_paperwork_id'], $query);
+				$query=str_replace('%posi_id%',$value,$query);
+				rosine_database_query($query, "8-".$value);
 				
 				// now the check if the old paperwork is all done
-				$query=rosine_correct_query($GLOBALS['_POST']['paperwork'], $GLOBALS['rosine_db_query']['get_ammount_unfinished_items']);
+				$query=rosine_correct_query($GLOBALS['_POST']['old_paperwork'], 
+						$GLOBALS['rosine_db_query']['get_ammount_unfinished_items'],$GLOBALS['_POST']['old_paperwork_id']);
+				
 				$result=rosine_database_query($query, "9-".$value);
 				if ($result){
-					$f=mysql_fetch_row($result);
-					if ($f['number']=0){
+					$f=mysql_fetch_array($result);
+
+					if ($f['number']==0){
 						rosine_set_status_paperwork($GLOBALS['_POST']['old_paperwork'], $GLOBALS['_POST']['old_paperwork_id'], "delivery".$GLOBALS['_POST']['paperwork_id']);
 					}// there are no remaining items
 					else {
@@ -185,10 +189,10 @@ switch ($_POST['next_function']) {
 		while ($f = @mysql_fetch_array($result)){
 			$counter++;
 			$check_fields.='<input type="checkbox" name="old_posi_id['.$counter.']" value="'.$f['POSI_ID'].'"> ';
-			$check_fields.='<input class="rosine_input_ammount" style="width:40px;" type="text" name="old_posi_ammount['.
-				$f['POSI_ID'].']" value="'.number_format($f['POSI_AMMOUNT'],2,",",".").'">'.$f['POSI_UNIT'];
-			$check_fields.=' '.$f['POSI_TEXT'].' | ';
-			$check_fields.="<br>";
+			$check_fields.=number_format($f['POSI_AMMOUNT'],2,",",".").$f['POSI_UNIT'];
+			$check_fields.=' <b>'.$f['POSI_TEXT'].'</b> = ';
+			$check_fields.='<input class ="rosine_input_ammount" style="width:40px;" name="old_posi_ammount['.$counter.']">';
+			$check_fields.='<input class ="rosine_input_ammount" style="width:20px;" name="old_posi_unity['.$counter.']" value="kg"><br>';
 		}// get every article that correspondeces to this search
 		
 		$check_fields.='';
@@ -278,7 +282,7 @@ $tpl->assign("check_fields", $check_fields);
 $tpl->assign("paperwork", $lang[$_POST['paperwork']]);
 $tpl->assign("additional", '
 			{$input_favorites}');
-$tpl->assign("input_favorites", rosine_most_used_articles($_POST['paperwork']),$config['norm_stock']);
+$tpl->assign("input_favorites", rosine_most_used_articles($_POST['paperwork'],$config['norm_stock'],true));
 $tpl->assign("this_number",rosine_get_real_number($_POST['paperwork'],$_POST['paperwork_id']));
 $tpl->assign("paperwork_file", rosine_get_plural($_POST['paperwork']));
 $tpl->assign("paperwork_type", $_POST['paperwork']);

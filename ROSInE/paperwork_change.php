@@ -21,7 +21,7 @@ if ($_GET['paperwork']!="")
 	 * But this $_POST variable is used everywhere in this file 
 	 */
 	$_POST['paperwork']=$_GET['paperwork'];
-include ('inc/paperwork_change_inc_'.$config[$_POST['paperwork'].'_change_form'].'.php');
+	include ('inc/paperwork_change_inc_'.$config[$_POST['paperwork'].'_change_form'].'.php');
 /*
  * This is to include the right php-File for special customers...
  */
