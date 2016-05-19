@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2016-05-18  										    *
+ *  date of this file: 2016-05-19  										    *
  \**************************************************************************/
 /*
  * This form works the following way:
@@ -136,7 +136,9 @@ switch ($_POST['next_function']) {
 			if ($result){
 				$f=mysql_fetch_array($result);
 				// insert new paperwork
-				rosine_paperwork_add_article($GLOBALS['_POST']['paperwork'],$GLOBALS['_POST']['old_posi_ammount'][$value] , $GLOBALS['_POST']['paperwork_id'],' ART_NUMBER='.$value);
+				rosine_paperwork_add_article($GLOBALS['_POST']['paperwork'],
+						$GLOBALS['_POST']['old_posi_ammount'][$value] , 
+						$GLOBALS['_POST']['paperwork_id'],' ART_NUMBER="'.$f['ART_NUMBER'].'"');
 				
 				// check if added ammount is smaller than the "old" ammount
 				$f['POSI_AMMOUNT']=floatval($f['POSI_AMMOUNT']);
@@ -159,11 +161,14 @@ switch ($_POST['next_function']) {
 				}// new ammount is equal or greater than old
 				
 				// now the check if the old paperwork is all done
-				$query=rosine_correct_query($GLOBALS['_POST']['paperwork'], $GLOBALS['rosine_db_query']['get_ammount_unfinished_items']);
+				$query=rosine_correct_query($GLOBALS['_POST']['old_paperwork'], 
+						$GLOBALS['rosine_db_query']['get_ammount_unfinished_items'],
+						$GLOBALS['_POST']['old_paperwork_id']);
 				$result=rosine_database_query($query, "9-".$value);
 				if ($result){
-					$f=mysql_fetch_row($result);
-					if ($f['number']=0){
+					$f=mysql_fetch_array($result);					
+					if ($f['number']==0){
+						echo "jetzt leer!";
 						rosine_set_status_paperwork($GLOBALS['_POST']['old_paperwork'], $GLOBALS['_POST']['old_paperwork_id'], "delivery".$GLOBALS['_POST']['paperwork_id']);
 					}// there are no remaining items
 					else {

@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2016-05-18  										    *
+ *  date of this file: 2016-05-19  										    *
  \**************************************************************************/
 /*
  * This form works the following way:
@@ -161,7 +161,8 @@ switch ($_POST['next_function']) {
 				
 				// now the check if the old paperwork is all done
 				$query=rosine_correct_query($GLOBALS['_POST']['old_paperwork'], 
-						$GLOBALS['rosine_db_query']['get_ammount_unfinished_items'],$GLOBALS['_POST']['old_paperwork_id']);
+						$GLOBALS['rosine_db_query']['get_ammount_unfinished_items'],
+						$GLOBALS['_POST']['old_paperwork_id']);
 				
 				$result=rosine_database_query($query, "9-".$value);
 				if ($result){

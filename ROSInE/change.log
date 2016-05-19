@@ -4,7 +4,6 @@ change.log
 V 0.0.1
 first version for Testing github
 
-
 2016-01-10
 articles work
 
@@ -26,11 +25,11 @@ minor change: lists to be sorted descending
 2016-05-18
 specialised version of delivery notes for changing ammounts and units
 
+2016-05-19
+eliminate errors inpaperwork_change_inc_1 !
  
 to do list:
-- eliminate errors inpaperwork_change_inc_1 !
 - different colors for offer, order, invoice and delivery note
-- special version for Kapplermühle for adding things to delivery note
 - invoices not to be deleted (not allowed in germany)
 - icons for printed, delivered and so on...
-- 
+- javascript insert payments ammount into field
