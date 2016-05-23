@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2016-05-19  										    *
+ *  date of this file: 2016-05-23  										    *
  \**************************************************************************/
 /*
  * This form works the following way:
@@ -190,10 +190,18 @@ switch ($_POST['next_function']) {
 		while ($f = @mysql_fetch_array($result)){
 			$counter++;
 			$check_fields.='<input type="checkbox" name="old_posi_id['.$counter.']" value="'.$f['POSI_ID'].'"> ';
-			$check_fields.=number_format($f['POSI_AMMOUNT'],2,",",".").$f['POSI_UNIT'];
+			$check_fields.=number_format($f['POSI_AMMOUNT'],2,",",".").' '. $f['POSI_UNIT'];
 			$check_fields.=' <b>'.$f['POSI_TEXT'].'</b> = ';
-			$check_fields.='<input class ="rosine_input_ammount" style="width:40px;" name="old_posi_ammount['.$counter.']">';
-			$check_fields.='<input class ="rosine_input_ammount" style="width:20px;" name="old_posi_unity['.$counter.']" value="kg"><br>';
+			
+			if ($f['POSI_UNIT']==$config['delivery_unit_to_change']){
+								$check_fields.='<input class ="rosine_input_ammount" style="width:40px;" name="old_posi_ammount['.$counter.']">';
+								$check_fields.='<input class ="rosine_input_ammount" style="width:40px;" name="old_posi_unity['.$counter.']" value="kg"><br>';
+			}// if unit should be change
+			else {
+				$check_fields.='<input class ="rosine_input_ammount" style="width:40px;" name="old_posi_ammount['.$counter.']" value="'.number_format($f['POSI_AMMOUNT'],0,",",".").'">';
+				$check_fields.='<input class ="rosine_input_ammount" style="width:40px;" name="old_posi_unity['.$counter.']" value="'.$f['POSI_UNIT'].'"><br>';
+			}// if unit shouldn't be change
+			
 		}// get every article that correspondeces to this search
 		
 		$check_fields.='';
