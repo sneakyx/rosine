@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+	
+	<title>{$paperwork}</title>
+	
+	<link rel='stylesheet' type='text/css' href='templates/rosine/print.css' />	
+</head>
+
+<body>
+{$error}
+	<div id="page-wrap">
+
+		<textarea id="header">{$paperwork}</textarea>
+		
+		<div id="identity">
+		
+            <textarea id="address">{$config[company_name]}
+{$config[company_street]}
+{$config[company_zip]} {$config[company_city]}
+
+</textarea>
+
+            <div id="logo">
+              <img id="image" src="templates/rosine/logo_paperwork.png" alt="logo" />
+            </div>
+		
+		</div>
+		
+		<div style="clear:both"></div>
+		
+		<div id="customer">
+
+            <textarea id="customer-title" height="5" width="50">{$customer_name} 
+{$customer_street}
+{$customer_zip} {$customer_city}</textarea>
+
+            <table id="meta">
+                <tr>
+                    <td class="meta-head" style="border-radius:10px 0 0 0;">{$paperwork}</td>
+                    <td style="border-radius:0 10px 0 0;">{$paperwork_prefix}{$paperwork_id}</td>
+                </tr>
+                <tr>
+
+                    <td class="meta-head" >{L_DATE}</td>
+                    <td>{$day}.{$month}.{$year}</td>
+                </tr>
+                <tr>
+                    <td class="meta-head" style="border-radius:0  0 0 10px;">{L_CUSTOMER_ID}</td>
+                    <td style="border-radius:0 0 10px 0;"><div class="due">{$customer_id}</div></td>
+                </tr>
+
+            </table>
+		
+		</div>
+		
+		<table id="items">
+		
+		  <tr>
+		  		<th>Pos.</th>
+		      <th>Artikel</th>
+		      <th>Beschreibung</th>
+
+		      <th colspan="2">Menge</th>
+
+		  </tr>
+		  
+{$rows}
+
+		</table>
+		
+		<div id="terms">
+		  <h5>{L_TERMS}</h5>
+		  {$paperwork_terms}<br>
+		  Falls nichts anderes angegeben, entspricht Rechnungsdatum Lieferdatum.<br>
+		  <hr>
+		  Packstellen-Nr.: DE-052493 * Internet: www.biohof-kapplermuehle.de * {L_TAX_NR} {$config[company_tax_nr]}<br>
+		  Telefon: 02759 / 21 41 39  * Telefax: 02759 / 94 92 86 * E-Mail: info@biohof-kapplermuehle.de
+		</div>
+	
+	</div>
+	<script src='js/print_now.js'></script>
+</body>
+
+</html>

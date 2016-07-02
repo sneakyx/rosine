@@ -1,0 +1,29 @@
+{*Header einbinden*}
+{include file="head.html"}
+
+<div id="rosine_input_wrap">
+	<form action="#" method="POST">
+		<div class="rosine_input" style="height:31em;">
+			<p class="rosine_input_header">{L_CHOOSE_INVOICE_FOR_PAYMENT}</p> 
+				{$input_fields}				
+				<div id="rosine_input_right">	
+				{L_NOTES}:<br>	
+				<textarea name="notes" rows="5" cols="40"></textarea><br>
+				<p class="rosine_back"><a href="index.php" >{L_BACK}</a></p>			
+				</div>
+				<div id="rosine_input_left" >	<br>
+				<input type="hidden" name="next_function" value="insert_payment">
+				<br>	
+				{L_DATE}:<input type="text" name="payment_date" size="10" maxlength="10" value="{$date}"> <br>
+				{L_PAYED_MONEY}: <input type="text" name="payment_ammount" size="10" placeholder="{$config['currency']}"><br><br><br>
+				<button type="submit" name="next_function" value="insert_payment">{L_INSERT_PAYMENT}</button>
+				</div>
+				<div style="clear:both;">
+							
+				</div>
+			</div>
+		</form>
+</div>
+
+{*Footer einbinden*}
+{include file="footer.html"}

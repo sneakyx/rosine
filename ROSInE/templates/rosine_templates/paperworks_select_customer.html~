@@ -1,0 +1,28 @@
+{*Header einbinden*}
+{include file="head.html"}
+
+<div id="rosine_paperwork_form_new" class="rosine_paperwork">
+	<h3>{L_CUSTOMER_LIST}</h3>
+	<p id="rosine_table_note"> {L_PAGE_BUTTONS}  </p>
+	<br>
+	<form action="#" method="post">
+	<input type="hidden" name="next_function" value="insert">
+	{$input_fields}
+	<br>{L_SELECT_NOTE}: {$note_field}	
+	</form>
+	<br><form action="#" method="POST">
+	
+	<h3>{L_MORE_FUNCTIONS}</h3>
+	<p id="rosine_paperwork_search_customers">
+	<br><button>{L_CUSTOMERS_WITH_MOST_SALES}</button> 
+	<button>{L_CUSTOMERS_WITH_MOST_PAPERWORK}</button> 
+	<button>{L_LAST_CUSTOMERS}</button><br> oder
+	<input type="text" placeholder="{L_CUSTOMER_NAME_OR_NUMBER}" width="40" maxwidth="60" name="searchstring"> <input type="submit" name="find" value="finden">
+	
+	<br>oder <button>{L_BACK}</button>
+	<input type="hidden" name="next_function" value="find_customer">
+	</form></p>
+</div>
+
+{*Footer einbinden*}
+{include file="footer.html"}
