@@ -10,8 +10,13 @@
 	*  date of this file: 2016-04-20  										   *
 	\**************************************************************************/
 
+$GLOBALS['egw_info'] = array(
+		'flags' => array(
+				'currentapp' => 'rosine',
+				'noheader'   => True,
+				'nonavbar'   => True
+		));
 
-$GLOBALS['phpgw_info']['flags']['currentapp'] = 'rosine';
 include('../header.inc.php');
 include ('inc/settings.php');
 include ('inc/template.class.php');

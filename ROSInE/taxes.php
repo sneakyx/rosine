@@ -7,12 +7,16 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2016-04-20  										   *
+ *  date of this file: 2016-08-24  										    *
  \**************************************************************************/
 
+$GLOBALS['egw_info'] = array(
+		'flags' => array(
+				'currentapp' => 'rosine',
+				'noheader'   => True,
+				'nonavbar'   => True
+		));
 
-
-$GLOBALS['phpgw_info']['flags']['currentapp'] = 'rosine';
 include('../header.inc.php');
 include ('inc/settings.php');
 include ('inc/template.class.php');

@@ -9,12 +9,7 @@
  *  Free Software Foundation; version 2 of the License.                     *
  *  date of this file: 2016-08-24  										    *
  \**************************************************************************/
-$GLOBALS['egw_info'] = array(
-		'flags' => array(
-				'currentapp' => 'rosine',
-				'noheader'   => True,
-				'nonavbar'   => True
-		));
+
 $rosine_db_prefix="rosine_";
 $egw_db_prefix="egw_";
 ?>
