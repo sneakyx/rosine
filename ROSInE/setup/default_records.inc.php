@@ -53,7 +53,7 @@ $oProc->query("
 			('print_template_offer', 0, 'print_paperwork.html'),
 			('print_template_order', 0, 'print_paperwork.html')
 		");
-/*$oProc->query("
+$oProc->query("
 			INSERT IGNORE INTO `rosine_locations` (`LOC_ID`, `LOC_NAME`, `LOC_NOTE`, `GENERATED`, `CHANGED`) VALUES
 			(0, 'Hauptlager', '', '', '2016-07-02-14-59-23'),
 			(1, 'Lager 1', '', '', '2016-07-02-14-59-31')
@@ -86,5 +86,5 @@ $oProc->query("
 	('01', 'Bio-Eier', 'Stück', 0.35, 3, 2, 0, '', '2016-04-2308:08:05', '2016-05-10-19-16-46'),
 	('02', 'Bio- Hähnchen', 'Stück', 10.00, 3, 1, 0, '', '2016-04-2308:08:05', '2016-05-04-14-01-11')	
 		");
-*/
+
 ?>
