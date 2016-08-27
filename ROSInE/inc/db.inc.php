@@ -15,7 +15,7 @@ $rosine_db_query['get_config']='SELECT * FROM '.$rosine_db_prefix.
 	'config WHERE user_id =0 OR user_id ='.$GLOBALS['egw_info']['user']['account_id'].
 	' GROUP BY config desc';
 //mysql for articles
-$rosine_db_query['insert_article']="INSERT INTO ".$rosine_db_prefix."articles (ART_NUMBER, ART_UNIT, ART_NAME, ART_PRICE, ART_TAX, ART_STOCKNR, ART_INSTOCK, ART_NOTE, GENERATED, CHANGED) VALUES ";
+$rosine_db_query['insert_article']="INSERT INTO ".$rosine_db_prefix."articles (ART_NUMBER, ART_UNIT, ART_NAME, ART_PRICE, ART_TAX, ART_STOCKNR, ART_INSTOCK, ART_NOTE, `GENERATED`, CHANGED) VALUES ";
 $rosine_db_query['get_articles']="SELECT * FROM ".$rosine_db_prefix."articles WHERE ";
 $rosine_db_query['get_article_ammount']="SELECT COUNT(*) FROM ".$rosine_db_prefix."articles WHERE ";
 $rosine_db_query['update_article']="UPDATE ".$rosine_db_prefix."articles SET ";
@@ -26,14 +26,14 @@ $rosine_db_query['get_tax_ammount']="SELECT COUNT(*) FROM ".$rosine_db_prefix."t
 $rosine_db_query['get_taxs']="SELECT * FROM ".$rosine_db_prefix."taxes WHERE ";
 $rosine_db_query['update_tax']="UPDATE ".$rosine_db_prefix."taxes SET ";
 $rosine_db_query['delete_tax']="DELETE FROM ".$rosine_db_prefix."taxes WHERE ";
-$rosine_db_query['insert_tax']="INSERT INTO ".$rosine_db_prefix."taxes (TAX_ID, TAX_NAME, TAX_PERCENTAGE, GENERATED, CHANGED) VALUES ";
+$rosine_db_query['insert_tax']="INSERT INTO ".$rosine_db_prefix."taxes (TAX_ID, TAX_NAME, TAX_PERCENTAGE, `GENERATED`, CHANGED) VALUES ";
 
 // mysql for locations
 $rosine_db_query['get_location_ammount']="SELECT COUNT(*) FROM ".$rosine_db_prefix."locations WHERE ";
 $rosine_db_query['get_locations']="SELECT * FROM ".$rosine_db_prefix."locations WHERE ";
 $rosine_db_query['update_location']="UPDATE ".$rosine_db_prefix."locations SET ";
 $rosine_db_query['delete_location']="DELETE FROM ".$rosine_db_prefix."locations WHERE ";
-$rosine_db_query['insert_location']="INSERT INTO ".$rosine_db_prefix."locations (LOC_ID, LOC_NAME, LOC_NOTE, GENERATED, CHANGED) VALUES ";
+$rosine_db_query['insert_location']="INSERT INTO ".$rosine_db_prefix."locations (LOC_ID, LOC_NAME, LOC_NOTE, `GENERATED`, CHANGED) VALUES ";
 
 // mysql for search customers
 $rosine_db_query['search_customers_ammount']="SELECT COUNT(*) FROM ".$egw_db_prefix."addressbook WHERE ";
@@ -44,7 +44,7 @@ $rosine_db_query['most_used_articles']="SELECT art_name, count(p.art_number) as 
 $rosine_db_query['paperwork_not_used']='SELECT r.%singular%_id AS %singular%_id, GROUP_CONCAT(concat (p.posi_ammount, " ", a.art_name)) AS contents, r.changed AS changed, COUNT(p.posi_id) AS ammount, r.%singular%_ammount AS money FROM '.$rosine_db_prefix.'%plural% AS r JOIN '.$rosine_db_prefix.'%plural%_positions as p on r.%singular%_id = p.%singular%_id JOIN '.$rosine_db_prefix.'articles AS a ON a.art_number=p.art_number WHERE %singular%_status="changed" AND %singular%_customer=%customer% GROUP BY %singular%_id ORDER BY changed DESC'; 
 
 // mysql for paperwork
-$rosine_db_query['insert_paperwork']="INSERT INTO ".$rosine_db_prefix."%plural% (%SINGULAR%_ID,%SINGULAR%_DATE,%SINGULAR%_CUSTOMER,%SINGULAR%_CUSTOMER_PRIVATE,%SINGULAR%_AMMOUNT,%SINGULAR%_STATUS,GENERATED,%SINGULAR%_NOTE) VALUES ";
+$rosine_db_query['insert_paperwork']="INSERT INTO ".$rosine_db_prefix."%plural% (%SINGULAR%_ID,%SINGULAR%_DATE,%SINGULAR%_CUSTOMER,%SINGULAR%_CUSTOMER_PRIVATE,%SINGULAR%_AMMOUNT,%SINGULAR%_STATUS,`GENERATED`,%SINGULAR%_NOTE) VALUES ";
 $rosine_db_query['get_highest_number']="SELECT MAX(%singular%_id) AS maximum FROM ".$rosine_db_prefix."%plural% WHERE %1%";
 $rosine_db_query['insert_article_into_paperwork']='INSERT INTO '.$rosine_db_prefix.'%plural%_positions (%SINGULAR%_ID, POSI_ID, ART_NUMBER, POSI_AMMOUNT, POSI_UNIT, POSI_PRICE, POSI_LOCATION, POSI_SERIAL, POSI_TEXT, POSI_TAX) VALUES ';
 $rosine_db_query['get_articles_from_paperwork']="SELECT * FROM ".$rosine_db_prefix;

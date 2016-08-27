@@ -21,7 +21,7 @@ $phpgw_baseline = array(
 						'ART_TAX' => array('type' => 'int','precision' => '1','default' => '1'),
 						'ART_STOCKNR' => array('type' => 'int','precision' => '2','default' => '1','nullable' => False),
 						'ART_INSTOCK' => array('type' => 'int','precision' => '4'),
-						'ART_NOTE' => array('type' => 'text'),
+						'ART_NOTE' => array('type' => 'varchar','precision' => '1100'),
 						'GENERATED' => array('type' => 'varchar','precision' => '100'),
 						'CHANGED' => array('type' => 'varchar','precision' => '100')
 				),
@@ -121,7 +121,7 @@ $phpgw_baseline = array(
 				'fd' => array(
 						'LOC_ID' => array('type' => 'int','precision' => '2','nullable' => False),
 						'LOC_NAME' => array('type' => 'varchar','precision' => '255','nullable' => False),
-						'LOC_NOTE' => array('type' => 'text'),
+						'LOC_NOTE' => array('type' => 'varchar','precision' => '1100'),
 						'GENERATED' => array('type' => 'varchar','precision' => '100'),
 						'CHANGED' => array('type' => 'varchar','precision' => '100')
 				),
@@ -149,7 +149,7 @@ $phpgw_baseline = array(
 						'OFFER_CUSTOMER_PRIVATE' => array('type' => 'int','precision' => '1','default' => '1','nullable' => False),
 						'OFFER_AMMOUNT' => array('type' => 'decimal','precision' => '8','scale' => '2'),
 						'OFFER_AMMOUNT_BRUTTO' => array('type' => 'decimal','precision' => '8','scale' => '2'),
-						'OFFER_NOTE' => array('type' => 'text'),
+						'OFFER_NOTE' => array('type' => 'varchar','precision' => '1100'),
 						'OFFER_STATUS' => array('type' => 'varchar','precision' => '10','nullable' => False),
 						'OFFER_PRINTED' => array('type' => 'int','precision' => '1','default' => '0'),
 						'GENERATED' => array('type' => 'varchar','precision' => '100'),
@@ -187,7 +187,7 @@ $phpgw_baseline = array(
 						'ORDER_CUSTOMER_PRIVATE' => array('type' => 'int','precision' => '1','default' => '1','nullable' => False),
 						'ORDER_AMMOUNT' => array('type' => 'decimal','precision' => '8','scale' => '2'),
 						'ORDER_AMMOUNT_BRUTTO' => array('type' => 'decimal','precision' => '8','scale' => '2'),
-						'ORDER_NOTE' => array('type' => 'text'),
+						'ORDER_NOTE' => array('type' => 'varchar','precision' => '1100'),
 						'ORDER_STATUS' => array('type' => 'varchar','precision' => '10','nullable' => False),
 						'ORDER_PRINTED' => array('type' => 'int','precision' => '1','default' => '0'),
 						'GENERATED' => array('type' => 'varchar','precision' => '100'),
