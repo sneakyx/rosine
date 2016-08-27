@@ -7,37 +7,13 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2016-08-18  										    *
+ *  date of this file: 2016-08-24  										    *
  \**************************************************************************/
 
-
-@$rosine_db = mysql_connect($egw_info["server"]["db_host"], $egw_info["server"]["db_user"], $egw_info["server"]["db_pass"]) OR die("Fehler mit Datenbank");
-@mysql_select_db($egw_info["server"]["db_name"],$rosine_db) OR die ("Wrong database!");
-$rosine_db_prefix="rosine_";
-$egw_db_prefix="egw_";
-mysql_query("SET NAMES 'utf8'");
-function trimhtml (&$value, $key) {
-	$value = trim(htmlspecialchars($value, ENT_QUOTES));
-}
-array_walk_recursive($_GET, 'trimhtml');
-array_walk_recursive ($_POST, 'trimhtml');
-
-//for error-and OK-Bar (if nothing to show, they don't show up!
-$error="";
-$OK="";
-
 // mysql to get config
-$rosine_db_query['get_config']='SELECT * FROM '.$rosine_db_prefix.'config WHERE user_id =0 OR user_id ='.$egw_info['user']['account_id'].' GROUP BY config desc';
-$result=mysql_query($rosine_db_query['get_config']);
-if (mysql_errno($rosine_db)!=0) {
-	// Error in mysql detected
-	echo "1000: ".mysql_error($rosine_db);
-	echo $rosine_db_query['get_config'];
-}
-while ($f= mysql_fetch_array($result)) {
-	$config[$f['config']]=$f['value'];
-//	echo $f['config'].": ".$f['value']."<br>"; // this is just to get an output for the configuration in the database
-}// put config into array
+$rosine_db_query['get_config']='SELECT * FROM '.$rosine_db_prefix.
+	'config WHERE user_id =0 OR user_id ='.$GLOBALS['egw_info']['user']['account_id'].
+	' GROUP BY config desc';
 //mysql for articles
 $rosine_db_query['insert_article']="INSERT INTO ".$rosine_db_prefix."articles (ART_NUMBER, ART_UNIT, ART_NAME, ART_PRICE, ART_TAX, ART_STOCKNR, ART_INSTOCK, ART_NOTE, GENERATED, CHANGED) VALUES ";
 $rosine_db_query['get_articles']="SELECT * FROM ".$rosine_db_prefix."articles WHERE ";
@@ -47,13 +23,13 @@ $rosine_db_query['delete_article']="DELETE FROM ".$rosine_db_prefix."articles WH
 $rosine_db_query['get_next_article_number']='SELECT MAX(ART_NUMBER) AS maximum FROM '.$rosine_db_prefix.'articles WHERE 1';
 // mysql for taxes
 $rosine_db_query['get_tax_ammount']="SELECT COUNT(*) FROM ".$rosine_db_prefix."taxes WHERE ";
-$rosine_db_query['get_taxes']="SELECT * FROM ".$rosine_db_prefix."taxes WHERE ";
+$rosine_db_query['get_taxs']="SELECT * FROM ".$rosine_db_prefix."taxes WHERE ";
 $rosine_db_query['update_tax']="UPDATE ".$rosine_db_prefix."taxes SET ";
 $rosine_db_query['delete_tax']="DELETE FROM ".$rosine_db_prefix."taxes WHERE ";
 $rosine_db_query['insert_tax']="INSERT INTO ".$rosine_db_prefix."taxes (TAX_ID, TAX_NAME, TAX_PERCENTAGE, GENERATED, CHANGED) VALUES ";
 
 // mysql for locations
-$rosine_db_query['get_locations_ammount']="SELECT COUNT(*) FROM ".$rosine_db_prefix."locations WHERE ";
+$rosine_db_query['get_location_ammount']="SELECT COUNT(*) FROM ".$rosine_db_prefix."locations WHERE ";
 $rosine_db_query['get_locations']="SELECT * FROM ".$rosine_db_prefix."locations WHERE ";
 $rosine_db_query['update_location']="UPDATE ".$rosine_db_prefix."locations SET ";
 $rosine_db_query['delete_location']="DELETE FROM ".$rosine_db_prefix."locations WHERE ";
@@ -97,5 +73,21 @@ $rosine_db_query['get_unpaid_invoices']='SELECT e.n_fn AS name, i.INVOICE_CUSTOM
 $rosine_db_query['get_payment_methods']='SELECT * FROM '.$rosine_db_prefix.'payments_methods WHERE 1';
 $rosine_db_query['insert_payment']='INSERT INTO '.$rosine_db_prefix.'payments (PAYMENT_ID , INVOICE_ID , PAYMENT_DATE , METH_ID , PAYMENT_AMMOUNT , PAYMENT_NOTE ) VALUES ';
 $rosine_db_query['get_open_money']='SELECT sum(p.PAYMENT_AMMOUNT) as already_payed, i.INVOICE_AMMOUNT_BRUTTO as invoice_ammount from '.$rosine_db_prefix.'payments as p JOIN '.$rosine_db_prefix.'invoices as i on i.INVOICE_ID=p.INVOICE_ID WHERE p.INVOICE_ID=';
+
+$rosine_db = new mysqli(
+		$GLOBALS['egw_info']['server']['db_host'],
+		$GLOBALS['egw_info']['server']['db_user'],
+		$GLOBALS['egw_info']['server']['db_pass'],
+		$GLOBALS['egw_info']['server']['db_name'],
+		$GLOBALS['egw_info']['server']['db_port']) ;
+if ($rosine_db->connect_error) {
+	die('Connect Error (' . $rosine_db->connect_errno . ') '
+			. $rosine_db->connect_error.'
+					db_host:'.$GLOBALS['egw_info']['server']['db_host'].
+					'db_name:'.$GLOBALS['egw_info']['server']['db_name']);
+} // die if database error
+
+$rosine_db->query("SET NAMES 'utf8'");
+
 
 ?>

@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2016-05-17  										    *
+ *  date of this file: 2016-08-26  										    *
  \**************************************************************************/
 $tpl = new Rosine_Template();
 // paperwork list, add items etc
@@ -16,10 +16,12 @@ switch ($_POST['next_function']) {
 			//insert an empty paperwork- just to fill in next step
 			
 			// choose either address one or two if to use customers address one or two
-			if (ucfirst(substr($_POST['contact_id'],0,1))=="P")
+			if (ucfirst(substr($_POST['contact_id'],0,1))=="P"){
 				$customer_private=1;
-			else 
+			}//endif
+			else {
 				$customer_private=0;
+			}//endelse
 			/* here we get the highest number of paperworks from the database
 			 * this ist just for the use in the next functions
 			 */
@@ -91,10 +93,11 @@ switch ($_POST['next_function']) {
 				// select fields must be displayed in paperwork to select the right
 				$input_fields.='<select name="articles['.$i.']" style="width:16.5em;">';
 				$input_fields.='<option selected>---------</option>';
-				while ($f = @mysql_fetch_array($result['result'])){
+				while ($f = $result['result']->fetch_array()){
 					$input_fields.='<option value="#'.$f['ART_NUMBER'].'">'.$f['ART_NAME'].' ('.$f['ART_NUMBER'].')</option>';
 				}// get every article that correspondeces to this search
 				$input_fields.='</select>';
+				$result['result']->close();
 			}// endif $select_article=true
 			else {
 				$input_fields.='<input  name="articles['.$i.']" type="text" width="30" maxwidth="50" placeholder="'.
@@ -122,18 +125,15 @@ switch ($_POST['next_function']) {
 		
 		
 		// get customer from database
-		$result=mysql_query($rosine_db_query['get_customers']." contact_id=".substr($_POST['contact_id'],2));
+		$result=rosine_database_query($rosine_db_query['get_customers']." contact_id=".
+				substr($_POST['contact_id'],2),140);
 		/* hier könnte ich das noch so ändern, dass die Abfrage von 
 		 * $rosine_db_query['get_paperworks'] kommt und damit die extra Abfrage unten für
 		 * %paperwork%_NOTE gespart wird....
 		 */ 
-		if (mysql_errno($rosine_db)!=0) {
-			// Error in mysql detected
-			$error.="4: ".mysql_error($rosine_db);
-				
-		} // Error in mysql detected
-		else {
-			$customer_details = @mysql_fetch_array($result);
+		if ($result!=false) {
+			$customer_details = $result->fetch_array();
+			$result->close();
 			//are there items to delete?
 			array_walk ($_POST[delete], 'rosine_delete_positions',str_replace("%paperwork%",
 					rosine_get_plural($_POST['paperwork']),$rosine_db_query['delete_article_from_paperwork']).
@@ -171,47 +171,43 @@ switch ($_POST['next_function']) {
 		$tpl->load("paperworks_select_customer.html");
 		$lang[] = $config['language'];
 		$lang = $tpl->loadLanguage($lang);
-		$result=mysql_query($rosine_db_query['search_customers_ammount']." 1");
+		$result=rosine_database_query($rosine_db_query['search_customers_ammount']." 1",160);
 		// 
-		if (mysql_errno($rosine_db)!=0) {
-			// Error in mysql detected
-			$error.="3: ".mysql_error($rosine_db);
-
-		} // Error in mysql detected
-		else {
+		if ($result!=false) {
 			// this is for changing pages
 		
-			$g = @mysql_fetch_array($result);
+			$g = $result->fetch_array();
 			$max_rows=$g[0];
 			$from=(intval($_GET['from']));
-			if ($from < 0)
+			if ($from < 0){
 				$from=0;
-			if ($max_rows<$from+$config['customers_per_page'])
+			}//endif	
+			if ($max_rows<$from+$config['customers_per_page']){
 				$config['customers_per_page']=$max_rows-$from;
-						
-			if ($from >0) //zurueckblaettern anzeigen wenn moeglich
+			}//endif
+			if ($from >0) {//zurueckblaettern anzeigen wenn moeglich
 				$tpl->assign("backward", '<a href="?from='.($from-$config['customers_per_page']).'&paperwork='.$_POST['paperwork'].'">&lt;&lt;</a>');
-			else
+			}//endif
+			else{
 				$tpl->assign("backward", "");
-			if ($from < $max_rows-$config['customers_per_page']) //vorblaettern anzeigen wenn notwendig
+			}//endelse
+			if ($from < $max_rows-$config['customers_per_page']) { //vorblaettern anzeigen wenn notwendig
 				$tpl->assign("foreward", '<a href="?from='.($from+$config['customers_per_page']).'&paperwork='.$_POST['paperwork'].'">&gt;&gt;</a>');
-			else
+			}//endif
+			else {
 				$tpl->assign("foreward", "");
+			}//endelse
 			$tpl->assign('from', $from);
 			$tpl->assign("to", ($from+$config['customers_per_page']));
 			$tpl->assign("max", $max_rows);
 			//here the things for changing the pages end
 			
-			$result=mysql_query($rosine_db_query['get_customers']." 1 LIMIT ".$from.", ".$config['customers_per_page']);
-			if (mysql_errno($rosine_db)!=0) {
-				// Error in mysql detected
-				$error.="4: ".mysql_error($rosine_db);
-			
-			} // Error in mysql detected
-			else {
+			$result=rosine_database_query($rosine_db_query['get_customers']." 1 LIMIT ".$from.
+					", ".$config['customers_per_page'],165);
+			if ($result!=false) {
 				//no error in mysql get customers
 				$input_fields.='<input type="hidden" name="paperwork" value="'.$_POST['paperwork'].'">';
-				while($f = @mysql_fetch_array($result)) {
+				while($f = $result->fetch_array()) {
 					if ($f['n_family']!="")
 							$input_fields.='<button name="contact_id" value="P-'.$f["contact_id"].
 							'" type="submit" >'.$f['n_fn'].' - '.$f['adr_two_locality'].' ['.$f['contact_id'].']</button>';
@@ -219,6 +215,7 @@ switch ($_POST['next_function']) {
 						$input_fields.='<button name="contact_id" value="F-'.$f["contact_id"].
 						'" type="submit" >'.$f['org_name'].' - '.$f['adr_one_locality'].' ['.$f['contact_id'].']</button>';
 				}//endwhile
+				$result->close();
 			} //endelse no error in mysql search for customers
 			
 		}// endelse no error in customer ammount search
@@ -229,12 +226,13 @@ switch ($_POST['next_function']) {
 		
 		$note_field='<select name="note_text">';
 		$result=rosine_database_query($rosine_db_query['get_all_notes']." 1", 701);
-		while ($f=mysql_fetch_array($result)){
+		while ($f=$result->fetch_array()){
 			$note_field.='<option value="'.$f['NOTE_TEXT'].'"';
 				if ($f['NOTE_ID']==$standard_note)
 					$note_field.=" selected "; // for getting the standard note
 			$note_field.='>'.$f['NOTE_TEXT'].'</option>';
 		}//no error getting all notes
+		$result->close();
 		$note_field.='</select>';
 		$tpl->assign("note_field", $note_field);
 		$tpl->assign("next_function", '<input type="hidden" name="next_function" value="change">');

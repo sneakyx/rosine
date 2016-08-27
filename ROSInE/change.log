@@ -27,6 +27,13 @@ specialised version of delivery notes for changing ammounts and units
 
 2016-05-19
 eliminate errors inpaperwork_change_inc_1 !
+
+2016-08-24
+automatic installation (egroupware added)
+
+2016-08-27
+changed everything that it works with egroupware 16.1
+
  
 to do list:
 - different colors for offer, order, invoice and delivery note

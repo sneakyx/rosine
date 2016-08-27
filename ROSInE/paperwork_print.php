@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2016-08-24  										    *
+ *  date of this file: 2016-08-26  										    *
  \**************************************************************************/
 
 /*
@@ -58,17 +58,7 @@
  *
  * Feel free to tell me if anything is missing!
  */
-
-$GLOBALS['egw_info'] = array(
-		'flags' => array(
-				'currentapp' => 'rosine',
-				'noheader'   => True,
-				'nonavbar'   => True
-		));
-
-include('../header.inc.php');
-include ('inc/settings.php');
-include ('inc/template.class.php');
+include ('inc/head.inc.php');
 
 /*function rosine_assign_invoice_fields ($item, $key, $tpl){
 	// assign all template-fields in invoice with data
@@ -89,49 +79,41 @@ $lang = $paperwork->loadLanguage($lang);
 $paperwork->assign('paperwork', $lang[$_GET['paperwork']]);
 
 // get fields from database (just the fields for the full page)
-$result=mysql_query(rosine_correct_query($_GET['paperwork'], $rosine_db_query['get_paperworks']."%singular%_ID=".
-		$_GET['paperwork_id']));
-if (mysql_errno($rosine_db)!=0) {
-	// Error in mysql detected
-	$error.="  1: ".mysql_error($rosine_db)."<br>";
-	$error.=rosine_correct_query($_GET['paperwork'], $rosine_db_query['get_paperworks']."%singular%_ID=".
-			$_GET['paperwork_id']);
-		
-} // Error in mysql detected
-else {
+$result=rosine_database_query(rosine_correct_query($_GET['paperwork'], 
+		$rosine_db_query['get_paperworks']."%singular%_ID=".
+		$_GET['paperwork_id']),101);
+if ($result!=false) {
 	// now the fields can be generated
-	$result=mysql_fetch_array($result);
+	$row=$result->fetch_array();
 	// goes this paperwork to organisation or to private?
-	if ($result[strtoupper($_GET['paperwork']."_customer_private")]=="1") {
-		$paperwork->assign('customer_name',$result['n_fn']);
+	if ($row[strtoupper($_GET['paperwork']."_customer_private")]=="1") {
+		$paperwork->assign('customer_name',$row['n_fn']);
 		$nr="two";
 	}// customer is private
 	else {
-		$paperwork->assign('customer_name',$result['n_fn']);
+		$paperwork->assign('customer_name',$row['n_fn']);
 		$nr="one";
 	}// customer is organisation
-	$paperwork->assign('customer_street',$result['adr_one_street']); // depending on private / organisation
-	$paperwork->assign('customer_zip',$result['adr_'.$nr.'_postalcode']);// depending on private / organisation
-	$paperwork->assign('customer_city',$result['adr_'.$nr.'_locality']);// depending on private / organisation
-	$paperwork->assign('customer_country', $result['adr_'.$nr.'_countryname']);// depending on private / organisation
-	$paperwork->assign('day', substr($result[strtoupper($_GET['paperwork'].'_DATE')], 8,2));
-	$paperwork->assign('month', substr($result[strtoupper($_GET['paperwork'].'_DATE')], 5,2));
-	$paperwork->assign('year', substr($result[strtoupper($_GET['paperwork'].'_DATE')], 0,4));
-	$paperwork->assign('customer_id', $result['contact_id']);
-	$paperwork->assign("paperwork_terms", $result[strtoupper($_GET['paperwork'].'_NOTE')]);
+	$paperwork->assign('customer_street',$row['adr_one_street']); // depending on private / organisation
+	$paperwork->assign('customer_zip',$row['adr_'.$nr.'_postalcode']);// depending on private / organisation
+	$paperwork->assign('customer_city',$row['adr_'.$nr.'_locality']);// depending on private / organisation
+	$paperwork->assign('customer_country', $row['adr_'.$nr.'_countryname']);// depending on private / organisation
+	$paperwork->assign('day', substr($row[strtoupper($_GET['paperwork'].'_DATE')], 8,2));
+	$paperwork->assign('month', substr($row[strtoupper($_GET['paperwork'].'_DATE')], 5,2));
+	$paperwork->assign('year', substr($row[strtoupper($_GET['paperwork'].'_DATE')], 0,4));
+	$paperwork->assign('customer_id', $row['contact_id']);
+	$paperwork->assign("paperwork_terms", $row[strtoupper($_GET['paperwork'].'_NOTE')]);
+	$result->close();
 	// now get the items
-	$result=mysql_query(rosine_correct_query($_GET['paperwork'], $rosine_db_query['get_articles_from_paperwork_with_all']." %singular%_ID=".$_GET['paperwork_id']));
-	if (mysql_errno($rosine_db)!=0) {
-		// Error in mysql detected
-		$error.="2: ".mysql_error($rosine_db);
-	
-	} // Error in mysql detected
-	else {
+	$result=rosine_database_query(rosine_correct_query($_GET['paperwork'], 
+			$rosine_db_query['get_articles_from_paperwork_with_all']." %singular%_ID=".
+			$_GET['paperwork_id']),102);
+	if ($result!=false) {
 		$sum_all_netto=0;
 		$sum_all_brutto=0;
 		$sum_tax=0;
 		$rows="";
-		while($f = @mysql_fetch_array($result)) {
+		while($f = $result->fetch_array()) {
 			$row = new Rosine_Template();
 			$row->load(str_replace('.html', '_row.html', $config['print_template_'.$_GET['paperwork']]));
 			$lang[] = $config['language'];
@@ -162,13 +144,10 @@ else {
 			$rows.=$row->return_html();
 			$tax_percentage=$f['TAX_PERCENTAGE'];
 		}// get every item line by line from this paperwork id
-		
+		$result->close();
 		//$row.=$paperwork->return_html();
 	}// there was no error in SQL 2
 }// there was no error  in SQL 1
-
-
-
 
 // put page together and show it
 

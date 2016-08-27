@@ -19,7 +19,7 @@ function LadeSeite5() {
 return;
 }
 function LadeSeite6() {
-	window.location = "articles.php";
+	window.location = "type_list.php?type=article";
 	return;
 }
 document.getElementById("button1").addEventListener("click", LadeSeite1);

@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2016-05-19  										    *
+ *  date of this file: 2016-08-27  										    *
  \**************************************************************************/
 /*
  * This form works the following way:
@@ -23,10 +23,10 @@ switch ($_POST['next_function']) {
 			
 			$result=rosine_database_query(rosine_correct_query($_POST['old_paperwork'],($rosine_db_query['get_paperworks'].'%SINGULAR%_ID='.$_POST['old_paperwork_id'])),100);	
 			if ($result!=false)
-				$result=mysql_fetch_array($result);
-			$_POST['contact_id']=$result[strtoupper($_POST['old_paperwork']).'_CUSTOMER'];
-			$customer_private=$result[strtoupper($_POST['old_paperwork']).'_CUSTOMER_PRIVATE'];
-			
+				$row=$result->fetch_array();
+			$_POST['contact_id']=$row[strtoupper($_POST['old_paperwork']).'_CUSTOMER'];
+			$customer_private=$row[strtoupper($_POST['old_paperwork']).'_CUSTOMER_PRIVATE'];
+			$result->close();
 			/* here we get the highest number of paperworks from the database
 			 * this ist just for the use in the next functions
 			 */
@@ -104,10 +104,11 @@ switch ($_POST['next_function']) {
 				// select fields must be displayed in paperwork to select the right
 				$input_fields.='<select name="articles['.$i.']" style="width:16.5em;">';
 				$input_fields.='<option selected>---------</option>';
-				while ($f = @mysql_fetch_array($result['result'])){
+				while ($f = $result['result']->fetch_array()){
 					$input_fields.='<option value="#'.$f['ART_NUMBER'].'">'.$f['ART_NAME'].' ('.$f['ART_NUMBER'].')</option>';
 				}// get every article that correspondeces to this search
 				$input_fields.='</select>';
+				$result['result']->close();
 			}// endif $select_article=true
 			else {
 				$input_fields.='<input  name="articles['.$i.']" type="text" width="30" maxwidth="50" placeholder="'.
@@ -134,7 +135,8 @@ switch ($_POST['next_function']) {
 					' AND POSI_ID='.$value),"6-".$value);
 			$GLOBALS['_POST']['old_posi_ammount'][$value]=str_replace(',','.',$GLOBALS['_POST']['old_posi_ammount'][$value]);
 			if ($result){
-				$f=mysql_fetch_array($result);
+				$f=$result->fetch_array();
+				$result->close();
 				// insert new paperwork
 				rosine_paperwork_add_article($GLOBALS['_POST']['paperwork'],
 						$GLOBALS['_POST']['old_posi_ammount'][$value] , 
@@ -166,7 +168,7 @@ switch ($_POST['next_function']) {
 						$GLOBALS['_POST']['old_paperwork_id']);
 				$result=rosine_database_query($query, "9-".$value);
 				if ($result){
-					$f=mysql_fetch_array($result);					
+					$f=$result->fetch_array();					
 					if ($f['number']==0){
 						echo "jetzt leer!";
 						rosine_set_status_paperwork($GLOBALS['_POST']['old_paperwork'], $GLOBALS['_POST']['old_paperwork_id'], "delivery".$GLOBALS['_POST']['paperwork_id']);
@@ -187,7 +189,7 @@ switch ($_POST['next_function']) {
 		$result=rosine_database_query(rosine_correct_query($_POST['old_paperwork'],$rosine_db_query['get_articles_from_paperwork_with_all'].
 				strtoupper($_POST['old_paperwork']).'_ID='.$_POST['old_paperwork_id'].' AND POSI_LOCATION='.$config['norm_stock'].' AND DONE=false'), 300);
 		$counter=0;
-		while ($f = @mysql_fetch_array($result)){
+		while ($f = $result->fetch_array()){
 			$counter++;
 			$check_fields.='<input type="checkbox" name="old_posi_id['.$counter.']" value="'.$f['POSI_ID'].'"> ';
 			$check_fields.='<input class="rosine_input_ammount" style="width:40px;" type="text" name="old_posi_ammount['.
@@ -195,20 +197,16 @@ switch ($_POST['next_function']) {
 			$check_fields.=' '.$f['POSI_TEXT'].' | ';
 			$check_fields.="<br>";
 		}// get every article that correspondeces to this search
-		
+		$result->close();
 		$check_fields.='';
 		
 		// articles from old paperwork ends here!
 		
 		// get customer from database
-		$result=mysql_query($rosine_db_query['get_customers']." contact_id=".$_POST['contact_id']);
-		if (mysql_errno($rosine_db)!=0) {
-			// Error in mysql detected
-			$error.="4: ".mysql_error($rosine_db);
-				
-		} // Error in mysql detected
-		else {
-			$customer_details = @mysql_fetch_array($result);
+		$result=rosine_database_query($rosine_db_query['get_customers']." contact_id=".$_POST['contact_id'],117);
+		if ($result!=false) {
+			$customer_details = $result->fetch_array();
+			$result->close();
 			//are there items to delete?
 			array_walk ($_POST[delete], 'rosine_delete_positions',str_replace("%paperwork%",
 					rosine_get_plural($_POST['paperwork']),$rosine_db_query['delete_article_from_paperwork']).
@@ -234,23 +232,28 @@ switch ($_POST['next_function']) {
 		$lang = $tpl->loadLanguage($lang);
 		$result=rosine_database_query(str_replace("%location%", $config['norm_stock'], 
 				rosine_correct_query("order", $rosine_db_query['get_unfinished_paperwork'])), 4);
-		if ($result!=""){
+		if ($result!=false){
 					// this is for changing pages
-			$max_rows=mysql_num_rows($result);
+			$max_rows=$result->num_rows();
 			$from=(intval($_GET['from']));
-			if ($from < 0)
+			if ($from < 0){
 				$from=0;
-			if ($max_rows<$from+$config['customers_per_page'])
+			}//endif
+			if ($max_rows<$from+$config['customers_per_page']){
 				$config['customers_per_page']=$max_rows-$from;
-						
-			if ($from >0) //zurueckblaettern anzeigen wenn moeglich
+			}//endif
+			if ($from >0){ //zurueckblaettern anzeigen wenn moeglich
 				$tpl->assign("backward", '<a href="?from='.($from-$config['customers_per_page']).'">&lt;&lt;</a>');
-			else
+			}//endif
+			else {
 				$tpl->assign("backward", "");
-			if ($from < $max_rows-$config['customers_per_page']) //vorblaettern anzeigen wenn notwendig
+			}//endelse
+			if ($from < $max_rows-$config['customers_per_page']){ //vorblaettern anzeigen wenn notwendig
 				$tpl->assign("foreward", '<a href="?from='.($from+$config['customers_per_page']).'">&gt;&gt;</a>');
-			else
+			}//endif
+			else {
 				$tpl->assign("foreward", "");
+			}//endelse
 			$tpl->assign('from', $from);
 			$tpl->assign("to", ($from+$config['customers_per_page']));
 			$tpl->assign("max", $max_rows);
@@ -261,14 +264,14 @@ switch ($_POST['next_function']) {
 						<input type="hidden" name="next_function" value="insert">
 						<input type="hidden" name="paperwork" value="'.$_POST['paperwork'].'">
 						<input type="hidden" name="old_paperwork" value="order">';
-			if (mysql_affected_rows()==0)
+			if ($result->affected_rows()==0)
 				$input_fields.=$lang['nothing_to_show']."<br>";
-			while($f = @mysql_fetch_array($result)) {
+			while($f = $result->fetch_array()) {
 				$input_fields.='<button name="old_paperwork_id" value="'.$f["paperwork_id"].
 						'" type="submit" >'.$f['n_fn'].'  ['.$lang['ammount'].': '.$f['ammount'].']</button>';
 			}//endwhile
 			$input_fields.='</form>';
-		
+			$result->close();
 			
 		}// endelse no error in customer ammount search
 		$tpl->assign("next_function", '<input type="hidden" name="next_function" value="change">');

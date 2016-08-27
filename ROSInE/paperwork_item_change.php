@@ -7,17 +7,10 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2016-08-24  										    *
+ *  date of this file: 2016-08-26  										    *
  \**************************************************************************/
-$GLOBALS['egw_info'] = array(
-		'flags' => array(
-				'currentapp' => 'rosine',
-				'noheader'   => True,
-				'nonavbar'   => True
-		));
-include('../header.inc.php');
-include ('inc/settings.php');
-include ('inc/template.class.php');
+include ('inc/head.inc.php');
+
 $tpl = new Rosine_Template();
 // order list, add items etc
 switch ($_POST['next_function']){
@@ -26,8 +19,6 @@ switch ($_POST['next_function']){
 		$tpl->load("paperwork_item_changed.html");
 		$lang[] = $config['language'];
 		$lang = $tpl->loadLanguage($lang);
-		$OK="";
-		$error="";
 		
 		$set='POSI_AMMOUNT='.$_POST['posi_ammount'].', POSI_UNIT="'.$_POST['posi_unit'].'", POSI_PRICE='.$_POST['posi_price'].
 			', POSI_LOCATION='.$_POST['posi_location'].',POSI_SERIAL="'.$_POST['posi_serial'].'", POSI_TEXT="'.$_POST['posi_text'].
@@ -36,13 +27,8 @@ switch ($_POST['next_function']){
 		$query=str_replace("%paperwork_id%", $_POST['paperwork_id'], $query);
 		$query=str_replace("%posi_id%", $_POST['posi_id'],$query);
 		$query=str_replace("%set%", $set, $query);
-		$result=mysql_query($query);
-		if (mysql_errno($rosine_db)!=0) {
-			// Error in mysql detected
-			$error.="9: ".mysql_error($rosine_db);
-				
-		} // Error in mysql detected
-		else {
+		$result=rosine_database_query($query,101);
+		if ($result!=false) {
 			$OK.=$lang['item_changed'].' ' .$lang[$_POST['paperwork']].': '.$_POST['paperwork_id'].' - '.$lang['position'].': '.$_POST['posi_id'];
 		}//no error in mysql
 		$tpl->assign("what_to_do", $lang['item_changed']);
@@ -57,22 +43,16 @@ switch ($_POST['next_function']){
 	$tpl->load("paperwork_item_change.html");
 	$lang[] = $config['language'];
 	$lang = $tpl->loadLanguage($lang);
-	$OK="";
-	$error="";
 	
 	$query=$rosine_db_query['get_articles_from_paperwork'].rosine_get_plural($_GET['paperwork']).'_positions WHERE '.$_GET['paperwork'].'_id='.$_GET['paperwork_id'].' AND posi_id='.$_GET['posi_id'];
-	$result=mysql_query($query);
-	if (mysql_errno($rosine_db)!=0){
-		//Error 1 in mysql
-		$error.="1: ".mysql_error($rosine_db);
-		$error.=$query;
-	}// Error in mysql detected
-	else {
-		$f=mysql_fetch_array($result);
+	$result=rosine_database_query($query,110);
+	if ($result!=false) {
+		$f=$result->fetch_array();
+		$result->close();
 		$query2=rosine_correct_query($_GET['paperwork'], $rosine_db_query['get_customer_name_by_paperwork_id']);
 		$query2=str_replace("%ID%", $_GET['paperwork_id'], $query2);
-		$result2=mysql_query($query2);
-		$g=mysql_fetch_array($result2);
+		$result2=rosine_database_query($query2);
+		$g=$result2->fetch_array();
 		$hidden='<input type="hidden" name="posi_id" value="'.$f['POSI_ID'].'">';
 		$hidden.='<input type="hidden" name="paperwork_id" value="'.$_GET['paperwork_id'].'">';
 		$hidden.='<input type="hidden" name="paperwork" value="'.$_GET['paperwork'].'">';

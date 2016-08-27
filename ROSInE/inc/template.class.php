@@ -1,4 +1,13 @@
 <?php
+/*********************************************************************************\
+ * Author: Corvin Gröning                                                         * 
+ * http://www.webmasterpro.de/coding/article/php-ein-eigenes-template-system.html *
+ * changes to this file made by André Scholz                                      *
+ * --------------------------------------------                                   *
+ * For licence see upper webpage                                                  *
+ * Date of this file: 2016-08-26                                                  *
+ \********************************************************************************/
+
 class Rosine_Template
 {
     /**
@@ -199,17 +208,15 @@ class Rosine_Template
      */
     public function loadLanguage($files) {
         $this->languageFiles = $files;
-
         // Versuchen, alle Sprachdateien einzubinden
         for( $i = 0; $i < count( $this->languageFiles ); $i++ ) {
             if ( !file_exists( $this->languageDir .$this->languageFiles[$i] ) ) {
-                return false;
+            	return false;
             } else {
                  include_once( $this->languageDir .$this->languageFiles[$i] );
                  // Jetzt steht das Array $lang zur Verfügung
             }
         }
-
         // Die Sprachvariablen mit dem Text ersetzen
         $this->replaceLangVars($lang);
 
@@ -225,7 +232,13 @@ class Rosine_Template
      * @uses      $template
      */
     private function replaceLangVars($lang) {
-        $this->template = preg_replace("/\{L_(.*)\}/isUe", "\$lang[strtolower('\\1')]", $this->template);
+//        $this->template = preg_replace("/\{L_(.*)\}/isUe", "\$lang[strtolower('\\1')]", 
+//                                $this->template); deprecated
+        $this->template =preg_replace_callback("/\{L_(.*)\}/isU", function ($m) use ($lang){
+        							return $lang[strtolower($m[1])];
+    								},
+        						$this->template);
+        
     }
 
     /**
@@ -243,16 +256,28 @@ class Rosine_Template
         while( preg_match( "/" .$this->leftDelimiterF ."include file=\"(.*)\.(.*)\""
                            .$this->rightDelimiterF ."/isUe", $this->template) )
         {
-            $this->template = preg_replace( "/" .$this->leftDelimiterF ."include file=\"(.*)\.(.*)\""
+/*            $this->template = preg_replace( "/" .$this->leftDelimiterF ."include file=\"(.*)\.(.*)\""
                                             .$this->rightDelimiterF."/isUe",
                                             "file_get_contents(\$this->templateDir.'\\1'.'.'.'\\2')",
                                             $this->template );
+*/ //deprecated
+        	$templateDir=$this->templateDir;
+        	$this->template =preg_replace_callback( "/" .$this->leftDelimiterF ."include file=\"(.*)\.(.*)\""
+                                            .$this->rightDelimiterF."/isU", function ($m) use ($templateDir){
+            	return file_get_contents($templateDir.$m[1].'.'.$m[2]);
+            },
+            $this->template);
+            
         }
 
 
         // Kommentare löschen
-        $this->template = preg_replace( "/" .$this->leftDelimiterC ."(.*)" .$this->rightDelimiterC ."/isUe",
-                                        "", $this->template );
+/*        $this->template = preg_replace( "/" .$this->leftDelimiterC ."(.*)" .$this->rightDelimiterC ."/isUe",
+                                        "", $this->template );  //deprecated
+*/
+        		$this->template = preg_replace_callback( "/".$this->leftDelimiterC ."(.*)".$this->rightDelimiterC ."/isU",
+        				function () {return '';}, $this->template);
+        
     }
 
     /**
