@@ -21,16 +21,16 @@
  * $sum_all_netto = sum of all articles without tax
  * $sum_all_brutto = sum of all articles with tax
  * $sum_tax = sum of all article_tax
- * $paperwork = kind of paperwork (offer, order, etc)
+ * $tpl = kind of paperwork (offer, order, etc)
  * $customer_name = the name that should be on the invoice as recipient
  * $customer_street = the name of customers' street
  * $customer_zip = the customers' zip (postal code)
  * $customer_city = the customers' city
  * $customer_country = the customers' country
- * $paperwork_id = number of paperwork
- * $paperwork_variable = this can be used for many things, for example if you print a 
+ * $tpl_id = number of paperwork
+ * $tpl_variable = this can be used for many things, for example if you print a 
  * 						delivery and want to use $config[delivery_prefix] just write
- * 						{$config[{$paperwork_variable}_prefix]}  
+ * 						{$config[{$tpl_variable}_prefix]}  
  * $config['company_name'] = name of Your company
  * $config['company_street'] = Street+ number of Your company
  * $config['company_zip'] = postal code of your company
@@ -69,9 +69,9 @@ include ('inc/head.inc.php');
 */
 
 //2. Dimension von $GEt und $post durchsuchen!!!!
-$paperwork->load($config['print_template_'.$_GET['paperwork']]);
-$lang = $paperwork->loadLanguage($lang);
-$paperwork->assign('paperwork', $lang[$_GET['paperwork']]);
+$tpl->load($config['print_template_'.$_GET['paperwork']]);
+$lang = $tpl->loadLanguage($lang);
+$tpl->assign('paperwork', $lang[$_GET['paperwork']]);
 
 // get fields from database (just the fields for the full page)
 $result=rosine_database_query(rosine_correct_query($_GET['paperwork'], 
@@ -82,22 +82,22 @@ if ($result!=false) {
 	$row=$result->fetch_array();
 	// goes this paperwork to organisation or to private?
 	if ($row[strtoupper($_GET['paperwork']."_customer_private")]=="1") {
-		$paperwork->assign('customer_name',$row['n_fn']);
+		$tpl->assign('customer_name',$row['n_fn']);
 		$nr="two";
 	}// customer is private
 	else {
-		$paperwork->assign('customer_name',$row['n_fn']);
+		$tpl->assign('customer_name',$row['n_fn']);
 		$nr="one";
 	}// customer is organisation
-	$paperwork->assign('customer_street',$row['adr_one_street']); // depending on private / organisation
-	$paperwork->assign('customer_zip',$row['adr_'.$nr.'_postalcode']);// depending on private / organisation
-	$paperwork->assign('customer_city',$row['adr_'.$nr.'_locality']);// depending on private / organisation
-	$paperwork->assign('customer_country', $row['adr_'.$nr.'_countryname']);// depending on private / organisation
-	$paperwork->assign('day', substr($row[strtoupper($_GET['paperwork'].'_DATE')], 8,2));
-	$paperwork->assign('month', substr($row[strtoupper($_GET['paperwork'].'_DATE')], 5,2));
-	$paperwork->assign('year', substr($row[strtoupper($_GET['paperwork'].'_DATE')], 0,4));
-	$paperwork->assign('customer_id', $row['contact_id']);
-	$paperwork->assign("paperwork_terms", $row[strtoupper($_GET['paperwork'].'_NOTE')]);
+	$tpl->assign('customer_street',$row['adr_one_street']); // depending on private / organisation
+	$tpl->assign('customer_zip',$row['adr_'.$nr.'_postalcode']);// depending on private / organisation
+	$tpl->assign('customer_city',$row['adr_'.$nr.'_locality']);// depending on private / organisation
+	$tpl->assign('customer_country', $row['adr_'.$nr.'_countryname']);// depending on private / organisation
+	$tpl->assign('day', substr($row[strtoupper($_GET['paperwork'].'_DATE')], 8,2));
+	$tpl->assign('month', substr($row[strtoupper($_GET['paperwork'].'_DATE')], 5,2));
+	$tpl->assign('year', substr($row[strtoupper($_GET['paperwork'].'_DATE')], 0,4));
+	$tpl->assign('customer_id', $row['contact_id']);
+	$tpl->assign("paperwork_terms", $row[strtoupper($_GET['paperwork'].'_NOTE')]);
 	$result->close();
 	// now get the items
 	$result=rosine_database_query(rosine_correct_query($_GET['paperwork'], 
@@ -140,23 +140,23 @@ if ($result!=false) {
 			$tax_percentage=$f['TAX_PERCENTAGE'];
 		}// get every item line by line from this paperwork id
 		$result->close();
-		//$row.=$paperwork->return_html();
+		//$row.=$tpl->return_html();
 	}// there was no error in SQL 2
 }// there was no error  in SQL 1
 
 // put page together and show it
 
-$paperwork->assign('sum_all_netto', number_format($sum_all_netto,2,",","."));
-$paperwork->assign('sum_all_brutto', number_format($sum_all_brutto,2,",","."));
-$paperwork->assign('sum_tax', number_format($sum_tax,2,",","."));
-$paperwork->assign("OK", $OK);
-$paperwork->assign("error", $error);
-$paperwork->assign("rows", $rows);
-$paperwork->assign('paperwork_id', $_GET['paperwork_id']);
-$paperwork->assign("paperwork_prefix", $config[$_GET['paperwork'].'_prefix']);
-$paperwork->assign('tax_percentage', $tax_percentage);
-$paperwork->assign_array('config', $config);
+$tpl->assign('sum_all_netto', number_format($sum_all_netto,2,",","."));
+$tpl->assign('sum_all_brutto', number_format($sum_all_brutto,2,",","."));
+$tpl->assign('sum_tax', number_format($sum_tax,2,",","."));
+$tpl->assign("OK", $OK);
+$tpl->assign("error", $error);
+$tpl->assign("rows", $rows);
+$tpl->assign('paperwork_id', $_GET['paperwork_id']);
+$tpl->assign("paperwork_prefix", $config[$_GET['paperwork'].'_prefix']);
+$tpl->assign('tax_percentage', $tax_percentage);
+$tpl->assign_array('config', $config);
 
-$paperwork->display();
+$tpl->display();
 
 ?>
