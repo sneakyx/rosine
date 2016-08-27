@@ -9,7 +9,6 @@
  *  Free Software Foundation; version 2 of the License.                     *
  *  date of this file: 2016-08-26  										    *
  \**************************************************************************/
-$tpl = new Rosine_Template();
 // paperwork list, add items etc
 switch ($_POST['next_function']) {
 	case "insert":

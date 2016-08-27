@@ -7,11 +7,11 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2016-08-26  										    *
+ *  date of this file: 2016-08-27  										    *
  \**************************************************************************/
-$tpl = new Rosine_Template();
+
 $tpl->load("paperworklist.html");
-$lang[] = $config['language'];
+
 $lang = $tpl->loadLanguage($lang);
 // should there be one invoice really deleted?
 if ($_POST['next_function']=="really_delete"){

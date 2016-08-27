@@ -15,7 +15,7 @@
  * When You finished all things that can be delivered you can print the delivery and
  * return to the list
  */
-$tpl = new Rosine_Template();
+
 // paperwork list, add items etc
 switch ($_POST['next_function']) {
 	case "insert":

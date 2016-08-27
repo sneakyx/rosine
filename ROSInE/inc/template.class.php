@@ -167,7 +167,7 @@ class Rosine_Template
                 mkdir(substr($this->templateDir,0,-1),0777,1);
                 echo '<br>'.substr($this->templateDir,0,-1).' created <br>';
         }// endif
-        echo 'Installation completed if there are no errors... <h1>Click <a href="index.php#">here</a> to reload page!</h1><br>';
+        echo 'Installation completed if there are no errors... <h1>Click <a href="index.php">here</a> to reload page!</h1><br>';
         $source_dir = opendir ('./templates/rosine_templates');
         while ($file = readdir ($source_dir))   { // read folder
 
