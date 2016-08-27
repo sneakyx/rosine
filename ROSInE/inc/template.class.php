@@ -5,7 +5,7 @@
  * changes to this file made by André Scholz                                      *
  * --------------------------------------------                                   *
  * For licence see upper webpage                                                  *
- * Date of this file: 2016-08-26                                                  *
+ * Date of this file: 2016-08-27                                                  *
  \********************************************************************************/
 
 class Rosine_Template
@@ -16,7 +16,8 @@ class Rosine_Template
      * @access    private
      * @var       string
      */
-    private $templateDir = "templates/rosine/";
+	
+    private $templateDir = "";
 
     /**
      * Der Ordner in dem sich die Sprach-Dateien befinden.
@@ -147,7 +148,45 @@ class Rosine_Template
             $this->languageDir = $lang_dir;
         }
     }
+    /**
+     * sets the variable templateDir
+     *
+     * returns nothing
+     */
+    
+	public function set_templateDir($templateDir){
+		$this->templateDir=$templateDir;
+	}// end function set_templateDir
+    
+    private function rosine_setup_templates(){
+        echo 'This seems a new installation or this template is missing! Trying to copy it from the defaults!<br>';
+        echo' Es scheint, dies ist eine neue Installation - es wird versucht, die Templates aus den Vorlagen zu kopieren!<br>';
+        //copy template files
+        //create folder if not exists
+        if (!is_dir($this->templateDir)){
+                mkdir(substr($this->templateDir,0,-1),0777,1);
+                echo '<br>'.substr($this->templateDir,0,-1).' created <br>';
+        }// endif
+        echo 'Installation completed if there are no errors... <h1>Click <a href="index.php#">here</a> to reload page!</h1><br>';
+        $source_dir = opendir ('./templates/rosine_templates');
+        while ($file = readdir ($source_dir))   { // read folder
 
+                //copies only if file not exists. that way Your templates aren't overwritten!
+                if ($file!='.' && $file!='..' && !is_file($this->templateDir.$file)){
+                        echo $file.' to '.$this->templateDir.$file;
+                        if (copy('./templates/rosine_templates/'.$file,$this->templateDir.$file)){
+                        	echo ' copied!<br>';
+                        }
+                        else {
+                        	echo ' could not be copied!<br>';
+                        }
+                }//endif
+    			
+        }//endwhile
+        closedir($source_dir);
+    }
+	
+    
     /**
      * Eine Templatedatei öffnen.
      *
@@ -160,8 +199,13 @@ class Rosine_Template
      * @return    boolean
      */
     public function load($file)    {
-        // Eigenschaften zuweisen
-        $this->templateName = $file;
+        /* if there's a folder name in database, use this instead
+         * this is mainly used for docker installations
+         */
+        if ($this->templateDir=='') {
+        	echo 'Error(.1):Template Folder is not set!';
+        }//endif 
+    	$this->templateName = $file;
         $this->templateFile = $this->templateDir.$file;
 
         // Wenn ein Dateiname übergeben wurde, versuchen, die Datei zu öffnen
@@ -169,7 +213,8 @@ class Rosine_Template
             if( file_exists($this->templateFile) ) {
                 $this->template = file_get_contents($this->templateFile);
             } else {
-                return false;
+                $this->rosine_setup_templates($this->templateDir);
+            	return false;
             }
         } else {
            return false;

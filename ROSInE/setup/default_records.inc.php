@@ -7,8 +7,9 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2016-08-24  										    *
+ *  date of this file: 2016-08-27  										    *
  \**************************************************************************/
+echo "Template-Dir:".$GLOBALS['egw_info']['rosine_template_folder']."<br>";
 $oProc->query("
 			INSERT IGNORE INTO `rosine_config` (`config`, `user_id`, `value`) VALUES
 			('articles_per_page', 0, '10'),
@@ -51,7 +52,8 @@ $oProc->query("
 			('print_template_delivery', 0, 'print_paperwork_without_money.html'),
 			('print_template_invoice', 0, 'print_paperwork.html'),
 			('print_template_offer', 0, 'print_paperwork.html'),
-			('print_template_order', 0, 'print_paperwork.html')		
+			('print_template_order', 0, 'print_paperwork.html'),
+			('template_folder',0,'".$GLOBALS['egw_info']['rosine_template_folder']."')
 		");
 $oProc->query("
 			INSERT IGNORE INTO `rosine_locations` (`LOC_ID`, `LOC_NAME`, `LOC_NOTE`, `GENERATED`, `CHANGED`) VALUES

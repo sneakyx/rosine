@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2016-08-26  										    *
+ *  date of this file: 2016-08-27  										    *
  \**************************************************************************/
 include ('inc/head.inc.php');
 
@@ -17,7 +17,6 @@ switch ($_POST['next_function']){
 	case "changed":
 		// form was filled, now it has to be changed
 		$tpl->load("paperwork_item_changed.html");
-		$lang[] = $config['language'];
 		$lang = $tpl->loadLanguage($lang);
 		
 		$set='POSI_AMMOUNT='.$_POST['posi_ammount'].', POSI_UNIT="'.$_POST['posi_unit'].'", POSI_PRICE='.$_POST['posi_price'].
@@ -41,7 +40,6 @@ switch ($_POST['next_function']){
 	default:
 	//if next function is empty then the item most be loaded from database
 	$tpl->load("paperwork_item_change.html");
-	$lang[] = $config['language'];
 	$lang = $tpl->loadLanguage($lang);
 	
 	$query=$rosine_db_query['get_articles_from_paperwork'].rosine_get_plural($_GET['paperwork']).'_positions WHERE '.$_GET['paperwork'].'_id='.$_GET['paperwork_id'].' AND posi_id='.$_GET['posi_id'];

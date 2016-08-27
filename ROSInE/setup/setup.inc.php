@@ -46,13 +46,6 @@
 			$rosine_db_prefix.'payments_methods',
 			$rosine_db_prefix.'taxes'
 	);
-#	$setup_info['rosine']['tables'][] = $rosine_db_prefix.'articles';
-#	$setup_info['rosine']['tables'][] = $rosine_db_prefix.'config';
-#	$setup_info['rosine']['tables'][] = 'egw_cal_user';
-#	$setup_info['rosine']['tables'][] = 'egw_cal_extra';
-#	$setup_info['rosine']['tables'][] = 'egw_cal_dates';
-#	$setup_info['rosine']['tables'][] = 'egw_cal_timezones';
-	
 	$setup_info['rosine']['depends'][] = array(
 			'appname' => 'api',
 			'versions' => Array(
@@ -60,5 +53,4 @@
 					'16.1'
 					)
 	);
-
 ?>

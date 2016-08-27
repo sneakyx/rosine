@@ -87,7 +87,7 @@ if ($rosine_db->connect_error) {
 					'db_name:'.$GLOBALS['egw_info']['server']['db_name']);
 } // die if database error
 
-$rosine_db->query("SET NAMES 'utf8'");
-
+$rosine_db->query('SET NAMES "utf8"');
+$rosine_db->query('SET sql_mode=""');
 
 ?>

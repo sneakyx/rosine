@@ -38,4 +38,9 @@ while ($f= $result->fetch_array()) {
 //	echo $f['config'].": ".$f['value']."<br>"; // this is just to get an output for the configuration in the database
 }// put config into array
 $result->close;
+//things for every template
+$tpl = new Rosine_Template();
+$tpl->set_templateDir(substr($GLOBALS['egw_info']['server']['backup_dir'],0,strrpos($GLOBALS['egw_info']['server']['backup_dir'], '/')).'/rosine/templates/');
+$lang[] = $config['language'];
+
 ?>

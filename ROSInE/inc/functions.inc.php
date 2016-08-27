@@ -11,6 +11,8 @@
  *  date of this file: 2016-08-27   		 								*
  \**************************************************************************/
 
+
+
 function rosine_create_tax_list($taxID){
 	$liste='<select name="posi_tax">';
 	$result=rosine_database_query( 

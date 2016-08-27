@@ -11,9 +11,7 @@
  \**************************************************************************/
 include ('inc/head.inc.php');
 
-$tpl = new Rosine_Template();
 $tpl->load("select_invoice_payment.html");
-$lang[] = $config['language'];
 $lang = $tpl->loadLanguage($lang);
 
 switch ($_POST['next_function']) {

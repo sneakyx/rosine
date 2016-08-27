@@ -7,11 +7,9 @@
 *  This program is free software; you can redistribute it and/or modify it *
 *  under the terms of the GNU General Public License as published by the   *
 *  Free Software Foundation; version 2 of the License.                     *
-*  date of this file: 2016-08-24 										   *
+*  date of this file: 2016-08-27 										   *
 \**************************************************************************/
 include ('inc/head.inc.php');
-$tpl = new Rosine_Template();
-$lang[] = $config['language'];
 
 $tpl->load("insert_location.html");
 $lang = $tpl->loadLanguage($lang);

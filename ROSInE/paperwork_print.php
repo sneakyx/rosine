@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2016-08-26  										    *
+ *  date of this file: 2016-08-27  										    *
  \**************************************************************************/
 
 /*
@@ -69,12 +69,7 @@ include ('inc/head.inc.php');
 */
 
 //2. Dimension von $GEt und $post durchsuchen!!!!
-$OK="";
-$error="";
-$paperwork = new Rosine_Template();
 $paperwork->load($config['print_template_'.$_GET['paperwork']]);
-
-$lang[] = $config['language'];
 $lang = $paperwork->loadLanguage($lang);
 $paperwork->assign('paperwork', $lang[$_GET['paperwork']]);
 
