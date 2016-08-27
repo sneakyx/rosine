@@ -31,7 +31,7 @@ array_walk_recursive ($_POST, 'trimhtml');
 
 include ('inc/db.inc.php');
 include ('inc/template.class.php');
-//include  ('inc/functions.inc.php'); // seems this is inserted by egroupware api
+include_once ('inc/functions.inc.php'); // seems this is inserted by egroupware api
 $result=rosine_database_query($rosine_db_query['get_config'],1);
 while ($f= $result->fetch_array()) {
 	$config[$f['config']]=$f['value'];
