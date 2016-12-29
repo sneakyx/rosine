@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2016-08-27  										    *
+ *  date of this file: 2016-12-29  										    *
  \**************************************************************************/
 
 /*
@@ -68,7 +68,6 @@ include ('inc/head.inc.php');
 * not used, maybe later on
 */
 
-//2. Dimension von $GEt und $post durchsuchen!!!!
 $tpl->load($config['print_template_'.$_GET['paperwork']]);
 $lang = $tpl->loadLanguage($lang);
 $tpl->assign('paperwork', $lang[$_GET['paperwork']]);
@@ -110,6 +109,7 @@ if ($result!=false) {
 		$rows="";
 		while($f = $result->fetch_array()) {
 			$row = new Rosine_Template();
+			$row->set_templateDir(substr($GLOBALS['egw_info']['server']['backup_dir'],0,strrpos($GLOBALS['egw_info']['server']['backup_dir'], '/')).'/rosine/templates/');
 			$row->load(str_replace('.html', '_row.html', $config['print_template_'.$_GET['paperwork']]));
 			$lang[] = $config['language'];
 			$lang = $row->loadLanguage($lang);

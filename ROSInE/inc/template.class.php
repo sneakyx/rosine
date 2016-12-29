@@ -5,7 +5,7 @@
  * changes to this file made by André Scholz                                      *
  * --------------------------------------------                                   *
  * For licence see upper webpage                                                  *
- * Date of this file: 2016-08-27                                                  *
+ * Date of this file: 2016-12-29-17-18                                            *
  \********************************************************************************/
 
 class Rosine_Template
@@ -203,7 +203,7 @@ class Rosine_Template
          * this is mainly used for docker installations
          */
         if ($this->templateDir=='') {
-        	echo 'Error(.1):Template Folder is not set!';
+        	echo 'Error(.1):Template Folder is not set!<br>';
         }//endif 
     	$this->templateName = $file;
         $this->templateFile = $this->templateDir.$file;
@@ -213,7 +213,8 @@ class Rosine_Template
             if( file_exists($this->templateFile) ) {
                 $this->template = file_get_contents($this->templateFile);
             } else {
-                $this->rosine_setup_templates($this->templateDir);
+                echo "<br>Error: Template ".$this->templateFile." is missing<br>";
+            	$this->rosine_setup_templates($this->templateDir);
             	return false;
             }
         } else {
