@@ -7,14 +7,24 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2016-08-26  										    *
+ *  date of this file: 2016-12-29  										    *
  \**************************************************************************/
-$GLOBALS['egw_info'] = array(
-		'flags' => array(
-				'currentapp' => 'rosine',
-				'noheader'   => False,
-				'nonavbar'   => True
-		));
+if (basename ($_SERVER['SCRIPT_NAME'])!= "paperwork_print.php") {
+	$GLOBALS['egw_info'] = array(
+			'flags' => array(
+					'currentapp' => 'rosine',
+					'noheader'   => False,
+					'nonavbar'   => True
+			));
+}// header for all files but not printing
+else {
+	$GLOBALS['egw_info'] = array(
+			'flags' => array(
+					'currentapp' => 'rosine',
+					'noheader'   => True,
+					'nonavbar'   => True
+			));
+}// header for paperwork_print.php
 include('../header.inc.php');
 
 $rosine_db_prefix="rosine_";
