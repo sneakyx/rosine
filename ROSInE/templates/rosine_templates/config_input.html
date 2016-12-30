@@ -1,0 +1,25 @@
+<div id="rosine_input_wrap">
+	<form action="#" method="POST">
+		<div class="rosine_input">
+			<p class="rosine_input_header">{$what_to_do}</p> 
+				<div id="rosine_input_right">	
+				<br>	<br>	<br>	
+				<br>
+				<p class="rosine_back"><a href="config.php" >{L_BACK}</a></p>			
+				</div>
+				<div id="rosine_input_left">		
+				{L_CONFIG}: <input type="text" name="config" size="40" maxlength="80" value="{$config}" > <br>
+				{L_USER_ID}: <input type="text" name="user_id" value="{$user_id}" size="4" maxlength="6"><br>
+				<br>
+				{L_VALUE}: <input type="text" name="value" value="{$value}" size="20" maxlength="80">
+				<br>
+				<br>
+				<input type="hidden" name="next_function" value="{$next_function}">				
+				<input type="submit" title="insert_config" value="{$what_to_do}">
+				</div>
+				<div style="clear:both;">
+							
+				</div>
+			</div>
+		</form>
+</div>

@@ -8,7 +8,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2016-04-30   		 								*
+ *  date of this file: 2016-12-30   		 								*
  \**************************************************************************/
 
 $lang['page_buttons']='{$backward} {$from} bis {$to} von insgesamt {$max} {$foreward}';
@@ -153,4 +153,18 @@ $lang['save']="speichern";
 $lang['select_note']="Hinweistext auswählen";
 $lang['nothing_to_show']="Nichts vorhanden!";
 $lang['tax_nr']="Steuernummer:";
+
+// for configuration
+$lang['user']="Benutzer";
+$lang['user_id']="Benutzernummer";
+$lang['value']="Wert";
+$lang['config']="Einstellung";
+$lang['everybody']="Jeder";
+$lang['no_user']="keiner";
+$lang['standard_value']="Standardwert";
+$lang['deleted']="gelöscht";
+$lang['missing']="%value% fehlt! ";
+$lang['change_config']="Konfiguration ändern";
+$lang['insert_config']="Konfiguration einfügen";
+$lang['config_changed']="Konfiguration geändert";
 ?>
