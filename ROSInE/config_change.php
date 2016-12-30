@@ -104,6 +104,7 @@ switch ($_POST['next_function']){
 		$tpl->assign("config", "");
 		$tpl->assign("value","");
 		$tpl->assign("user_id", "");
+		$tpl->assign("what_to_do", $lang['insert_config']);
 }//end case select what happens with the data
 $tpl->assign("error", $error);
 $tpl->assign("OK", $OK);
