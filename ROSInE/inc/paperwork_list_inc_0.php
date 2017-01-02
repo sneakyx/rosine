@@ -106,7 +106,7 @@ if ($result!=false) {
 				"<td>".$f['n_fn']."</td>".
 				"<td>".$f[strtoupper($_POST['paperwork']).'_AMMOUNT'].$config['currency']."</td>".
 				"<td>".$f[strtoupper($_POST['paperwork']).'_STATUS']."</td>";
-		if ($f[strtoupper($_POST['paperwork']).'_STATUS']="changed" | $f[strtoupper($_POST['paperwork']).'_STATUS']="empty"){
+		if ($f[strtoupper($_POST['paperwork']).'_STATUS']=="changed" | $f[strtoupper($_POST['paperwork']).'_STATUS']="empty"){
 					$liste.='<td>
 					<form action="#" method="post">
 						<input type="hidden" name="next_function" value="'.$next_function.'">

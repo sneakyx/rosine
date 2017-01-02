@@ -8,7 +8,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2016-12-30   		 								*
+ *  date of this file: 2017-01-02   		 								*
  \**************************************************************************/
 
 $lang['page_buttons']='{$backward} {$from} to {$to} - of {$max} {$foreward}';
@@ -153,7 +153,12 @@ $lang['save']="save";
 $lang['select_note']="select note";
 $lang['nothing_to_show']="Nothing to show!";
 $lang['tax_nr']="Tax ID:";
+$lang['invoice_number']="ID";
+$lang['offer_number']="ID";
+$lang['order_number']="ID";
+$lang['delivery_number']="ID";
 
+// for configuration
 $lang['user']="User";
 $lang['user_id']="User ID";
 $lang['value']="Value";
