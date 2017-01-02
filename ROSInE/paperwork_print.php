@@ -81,12 +81,14 @@ if ($result!=false) {
 	// now the fields can be generated
 	$row=$result->fetch_array();
 	// goes this paperwork to organisation or to private?
-	$tpl->assign('customer_name',$row['n_fn']);
+	
 	if ($row[strtoupper($_GET['paperwork']."_customer_private")]=="1") {
+		$tpl->assign('customer_name',$row['n_fn']);
 		$tpl->assign('customer_org',"");
 		$nr="two";
 	}// customer is private
 	else {
+		$tpl->assign('customer_name',$row['n_prefix'].' '.$row['n_given'].' '.$row['n_family']);
 		$tpl->assign('customer_org',$row['org_name']);
 		$nr="one";
 	}// customer is organisation
