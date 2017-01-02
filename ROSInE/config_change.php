@@ -68,8 +68,14 @@ switch ($_POST['next_function']){
 			$tpl->assign("config", $row['config'].
 					'" > <input type="hidden" name="oldconfig" value="'.$row['config'].'"');
 			//this is to have the possibiliity to change even the tax number!
-			$tpl->assign("user_id",$row['user_id'].
-					'" > <input type="hidden" name="olduser_id" value="'.$row['user_id'].'"');
+			if ($row['user_id']!="0"){
+				$tpl->assign("user_id",$row['user_id'].
+						'" > <input type="hidden" name="olduser_id" value="'.$row['user_id'].'"');
+			}// no standard value
+			else {
+				$tpl->assign("user_id",$row['user_id'].
+						'" disabled> <input type="hidden" name="user_id" value="'.$row['user_id'].'"');
+			}// standard value
 			$tpl->assign("value", $row['value']);
 			$result->close();
 		}// error in mysql 
@@ -98,7 +104,6 @@ switch ($_POST['next_function']){
 
 	default:
 		// this file is 1. loaded, no inserted articles before
-		$tpl->assign("what_to_do", $lang['insert_new_configuration']);
 		$tpl->assign( "next_function", "new" );
 		// this is to empty the values
 		$tpl->assign("config", "");
