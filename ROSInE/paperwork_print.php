@@ -144,6 +144,7 @@ if ($result!=false) {
 	}// there was no error in SQL 2
 }// there was no error  in SQL 1
 
+rosine_set_paperwork_printed($_GET['paperwork'], $_GET['paperwork_id']);
 // put page together and show it
 
 $tpl->assign('sum_all_netto', number_format($sum_all_netto,2,",","."));

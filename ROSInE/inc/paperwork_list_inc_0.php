@@ -127,8 +127,13 @@ if ($result!=false) {
 		else {
 			$liste.='<td></td><td></td>';
 		}// paperwork can be changed or deleted
-		$liste.='<td><a href="paperwork_print.php?paperwork='.$_POST['paperwork'].'&paperwork_id='.
-				$f[strtoupper($_POST['paperwork']).'_ID'].'" target="_blank">'.$lang['print'].'</a></td>';
+		$liste.='<td><a href="paperwork_print.php?paperwork='.$_POST['paperwork'].'&paperwork_id=';
+		if ($f[strtoupper($_POST['paperwork']).'_PRINTED']=="1") {
+				$liste.=$f[strtoupper($_POST['paperwork']).'_ID'].'" target="_blank">'.$lang['print_again'].'</a></td>';
+		} // had been printed
+		else {
+			$liste.=$f[strtoupper($_POST['paperwork']).'_ID'].'" target="_blank">'.$lang['print'].'</a></td>';
+		}// had not been printed
 		$liste.="</tr>";
 	}//endwhile
 	$liste.="</table>";

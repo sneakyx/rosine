@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2016-12-30  										    *
+ *  date of this file: 2017-01-02  										    *
  \**************************************************************************/
 
 // mysql to get config
@@ -67,6 +67,7 @@ $rosine_db_query['get_standard_note']='SELECT n.NOTE_TEXT as text, n.NOTE_ID as 
 $rosine_db_query['get_all_notes']='SELECT * FROM '.$rosine_db_prefix.'notes WHERE';
 $rosine_db_query['update_paperwork_note']='UPDATE '.$rosine_db_prefix.'%plural% SET %SINGULAR%_NOTE="%paperwork%" WHERE %SINGULAR%_ID=';
 $rosine_db_query['update_brutto_ammount_paperwork']='UPDATE '.$rosine_db_prefix.'%plural% SET %SINGULAR%_AMMOUNT_BRUTTO = (SELECT SUM(POSI_PRICE*(100+TAX_PERCENTAGE)/100*POSI_AMMOUNT) FROM '.$rosine_db_prefix.'%plural%_positions AS p JOIN '.$rosine_db_prefix.'taxes AS t ON p.POSI_TAX=t.TAX_ID WHERE %SINGULAR%_ID=%paperwork% GROUP BY %SINGULAR%_ID ) WHERE %SINGULAR%_ID=%paperwork%';
+$rosine_db_query['set_paperwork_printed']="UPDATE ".$rosine_db_prefix.'%plural% SET %SINGULAR%_PRINTED=1 WHERE %singular%_ID=%ID% LIMIT 1';
 
 //mysql for payments
 $rosine_db_query['get_unpaid_invoices']='SELECT e.n_fn AS name, i.INVOICE_CUSTOMER AS invoice_customer, i.INVOICE_ID AS invoice_id, i.INVOICE_AMMOUNT_BRUTTO AS invoice_ammount, sum( p.PAYMENT_AMMOUNT ) AS already_paid FROM '.$rosine_db_prefix.'invoices AS i NATURAL LEFT JOIN '.$rosine_db_prefix.'payments AS p JOIN '.$egw_db_prefix.'addressbook as e ON i.INVOICE_CUSTOMER=e.contact_id WHERE i.invoice_status = "changed" GROUP BY i.INVOICE_ID ORDER BY i.INVOICE_ID';

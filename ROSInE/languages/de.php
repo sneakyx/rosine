@@ -112,6 +112,7 @@ $lang['paperwork_deleted']="%paperwork% gelöscht ";
 $lang['posi_id']="Position";
 $lang['ready']="Fertig";
 $lang['print']="drucken";
+$lang['print_again']="nochmal drucken";
 $lang['offer_number']="Nummer";
 $lang['private']="(Privat)";
 $lang['company']="(Firma)";

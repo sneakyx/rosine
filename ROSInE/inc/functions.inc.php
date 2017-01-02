@@ -8,7 +8,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2016-08-27   		 								*
+ *  date of this file: 2017-01-02   		 								*
  \**************************************************************************/
 
 
@@ -193,6 +193,12 @@ function rosine_set_status_paperwork($singular,$ID,$status){
 	$query=str_replace("%status%",$status,$query);
 	$result=rosine_database_query($query,"257");
 }// end function set status paperwork
+
+function rosine_set_paperwork_printed($singular,$ID){
+	$query=rosine_correct_query($singular, $GLOBALS['rosine_db_query']['set_paperwork_printed']);
+	$query=str_replace("%ID%", $ID, $query);
+	$result=rosine_database_query($query,"258");
+}// end function set paperwork_printed
 
 function rosine_most_used_articles($singular, $location="",$unity=""){
 	$query=rosine_correct_query($singular, $GLOBALS['rosine_db_query']['most_used_articles']);
