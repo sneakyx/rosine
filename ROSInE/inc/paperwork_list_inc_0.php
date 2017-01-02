@@ -95,10 +95,10 @@ if ($result!=false) {
 			$next_function="delete";
 		}// no safety question
 		if ($f[strtoupper($_POST['paperwork'].'_customer_private')]=="1"){
-			$f['n_fn'].=" ".$lang['private'];
+			$f['n_fn']=substr($f['n_fn'],0,35)." ".$lang['private'];
 		}// paperwork for private address
 		else{ 
-			$f['n_fn'].=$f['org_name']." ".$lang['company'];
+			$f['n_fn']=substr($f['org_name'],0,35)." ".$lang['company'];
 		}//paperwork for company address
 		
 		$liste.="<td>".$f[strtoupper($_POST['paperwork']).'_ID']."</td>".

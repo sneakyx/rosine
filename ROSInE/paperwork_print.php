@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2016-12-29  										    *
+ *  date of this file: 2017-01-02  										    *
  \**************************************************************************/
 
 /*
@@ -23,6 +23,7 @@
  * $sum_tax = sum of all article_tax
  * $tpl = kind of paperwork (offer, order, etc)
  * $customer_name = the name that should be on the invoice as recipient
+ * $customer_org = organisation of customer
  * $customer_street = the name of customers' street
  * $customer_zip = the customers' zip (postal code)
  * $customer_city = the customers' city
@@ -80,12 +81,13 @@ if ($result!=false) {
 	// now the fields can be generated
 	$row=$result->fetch_array();
 	// goes this paperwork to organisation or to private?
+	$tpl->assign('customer_name',$row['n_fn']);
 	if ($row[strtoupper($_GET['paperwork']."_customer_private")]=="1") {
-		$tpl->assign('customer_name',$row['n_fn']);
+		$tpl->assign('customer_org',"");
 		$nr="two";
 	}// customer is private
 	else {
-		$tpl->assign('customer_name',$row['org_name']);
+		$tpl->assign('customer_org',$row['org_name']);
 		$nr="one";
 	}// customer is organisation
 	$tpl->assign('customer_street',$row['adr_one_street']); // depending on private / organisation
