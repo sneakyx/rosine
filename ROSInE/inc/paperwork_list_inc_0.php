@@ -98,7 +98,7 @@ if ($result!=false) {
 			$f['n_fn'].=" ".$lang['private'];
 		}// paperwork for private address
 		else{ 
-			$f['n_fn'].=" ".$lang['company'];
+			$f['n_fn'].=$f['org_name']." ".$lang['company'];
 		}//paperwork for company address
 		
 		$liste.="<td>".$f[strtoupper($_POST['paperwork']).'_ID']."</td>".

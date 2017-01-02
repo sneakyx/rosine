@@ -85,7 +85,7 @@ if ($result!=false) {
 		$nr="two";
 	}// customer is private
 	else {
-		$tpl->assign('customer_name',$row['n_fn']);
+		$tpl->assign('customer_name',$row['org_name']);
 		$nr="one";
 	}// customer is organisation
 	$tpl->assign('customer_street',$row['adr_one_street']); // depending on private / organisation
