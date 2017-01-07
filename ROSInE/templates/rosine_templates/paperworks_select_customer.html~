@@ -4,22 +4,28 @@
 <div id="rosine_paperwork_form_new" class="rosine_paperwork">
 	<h3>{L_CUSTOMER_LIST}</h3>
 	<p id="rosine_table_note"> {L_PAGE_BUTTONS}  </p>
-	<br>
+	
 	<form action="#" method="post">
+<b>{L_SELECT_NOTE}:</b> {$note_field}<br>	
+	<br>	
 	<input type="hidden" name="next_function" value="insert">
 	{$input_fields}
-	<br>{L_SELECT_NOTE}: {$note_field}	
+		
 	</form>
 	<br><form action="#" method="POST">
 	
 	<h3>{L_MORE_FUNCTIONS}</h3>
 	<p id="rosine_paperwork_search_customers">
-	<br><button>{L_CUSTOMERS_WITH_MOST_SALES}</button> 
-	<button>{L_CUSTOMERS_WITH_MOST_PAPERWORK}</button> 
-	<button>{L_LAST_CUSTOMERS}</button><br> oder
-	<input type="text" placeholder="{L_CUSTOMER_NAME_OR_NUMBER}" width="40" maxwidth="60" name="searchstring"> <input type="submit" name="find" value="finden">
+	<br>
+	<select name="sort1" size="1">	
+	<option value="customer_with_most_sales" {$sort[customer_with_most_sales]}>{L_CUSTOMERS_WITH_MOST_SALES}</option> 
+	<option value="customer_with_most_paperwork" {$sort[customer_with_most_paperwork]}>{L_CUSTOMERS_WITH_MOST_PAPERWORK}</option> 
+	<option value="last_customers" {$sort[last_customers]}>{L_LAST_CUSTOMERS}</option>
+	<option value="sorted_in_alphabetic_order" {$sort[sorted_in_alphabetic_order]}>{L_SORTED_IN_ALPHABETIC_ORDER}</option>
+	</select>	
 	
-	<br>oder <button>{L_BACK}</button>
+	<input type="text" placeholder="{L_CUSTOMER_NAME_OR_NUMBER}" value="{$searchstring}" width="40" maxwidth="60" name="searchstring"> 
+	<input type="submit" name="find" value="finden">
 	<input type="hidden" name="next_function" value="find_customer">
 	</form></p>
 </div>

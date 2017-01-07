@@ -7,7 +7,7 @@
 *  This program is free software; you can redistribute it and/or modify it *
 *  under the terms of the GNU General Public License as published by the   *
 *  Free Software Foundation; version 2 of the License.                     *
-*  date of this file: 2016-12-30 										   *
+*  date of this file: 2017-01-07 										   *
 \**************************************************************************/
 include ('inc/head.inc.php');
 
@@ -65,21 +65,23 @@ switch ($_POST['next_function']){
 				$rosine_db_query['get_configurations']. ' config="'.$_POST['config'].'" and user_id='.$_POST['user_id'].' LIMIT 1',102);
 		if ($result !=false) {
 			$row = $result->fetch_array();
-			$tpl->assign("config", $row['config'].
-					'" > <input type="hidden" name="oldconfig" value="'.$row['config'].'"');
+			
 			//this is to have the possibiliity to change even the tax number!
 			if ($row['user_id']!="0"){
 				$tpl->assign("user_id",$row['user_id'].
 						'" > <input type="hidden" name="olduser_id" value="'.$row['user_id'].'"');
+				$tpl->assign("config", $row['config'].
+						'" > <input type="hidden" name="oldconfig" value="'.$row['config'].'"');
 			}// no standard value
 			else {
 				$tpl->assign("user_id",$row['user_id'].
-						'" disabled> <input type="hidden" name="user_id" value="'.$row['user_id'].'"');
+						'" readonly> <input type="hidden" name="olduser_id" value="'.$row['user_id'].'"');
+				$tpl->assign("config", $row['config'].
+						'" readonly> <input type="hidden" name="oldconfig" value="'.$row['config'].'"');
 			}// standard value
 			$tpl->assign("value", $row['value']);
 			$result->close();
 		}// error in mysql 
-		
 		break;
 
 	case "changed":
@@ -109,6 +111,7 @@ switch ($_POST['next_function']){
 		$tpl->assign("config", "");
 		$tpl->assign("value","");
 		$tpl->assign("user_id", "");
+		$tpl->assign("olduser_id", $_POST['olduser_id']);
 		$tpl->assign("what_to_do", $lang['insert_config']);
 }//end case select what happens with the data
 $tpl->assign("error", $error);

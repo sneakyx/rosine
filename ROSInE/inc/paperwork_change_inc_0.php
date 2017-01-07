@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2016-08-26  										    *
+ *  date of this file: 2017-01-07  										    *
  \**************************************************************************/
 // paperwork list, add items etc
 switch ($_POST['next_function']) {
@@ -164,13 +164,57 @@ switch ($_POST['next_function']) {
 		}// no error in mysql for getting customer details
 	break;
 		
+	case "find_customer":
+		/*
+		 * just a dummy thing
+		 */ 
 	
 	default:
-		// Step 0 - show address to choose	
+		// Step 0 - show address to choose
 		$tpl->load("paperworks_select_customer.html");
 		$lang[] = $config['language'];
 		$lang = $tpl->loadLanguage($lang);
-		$result=rosine_database_query($rosine_db_query['search_customers_ammount']." 1",160);
+		
+		// search settings
+		if ($_POST['searchstring']!=''){
+			if (intval($_POST['searchstring']==0)){
+				// Name is passed
+				$where=" n_fn LIKE '%".$_POST['searchstring'].
+				"%' OR n_given LIKE '%".$_POST['searchstring'].
+				"%' OR org_name LIKE '%".$_POST['searchstring'].
+				"%' ";
+			}// Name is passed
+			else {
+				$where=" contact_id=".intval($_POST['searchstring'])." ";
+			}//number is passed
+			$tpl->assign('searchstring', $_POST['searchstring']);
+		}// customers should be searched
+		else {
+			$tpl->assign('searchstring', '');
+			$where="1"; //standard-search
+		}// search setting
+		
+		//sort setting
+		$sort_select['customer_with_most_sales']="";
+		$sort_select['customer_with_most_paperwork']="";
+		$sort_select['last_customers']="";
+		$sort_select['sorted_in_alphabetic_order']="";
+		$sort_select[$_POST['sort_list']]="selected";
+		if ($_POST['sort_list']=="" || $_POST['sort_list']=="sorted_in_alphabetic_order"){
+			$sort=" ORDER BY concat( COALESCE( n_fn , '' ) , COALESCE( org_name , '' ) , COALESCE( n_family , '' ) , COALESCE( n_given , '' ) ) ";
+			$sql_query=$rosine_db_query['get_customers']." ".$where.$sort;
+			$sort_select['sorted_in_alphabetic_order']="selected";
+		}// default sort
+		else {
+			$sql_query=str_replace("%where%", $where, $rosine_db_query[$_POST['sort_list']]." ");
+			
+		}// other sort
+		$sql_query=rosine_correct_query($_POST['paperwork'], $sql_query);
+		
+		$tpl->assign_array('sort', $sort_select);
+		
+		// get ammount of customers
+		$result=rosine_database_query($rosine_db_query['search_customers_ammount']." ".$where,160);
 		// 
 		if ($result!=false) {
 			// this is for changing pages
@@ -185,13 +229,17 @@ switch ($_POST['next_function']) {
 				$config['customers_per_page']=$max_rows-$from;
 			}//endif
 			if ($from >0) {//zurueckblaettern anzeigen wenn moeglich
-				$tpl->assign("backward", '<a href="?from='.($from-$config['customers_per_page']).'&paperwork='.$_POST['paperwork'].'">&lt;&lt;</a>');
+				$tpl->assign("backward", '<a href="?from='.($from-$config['customers_per_page']).'&paperwork='.
+						$_POST['paperwork'].'&searchstring='.$_POST['searchstring'].
+						'&sort_list='.$_POST['sort_list'].'">&lt;&lt;</a>');
 			}//endif
 			else{
 				$tpl->assign("backward", "");
 			}//endelse
 			if ($from < $max_rows-$config['customers_per_page']) { //vorblaettern anzeigen wenn notwendig
-				$tpl->assign("foreward", '<a href="?from='.($from+$config['customers_per_page']).'&paperwork='.$_POST['paperwork'].'">&gt;&gt;</a>');
+				$tpl->assign("foreward", '<a href="?from='.($from+$config['customers_per_page']).'&paperwork='.
+						$_POST['paperwork'].'&searchstring='.$_POST['searchstring'].
+						'&sort_list='.$_POST['sort_list'].'">&gt;&gt;</a>');
 			}//endif
 			else {
 				$tpl->assign("foreward", "");
@@ -201,8 +249,7 @@ switch ($_POST['next_function']) {
 			$tpl->assign("max", $max_rows);
 			//here the things for changing the pages end
 			
-			$result=rosine_database_query($rosine_db_query['get_customers']." 1 LIMIT ".$from.
-					", ".$config['customers_per_page'],165);
+			$result=rosine_database_query($sql_query." LIMIT ".$from. ", ".$config['customers_per_page'],165);
 			if ($result!=false) {
 				//no error in mysql get customers
 				$input_fields.='<input type="hidden" name="paperwork" value="'.$_POST['paperwork'].'">';
@@ -222,12 +269,11 @@ switch ($_POST['next_function']) {
 		$standard_note=rosine_get_field_database(rosine_correct_query($_POST['paperwork'], 
 				str_replace("%language%", $config['language'], 
 				$rosine_db_query['get_standard_note'])), "id",700);
-		
 		$note_field='<select name="note_text">';
 		$result=rosine_database_query($rosine_db_query['get_all_notes']." 1", 701);
 		while ($f=$result->fetch_array()){
 			$note_field.='<option value="'.$f['NOTE_TEXT'].'"';
-				if ($f['NOTE_ID']==$standard_note)
+				if ($f['NOTE_ID']==$standard_note && $f['LANGUAGE']==$config['language'])
 					$note_field.=" selected "; // for getting the standard note
 			$note_field.='>'.$f['NOTE_TEXT'].'</option>';
 		}//no error getting all notes

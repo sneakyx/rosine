@@ -68,7 +68,9 @@ $rosine_db_query['get_all_notes']='SELECT * FROM '.$rosine_db_prefix.'notes WHER
 $rosine_db_query['update_paperwork_note']='UPDATE '.$rosine_db_prefix.'%plural% SET %SINGULAR%_NOTE="%paperwork%" WHERE %SINGULAR%_ID=';
 $rosine_db_query['update_brutto_ammount_paperwork']='UPDATE '.$rosine_db_prefix.'%plural% SET %SINGULAR%_AMMOUNT_BRUTTO = (SELECT SUM(POSI_PRICE*(100+TAX_PERCENTAGE)/100*POSI_AMMOUNT) FROM '.$rosine_db_prefix.'%plural%_positions AS p JOIN '.$rosine_db_prefix.'taxes AS t ON p.POSI_TAX=t.TAX_ID WHERE %SINGULAR%_ID=%paperwork% GROUP BY %SINGULAR%_ID ) WHERE %SINGULAR%_ID=%paperwork%';
 $rosine_db_query['set_paperwork_printed']="UPDATE ".$rosine_db_prefix.'%plural% SET %SINGULAR%_PRINTED=1 WHERE %singular%_ID=%ID% LIMIT 1';
-
+$rosine_db_query['customer_with_most_paperwork']="SELECT e.* , count( r.%SINGULAR%_ID ) as anzahl FROM ".$egw_db_prefix."addressbook AS e JOIN ".$rosine_db_prefix."%plural% AS r ON e.contact_id = r.%SINGULAR%_CUSTOMER WHERE %where% GROUP BY contact_id ORDER BY count( r.%SINGULAR%_ID ) DESC "; 
+$rosine_db_query['last_customers']="SELECT r.%SINGULAR%_ID, e . * FROM ".$egw_db_prefix."addressbook AS e JOIN ".$rosine_db_prefix."%plural% AS r ON e.contact_id = r.%SINGULAR%_CUSTOMER WHERE %where% ORDER BY r.%SINGULAR%_ID DESC ";
+$rosine_db_query['customer_with_most_sales']="";
 //mysql for payments
 $rosine_db_query['get_unpaid_invoices']='SELECT e.n_fn AS name, i.INVOICE_CUSTOMER AS invoice_customer, i.INVOICE_ID AS invoice_id, i.INVOICE_AMMOUNT_BRUTTO AS invoice_ammount, sum( p.PAYMENT_AMMOUNT ) AS already_paid FROM '.$rosine_db_prefix.'invoices AS i NATURAL LEFT JOIN '.$rosine_db_prefix.'payments AS p JOIN '.$egw_db_prefix.'addressbook as e ON i.INVOICE_CUSTOMER=e.contact_id WHERE i.invoice_status = "changed" GROUP BY i.INVOICE_ID ORDER BY i.INVOICE_ID';
 $rosine_db_query['get_payment_methods']='SELECT * FROM '.$rosine_db_prefix.'payments_methods WHERE 1';

@@ -5,7 +5,7 @@
  * changes to this file made by André Scholz                                      *
  * --------------------------------------------                                   *
  * For licence see upper webpage                                                  *
- * Date of this file: 2016-12-29-17-18                                            *
+ * Date of this file: 2017-01-07                                                  *
  \********************************************************************************/
 
 class Rosine_Template
@@ -158,7 +158,7 @@ class Rosine_Template
 		$this->templateDir=$templateDir;
 	}// end function set_templateDir
     
-    private function rosine_setup_templates(){
+    public function rosine_setup_templates($renew="no"){
         echo 'This seems a new installation or this template is missing! Trying to copy it from the defaults!<br>';
         echo' Es scheint, dies ist eine neue Installation - es wird versucht, die Templates aus den Vorlagen zu kopieren!<br>';
         //copy template files
@@ -172,14 +172,19 @@ class Rosine_Template
         while ($file = readdir ($source_dir))   { // read folder
 
                 //copies only if file not exists. that way Your templates aren't overwritten!
-                if ($file!='.' && $file!='..' && !is_file($this->templateDir.$file)){
-                        echo $file.' to '.$this->templateDir.$file;
-                        if (copy('./templates/rosine_templates/'.$file,$this->templateDir.$file)){
-                        	echo ' copied!<br>';
-                        }
-                        else {
-                        	echo ' could not be copied!<br>';
-                        }
+                if ($file!='.' 
+                		&& $file!='..' 
+                		&& (
+                				!is_file($this->templateDir.$file) 
+                				|| $renew="yes"))
+                {
+	                        echo $file.' to '.$this->templateDir.$file;
+	                        if (copy('./templates/rosine_templates/'.$file,$this->templateDir.$file)){
+	                        	echo ' copied!<br>';
+	                        }
+	                        else {
+	                        	echo ' could not be copied!<br>';
+	                        }
                 }//endif
     			
         }//endwhile
@@ -207,8 +212,8 @@ class Rosine_Template
         }//endif 
     	$this->templateName = $file;
         $this->templateFile = $this->templateDir.$file;
-
-        // Wenn ein Dateiname übergeben wurde, versuchen, die Datei zu öffnen
+        
+        // if a file name is offered, try to get the file 
         if( !empty($this->templateFile) ) {
             if( file_exists($this->templateFile) ) {
                 $this->template = file_get_contents($this->templateFile);
