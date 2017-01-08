@@ -8,7 +8,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2017-01-02   		 								*
+ *  date of this file: 2017-01-08   		 								*
  \**************************************************************************/
 
 
@@ -201,11 +201,10 @@ function rosine_set_paperwork_printed($singular,$ID){
 }// end function set paperwork_printed
 
 function rosine_most_used_articles($singular, $location="",$unity=""){
-	$query=rosine_correct_query($singular, $GLOBALS['rosine_db_query']['most_used_articles']);
+	$query=rosine_correct_query($singular, $GLOBALS['rosine_db_query']['most_used_articles']. $GLOBALS['config']['favorite_articles']);
 	if ($location!=0) // when there is a limitation by stocknr
 		$query=str_replace("WHERE 1", "WHERE a.ART_STOCKNR=".$location, $query);		
 	$result=rosine_database_query($query,700);
-	
 	$i=$GLOBALS['config']['items_per_page'];
 	if ($result!=false) {
 		while ($f= $result->fetch_array(MYSQLI_ASSOC)){
@@ -214,7 +213,7 @@ function rosine_most_used_articles($singular, $location="",$unity=""){
 			if ($unity!="")
 				$liste.='<input class="rosine_input_ammount" style="width:40px;" name="unity['.$i.']" type="text" width="5" maxwidth="10" 
 						value="'.$f['art_unit'].'">';
-			$liste.=$f['art_name'].'('.$f['art_number'].')&nbsp;&nbsp;&nbsp;&nbsp;</div> ';
+			$liste.=substr($f['art_name'],0,10).'('.$f['art_number'].')&nbsp;&nbsp;&nbsp;&nbsp;</div> ';
 			$i+=1;
 		}//add rows to the return
 		$result->close();

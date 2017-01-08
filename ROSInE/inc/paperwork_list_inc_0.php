@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2017-01-02  										    *
+ *  date of this file: 2017-01-07  										    *
  \**************************************************************************/
 
 $tpl->load("paperworklist.html");
@@ -106,7 +106,7 @@ if ($result!=false) {
 				"<td>".$f['n_fn']."</td>".
 				"<td>".$f[strtoupper($_POST['paperwork']).'_AMMOUNT'].$config['currency']."</td>".
 				"<td>".$f[strtoupper($_POST['paperwork']).'_STATUS']."</td>";
-		if ($f[strtoupper($_POST['paperwork']).'_STATUS']=="changed" | $f[strtoupper($_POST['paperwork']).'_STATUS']="empty"){
+		if ($f[strtoupper($_POST['paperwork']).'_STATUS']=="changed" | $f[strtoupper($_POST['paperwork']).'_STATUS']=="empty"){
 					$liste.='<td>
 					<form action="#" method="post">
 						<input type="hidden" name="next_function" value="'.$next_function.'">
