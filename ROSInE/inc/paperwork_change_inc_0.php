@@ -109,7 +109,7 @@ switch ($_POST['next_function']) {
 		for ($i=$config['items_per_page'];$i<($config['items_per_page']+$config['favorite_articles']);$i++){
 			//add favorite articles
 			if ($_POST['ammount'][$i]>0){
-				rosine_paperwork_add_article($_POST['paperwork'], $_POST['ammount'][$i], $_POST['paperwork_id'],' ART_NUMBER = '.substr($_POST['articles'][$i],1));
+				rosine_paperwork_add_article($_POST['paperwork'], $_POST['ammount'][$i], $_POST['paperwork_id'],' ART_NUMBER = "'.substr($_POST['articles'][$i].'"',1));
 			}//endif ammount field is not empty
 		}// endfor add favorite articles
 		/*
