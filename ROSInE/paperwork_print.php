@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2017-01-02  										    *
+ *  date of this file: 2017-01-13  										    *
  \**************************************************************************/
 
 /*
@@ -105,7 +105,7 @@ if ($result!=false) {
 	// now get the items
 	$result=rosine_database_query(rosine_correct_query($_GET['paperwork'], 
 			$rosine_db_query['get_articles_from_paperwork_with_all']." %singular%_ID=".
-			$_GET['paperwork_id']),102);
+			$_GET['paperwork_id'].' ORDER BY POSI_ID ASC'),102);
 	if ($result!=false) {
 		$sum_all_netto=0;
 		$sum_all_brutto=0;

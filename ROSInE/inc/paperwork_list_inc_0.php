@@ -77,23 +77,28 @@ if ($result!=false) {
 			<th>'.$lang['customer'].'</th>
 			<th>'.$lang['money'].'</th>
 			<th>'.$lang['status'].'</th>		
-			<th>'.$lang['delete'].'</th>
 			<th>'.$lang['change'].'</th>
 			<th>'.$lang['print'].'</th>		
 		</tr>';
 
 	while($f = $result->fetch_array()) {
 		$liste.="<tr>";
-		if ($_POST['next_function']=="delete" & $_POST['number']==$f[strtoupper($_POST['paperwork']).'_ID']){
-			//Sicherheitsabfrage!
-			$next_function="really_delete";
-			$delete=$lang['really_delete'];
-		}// endif safety question
+		if ($max_rows!=$f[strtoupper($_POST['paperwork']).'_ID']&& $_POST['paperwork']=='invoice'){
+			$delete="";
+			$next_function="";
+		}// invoice and not last number, so cannot be deleted
 		else {
-			//Normale Funktion
-			$delete=$lang['delete'];
-			$next_function="delete";
-		}// no safety question
+			if ($_POST['next_function']=="delete" & $_POST['number']==$f[strtoupper($_POST['paperwork']).'_ID']){
+				//Sicherheitsabfrage!
+				$next_function="really_delete";
+				$delete=$lang['really_delete'];
+			}// endif safety question
+			else {
+				//Normale Funktion
+				$delete=$lang['delete'];
+				$next_function="delete";
+			}// no safety question
+		}// not invoice or invoice and last number, so can be deleted
 		if ($f[strtoupper($_POST['paperwork'].'_customer_private')]=="1"){
 			$f['n_fn']=substr($f['n_fn'],0,35)." ".$lang['private'];
 		}// paperwork for private address
@@ -109,12 +114,13 @@ if ($result!=false) {
 		if ($f[strtoupper($_POST['paperwork']).'_STATUS']=="changed" | $f[strtoupper($_POST['paperwork']).'_STATUS']=="empty"){
 					$liste.='<td>
 					<form action="#" method="post">
-						<input type="hidden" name="next_function" value="'.$next_function.'">
-						<input type="submit" title="'.$delete.'" value="'.$delete.'">
-						<input type="hidden" name="number" value="'.$f[strtoupper($_POST['paperwork']).'_ID'].'">
+						<input type="hidden" name="next_function" value="'.$next_function.'">';
+					if ($delete!=""){
+						$liste.='<input type="submit" title="'.$delete.'" value="'.$delete.'">';
+					}// not invoice or last type, so can be deleted
+					$liste.='<input type="hidden" name="number" value="'.$f[strtoupper($_POST['paperwork']).'_ID'].'">
 					</form>
-					</td>
-					<td>
+					
 					<form action="paperwork_change.php" method="post">
 						<input type="hidden" name="paperwork" value="'.$_POST['paperwork'].'">
 						<input type="hidden" name="next_function" value="overview">
@@ -125,7 +131,7 @@ if ($result!=false) {
 			</td>';
 		}// if paperwork should be able to be deleted or changed
 		else {
-			$liste.='<td></td><td></td>';
+			$liste.='<td></td>';
 		}// paperwork can be changed or deleted
 		$liste.='<td><a href="paperwork_print.php?paperwork='.$_POST['paperwork'].'&paperwork_id=';
 		if ($f[strtoupper($_POST['paperwork']).'_PRINTED']=="1") {

@@ -5,7 +5,7 @@
  * changes to this file made by André Scholz                                      *
  * --------------------------------------------                                   *
  * For licence see upper webpage                                                  *
- * Date of this file: 2017-01-07                                                  *
+ * Date of this file: 2017-01-13                                                  *
  \********************************************************************************/
 
 class Rosine_Template
@@ -176,14 +176,15 @@ class Rosine_Template
                 		&& $file!='..' 
                 		&& (
                 				!is_file($this->templateDir.$file) 
-                				|| $renew="yes"))
+       //         				|| $renew="yes")) //there is an error in this line
+       ))
                 {
 	                        echo $file.' to '.$this->templateDir.$file;
 	                        if (copy('./templates/rosine_templates/'.$file,$this->templateDir.$file)){
-	                        	echo ' copied!<br>';
+	                        	echo ' <b>copied!</b><br>';
 	                        }
 	                        else {
-	                        	echo ' could not be copied!<br>';
+	                        	echo ' <b>could not be copied!</b><br>';
 	                        }
                 }//endif
     			

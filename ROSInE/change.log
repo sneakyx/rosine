@@ -34,10 +34,22 @@ automatic installation (egroupware added)
 2016-08-27
 changed everything that it works with egroupware 16.1
 
+2016-12-20 to 2017-01-08
+many changed added:
+- customers search added
+- many errors deleted
+- option to update all templates
+
+2017-01-12
+added: invoices not to be deleted (not allowed in germany)
+
+2017-01-23
+corrected: printing right order
+corrected: next/last page articles didn't work
  
 to do list:
 - different colors for offer, order, invoice and delivery note
-- invoices not to be deleted (not allowed in germany)
+- 
 - icons for printed, delivered and so on...
 - javascript insert payments ammount into field
 
