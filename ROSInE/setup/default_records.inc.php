@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2017-01-08  										    *
+ *  date of this file: 2017-01-14  										    *
  \**************************************************************************/
 $oProc->query("
 			INSERT IGNORE INTO `rosine_config` (`config`, `user_id`, `value`) VALUES
@@ -52,7 +52,11 @@ $oProc->query("
 			('print_template_invoice', 0, 'print_paperwork.html'),
 			('print_template_offer', 0, 'print_paperwork.html'),
 			('print_template_order', 0, 'print_paperwork.html'),
-			('overwrite_templates',0,'no')
+			('overwrite_templates',0,'no'),
+			('insert_delivery_into_paperwork', '0', '100'), 
+			('insert_offer_into_paperwork', '0', '100'),
+			('insert_order_into_paperwork', '0', '100'), 
+			('insert_invoice_into_paperwork', '0', '100')
 		");
 $oProc->query("
 			INSERT IGNORE INTO `rosine_locations` (`LOC_ID`, `LOC_NAME`, `LOC_NOTE`, `GENERATED`, `CHANGED`) VALUES
@@ -74,7 +78,9 @@ $oProc->query("
 			(5, 'de.php', 'Angebot ist 28 Tage gültig.'),
 			(6, 'de.php', 'Lieferung innerhalb 7 Tagen.'),
 			(7, 'de.php', 'Lieferung frei Haus.'),
-			(1,'en.php','free shipment')	
+			(1,'en.php','free shipment'),
+			(100, 'de.php', '%SINGULAR% %ID% vom %date%:'), 
+			(100, 'en.php', '%SINGULAR% %ID% from %date%:')
 		");
 $oProc->query("
 	INSERT IGNORE INTO `rosine_payments_methods` (`METH_ID`, `METH_NAME`, `METH_NOTE`, `GENERATED`, `CHANGED`) VALUES

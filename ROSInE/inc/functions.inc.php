@@ -8,7 +8,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2017-01-08   		 								*
+ *  date of this file: 2017-01-14   		 								*
  \**************************************************************************/
 
 
@@ -92,9 +92,9 @@ function rosine_add_complete_paperwork($singular1,$ID1,$singular2,$ID2,$complete
 	// this adds a complete paperwork into another paperwork eg an offer into an order
 	/*
 	 * $singular1 = from which paperwork comes the data
-	 * $paperwork_ID1 = which ID has the source paperwork 
+	 * $ID1 = which ID has the source paperwork 
 	 * $singular2 = to which paperwork goes the data
-	 * $paperwork_ID2 = which ID has the destination paperwork
+	 * $ID2 = which ID has the destination paperwork
 	 * 
 	 */
 	$plural1=rosine_get_plural($singular1);
@@ -107,12 +107,17 @@ function rosine_add_complete_paperwork($singular1,$ID1,$singular2,$ID2,$complete
 		$query=str_replace("%infotext%", "", $query);
 	}// if a paperwork is just copied - not yet implemented
 	else {
-		$query=str_replace("%infotext%", $GLOBALS['lang']['from_paperwork'], $query);
+		$infotext=rosine_get_field_database($GLOBALS['rosine_db_query']['get_all_notes'].
+				' NOTE_ID='.$GLOBALS['config']['insert_'.$singular1.'_into_paperwork'], 'NOTE_TEXT' ,800);
+		$query=str_replace("%infotext%", $infotext, $query);
 	}// paperwork is inserted into another - normal use of this function
 	$query=str_replace("%paperwork%", $GLOBALS['lang'][$singular1], $query);
 	$query=str_replace("%ID1%", $ID1, $query);
 	$query=str_replace("%ID2%", $ID2, $query);
-	
+	$query=str_replace("%date%",rosine_get_field_database(rosine_correct_query($singular1, 
+			$GLOBALS['rosine_db_query']['get_paperworks'].' '.strtoupper($singular1).
+			'_ID='.$ID1), strtoupper($singular1).'_DATE',801),$query);
+	$query=str_replace("%SINGULAR1%",$GLOBALS['lang'][$singular1],$query);
 	$query0=str_replace("%singular%", $singular2, $GLOBALS['rosine_db_query']['get_highest_number']);
 	$query0=str_replace("%plural%",$plural2,$query0);
 	$query0=str_replace("%1%", $singular2."_id=".$ID2, $query0);
