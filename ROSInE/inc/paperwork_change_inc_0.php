@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2017-01-07  										    *
+ *  date of this file: 2017-01-16  										    *
  \**************************************************************************/
 // paperwork list, add items etc
 switch ($_POST['next_function']) {
@@ -199,6 +199,10 @@ switch ($_POST['next_function']) {
 		$sort_select['customer_with_most_paperwork']="";
 		$sort_select['last_customers']="";
 		$sort_select['sorted_in_alphabetic_order']="";
+		$sort_select['customers_with_open_offer']="";
+		$sort_select['customers_with_open_order']="";
+		$sort_select['customers_with_open_delivery']="";
+		$sort_select['customers_with_open_invoice']="";
 		$sort_select[$_POST['sort_list']]="selected";
 		if ($_POST['sort_list']=="" || $_POST['sort_list']=="sorted_in_alphabetic_order"){
 			$sort=" ORDER BY concat( COALESCE( n_fn , '' ) , COALESCE( org_name , '' ) , COALESCE( n_family , '' ) , COALESCE( n_given , '' ) ) ";
@@ -206,9 +210,17 @@ switch ($_POST['next_function']) {
 			$sort_select['sorted_in_alphabetic_order']="selected";
 		}// default sort
 		else {
-			$sql_query=str_replace("%where%", $where, $rosine_db_query[$_POST['sort_list']]." ");
+			if (substr($_POST['sort_list'], 15,4)=="open") {
+				$sql_query=str_replace("%where%", $where, 
+						rosine_correct_query(
+								substr($_POST['sort_list'],20), 
+								$rosine_db_query[substr($_POST['sort_list'],0,20).'paperwork']." ")); // this is to correct the database query
+			}// only open paperwork
+			else{
+				$sql_query=str_replace("%where%", $where, $rosine_db_query[$_POST['sort_list']]." ");
+			}// just other sort
 			
-		}// other sort
+		}// other sort or open paperwork
 		$sql_query=rosine_correct_query($_POST['paperwork'], $sql_query);
 		
 		$tpl->assign_array('sort', $sort_select);

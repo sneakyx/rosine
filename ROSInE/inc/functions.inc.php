@@ -8,7 +8,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2017-01-14   		 								*
+ *  date of this file: 2017-01-15   		 								*
  \**************************************************************************/
 
 
@@ -131,7 +131,7 @@ function rosine_add_complete_paperwork($singular1,$ID1,$singular2,$ID2,$complete
 	
 	array_walk($query, 'rosine_database_query');
 	if ($complete){
-		rosine_set_status_paperwork($singular1,$ID1,$singular2." ".$ID2);
+		rosine_set_status_paperwork($singular1,$ID1,substr($singular2,0,2)." ".$ID2);
 	}// if the complete paperwork is added, we have to set the new status
 	
 }//endfunc add complete paperwork 

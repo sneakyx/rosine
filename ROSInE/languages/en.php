@@ -8,7 +8,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2017-01-07   		 								*
+ *  date of this file: 2017-01-16   		 								*
  \**************************************************************************/
 
 $lang['page_buttons']='{$backward} {$from} to {$to} - of {$max} {$foreward}';
@@ -159,6 +159,10 @@ $lang['invoice_number']="ID";
 $lang['offer_number']="ID";
 $lang['order_number']="ID";
 $lang['delivery_number']="ID";
+$lang['all_customers_with_open_offers']="All customers with open offers";
+$lang['all_customers_with_open_orders']="All customers with open orders";
+$lang['all_customers_with_open_deliveries']="Alle customers with open deliveries";
+$lang['all_customers_with_open_invoices']="All customers with open invoices";
 
 // for configuration
 $lang['user']="User";

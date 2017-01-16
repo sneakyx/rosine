@@ -50,6 +50,13 @@ corrected: next/last page articles didn't work
 2017-01-14
 updated: css file for printing paperwork
 added: if paperwork is inserted into paperwork, you can insert a special text for it
+
+2017-01-15
+corrected: if full paperwork is inserted in another paperwork, it is set to the new number
+
+2017-01-16
+corrected: update templates
+added: new search field - customers with unfinished paperwork
  
 to do list:
 - correct update function

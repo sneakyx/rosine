@@ -5,7 +5,7 @@
  * changes to this file made by André Scholz                                      *
  * --------------------------------------------                                   *
  * For licence see upper webpage                                                  *
- * Date of this file: 2017-01-13                                                  *
+ * Date of this file: 2017-01-16                                                  *
  \********************************************************************************/
 
 class Rosine_Template
@@ -173,24 +173,35 @@ class Rosine_Template
 
                 //copies only if file not exists. that way Your templates aren't overwritten!
                 if ($file!='.' 
-                		&& $file!='..' 
-                		&& (
-                				!is_file($this->templateDir.$file) 
-       //         				|| $renew="yes")) //there is an error in this line
-       ))
-                {
-	                        echo $file.' to '.$this->templateDir.$file;
-	                        if (copy('./templates/rosine_templates/'.$file,$this->templateDir.$file)){
-	                        	echo ' <b>copied!</b><br>';
-	                        }
-	                        else {
-	                        	echo ' <b>could not be copied!</b><br>';
-	                        }
-                }//endif
-    			
+                		&& $file!='..' ){ // if file and not "." ".."
+                	
+	                if ( is_file($this->templateDir.$file) && $renew=="yes") //if file exists and should be updated
+	                {
+		                        echo $file.' to '.$this->templateDir.$file;
+		                        if (
+		                        		copy ($this->templateDir.$file,$this->templateDir.date("Ymdhis")."-".$file) &&
+		                        		copy('./templates/rosine_templates/'.$file,$this->templateDir.$file)){
+		                        	echo ' <b>copied - updated!</b><br>';
+		                        
+		                        }// could be copied
+		                        else {
+		                        	echo ' <b>(update) could not be copied!</b><br>';
+		                        }//couldn't be copied
+	                }//file exists and should be updated
+	                elseif (!is_file($this->templateDir.$file)){
+	                	if (copy('./templates/rosine_templates/'.$file,$this->templateDir.$file)){
+	                				echo ' <b>copied - new file!</b><br>';
+	                	
+	                	}// could be copied
+	                	else {
+	                		echo ' <b>(new file) could not be copied!</b><br>';
+	                	}//couldn't be copied
+	                }//file doesn'T exist
+                }//if file and not "." or ".."
         }//endwhile
+        echo "Ich bin hier!";
         closedir($source_dir);
-    }
+    }// end function rosine_setup_templates
 	
     
     /**
