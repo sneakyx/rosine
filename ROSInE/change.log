@@ -57,6 +57,9 @@ corrected: if full paperwork is inserted in another paperwork, it is set to the 
 2017-01-16
 corrected: update templates
 added: new search field - customers with unfinished paperwork
+
+2017-01-17
+updated: css file for whole program - for better usability
  
 to do list:
 - correct update function
