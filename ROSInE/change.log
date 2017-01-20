@@ -23,6 +23,7 @@ added: you can input numbers now as 5.75 and as 5,75 or 1047 as 1 047 (non-engli
 corrected: ammount of customers in paperwork search is now working
 changed: better view of customers when selecting customers
 
+
 2017-01-12 to 2017-01-17 
 added: invoices not to be deleted (not allowed in germany)
 corrected: printing right order

@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2017-01-20  										    *
+ *  date of this file: 2017-01-20  									    *
  \**************************************************************************/
 // paperwork list, add items etc
 switch ($_POST['next_function']) {
