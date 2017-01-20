@@ -1,66 +1,5 @@
 change.log
 
-
-V 0.0.1
-first version for Testing github
-
-2016-01-10
-articles work
-
-2016-01-12
-Tax List, add, delete, etc works
-
-
-2016-01-12 to 2016-04-16 
-everything works except printing
-
-2016-04 to 2016-05 
-printing works
-adding specialised versions for printing und working with paperwork
-
-2016-05-17
-minor change: lists to be sorted descending
-- payments to work with brutto ammount
-
-2016-05-18
-specialised version of delivery notes for changing ammounts and units
-
-2016-05-19
-eliminate errors inpaperwork_change_inc_1 !
-
-2016-08-24
-automatic installation (egroupware added)
-
-2016-08-27
-changed everything that it works with egroupware 16.1
-
-2016-12-20 to 2017-01-08
-many changed added:
-- customers search added
-- many errors deleted
-- option to update all templates
-
-2017-01-12
-added: invoices not to be deleted (not allowed in germany)
-
-2017-01-13
-corrected: printing right order
-corrected: next/last page articles didn't work
-
-2017-01-14
-updated: css file for printing paperwork
-added: if paperwork is inserted into paperwork, you can insert a special text for it
-
-2017-01-15
-corrected: if full paperwork is inserted in another paperwork, it is set to the new number
-
-2017-01-16
-corrected: update templates
-added: new search field - customers with unfinished paperwork
-
-2017-01-17
-updated: css file for whole program - for better usability
- 
 to do list:
 - correct update function
 - list for open delivery notes
@@ -74,3 +13,56 @@ to do list:
 - GOBD
 
 suggestions? Write me an E-Mail: info@rothaarsystems.de
+
+------------------------------------------------------------------------
+
+
+2017-01-19 to 2017-01-20
+minor errors deleted
+added: you can input numbers now as 5.75 and as 5,75 or 1047 as 1 047 (non-english writing)
+corrected: ammount of customers in paperwork search is now working
+changed: better view of customers when selecting customers
+
+2017-01-12 to 2017-01-17 
+added: invoices not to be deleted (not allowed in germany)
+corrected: printing right order
+corrected: next/last page articles didn't work
+updated: css file for printing paperwork
+added: if paperwork is inserted into paperwork, you can insert a special text for it
+corrected: if full paperwork is inserted in another paperwork, it is set to the new number
+corrected: update templates
+added: new search field - customers with unfinished paperwork
+
+2016-12-20 to 2017-01-08
+many changed added:
+- customers search added
+- many errors deleted
+- option to update all templates
+
+2016-08-27
+changed everything that it works with egroupware 16.1
+
+2016-08-24
+automatic installation (egroupware added)
+
+2016-05-17 to 2016-05-19
+minor change: lists to be sorted descending
+- payments to work with brutto ammount
+specialised version of delivery notes for changing ammounts and units
+eliminate errors inpaperwork_change_inc_1 !
+
+2016-04 to 2016-05 
+printing works
+adding specialised versions for printing und working with paperwork
+
+2016-01-12 to 2016-04-16 
+everything works except printing
+
+2016-01-10 to 2016-01-12
+articles work
+Tax List, add, delete, etc works
+
+V 0.0.1
+first version for Testing github
+
+ 

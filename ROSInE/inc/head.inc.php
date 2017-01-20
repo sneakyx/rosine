@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2017-01-07  										    *
+ *  date of this file: 2017-01-20  										    *
  \**************************************************************************/
 if (basename ($_SERVER['SCRIPT_NAME'])!= "paperwork_print.php") {
 	$GLOBALS['egw_info'] = array(
@@ -34,9 +34,14 @@ $error="";
 $OK="";
 
 function trimhtml (&$value, $key) {
-	$value = trim(htmlspecialchars($value, ENT_QUOTES));
+	$value = trim(htmlspecialchars($value, ENT_QUOTES)); // just to delete strange, dangerous stuff from GET and POST
 	//echo $key.":".$value."<br>"; // this line is just for debugging
-}
+	$newvalue=str_replace(' ','',str_replace(",",".",$value));
+	if (is_numeric($newvalue)){
+		$value=floatval($newvalue);
+	}// change kommas in numbers to dot
+	
+}// function trimhtml
 array_walk_recursive($_GET, 'trimhtml');
 array_walk_recursive ($_POST, 'trimhtml');
 $_POST=(array_merge($_POST, $_GET));

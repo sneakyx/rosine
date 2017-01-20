@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2017-01-16  										    *
+ *  date of this file: 2017-01-20  										    *
  \**************************************************************************/
 // paperwork list, add items etc
 switch ($_POST['next_function']) {
@@ -208,6 +208,8 @@ switch ($_POST['next_function']) {
 			$sort=" ORDER BY concat( COALESCE( n_fn , '' ) , COALESCE( org_name , '' ) , COALESCE( n_family , '' ) , COALESCE( n_given , '' ) ) ";
 			$sql_query=$rosine_db_query['get_customers']." ".$where.$sort;
 			$sort_select['sorted_in_alphabetic_order']="selected";
+			$sql_query=rosine_correct_query($_POST['paperwork'], $sql_query);
+			$ammount_query=str_replace('SELECT * ', 'SELECT COUNT(*) ', $sql_query);
 		}// default sort
 		else {
 			if (substr($_POST['sort_list'], 15,4)=="open") {
@@ -219,14 +221,14 @@ switch ($_POST['next_function']) {
 			else{
 				$sql_query=str_replace("%where%", $where, $rosine_db_query[$_POST['sort_list']]." ");
 			}// just other sort
-			
+			$sql_query=rosine_correct_query($_POST['paperwork'], $sql_query);
+			$ammount_query=str_replace('SELECT ', 'SELECT COUNT(*), ', $sql_query);
 		}// other sort or open paperwork
-		$sql_query=rosine_correct_query($_POST['paperwork'], $sql_query);
 		
 		$tpl->assign_array('sort', $sort_select);
 		
 		// get ammount of customers
-		$result=rosine_database_query($rosine_db_query['search_customers_ammount']." ".$where,160);
+		$result=rosine_database_query($ammount_query,160);
 		// 
 		if ($result!=false) {
 			// this is for changing pages
@@ -268,10 +270,11 @@ switch ($_POST['next_function']) {
 				while($f = $result->fetch_array()) {
 					if ($f['n_family']!="")
 							$input_fields.='<button name="contact_id" value="P-'.$f["contact_id"].
-							'" type="submit" >'.$f['n_fn'].' - '.$f['adr_two_locality'].' ['.$f['contact_id'].']</button>';
+							'" type="submit" >'.$f['n_fn'].' - '.$f['adr_two_locality'].' ['.$f['contact_id'].']'.$lang['private'].'</button>';
 					if ($f['org_name']!="")
 						$input_fields.='<button name="contact_id" value="F-'.$f["contact_id"].
-						'" type="submit" >'.$f['org_name'].' - '.$f['adr_one_locality'].' ['.$f['contact_id'].']</button>';
+						'" type="submit" >'.$f['org_name'].' - '.$f['adr_one_locality'].' ['.$f['contact_id'].']'.$lang['company'].'</button>';
+					$input_fields.="&nbsp;|&nbsp; ";
 				}//endwhile
 				$result->close();
 			} //endelse no error in mysql search for customers

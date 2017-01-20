@@ -8,7 +8,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2017-01-16   		 								*
+ *  date of this file: 2017-01-20   		 								*
  \**************************************************************************/
 
 $lang['page_buttons']='{$backward} {$from} bis {$to} von insgesamt {$max} {$foreward}';
@@ -127,10 +127,10 @@ $lang['plus']="zzgl.";
 $lang['item_changed']="Position geändert!";
 $lang['customer_list']="Kundenliste";
 $lang['more_functions']="weitere Funktionen";
-$lang['customers_with_most_sales']="Kunden mit den meisten Umsatz (nor working yet!)";
-$lang['customers_with_most_paperwork']='Kunden mit den meisten {$paperwork}';
-$lang['sorted_in_alphabetic_order']='alphabetisch sortiert';
-$lang['last_customers']="Die letzen Kunden";
+$lang['customers_with_most_sales']="Alle Kunden sortiert nach Umsatz (nor working yet!)";
+$lang['customers_with_most_paperwork']='Alle Kunden sortiert nach den meisten {$paperwork}';
+$lang['sorted_in_alphabetic_order']='Alle Kunden alphabetisch sortiert';
+$lang['last_customers']="Die zuletzt verwendeten Kunden";
 $lang['customer_name_or_number']="Kundenname oder Nummer";
 $lang['choose_invoice_for_payment']="Zahlung eintragen";
 $lang['insert_payment']="Zahlung einfügen";
@@ -159,10 +159,10 @@ $lang['invoice_number']="Nummer";
 $lang['offer_number']="Nummer";
 $lang['order_number']="Nummer";
 $lang['delivery_number']="Nummer";
-$lang['all_customers_with_open_offers']="Alle Kunden mit offenen Angeboten";
-$lang['all_customers_with_open_orders']="Alle Kunden mit offenen Bestellungen";
-$lang['all_customers_with_open_deliveries']="Alle Kunden mit offenen Lieferungen";
-$lang['all_customers_with_open_invoices']="Alle Kunden mit offenen Rechnungen";
+$lang['all_customers_with_open_offers']="Nur Kunden mit offenen Angeboten";
+$lang['all_customers_with_open_orders']="Nur Kunden mit offenen Bestellungen";
+$lang['all_customers_with_open_deliveries']="Nur Kunden mit offenen Lieferungen";
+$lang['all_customers_with_open_invoices']="Nur Kunden mit offenen Rechnungen";
 
 // for configuration
 $lang['user']="Benutzer";
