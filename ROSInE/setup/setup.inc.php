@@ -7,13 +7,13 @@
 	*  This program is free software; you can redistribute it and/or modify it *
 	*  under the terms of the GNU General Public License as published by the   *
 	*  Free Software Foundation; version 2 of the License.                     *
-	*  Date of this file: 2016-08-27                                           *
+	*  Date of this file: 2017-01-21                                           *
 	\**************************************************************************/
 	$rosine_db_prefix="rosine_";
 
 	$setup_info['rosine']['name']	= 'rosine';
 	$setup_info['rosine']['title']	= 'ROSInE';
-	$setup_info['rosine']['version']	= '2016-08-27';
+	$setup_info['rosine']['version']	= '2017-01-21';
 	$setup_info['rosine']['app_order']	= 33;
 	$setup_info['rosine']['enable']    = 1;
 	

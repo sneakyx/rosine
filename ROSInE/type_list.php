@@ -7,7 +7,7 @@
 	*  This program is free software; you can redistribute it and/or modify it *
 	*  under the terms of the GNU General Public License as published by the   *
 	*  Free Software Foundation; version 2 of the License.                     *
-	*  date of this file: 2017-01-13  										   *
+	*  date of this file: 2017-01-20  										   *
 	\**************************************************************************/
 include ('inc/head.inc.php');
 if ($_GET['type']!="") {
@@ -57,14 +57,14 @@ if ($max_rows<$from+$config['items_per_page']) {
 }//endif 
 $result=rosine_database_query($rosine_db_query['get_'.$_POST['type'].'s']."1 LIMIT $from,".$config['items_per_page'] , 103);
 if ($from >0) {//if there's apossibility to go back
-	$tpl->assign("backward", '<a href="?'.$_POST['type'].'&from='.($from-$config['items_per_page']).'">&lt;&lt;</a>');
+	$tpl->assign("backward", '<a href="?type='.$_POST['type'].'&from='.($from-$config['items_per_page']).'">&lt;&lt;</a>');
 }//endif
 else {
 	$tpl->assign("backward", "");
 }//endelse
 
 if ($from < $max_rows-$config['items_per_page']){ //if you can click next
-	$tpl->assign("foreward", '<a href="?'.$_POST['type'].'&from='.($from+$config['items_per_page']).'">&gt;&gt;</a>');
+	$tpl->assign("foreward", '<a href="?type='.$_POST['type'].'&from='.($from+$config['items_per_page']).'">&gt;&gt;</a>');
 }//endif
 else {
 	$tpl->assign("foreward", "");

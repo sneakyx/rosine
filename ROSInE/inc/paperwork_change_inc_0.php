@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2017-01-20  									    *
+ *  date of this file: 2017-01-21  										    *
  \**************************************************************************/
 // paperwork list, add items etc
 switch ($_POST['next_function']) {
@@ -153,7 +153,13 @@ switch ($_POST['next_function']) {
 			$liste=rosine_create_items_list($_POST['paperwork'], $_POST['paperwork_id']);
 			$tpl->assign("paperwork_list", $liste);
 			$tpl->assign("next_function", '<input type="hidden" name="next_function" value="change">');
-			$tpl->assign("customer", $customer_details['n_fn']);
+			if ($customer_private==1) {
+				$tpl->assign("customer", $customer_details['n_fn']);
+			}// paperwork goes to private address
+			else {
+				$tpl->assign("customer", $customer_details['org_name']);
+			}//paperwork goes to company address
+			
 			$tpl->assign("ID", $customer_details['contact_id']);
 			$tpl->assign("note_text", rosine_get_field_database(rosine_correct_query($_POST['paperwork'], 
 					$rosine_db_query['get_paperworks'].'%SINGULAR%_ID='.
@@ -268,6 +274,14 @@ switch ($_POST['next_function']) {
 				//no error in mysql get customers
 				$input_fields.='<input type="hidden" name="paperwork" value="'.$_POST['paperwork'].'">';
 				while($f = $result->fetch_array()) {
+					if (substr($_POST['sort_list'], 15,4)=="open") {
+						if ($f['private']=="1"){
+							$f['org_name']="";
+						}// paperwork is for private address
+						else {
+							$f['n_family']="";
+						}// paperwork is for company address
+					}//if paperwork list is selected
 					if ($f['n_family']!="")
 							$input_fields.='<button name="contact_id" value="P-'.$f["contact_id"].
 							'" type="submit" >'.$f['n_fn'].' - '.$f['adr_two_locality'].' ['.$f['contact_id'].']'.$lang['private'].'</button>';

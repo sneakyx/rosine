@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2017-01-02  										    *
+ *  date of this file: 2017-01-20  										    *
  \**************************************************************************/
 
 // mysql to get config
@@ -71,7 +71,7 @@ $rosine_db_query['set_paperwork_printed']="UPDATE ".$rosine_db_prefix.'%plural% 
 $rosine_db_query['customer_with_most_paperwork']="SELECT e.* , count( r.%SINGULAR%_ID ) as anzahl FROM ".$egw_db_prefix."addressbook AS e JOIN ".$rosine_db_prefix."%plural% AS r ON e.contact_id = r.%SINGULAR%_CUSTOMER WHERE %where% GROUP BY contact_id ORDER BY count( r.%SINGULAR%_ID ) DESC "; 
 $rosine_db_query['last_customers']="SELECT r.%SINGULAR%_ID, e . * FROM ".$egw_db_prefix."addressbook AS e JOIN ".$rosine_db_prefix."%plural% AS r ON e.contact_id = r.%SINGULAR%_CUSTOMER WHERE %where% ORDER BY r.%SINGULAR%_ID DESC ";
 $rosine_db_query['customer_with_most_sales']="";
-$rosine_db_query['customers_with_open_paperwork']='SELECT e.* FROM '.$egw_db_prefix.'addressbook AS e JOIN '.$rosine_db_prefix.'%plural% AS r ON e.contact_id = r.%SINGULAR%_CUSTOMER WHERE r.%SINGULAR%_STATUS = "changed" AND %where% ';
+$rosine_db_query['customers_with_open_paperwork']='SELECT e.*, r.%SINGULAR%_CUSTOMER_PRIVATE as private FROM '.$egw_db_prefix.'addressbook AS e JOIN '.$rosine_db_prefix.'%plural% AS r ON e.contact_id = r.%SINGULAR%_CUSTOMER WHERE r.%SINGULAR%_STATUS = "changed" AND %where% ';
 
 //mysql for payments
 $rosine_db_query['get_unpaid_invoices']='SELECT e.n_fn AS name, i.INVOICE_CUSTOMER AS invoice_customer, i.INVOICE_ID AS invoice_id, i.INVOICE_AMMOUNT_BRUTTO AS invoice_ammount, sum( p.PAYMENT_AMMOUNT ) AS already_paid FROM '.$rosine_db_prefix.'invoices AS i NATURAL LEFT JOIN '.$rosine_db_prefix.'payments AS p JOIN '.$egw_db_prefix.'addressbook as e ON i.INVOICE_CUSTOMER=e.contact_id WHERE i.invoice_status = "changed" GROUP BY i.INVOICE_ID ORDER BY i.INVOICE_ID';
