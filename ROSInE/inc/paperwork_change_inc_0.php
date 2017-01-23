@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2017-01-21  										    *
+ *  date of this file: 2017-01-23  										    *
  \**************************************************************************/
 // paperwork list, add items etc
 switch ($_POST['next_function']) {
@@ -284,10 +284,10 @@ switch ($_POST['next_function']) {
 					}//if paperwork list is selected
 					if ($f['n_family']!="")
 							$input_fields.='<button name="contact_id" value="P-'.$f["contact_id"].
-							'" type="submit" >'.$f['n_fn'].' - '.$f['adr_two_locality'].' ['.$f['contact_id'].']'.$lang['private'].'</button>';
+							'" type="submit" >'.$f['n_fn'].' - '.$f['adr_two_locality'].' ['.$f['contact_id'].'] '.$lang['private'].' ('.$f['ammount'].$config['currency'].')</button>';
 					if ($f['org_name']!="")
 						$input_fields.='<button name="contact_id" value="F-'.$f["contact_id"].
-						'" type="submit" >'.$f['org_name'].' - '.$f['adr_one_locality'].' ['.$f['contact_id'].']'.$lang['company'].'</button>';
+						'" type="submit" >'.$f['org_name'].' - '.$f['adr_one_locality'].' ['.$f['contact_id'].'] '.$lang['company'].' ('.$f['ammount'].$config['currency'].')</button>';
 					$input_fields.="&nbsp;|&nbsp; ";
 				}//endwhile
 				$result->close();
