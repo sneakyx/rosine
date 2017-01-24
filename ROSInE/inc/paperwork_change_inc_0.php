@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2017-01-23  										    *
+ *  date of this file: 2017-01-24  										    *
  \**************************************************************************/
 // paperwork list, add items etc
 switch ($_POST['next_function']) {
@@ -274,7 +274,9 @@ switch ($_POST['next_function']) {
 				//no error in mysql get customers
 				$input_fields.='<input type="hidden" name="paperwork" value="'.$_POST['paperwork'].'">';
 				while($f = $result->fetch_array()) {
+					$money="";
 					if (substr($_POST['sort_list'], 15,4)=="open") {
+						$money='('.$f['ammount'].$config['currency'].')'; // to list the ammount of money in paperwork
 						if ($f['private']=="1"){
 							$f['org_name']="";
 						}// paperwork is for private address
@@ -284,10 +286,10 @@ switch ($_POST['next_function']) {
 					}//if paperwork list is selected
 					if ($f['n_family']!="")
 							$input_fields.='<button name="contact_id" value="P-'.$f["contact_id"].
-							'" type="submit" >'.$f['n_fn'].' - '.$f['adr_two_locality'].' ['.$f['contact_id'].'] '.$lang['private'].' ('.$f['ammount'].$config['currency'].')</button>';
+							'" type="submit" >'.$f['n_fn'].' - '.$f['adr_two_locality'].' ['.$f['contact_id'].'] '.$lang['private'].$money.'</button>';
 					if ($f['org_name']!="")
 						$input_fields.='<button name="contact_id" value="F-'.$f["contact_id"].
-						'" type="submit" >'.$f['org_name'].' - '.$f['adr_one_locality'].' ['.$f['contact_id'].'] '.$lang['company'].' ('.$f['ammount'].$config['currency'].')</button>';
+						'" type="submit" >'.$f['org_name'].' - '.$f['adr_one_locality'].' ['.$f['contact_id'].'] '.$lang['company'].$money.'</button>';
 					$input_fields.="&nbsp;|&nbsp; ";
 				}//endwhile
 				$result->close();
