@@ -8,7 +8,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2017-01-20  		 								*
+ *  date of this file: 2017-02-11 		 								*
  \**************************************************************************/
 
 $lang['page_buttons']='{$backward} {$from} to {$to} - of {$max} {$foreward}';
@@ -127,6 +127,8 @@ $lang['plus']="plus";
 $lang['item_changed']="item was changed!";
 $lang['customer_list']="customer list";
 $lang['more_functions']="more functions";
+$lang['functions']="Functions";
+$lang['preview']="preview";
 $lang['customers_with_most_sales']="All customers sorted by sales (not working yet)";
 $lang['customers_with_most_paperwork']='All customers sorted with most {$paperwork}';
 $lang['sorted_in_alphabetic_order']='All customers sorted in alphabetic order';

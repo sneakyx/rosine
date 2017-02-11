@@ -9,8 +9,10 @@
  *  Free Software Foundation; version 2 of the License.                     *
  *  date of this file: 2016-08-27  										    *
  \**************************************************************************/
-include ('inc/head.inc.php');
+use EGroupware\Api\Framework;
 
+include ('inc/head.inc.php');
+Framework::message('Hello World!','error');
 if ($_GET['paperwork']!="") 
 	/* this must be the first call of this file, so it is called by another
 	 * file, like main menue

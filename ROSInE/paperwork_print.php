@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2017-01-13  										    *
+ *  date of this file: 2017-02-11  										    *
  \**************************************************************************/
 
 /*
@@ -147,8 +147,14 @@ if ($result!=false) {
 		//$row.=$tpl->return_html();
 	}// there was no error in SQL 2
 }// there was no error  in SQL 1
+if ($_POST['print']<>"0") {
+	rosine_set_paperwork_printed($_GET['paperwork'], $_GET['paperwork_id']);
+	$tpl->assign('print', "script src='js/print_now.js'></script>");
+}// really print
+else {
+	$tpl->assign('print', '');
+}// only preview
 
-rosine_set_paperwork_printed($_GET['paperwork'], $_GET['paperwork_id']);
 // put page together and show it
 
 $tpl->assign('sum_all_netto', number_format($sum_all_netto,2,",","."));

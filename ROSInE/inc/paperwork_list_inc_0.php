@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2017-01-07  										    *
+ *  date of this file: 2017-02-11  										    *
  \**************************************************************************/
 
 $tpl->load("paperworklist.html");
@@ -77,8 +77,7 @@ if ($result!=false) {
 			<th>'.$lang['customer'].'</th>
 			<th>'.$lang['money'].'</th>
 			<th>'.$lang['status'].'</th>		
-			<th>'.$lang['change'].'</th>
-			<th>'.$lang['print'].'</th>		
+			<th colspan="4">'.$lang['functions'].'</th>		
 		</tr>';
 
 	while($f = $result->fetch_array()) {
@@ -113,32 +112,47 @@ if ($result!=false) {
 				"<td>".$f[strtoupper($_POST['paperwork']).'_STATUS']."</td>";
 		if ($f[strtoupper($_POST['paperwork']).'_STATUS']=="changed" | $f[strtoupper($_POST['paperwork']).'_STATUS']=="empty"){
 					$liste.='<td>
-					<form action="#" method="post">
-						<input type="hidden" name="next_function" value="'.$next_function.'">';
-					if ($delete!=""){
+					<a href="?paperwork='.$_POST['paperwork'].'&number=';
+		$liste.=$f[strtoupper($_POST['paperwork']).'_ID'].'&next_function='.$next_function.'"> ';
+		
+		if ($next_function=='really_delete'){
+			$liste.='<img src="../pixelegg/images/error.png"
+						alt="'.$lang[$next_function].'?" title="'.$lang[$next_function].'?" width="70%">';
+		}// safety question
+		elseif ($next_function=='delete'){
+			$liste.='<img src="../pixelegg/images/trash.png"
+						alt="'.$lang[$next_function].'?" title="'.$lang[$next_function].'?" width="75%">';
+		}//before safety question
+		else {
+			
+		}// cannot be deleted
+/*					if ($delete!=""){
 						$liste.='<input type="submit" title="'.$delete.'" value="'.$delete.'">';
 					}// not invoice or last type, so can be deleted
-					$liste.='<input type="hidden" name="number" value="'.$f[strtoupper($_POST['paperwork']).'_ID'].'">
-					</form>
-					
-					<form action="paperwork_change.php" method="post">
-						<input type="hidden" name="paperwork" value="'.$_POST['paperwork'].'">
-						<input type="hidden" name="next_function" value="overview">
-						<input type="submit" title="'.$lang['change'].'" value="'.$lang['change'].'">
-						<input type="hidden" name="paperwork_id" value="'.$f[strtoupper($_POST['paperwork']).'_ID'].'">
-						<input type="hidden" name="contact_id" value="::'.$f[strtoupper($_POST['paperwork']).'_CUSTOMER'].'">		
-					</form>
-			</td>';
+*/			$liste.='</a></td>
+					<td><a href="paperwork_change.php?paperwork='.$_POST['paperwork'].'&paperwork_id=';
+		$liste.=$f[strtoupper($_POST['paperwork']).'_ID'].'&next_function=overview&contact_id=::'.$f[strtoupper($_POST['paperwork']).'_CUSTOMER'].'">
+						<img src="../pixelegg/images/edit.png" 
+						alt="'.$lang['change'].'" title="'.$lang['change'].'" width="75%"></a></td>
+			';
 		}// if paperwork should be able to be deleted or changed
 		else {
-			$liste.='<td></td>';
+			$liste.='<td></td><td></td>';
 		}// paperwork can be changed or deleted
+		$liste.='<td><a href="paperwork_print.php?paperwork='.$_POST['paperwork'].'&print=0&paperwork_id=';
+		$liste.=$f[strtoupper($_POST['paperwork']).'_ID'].'" target="_blank">
+						<img src="../pixelegg/images/prieview.png" 
+						alt="'.$lang['preview'].'" title="'.$lang['preview'].'" width="75%"></a></td>';
 		$liste.='<td><a href="paperwork_print.php?paperwork='.$_POST['paperwork'].'&paperwork_id=';
 		if ($f[strtoupper($_POST['paperwork']).'_PRINTED']=="1") {
-				$liste.=$f[strtoupper($_POST['paperwork']).'_ID'].'" target="_blank">'.$lang['print_again'].'</a></td>';
+				$liste.=$f[strtoupper($_POST['paperwork']).'_ID'].'" target="_blank">
+						<img src="../pixelegg/images/print.png" style="opacity: 0.5;filter: alpha(opacity=50);" 
+						alt="'.$lang['print_again'].'" title="'.$lang['print_again'].'" width="75%"></a></td>';
 		} // had been printed
 		else {
-			$liste.=$f[strtoupper($_POST['paperwork']).'_ID'].'" target="_blank">'.$lang['print'].'</a></td>';
+			$liste.=$f[strtoupper($_POST['paperwork']).'_ID'].'" target="_blank">
+					<img src="../pixelegg/images/print.png" alt="'.$lang['print'].
+			'" title="'.$lang['print'].'" width="75%"></a></td>';
 		}// had not been printed
 		$liste.="</tr>";
 	}//endwhile

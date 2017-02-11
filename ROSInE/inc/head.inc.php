@@ -9,6 +9,8 @@
  *  Free Software Foundation; version 2 of the License.                     *
  *  date of this file: 2017-01-20  										    *
  \**************************************************************************/
+
+
 if (basename ($_SERVER['SCRIPT_NAME'])!= "paperwork_print.php") {
 	$GLOBALS['egw_info'] = array(
 			'flags' => array(

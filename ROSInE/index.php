@@ -9,8 +9,9 @@
 	*  Free Software Foundation; version 2 of the License.                     *
 	*  date of this file: 2016-08-27 										   *
 	\**************************************************************************/
+use EGroupware\Api\Framework;
 include ('inc/head.inc.php');
-
+Framework::message('Hello World!','error');
 $tpl->load("mainmenu.html");
 $lang = $tpl->loadLanguage($lang);
 if (!$lang){
