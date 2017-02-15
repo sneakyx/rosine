@@ -1,19 +1,19 @@
-<?php 
+<?php
 /**************************************************************************\
  * Rothaar Systems Open Source Invoice for Egroupware (ROSInE)              *
- * http://www.rothaarsystems.de                                             *
- * Author: info@rothaarsystems.de                                           *
- * --------------------------------------------                             *
- *  This program is free software; you can redistribute it and/or modify it *
- *  under the terms of the GNU General Public License as published by the   *
- *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2017-01-23  										    *
- \**************************************************************************/
+* http://www.rothaarsystems.de                                             *
+* Author: info@rothaarsystems.de                                           *
+* --------------------------------------------                             *
+*  This program is free software; you can redistribute it and/or modify it *
+*  under the terms of the GNU General Public License as published by the   *
+*  Free Software Foundation; version 2 of the License.                     *
+*  date of this file: 2017-02-13  										    *
+\**************************************************************************/
 
 // mysql to get config
 $rosine_db_query['get_config']='SELECT * FROM '.$rosine_db_prefix.
-	'config WHERE user_id =0 OR user_id ='.$GLOBALS['egw_info']['user']['account_id'].
-	' GROUP BY config desc';
+'config WHERE user_id =0 OR user_id ='.$GLOBALS['egw_info']['user']['account_id'].
+' GROUP BY config desc';
 //mysql for articles
 $rosine_db_query['insert_article']="INSERT INTO ".$rosine_db_prefix."articles (ART_NUMBER, ART_UNIT, ART_NAME, ART_PRICE, ART_TAX, ART_STOCKNR, ART_INSTOCK, ART_NOTE, `GENERATED`, CHANGED) VALUES ";
 $rosine_db_query['get_articles']="SELECT * FROM ".$rosine_db_prefix."articles WHERE ";
@@ -41,7 +41,7 @@ $rosine_db_query['get_customers']="SELECT * FROM ".$egw_db_prefix."addressbook W
 
 // mysql for special lists
 $rosine_db_query['most_used_articles']="SELECT art_name, count(p.art_number) as counter,p.art_number as art_number, a.art_unit as art_unit from ".$rosine_db_prefix."%plural%_positions as p JOIN ".$rosine_db_prefix."articles AS a ON a.art_number=p.art_number WHERE 1 GROUP BY art_number ORDER BY counter DESC LIMIT ".$config['favorite_articles'];
-$rosine_db_query['paperwork_not_used']='SELECT r.%singular%_id AS %singular%_id, GROUP_CONCAT(concat (p.posi_ammount, " ", a.art_name)) AS contents, r.changed AS changed, COUNT(p.posi_id) AS ammount, r.%singular%_ammount AS money FROM '.$rosine_db_prefix.'%plural% AS r JOIN '.$rosine_db_prefix.'%plural%_positions as p on r.%singular%_id = p.%singular%_id JOIN '.$rosine_db_prefix.'articles AS a ON a.art_number=p.art_number WHERE %singular%_status="changed" AND %singular%_customer=%customer% GROUP BY %singular%_id ORDER BY changed DESC'; 
+$rosine_db_query['paperwork_not_used']='SELECT r.%singular%_id AS %singular%_id, GROUP_CONCAT(concat (p.posi_ammount, " ", a.art_name)) AS contents, r.changed AS changed, COUNT(p.posi_id) AS ammount, r.%singular%_ammount AS money FROM '.$rosine_db_prefix.'%plural% AS r JOIN '.$rosine_db_prefix.'%plural%_positions as p on r.%singular%_id = p.%singular%_id JOIN '.$rosine_db_prefix.'articles AS a ON a.art_number=p.art_number WHERE %where% AND (%singular%_customer=%customer% ) GROUP BY %singular%_id ORDER BY changed DESC';
 
 // mysql for paperwork
 $rosine_db_query['insert_paperwork']="INSERT INTO ".$rosine_db_prefix."%plural% (%SINGULAR%_ID,%SINGULAR%_DATE,%SINGULAR%_CUSTOMER,%SINGULAR%_CUSTOMER_PRIVATE,%SINGULAR%_AMMOUNT,%SINGULAR%_STATUS,`GENERATED`,%SINGULAR%_NOTE) VALUES ";
@@ -68,7 +68,7 @@ $rosine_db_query['get_all_notes']='SELECT * FROM '.$rosine_db_prefix.'notes WHER
 $rosine_db_query['update_paperwork_note']='UPDATE '.$rosine_db_prefix.'%plural% SET %SINGULAR%_NOTE="%paperwork%" WHERE %SINGULAR%_ID=';
 $rosine_db_query['update_brutto_ammount_paperwork']='UPDATE '.$rosine_db_prefix.'%plural% SET %SINGULAR%_AMMOUNT_BRUTTO = (SELECT SUM(POSI_PRICE*(100+TAX_PERCENTAGE)/100*POSI_AMMOUNT) FROM '.$rosine_db_prefix.'%plural%_positions AS p JOIN '.$rosine_db_prefix.'taxes AS t ON p.POSI_TAX=t.TAX_ID WHERE %SINGULAR%_ID=%paperwork% GROUP BY %SINGULAR%_ID ) WHERE %SINGULAR%_ID=%paperwork%';
 $rosine_db_query['set_paperwork_printed']="UPDATE ".$rosine_db_prefix.'%plural% SET %SINGULAR%_PRINTED=1 WHERE %singular%_ID=%ID% LIMIT 1';
-$rosine_db_query['customer_with_most_paperwork']="SELECT e.* , count( r.%SINGULAR%_ID ) as anzahl FROM ".$egw_db_prefix."addressbook AS e JOIN ".$rosine_db_prefix."%plural% AS r ON e.contact_id = r.%SINGULAR%_CUSTOMER WHERE %where% GROUP BY contact_id ORDER BY count( r.%SINGULAR%_ID ) DESC "; 
+$rosine_db_query['customer_with_most_paperwork']="SELECT e.* , count( r.%SINGULAR%_ID ) as anzahl FROM ".$egw_db_prefix."addressbook AS e JOIN ".$rosine_db_prefix."%plural% AS r ON e.contact_id = r.%SINGULAR%_CUSTOMER WHERE %where% GROUP BY contact_id ORDER BY count( r.%SINGULAR%_ID ) DESC ";
 $rosine_db_query['last_customers']="SELECT r.%SINGULAR%_ID, e . * FROM ".$egw_db_prefix."addressbook AS e JOIN ".$rosine_db_prefix."%plural% AS r ON e.contact_id = r.%SINGULAR%_CUSTOMER WHERE %where% ORDER BY r.%SINGULAR%_ID DESC ";
 $rosine_db_query['customer_with_most_sales']="";
 $rosine_db_query['customers_with_open_paperwork']='SELECT e.*, r.%SINGULAR%_CUSTOMER_PRIVATE as private, r.%SINGULAR%_AMMOUNT as ammount FROM '.$egw_db_prefix.'addressbook AS e JOIN '.$rosine_db_prefix.'%plural% AS r ON e.contact_id = r.%SINGULAR%_CUSTOMER WHERE r.%SINGULAR%_STATUS = "changed" AND %where% ';
@@ -95,7 +95,7 @@ if ($rosine_db->connect_error) {
 	die('Connect Error (' . $rosine_db->connect_errno . ') '
 			. $rosine_db->connect_error.'
 					db_host:'.$GLOBALS['egw_info']['server']['db_host'].
-					'db_name:'.$GLOBALS['egw_info']['server']['db_name']);
+			'db_name:'.$GLOBALS['egw_info']['server']['db_name']);
 } // die if database error
 
 $rosine_db->query('SET NAMES "utf8"');

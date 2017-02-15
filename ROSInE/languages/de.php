@@ -2,14 +2,14 @@
 
 /**************************************************************************\
  * Rothaar Systems Open Source Invoice for Egroupware (ROSInE)              *
- * http://www.rothaarsystems.de                                             *
- * Author: info@rothaarsystems.de                                           *
- * --------------------------------------------                             *
- *  This program is free software; you can redistribute it and/or modify it *
- *  under the terms of the GNU General Public License as published by the   *
- *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2017-02-11	    	 								*
- \**************************************************************************/
+* http://www.rothaarsystems.de                                             *
+* Author: info@rothaarsystems.de                                           *
+* --------------------------------------------                             *
+*  This program is free software; you can redistribute it and/or modify it *
+*  under the terms of the GNU General Public License as published by the   *
+*  Free Software Foundation; version 2 of the License.                     *
+*  date of this file: 2017-02-13	    	 								*
+\**************************************************************************/
 
 $lang['page_buttons']='{$backward} {$from} bis {$to} von insgesamt {$max} {$foreward}';
 $lang['just_write_invoices']="Rechnungen einfach schreiben!";
@@ -66,7 +66,7 @@ $lang['delete']="löschen";
 $lang['change']="ändern";
 $lang['really_delete']="wirklich löschen";
 $lang['make_new']="neu erstellen";
-		
+
 // for taxes
 $lang['tax_deleted']="Steuersatz gelöscht";
 $lang['tax_id']="Nummer";
@@ -165,6 +165,8 @@ $lang['all_customers_with_open_offers']="Nur Kunden mit offenen Angeboten";
 $lang['all_customers_with_open_orders']="Nur Kunden mit offenen Bestellungen";
 $lang['all_customers_with_open_deliveries']="Nur Kunden mit offenen Lieferungen";
 $lang['all_customers_with_open_invoices']="Nur Kunden mit offenen Rechnungen";
+$lang['drafts']="Vorlagen";
+$lang['draft']="Vorlage";
 
 // for configuration
 $lang['user']="Benutzer";

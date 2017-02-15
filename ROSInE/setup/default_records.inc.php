@@ -1,14 +1,14 @@
-<?php 
+<?php
 /**************************************************************************\
  * Rothaar Systems Open Source Invoice for Egroupware (ROSInE)              *
- * http://www.rothaarsystems.de                                             *
- * Author: info@rothaarsystems.de                                           *
- * --------------------------------------------                             *
- *  This program is free software; you can redistribute it and/or modify it *
- *  under the terms of the GNU General Public License as published by the   *
- *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2017-01-14  										    *
- \**************************************************************************/
+* http://www.rothaarsystems.de                                             *
+* Author: info@rothaarsystems.de                                           *
+* --------------------------------------------                             *
+*  This program is free software; you can redistribute it and/or modify it *
+*  under the terms of the GNU General Public License as published by the   *
+*  Free Software Foundation; version 2 of the License.                     *
+*  date of this file: 2017-01-14  										    *
+\**************************************************************************/
 $oProc->query("
 			INSERT IGNORE INTO `rosine_config` (`config`, `user_id`, `value`) VALUES
 			('articles_per_page', 0, '10'),
@@ -24,6 +24,8 @@ $oProc->query("
 			('company_zip', 0, '57319'),
 			('currency', 0, 'Euro'),
 			('customers_per_page', 0, '10'),
+			('draft_change_form',0, '0'),
+			('draft_list_form',0,'0'),
 			('delivery_change_form', 0, '0'),
 			('delivery_list_form', 0, '0'),
 			('delivery_prefix', 0, 'L-'),
@@ -52,11 +54,13 @@ $oProc->query("
 			('print_template_invoice', 0, 'print_paperwork.html'),
 			('print_template_offer', 0, 'print_paperwork.html'),
 			('print_template_order', 0, 'print_paperwork.html'),
+			('print_template_draft', 0, 'print_paperwork.html'),
 			('overwrite_templates',0,'no'),
-			('insert_delivery_into_paperwork', '0', '100'), 
+			('insert_delivery_into_paperwork', '0', '100'),
 			('insert_offer_into_paperwork', '0', '100'),
-			('insert_order_into_paperwork', '0', '100'), 
-			('insert_invoice_into_paperwork', '0', '100')
+			('insert_order_into_paperwork', '0', '100'),
+			('insert_invoice_into_paperwork', '0', '100'),
+			('insert_draft_into_paperwork', '0', '100')
 		");
 $oProc->query("
 			INSERT IGNORE INTO `rosine_locations` (`LOC_ID`, `LOC_NAME`, `LOC_NOTE`, `GENERATED`, `CHANGED`) VALUES
@@ -79,7 +83,7 @@ $oProc->query("
 			(6, 'de.php', 'Lieferung innerhalb 7 Tagen.'),
 			(7, 'de.php', 'Lieferung frei Haus.'),
 			(1,'en.php','free shipment'),
-			(100, 'de.php', '%SINGULAR% %ID% vom %date%:'), 
+			(100, 'de.php', '%SINGULAR% %ID% vom %date%:'),
 			(100, 'en.php', '%SINGULAR% %ID% from %date%:')
 		");
 $oProc->query("
@@ -91,7 +95,7 @@ $oProc->query("
 $oProc->query("
 	INSERT IGNORE INTO `rosine_articles` (`ART_NUMBER`, `ART_NAME`, `ART_UNIT`, `ART_PRICE`, `ART_TAX`, `ART_STOCKNR`, `ART_INSTOCK`, `ART_NOTE`, `GENERATED`, `CHANGED`) VALUES
 	('01', 'Bio-Eier', 'Stück', 0.35, 3, 2, 0, '', '2016-04-2308:08:05', '2016-05-10-19-16-46'),
-	('02', 'Bio- Hähnchen', 'Stück', 10.00, 3, 1, 0, '', '2016-04-2308:08:05', '2016-05-04-14-01-11')	
+	('02', 'Bio- Hähnchen', 'Stück', 10.00, 3, 1, 0, '', '2016-04-2308:08:05', '2016-05-04-14-01-11')
 		");
 
 ?>

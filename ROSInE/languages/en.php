@@ -2,14 +2,14 @@
 
 /**************************************************************************\
  * Rothaar Systems Open Source Invoice for Egroupware (ROSInE)              *
- * http://www.rothaarsystems.de                                             *
- * Author: info@rothaarsystems.de                                           *
- * --------------------------------------------                             *
- *  This program is free software; you can redistribute it and/or modify it *
- *  under the terms of the GNU General Public License as published by the   *
- *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2017-02-11 		 								*
- \**************************************************************************/
+* http://www.rothaarsystems.de                                             *
+* Author: info@rothaarsystems.de                                           *
+* --------------------------------------------                             *
+*  This program is free software; you can redistribute it and/or modify it *
+*  under the terms of the GNU General Public License as published by the   *
+*  Free Software Foundation; version 2 of the License.                     *
+*  date of this file: 2017-02-13 		 								*
+\**************************************************************************/
 
 $lang['page_buttons']='{$backward} {$from} to {$to} - of {$max} {$foreward}';
 $lang['just_write_invoices']="Just write invoices!";
@@ -66,7 +66,7 @@ $lang['delete']="delete";
 $lang['change']="change";
 $lang['really_delete']="really delete";
 $lang['make_new']="generate new";
-		
+
 // for taxes
 $lang['tax_deleted']="tax rate was deleted";
 $lang['tax_id']="tax id";
@@ -165,6 +165,8 @@ $lang['all_customers_with_open_offers']="Only customers with open offers";
 $lang['all_customers_with_open_orders']="Only customers with open orders";
 $lang['all_customers_with_open_deliveries']="Only customers with open deliveries";
 $lang['all_customers_with_open_invoices']="Only customers with open invoices";
+$lang['drafts']="drafts";
+$lang['draft']="draft";
 
 // for configuration
 $lang['user']="User";
