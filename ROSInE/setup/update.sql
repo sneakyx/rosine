@@ -1,4 +1,30 @@
-# FROM 2016-02-11 to 2016-02-13
+# FROM 2017-02-16 to 2017-02-18
+INSERT IGNORE INTO `egroupware`.`rosine_notes` (`NOTE_ID` , `LANGUAGE` , `NOTE_TEXT`) VALUES
+ ( '101', 'de.php', ''), 
+('101', 'en.php', '');
+
+
+# FROM 2017-02-13 to 2017-02-16
+INSERT IGNORE INTO `rosine_config` (`config`, `user_id`, `value`) VALUES
+			('invoice_bcc',0, ''),
+			('delivery_bcc',0,''),
+			('order_bcc', 0, ''),
+			('offer_bcc', 0, '');
+INSERT IGNORE INTO `rosine_config` (`config`, `user_id`, `value`) VALUES
+			('invoice_cc',0, 'your@email.adress'),
+			('delivery_cc',0,'your@email.adress'),
+			('order_cc', 0, 'your@email.adress'),
+			('offer_cc', 0, 'your@email.adress');
+
+
+INSERT IGNORE INTO `rosine_config` (`config`, `user_id`, `value`) VALUES
+			('draft_change_form',0, '0'),
+			('draft_list_form',0,'0'),
+			('print_template_draft', 0, 'print_paperwork.html'),
+			('insert_draft_into_paperwork', '0', '101');
+
+
+# FROM 2017-02-11 to 2017-02-13
 CREATE TABLE IF NOT EXISTS `rosine_drafts` (
   `DRaFT_ID` int(11) NOT NULL AUTO_INCREMENT,
   `DRAFT_DATE` date DEFAULT NULL,

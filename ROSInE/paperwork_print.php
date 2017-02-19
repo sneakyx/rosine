@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2017-02-11  										    *
+ *  date of this file: 2017-02-18  										    *
  \**************************************************************************/
 
 /*
@@ -92,7 +92,7 @@ if ($result!=false) {
 		$tpl->assign('customer_org',$row['org_name']);
 		$nr="one";
 	}// customer is organisation
-	$tpl->assign('customer_street',$row['adr_one_street']); // depending on private / organisation
+	$tpl->assign('customer_street',$row['adr_'.$nr.'_street']); // depending on private / organisation
 	$tpl->assign('customer_zip',$row['adr_'.$nr.'_postalcode']);// depending on private / organisation
 	$tpl->assign('customer_city',$row['adr_'.$nr.'_locality']);// depending on private / organisation
 	$tpl->assign('customer_country', $row['adr_'.$nr.'_countryname']);// depending on private / organisation
@@ -149,7 +149,7 @@ if ($result!=false) {
 }// there was no error  in SQL 1
 if ($_POST['print']<>"0") {
 	rosine_set_paperwork_printed($_GET['paperwork'], $_GET['paperwork_id']);
-	$tpl->assign('print', "script src='js/print_now.js'></script>");
+	$tpl->assign('print', "<script src='js/print_now.js'></script>");
 }// really print
 else {
 	$tpl->assign('print', '');

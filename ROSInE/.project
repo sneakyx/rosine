@@ -3,6 +3,7 @@
 	<name>ROSInE</name>
 	<comment></comment>
 	<projects>
+		<project>egroupware</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

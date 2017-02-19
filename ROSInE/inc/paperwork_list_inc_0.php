@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2017-02-11  										    *
+ *  date of this file: 2017-02-16  										    *
  \**************************************************************************/
 
 $tpl->load("paperworklist.html");
@@ -77,7 +77,7 @@ if ($result!=false) {
 			<th>'.$lang['customer'].'</th>
 			<th>'.$lang['money'].'</th>
 			<th>'.$lang['status'].'</th>		
-			<th colspan="4">'.$lang['functions'].'</th>		
+			<th colspan="5">'.$lang['functions'].'</th>		
 		</tr>';
 
 	while($f = $result->fetch_array()) {
@@ -154,6 +154,11 @@ if ($result!=false) {
 					<img src="../pixelegg/images/print.png" alt="'.$lang['print'].
 			'" title="'.$lang['print'].'" width="75%"></a></td>';
 		}// had not been printed
+/*		$liste.='<td><a href="paperwork_mail.php?paperwork='.$_POST['paperwork'].'&paperwork_id=';
+		$liste.=$f[strtoupper($_POST['paperwork']).'_ID'].'">
+						<img src="../pixelegg/images/email.png" 
+						alt="'.$lang['send_email'].'" title="'.$lang['send_email'].'" width="75%"></a></td>';
+			net yet finished			*/
 		$liste.="</tr>";
 	}//endwhile
 	$liste.="</table>";
