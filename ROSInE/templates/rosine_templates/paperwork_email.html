@@ -1,0 +1,31 @@
+{*insert header*}
+{include file="head.html"}
+
+<div id="rosine_input_wrap">
+	<form action="#" method="POST">
+		<div class="rosine_input">
+			<p class="rosine_input_header">{$what_to_do}</p> 
+				<div id="rosine_input_right">	
+				<table>
+				<tr><td>{L_TO}: </td><td><input type="text" name="to" size="40" maxlength="80" value="{$to}" ></td></tr> 
+				<tr><td>{L_CC}:</td><td> <input type="text" name="cc" size="40" maxlength="80" value="{$cc}" maxlength="20"></td></tr>
+				<tr><td>{L_BCC}:</td><td> <input type="text" name="bcc" value="{$bcc}" size="40" maxlength="80"></td></tr>
+				</table><br><br>
+				<input type="hidden" name="next_function" value="{$next_function}">
+				<input type="hidden" name="paperwork" value="{$paperwork}">	
+				<input type="hidden" name="paperwork_id" value="{$paperwork_id}">			
+				<input type="submit" title="insert_article" value="{$what_to_do}">
+				<p class="rosine_back"><a href="paperwork_list.php?paperwork={$paperwork}" >{L_BACK}</a></p>
+				</div>
+				<div id="rosine_input_left">	
+				<textarea name="emailtext" rows="8" cols="60">{$emailtext}</textarea><br>
+			
+				<br>
+				</div>
+				<div style="clear:both;">	
+				</div>
+			</div>
+		</form>
+</div>
+{*insert footer*}
+{include file="footer.html"}

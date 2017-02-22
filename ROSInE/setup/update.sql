@@ -1,3 +1,15 @@
+# FROM 2017-02-20 to 2017-02-22
+INSERT IGNORE INTO `rosine_config` (`config`, `user_id`, `value`) VALUES
+			('email_delivery',0, 'txt'),
+			('email_invoice',0, 'none'),
+			('email_order',0, 'none'),
+			('email_offer',0, 'none'),
+			('email_draft',0, 'none');
+
+# FROM 2017-02-18 to 2017-02-20
+INSERT IGNORE INTO `rosine_config` (`config`, `user_id`, `value`) VALUES
+			('email_template_delivery',0, 'email_delivery.txt');
+
 # FROM 2017-02-16 to 2017-02-18
 INSERT IGNORE INTO `egroupware`.`rosine_notes` (`NOTE_ID` , `LANGUAGE` , `NOTE_TEXT`) VALUES
  ( '101', 'de.php', ''), 

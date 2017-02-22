@@ -7,7 +7,7 @@
 *  This program is free software; you can redistribute it and/or modify it *
 *  under the terms of the GNU General Public License as published by the   *
 *  Free Software Foundation; version 2 of the License.                     *
-*  date of this file: 2017-01-14  										    *
+*  date of this file: 2017-02-22  										    *
 \**************************************************************************/
 $oProc->query("
 			INSERT IGNORE INTO `rosine_config` (`config`, `user_id`, `value`) VALUES
@@ -60,7 +60,25 @@ $oProc->query("
 			('insert_offer_into_paperwork', '0', '100'),
 			('insert_order_into_paperwork', '0', '100'),
 			('insert_invoice_into_paperwork', '0', '100'),
-			('insert_draft_into_paperwork', '0', '100')
+			('insert_draft_into_paperwork', '0', '100'),
+			('email_delivery',0, 'txt'),
+			('email_invoice',0, 'none'),
+			('email_order',0, 'none'),
+			('email_offer',0, 'none'),
+			('email_draft',0, 'none'),
+			('email_template_delivery',0, 'email_delivery.txt'),
+			('invoice_cc',0, 'your@email.adress'),
+			('delivery_cc',0,'your@email.adress'),
+			('order_cc', 0, 'your@email.adress'),
+			('offer_cc', 0, 'your@email.adress'),
+			('invoice_bcc',0, ''),
+			('delivery_bcc',0,''),
+			('order_bcc', 0, ''),
+			('offer_bcc', 0, ''),
+			('draft_change_form',0, '0'),
+			('draft_list_form',0,'0'),
+			('print_template_draft', 0, 'print_paperwork.html'),
+			('insert_draft_into_paperwork', '0', '101')
 		");
 $oProc->query("
 			INSERT IGNORE INTO `rosine_locations` (`LOC_ID`, `LOC_NAME`, `LOC_NOTE`, `GENERATED`, `CHANGED`) VALUES
@@ -84,7 +102,9 @@ $oProc->query("
 			(7, 'de.php', 'Lieferung frei Haus.'),
 			(1,'en.php','free shipment'),
 			(100, 'de.php', '%SINGULAR% %ID% vom %date%:'),
-			(100, 'en.php', '%SINGULAR% %ID% from %date%:')
+			(100, 'en.php', '%SINGULAR% %ID% from %date%:'),
+			(101, 'de.php', ''), 
+			(101, 'en.php', '')	
 		");
 $oProc->query("
 	INSERT IGNORE INTO `rosine_payments_methods` (`METH_ID`, `METH_NAME`, `METH_NOTE`, `GENERATED`, `CHANGED`) VALUES

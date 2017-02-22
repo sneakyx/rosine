@@ -188,4 +188,6 @@ $lang['send_email_for']="E-Mail senden für";
 $lang['to']="An";
 $lang['cc']="Kopie";
 $lang['bcc']="Blindkopie";
+$lang['unit_price']="Einzelpreis";
+$lang['description']="Beschreibung";
 ?>

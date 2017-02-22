@@ -187,5 +187,6 @@ $lang['send_email_for']="Send E-Mail for";
 $lang['to']="to";
 $lang['cc']="cc";
 $lang['bcc']="bcc";
-
+$lang['unit_price']="unit price";
+$lang['description']="description";
 ?>

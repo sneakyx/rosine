@@ -3,7 +3,6 @@ change.log
 to do list:
 - correct update function
 - list for open delivery notes
-- templates for offers, orders, delivery notes and invoices to input more articles at once
 - correct query for last customers when search for customers
 - 
 - different colors for offer, order, invoice and delivery note
@@ -15,6 +14,17 @@ to do list:
 suggestions? Write me an E-Mail: info@rothaarsystems.de
 
 ------------------------------------------------------------------------
+2017-02-22
+- email-function works now (beta)
+- some old files deleted
+- template function added: sprintf-function added
+
+
+2017-02-20
+- new class template.paperwork.class.php
+- paperwork_print uses now class
+- now emails can be made (alpha!)
+
 2017-02-19
 - error in printing page deleted
 - minor error deleted

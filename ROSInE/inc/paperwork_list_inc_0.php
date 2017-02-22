@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2017-02-16  										    *
+ *  date of this file: 2017-02-22  										    *
  \**************************************************************************/
 
 $tpl->load("paperworklist.html");
@@ -154,11 +154,12 @@ if ($result!=false) {
 					<img src="../pixelegg/images/print.png" alt="'.$lang['print'].
 			'" title="'.$lang['print'].'" width="75%"></a></td>';
 		}// had not been printed
-/*		$liste.='<td><a href="paperwork_mail.php?paperwork='.$_POST['paperwork'].'&paperwork_id=';
-		$liste.=$f[strtoupper($_POST['paperwork']).'_ID'].'">
-						<img src="../pixelegg/images/email.png" 
-						alt="'.$lang['send_email'].'" title="'.$lang['send_email'].'" width="75%"></a></td>';
-			net yet finished			*/
+		if ($config['email_'.$_POST['paperwork']]!="none" && $config['email_'.$_POST['paperwork']]!=""){
+			$liste.='<td><a href="paperwork_mail.php?paperwork='.$_POST['paperwork'].'&paperwork_id=';
+			$liste.=$f[strtoupper($_POST['paperwork']).'_ID'].'&file_type='.$config['email_'.$_POST['paperwork']].'">
+							<img src="../pixelegg/images/email.png" 
+							alt="'.$lang['send_email'].'" title="'.$lang['send_email'].'" width="75%"></a></td>';
+		}// the can is an template to use	
 		$liste.="</tr>";
 	}//endwhile
 	$liste.="</table>";

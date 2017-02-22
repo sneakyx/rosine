@@ -50,6 +50,8 @@ $_POST=(array_merge($_POST, $_GET));
 include ('inc/db.inc.php');
 include ('inc/template.class.php');
 include_once ('inc/functions.inc.php'); // seems this is inserted by egroupware api
+include ('inc/template.paperwork.class.php');
+
 $result=rosine_database_query($rosine_db_query['get_config'],1);
 while ($f= $result->fetch_array()) {
 	$config[$f['config']]=$f['value'];
@@ -57,7 +59,13 @@ while ($f= $result->fetch_array()) {
 }// put config into array
 $result->close;
 //things for every template
-$tpl = new Rosine_Template();
+if ($rosine_load_template_paperwork){
+	$tpl = new Rosine_Paperwork_Template();
+}// load special class
+else {
+	$tpl = new Rosine_Template();
+}// normal class
+
 $tpl->set_templateDir(substr($GLOBALS['egw_info']['server']['backup_dir'],0,strrpos($GLOBALS['egw_info']['server']['backup_dir'], '/')).'/rosine/templates/');
 $lang[] = $config['language'];
 

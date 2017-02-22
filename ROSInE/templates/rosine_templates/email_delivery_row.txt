@@ -1,0 +1,1 @@
+ {$item_ammount:%7s} {$item_unit:%-5s} {$item_price_netto:%10s}{$config[currency]:%-5s}   {$item_text:%-40.40s}

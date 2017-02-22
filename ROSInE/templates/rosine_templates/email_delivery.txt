@@ -1,0 +1,20 @@
+Hallo,
+
+vielen Dank für Ihren Auftrag! 
+Sie haben von uns heute folgende Leistungen und Artikel erhalten:
+
+  {L_AMMOUNT}          {L_UNIT_PRICE}  {L_DESCRIPTION}
+{$rows}
+
+{L_AMMOUNT_NETTO}:   {$sum_all_netto}{$config[currency]}
+{L_AMMOUNT_TAX}:     {$sum_tax}{$config[currency]}
+{L_AMMOUNT_BRUTTO}:  {$sum_all_brutto}{$config[currency]}
+
+
+{L_TERMS}
+{$paperwork_terms}
+
+---------------------------
+{$config[company_name]}
+{$config[company_street]}
+{$config[company_zip]} {$config[company_city]}

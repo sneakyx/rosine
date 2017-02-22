@@ -5,7 +5,7 @@
  * changes to this file made by André Scholz                                      *
  * --------------------------------------------                                   *
  * For licence see upper webpage                                                  *
- * Date of this file: 2017-01-16                                                  *
+ * Date of this file: 2017-02-22                                                  *
  \********************************************************************************/
 
 class Rosine_Template
@@ -17,7 +17,7 @@ class Rosine_Template
      * @var       string
      */
 	
-    private $templateDir = "";
+    protected $templateDir = "";
 
     /**
      * Der Ordner in dem sich die Sprach-Dateien befinden.
@@ -179,7 +179,7 @@ class Rosine_Template
 	                {
 		                        echo $file.' to '.$this->templateDir.$file;
 		                        if (
-		                        		copy ($this->templateDir.$file,$this->templateDir.date("Ymdhis")."-".$file) &&
+		                        		copy ($this->templateDir.$file,$this->templateDir.date("YmdHis")."-".$file) &&
 		                        		copy('./templates/rosine_templates/'.$file,$this->templateDir.$file)){
 		                        	echo ' <b>copied - updated!</b><br>';
 		                        
@@ -199,7 +199,7 @@ class Rosine_Template
 	                }//file doesn'T exist
                 }//if file and not "." or ".."
         }//endwhile
-        echo "Ich bin hier!";
+        //echo "Ich bin hier!";
         closedir($source_dir);
     }// end function rosine_setup_templates
 	
@@ -256,7 +256,18 @@ class Rosine_Template
     public function assign($replace, $replacement) {
         $this->template = str_replace( $this->leftDelimiter .$replace.$this->rightDelimiter,
                                        $replacement, $this->template );
-    }
+        
+        while($seek = strpos($this->template, $this->leftDelimiter.$replace.':'))
+        {
+        	$end=strpos($this->template, $this->rightDelimiter,$seek);
+        	$replacewithpara=substr($this->template,$seek,$end-$seek+1);
+        	$para=substr($this->template,$seek+strlen($this->leftDelimiter.$replace.':'),
+        			$end-($seek+strlen($this->leftDelimiter.$replace.':')));
+        	$this->template = str_replace( $replacewithpara,
+                                       sprintf($para,$replacement), $this->template );
+        }
+        
+    }// end function assign
     
 	
     /**
@@ -294,7 +305,7 @@ class Rosine_Template
      * @param     string $lang Die Sprachvariablen.
      * @uses      $template
      */
-    private function replaceLangVars($lang) {
+    public function replaceLangVars($lang) {
 //        $this->template = preg_replace("/\{L_(.*)\}/isUe", "\$lang[strtolower('\\1')]", 
 //                                $this->template); deprecated
         $this->template =preg_replace_callback("/\{L_(.*)\}/isU", function ($m) use ($lang){
@@ -319,11 +330,6 @@ class Rosine_Template
         while( preg_match( "/" .$this->leftDelimiterF ."include file=\"(.*)\.(.*)\""
                            .$this->rightDelimiterF ."/isUe", $this->template) )
         {
-/*            $this->template = preg_replace( "/" .$this->leftDelimiterF ."include file=\"(.*)\.(.*)\""
-                                            .$this->rightDelimiterF."/isUe",
-                                            "file_get_contents(\$this->templateDir.'\\1'.'.'.'\\2')",
-                                            $this->template );
-*/ //deprecated
         	$templateDir=$this->templateDir;
         	$this->template =preg_replace_callback( "/" .$this->leftDelimiterF ."include file=\"(.*)\.(.*)\""
                                             .$this->rightDelimiterF."/isU", function ($m) use ($templateDir){
