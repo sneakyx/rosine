@@ -1,0 +1,17 @@
+{*Header einbinden*}
+{include file="head.html"}
+<div id="rosine_input_wrap">
+	
+		<div class="rosine_input">
+			<p class="rosine_input_header">{L_EMAIL_SENT}</p> 
+			<br>
+			<form action="paperwork_list.php" method="post">
+						
+						<center><input type="submit" title="{L_BACK}" value="{L_BACK}" style="height:10em; width: 10em;"></center>
+						<input type="hidden" name="paperwork_id" value="{$paperwork_id}">
+						<input type="hidden" name="paperwork" value="{$paperwork_type}">		
+			</form>
+			</div>
+	
+</div>{*Footer einbinden*}
+{include file="footer.html"}

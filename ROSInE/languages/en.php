@@ -8,7 +8,7 @@
 *  This program is free software; you can redistribute it and/or modify it *
 *  under the terms of the GNU General Public License as published by the   *
 *  Free Software Foundation; version 2 of the License.                     *
-*  date of this file: 2017-02-16  	 		 							*
+*  date of this file: 2017-02-28  	 		 							*
 \**************************************************************************/
 
 $lang['page_buttons']='{$backward} {$from} to {$to} - of {$max} {$foreward}';
@@ -184,6 +184,7 @@ $lang['insert_config']="insert_config";
 // for sending emails
 $lang['send_email']="send email";
 $lang['send_email_for']="Send E-Mail for";
+$lang['email_sent']="email sent";
 $lang['to']="to";
 $lang['cc']="cc";
 $lang['bcc']="bcc";

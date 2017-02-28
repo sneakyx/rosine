@@ -8,7 +8,7 @@
 *  This program is free software; you can redistribute it and/or modify it *
 *  under the terms of the GNU General Public License as published by the   *
 *  Free Software Foundation; version 2 of the License.                     *
-*  date of this file: 2017-02-15 										   *
+*  date of this file: 2017-02-28 										   *
 \**************************************************************************/
 use EGroupware\Api;
 include ('inc/head.inc.php');
@@ -24,14 +24,11 @@ switch ($_POST['next_function']) {
  		$emailsend->addAddress($_POST['to']);
  		$emailsend->addAddress($_POST['cc'],"","cc");
  		$emailsend->addAddress($_POST['bcc'],"","bcc");
- 		/*
- 		 * cc fehlt noch!
- 		 * Betreffzeile?
- 		 */
  		$emailsend->setBody($_POST['emailtext']);
  		$emailsend->addHeader("subject",$lang[$_POST['paperwork']]."  ".$_POST['paperwork_id']);
  		$emailsend->send();
- 		echo "E-Mail gesendet";
+ 		$tpl->assign("paperwork_id", $_POST['paperwork_id']);
+ 		$tpl->assign("paperwork_type", $_POST["paperwork"]);
 	break;
 	
 	default:
