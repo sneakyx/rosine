@@ -12,10 +12,8 @@
 use EGroupware\Api;
 include ('inc/head.inc.php');
 $tpl->load("mainmenu.html");
-$lang = $tpl->loadLanguage($lang);
-if (!$lang){
-	echo "<br>False!<br>";
-}
+$tpl->replaceLangVars();
+
 /* Just a test for the egroupware- E-Mail-Function
 $emailsend = new Api\Mailer();
 $emailsend->setFrom("info@rothaarsystems.de");

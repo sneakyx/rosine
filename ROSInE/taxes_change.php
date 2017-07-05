@@ -7,12 +7,11 @@
 *  This program is free software; you can redistribute it and/or modify it *
 *  under the terms of the GNU General Public License as published by the   *
 *  Free Software Foundation; version 2 of the License.                     *
-*  date of this file: 2016-08-27 										   *
+*  date of this file: 2017-07-05 										   *
 \**************************************************************************/
 include ('inc/head.inc.php');
 
 $tpl->load("insert_tax.html");
-$lang = $tpl->loadLanguage($lang);
 
 
 switch ($_POST['next_function']){
@@ -20,12 +19,12 @@ switch ($_POST['next_function']){
 	case "new":
 
 		$tpl->assign("next_function", "new");
-		$tpl->assign("what_to_do", $lang['insert_again_new_tax']);
+		$tpl->assign("what_to_do", lang('insert_again_new_tax'));
 		if ($_POST['tax_id']==""){
-			$error.=$lang['number_missing']."<br>";
+			$error.=lang('number_missing')."<br>";
 		}//endif
 		if ($_POST['tax_name']==""){
-			$error.=$lang['name_missing']."<br>";
+			$error.=lang('name_missing')."<br>";
 		}//endif
 	if ($error==""){
 		// in Tabelle einfügen!
@@ -44,7 +43,7 @@ switch ($_POST['next_function']){
 		}//endif
 		else{
 			//no error in mysql
-			$OK=$lang['tax_inserted']." ".$lang['tax_id'].":".$_POST['tax_id'];
+			$OK=lang('tax_inserted')." ".$lang['tax_id'].":".$_POST['tax_id'];
 			// this is to empty the values
 			$tpl->assign("tax_id", "");
 			$tpl->assign("tax_name","");
@@ -57,7 +56,7 @@ switch ($_POST['next_function']){
 
 	case "change":
 		//this is diretly sent from taxes.php to change a specific tax
-		$tpl->assign("what_to_do", $lang['change_tax']);
+		$tpl->assign("what_to_do", lang('change_tax'));
 		$tpl->assign("next_function", "changed");
 		$result=rosine_database_query(
 			$rosine_db_query['get_taxs']. ' TAX_ID="'.$_POST['tax_id'].'" LIMIT 1',102);
@@ -88,13 +87,13 @@ switch ($_POST['next_function']){
 							 CHANGED="'.date("Y-m-d-H-i-s").'"
 							 WHERE TAX_ID="'.$_POST['oldnumber'].'"',104);
 		if ($result!=false) {
-			$OK.=$lang['tax_changed'];
+			$OK.=lang('tax_changed');
 		}
 
 
 	default:
 		// this file is 1. loaded, no inserted articles before
-		$tpl->assign("what_to_do", $lang['insert_new_tax']);
+		$tpl->assign("what_to_do", lang('insert_new_tax'));
 		$tpl->assign( "next_function", "new" );
 		// this is to empty the values
 		$tpl->assign("tax_id", "");

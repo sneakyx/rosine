@@ -7,9 +7,10 @@
 	*  This program is free software; you can redistribute it and/or modify it *
 	*  under the terms of the GNU General Public License as published by the   *
 	*  Free Software Foundation; version 2 of the License.                     *
-	*  date of this file: 2017-01-20  										   *
+	*  date of this file: 2017-07-05  										   *
 	\**************************************************************************/
 include ('inc/head.inc.php');
+
 if ($_GET['type']!="") {
 	/* this must be the first call of this file, so it is called by another
 	 * file, like main menue
@@ -34,7 +35,7 @@ if ($_POST['next_function']=="really_delete"){
 	$result=rosine_database_query($rosine_db_query['delete_'.$_POST['type']].' '.$type_short.'="'.$_POST[$id_name].'" LIMIT 1',101);
 	if ($result!=false){
 		//no error deleting line
-		$OK.=$lang[$_POST['type'].'_deleted']." ".$lang[$_POST['type'].'_number']." ".$_POST['number'];
+		$OK.=lang($_POST['type'].'_deleted')." ".lang($_POST['type'].'_number')." ".$_POST['number'];
 	}// endif $result !=false
 	
 }//endif really delete

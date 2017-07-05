@@ -7,7 +7,7 @@
 *  This program is free software; you can redistribute it and/or modify it *
 *  under the terms of the GNU General Public License as published by the   *
 *  Free Software Foundation; version 2 of the License.                     *
-*  date of this file: 2017-02-20  										    *
+*  date of this file: 2017-07-05  										    *
 \**************************************************************************/
 class Rosine_Paperwork_Template extends Rosine_Template 
 {
@@ -152,8 +152,6 @@ class Rosine_Paperwork_Template extends Rosine_Template
 					$row = new Rosine_Template();
 					$row->set_templateDir($this->templateDir);
 					$row->load($this->row_template);
-					$lang[] = $this->config['language'];
-					$lang = $row->loadLanguage($lang);
 					$row->assign('item_id', $f['POSI_ID']);
 					$row->assign('item_number', $f['ART_NUMBER']);
 					$row->assign('item_ammount', number_format($f['POSI_AMMOUNT'],2,",","."));

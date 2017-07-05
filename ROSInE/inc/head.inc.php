@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2017-01-20  										    *
+ *  date of this file: 2017-06-29  										    *
  \**************************************************************************/
 
 
@@ -42,7 +42,7 @@ function trimhtml (&$value, $key) {
 	if (is_numeric($newvalue)){
 		$value=floatval($newvalue);
 	}// change kommas in numbers to dot
-	
+	//echo "$key=$value <br>"; //just a test function!
 }// function trimhtml
 array_walk_recursive($_GET, 'trimhtml');
 array_walk_recursive ($_POST, 'trimhtml');

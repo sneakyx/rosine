@@ -7,15 +7,15 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2016-08-26  										    *
+ *  date of this file: 2017-07-05  										    *
  \**************************************************************************/
 
 $liste.='<table id="rosine_tabelle">';
 $liste.='<tr>
-		<th>'.$lang['location_id'].'</th>
-		<th>'.$lang['location_name'].'</th>
-		<th>'.$lang['delete'].'</th>
-		<th>'.$lang['change'].'</th>
+		<th>'.lang('location_id').'</th>
+		<th>'.lang('location_name').'</th>
+		<th>'.lang('delete').'</th>
+		<th>'.lang('change').'</th>
 	</tr>';
 
 while($f = $result->fetch_array()) {
@@ -23,11 +23,11 @@ while($f = $result->fetch_array()) {
 	if ($_POST['next_function']=="delete" & $_POST['loc_id']==$f['LOC_ID']){
 		//Sicherheitsabfrage!
 		$next_function="really_delete";
-		$delete=$lang['really_delete'];
+		$delete=lang('really_delete');
 	}//endif
 	else {
 		//Normale Funktion
-		$delete=$lang['delete'];
+		$delete=lang('delete');
 		$next_function="delete";
 	}// endelse
 	$liste.='<td>'.$f['LOC_ID'].'</td>'.
@@ -44,7 +44,7 @@ while($f = $result->fetch_array()) {
 			<form action="locations_change.php" method="post">
 				<input type="hidden" name="type" value="type">
 				<input type="hidden" name="next_function" value="change">
-				<input type="submit" title="'.$lang['change'].'" value="'.$lang['change'].'">
+				<input type="submit" title="'.lang('change').'" value="'.lang('change').'">
 				<input type="hidden" name="loc_id" value="'.$f['LOC_ID'].'">
 			</form>
 			</td>';

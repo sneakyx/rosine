@@ -281,21 +281,12 @@ class Rosine_Template
      * @return    array
      */
     public function loadLanguage($files) {
-        $this->languageFiles = $files;
-        // Versuchen, alle Sprachdateien einzubinden
-        for( $i = 0; $i < count( $this->languageFiles ); $i++ ) {
-            if ( !file_exists( $this->languageDir .$this->languageFiles[$i] ) ) {
-            	return false;
-            } else {
-                 include_once( $this->languageDir .$this->languageFiles[$i] );
-                 // Jetzt steht das Array $lang zur Verfügung
-            }
-        }
-        // Die Sprachvariablen mit dem Text ersetzen
-        $this->replaceLangVars($lang);
 
-        // $lang zurückgeben, damit $lang auch im PHP-Code verwendet werden kann
-        return $lang;
+        // Die Sprachvariablen mit dem Text ersetzen
+        $this->replaceLangVars();
+
+        // return is true, for old usage
+        return true;
     }
 
     /**
@@ -305,11 +296,11 @@ class Rosine_Template
      * @param     string $lang Die Sprachvariablen.
      * @uses      $template
      */
-    public function replaceLangVars($lang) {
+    public function replaceLangVars() {
 //        $this->template = preg_replace("/\{L_(.*)\}/isUe", "\$lang[strtolower('\\1')]", 
 //                                $this->template); deprecated
         $this->template =preg_replace_callback("/\{L_(.*)\}/isU", function ($m) use ($lang){
-        							return $lang[strtolower($m[1])];
+        							return lang ($m[1]);
     								},
         						$this->template);
         

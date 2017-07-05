@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2016-08-26  										    *
+ *  date of this file: 2017-07-05  										    *
  \**************************************************************************/
 $tpl->load("paperworklist.html");
 $lang = $tpl->loadLanguage($lang);
@@ -16,13 +16,13 @@ if ($_POST['next_function']=="really_delete"){
 	$query=rosine_correct_query($_POST['paperwork'], $rosine_db_query['delete_paperwork'],$_POST['paperwork']);
 	$result=rosine_database_query(str_replace("%ID%", $_POST['number'],$query),110);
 	if ($result!=false) {
-		$OK.=str_replace("%paperwork%", $lang[$_POST['paperwork']], $lang['paperwork_deleted'])." ".$lang['']." ".$_POST['number']."<br>";
+		$OK.=str_replace("%paperwork%", lang($_POST['paperwork']), lang('paperwork_deleted'))." ".$_POST['number']."<br>";
 	}// no error while delete
 
 	$query=rosine_correct_query($_POST['paperwork'], $rosine_db_query['delete_paperwork_positions'],$_POST['paperwork']);
 	$result=rosine_database_query(str_replace("%ID%", $_POST['number'],$query),111);
 	if ($result!=false) {
-		$OK.=str_replace("%paperwork%", $lang[$_POST['paperwork']], $lang['paperwork_positions_deleted'])." ".$lang['']." ".$_POST['number']."<br>";
+		$OK.=str_replace("%paperwork%", lang($_POST['paperwork']), lang('paperwork_positions_deleted'))." ".$_POST['number']."<br>";
 	}// no error while delete
 	
 }// really delete
@@ -72,13 +72,13 @@ $tpl->assign("max", $max_rows);
 if ($result!=false) {
 	$liste.='<table id="rosine_tabelle">';
 	$liste.='<tr>
-			<th>'.$lang[$_POST['paperwork'].'_number'].'</th>
-			<th>'.$lang['date'].'</th>		
-			<th>'.$lang['customer'].'</th>
-			<th>'.$lang['status'].'</th>		
-			<th>'.$lang['delete'].'</th>
-			<th>'.$lang['change'].'</th>
-			<th>'.$lang['print'].'</th>		
+			<th>'.lang($_POST['paperwork'].'_number').'</th>
+			<th>'.lang('date').'</th>		
+			<th>'.lang('customer').'</th>
+			<th>'.lang('status').'</th>		
+			<th>'.lang('delete').'</th>
+			<th>'.lang('change').'</th>
+			<th>'.lang('print').'</th>		
 		</tr>';
 
 	while($f = $result->fetch_array()) {
@@ -86,18 +86,18 @@ if ($result!=false) {
 		if ($_POST['next_function']=="delete" & $_POST['number']==$f[strtoupper($_POST['paperwork']).'_ID']){
 			//Sicherheitsabfrage!
 			$next_function="really_delete";
-			$delete=$lang['really_delete'];
+			$delete=lang('really_delete');
 		}// endif safety question
 		else {
 			//Normale Funktion
-			$delete=$lang['delete'];
+			$delete=lang('delete');
 			$next_function="delete";
 		}// no safety question
 		if ($f[$_POST['paperwork'].'_customer_private']=="1"){
-			$f['n_fn'].=" ".$lang['private'];
+			$f['n_fn'].=" ".lang('private');
 		}//endif
 		else {
-			$f['n_fn'].=" ".$lang['company'];
+			$f['n_fn'].=" ".lang('company');
 		}//endelse
 		$liste.="<td>".$f[strtoupper($_POST['paperwork']).'_ID']."</td>".
 				"<td>".$f[strtoupper($_POST['paperwork']).'_DATE']."</td>".
@@ -114,20 +114,20 @@ if ($result!=false) {
 				<form action="paperwork_change.php" method="post">
 					<input type="hidden" name="paperwork" value="'.$_POST['paperwork'].'">
 					<input type="hidden" name="next_function" value="change">
-					<input type="submit" title="'.$lang['change'].'" value="'.$lang['change'].'">
+					<input type="submit" title="'.lang('change').'" value="'.lang('change').'">
 					<input type="hidden" name="paperwork_id" value="'.$f[strtoupper($_POST['paperwork']).'_ID'].'">
 					<input type="hidden" name="contact_id" value="::'.$f[strtoupper($_POST['paperwork']).'_CUSTOMER'].'">		
 				</form>
 		</td>'; //ob das mit den zwei Doppelpunkten stimmt?
 		$liste.='<td><a href="paperwork_print.php?paperwork='.$_POST['paperwork'].'&paperwork_id='.
-				$f[strtoupper($_POST['paperwork']).'_ID'].'" target="_blank">'.$lang['print'].'</a></td>';
+				$f[strtoupper($_POST['paperwork']).'_ID'].'" target="_blank">'.lang('print').'</a></td>';
 		$liste.="</tr>";
 	}//endwhile
 	$liste.="</table>";
 	$result->close();
 }
 $tpl->assign('paperworklist', $liste);
-$tpl->assign("paperwork", $lang[$_POST['paperwork']]);
+$tpl->assign("paperwork", lang($_POST['paperwork']));
 $tpl->assign("paperwork_type", $_POST['paperwork']);
 $tpl->assign("OK", $OK);
 $tpl->assign("error", $error);

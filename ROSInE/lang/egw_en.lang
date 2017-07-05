@@ -1,1 +1,178 @@
-%1 added	rosine	en	%1 added
+page_buttons	rosine	en	{$backward} {$from} to {$to} - of {$max} {$foreward}
+just_write_invoices	 rosine	 en	 Just write invoices!
+// for main menue
+main_menue	 rosine	 en	 main menu
+configurations	 rosine	 en	 configuration
+offers	 rosine	 en	 offers
+make_new_offer	 rosine	 en	 generate new offer
+offer_list	 rosine	 en	 offer list
+orders	 rosine	 en	 orders
+input_new_order	 rosine	 en	 insert new order
+orders_list	 rosine	 en	 order list
+delivery_notes	 rosine	 en	 delivery notes
+generate_new_delivery_note	 rosine	 en	 generate new delivery note
+delivery_note_list	 rosine	 en	 delivery note list
+invoices	 rosine	 en	 invoices
+generate_new_invoice	 rosine	 en	 generate new invoice
+invoice_list	 rosine	 en	 invoice list
+payments	 rosine	 en	 payments
+input_new_payment	 rosine	 en	 book a new payment
+unpaid_invoices	 rosine	 en	 unpaied invoices
+dunnings	 rosine	 en	 dunnings
+articles	 rosine	 en	 articles
+article	 rosine	 en	 article
+taxes	 rosine	 en	 tax rate
+number	 rosine	 en	 number
+stock_locations	 rosine	 en	 stock location
+generate_articles	 rosine	 en	 generate articles
+articles_list	 rosine	 en	 article list
+// for articles
+insert_new_article	rosine	en	insert new article
+insert_again_new_article	rosine	en	insert more articles
+change_article	rosine	en	change article
+notes	rosine	en	notes
+back	rosine	en	back
+article_number	 rosine	 en	 article number
+unity	 rosine	 en	 unity
+article_name	 rosine	 en	 material short text
+price	 rosine	 en	 price
+tax	rosine	en	tax
+stock_location	 rosine	 en	 stock location
+stock	 rosine	 en	 stock
+
+// error messages
+number_missing	 rosine	 en	 number is missing
+name_missing	 rosine	 en	 name is missing
+
+// OK messages
+article_inserted	 rosine	 en	 article was inserted
+article_changed	 rosine	 en	 article was changed
+article_deleted	 rosine	 en	 article was eleted
+// for lists
+delete	 rosine	 en	 delete
+change	 rosine	 en	 change
+really_delete	 rosine	 en	 really delete
+make_new	 rosine	 en	 generate new
+
+// for taxes
+tax_deleted	 rosine	 en	 tax rate was deleted
+tax_id	 rosine	 en	 tax id
+tax_name	 rosine	 en	 tax name
+tax_percentage	 rosine	 en	 percentage
+insert_new_tax	 rosine	 en	 insert new tax
+insert_again_new_tax	 rosine	 en	 insert more tax rates
+tax_changed	 rosine	 en	 tax rate was changed
+tax_inserted	 rosine	 en	 tax rate was inserted
+change_tax	 rosine	 en	 change tax rate
+
+// for locations
+location_deleted	 rosine	 en	 stock location was deleted
+location_id	 rosine	 en	 stock location id
+location_name	 rosine	 en	 stock location name
+insert_new_location	 rosine	 en	 insert new stock location
+insert_again_new_location	 rosine	 en	 insert more stock locations
+location_changed	 rosine	 en	 stock location was changed
+location_inserted	 rosine	 en	 stock location was inserted
+change_location	 rosine	 en	 change stock location
+
+cancel	 rosine	 en	 cancel
+next_step	 rosine	 en	 next
+what_s_next	 rosine	 en	 And now?
+favorite_articles	 rosine	 en	 favorite articles
+offer	 rosine	 en	 offer
+order	 rosine	 en	 order
+delivery	 rosine	 en	 delivery
+invoice	 rosine	 en	 invoice
+customer	 rosine	 en	 customer
+insert_into_paperwork	rosine	en	insert article in {$paperwork}
+change_paperwork']='change {$paperwork}';
+paperwork_for_customer']='{$paperwork} for customer';
+ammount	 rosine	 en	 ammount
+nothing_found	 rosine	 en	 nothing found!
+paperwork_inserted']='{$paperwork} inserted';
+added']=' added!';
+numbers_corrected	 rosine	 en	 numbers were corrected
+paperwork_positions_deleted	 rosine	 en	 deleted articles in %paperwork%
+paperwork_deleted	 rosine	 en	 %paperwork% deleted 
+posi_id	 rosine	 en	 position id
+ready	 rosine	 en	 ready
+print	 rosine	 en	 print
+print_again	 rosine	 en	 print again
+offer_number	 rosine	 en	 number
+private	 rosine	 en	 (private)
+company	 rosine	 en	 (company)
+date	 rosine	 en	 date
+status	 rosine	 en	 status
+add_articles_from_other_tables	 rosine	 en	 add articles from other tables
+from_paperwork	rosine	en	from %paperwork%: %ID1%
+change_item_in_paperwork	rosine	en	change article in {$paperwork}
+item_text	 rosine	 en	 item text
+position	 rosine	 en	 position
+plus	 rosine	 en	 plus
+item_changed	 rosine	 en	 item was changed!
+customer_list	 rosine	 en	 customer list
+more_functions	 rosine	 en	 more functions
+functions	 rosine	 en	 Functions
+preview	 rosine	 en	 preview
+customers_with_most_sales	 rosine	 en	 All customers sorted by sales (not working yet)
+customers_with_most_paperwork	rosine	en	All customers sorted with most {$paperwork}
+sorted_in_alphabetic_order	rosine	en	All customers sorted in alphabetic order
+last_customers	 rosine	 en	 last used customers
+customer_name_or_number	 rosine	 en	 customer's name oder number
+choose_invoice_for_payment	 rosine	 en	 chose invoice for payment
+insert_payment	 rosine	 en	 insert payment
+unpayed_ammount	 rosine	 en	 unpayed ammount: 
+from	 rosine	 en	 from
+and	 rosine	 en	 and
+payment_inserted	 rosine	 en	 payment was inserted!
+payed_money	 rosine	 en	 paied ammount
+invoice_payed	 rosine	 en	 invoice is fully paied!
+ammount_due	 rosine	 en	 ammount due
+terms	 rosine	 en	 terms
+ammount_netto	 rosine	 en	 netto ammount
+ammount_tax	 rosine	 en	 tax
+ammount_brutto	 rosine	 en	 brutto ammount
+customer_id	 rosine	 en	 customer id
+work	 rosine	 en	 work
+please_choose_paperwork	 rosine	 en	 Please choose the next task!
+money	 rosine	 en	 Amount
+what_is_packed	 rosine	 en	 The following articles have to be packed!
+more_fields	 rosine	 en	 more fields
+save	 rosine	 en	 save
+select_note	 rosine	 en	 select note
+nothing_to_show	 rosine	 en	 Nothing to show!
+tax_nr	 rosine	 en	 Tax ID:
+invoice_number	 rosine	 en	 ID
+offer_number	 rosine	 en	 ID
+order_number	 rosine	 en	 ID
+delivery_number	 rosine	 en	 ID
+all_customers_with_open_offers	 rosine	 en	 Only customers with open offers
+all_customers_with_open_orders	 rosine	 en	 Only customers with open orders
+all_customers_with_open_deliveries	 rosine	 en	 Only customers with open deliveries
+all_customers_with_open_invoices	 rosine	 en	 Only customers with open invoices
+drafts	 rosine	 en	 drafts
+draft	 rosine	 en	 draft
+
+// for configuration
+user	 rosine	 en	 User
+user_id	 rosine	 en	 User ID
+value	 rosine	 en	 Value
+config	 rosine	 en	 Configuration
+everybody	 rosine	 en	 Everybody
+no_user	 rosine	 en	 no valid user
+standard_value	 rosine	 en	 standard value
+deleted	 rosine	 en	 deleted
+missing	 rosine	 en	 %value% missing! 
+change_config	 rosine	 en	 change config
+insert_config	 rosine	 en	 insert_config
+
+// for sending emails
+send_email	 rosine	 en	 send email
+send_email_for	 rosine	 en	 Send E-Mail for
+email_sent	 rosine	 en	 email sent
+to	 rosine	 en	 to
+cc	 rosine	 en	 cc
+bcc	 rosine	 en	 bcc
+unit_price	 rosine	 en	 unit price
+description	 rosine	 en	 description
+?>

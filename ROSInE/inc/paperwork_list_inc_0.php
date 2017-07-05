@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2017-02-22  										    *
+ *  date of this file: 2017-07-05  										    *
  \**************************************************************************/
 
 $tpl->load("paperworklist.html");
@@ -18,13 +18,13 @@ if ($_POST['next_function']=="really_delete"){
 	$query=rosine_correct_query($_POST['paperwork'], $rosine_db_query['delete_paperwork'],$_POST['paperwork']);
 	$result=rosine_database_query(str_replace("%ID%", $_POST['number'],$query),110);
 	if ($result!=false) {
-		$OK.=str_replace("%paperwork%", $lang[$_POST['paperwork']], $lang['paperwork_deleted'])." ".$lang['']." ".$_POST['number']."<br>";
+		$OK.=str_replace("%paperwork%", lang($_POST['paperwork']), lang('paperwork_deleted'))." ".$_POST['number']."<br>";
 	}// no error while delete
 
 	$query=rosine_correct_query($_POST['paperwork'], $rosine_db_query['delete_paperwork_positions'],$_POST['paperwork']);
 	$result=rosine_database_query(str_replace("%ID%", $_POST['number'],$query),111);
 	if ($result!=false) {
-		$OK.=str_replace("%paperwork%", $lang[$_POST['paperwork']], $lang['paperwork_positions_deleted'])." ".$lang['']." ".$_POST['number']."<br>";
+		$OK.=str_replace("%paperwork%", lang($_POST['paperwork']), lang('paperwork_positions_deleted'))." ".$_POST['number']."<br>";
 	}// no error while delete
 	
 }// really delete
@@ -72,12 +72,12 @@ $tpl->assign("max", $max_rows);
 if ($result!=false) {
 	$liste.='<table id="rosine_tabelle">';
 	$liste.='<tr>
-			<th>'.$lang[$_POST['paperwork'].'_number'].'</th>
-			<th>'.$lang['date'].'</th>		
-			<th>'.$lang['customer'].'</th>
-			<th>'.$lang['money'].'</th>
-			<th>'.$lang['status'].'</th>		
-			<th colspan="5">'.$lang['functions'].'</th>		
+			<th>'.lang($_POST['paperwork'].'_number').'</th>
+			<th>'.lang('date').'</th>		
+			<th>'.lang('customer').'</th>
+			<th>'.lang('money').'</th>
+			<th>'.lang('status').'</th>		
+			<th colspan="5">'.lang('functions').'</th>		
 		</tr>';
 
 	while($f = $result->fetch_array()) {
@@ -90,19 +90,19 @@ if ($result!=false) {
 			if ($_POST['next_function']=="delete" & $_POST['number']==$f[strtoupper($_POST['paperwork']).'_ID']){
 				//Sicherheitsabfrage!
 				$next_function="really_delete";
-				$delete=$lang['really_delete'];
+				$delete=lang('really_delete');
 			}// endif safety question
 			else {
 				//Normale Funktion
-				$delete=$lang['delete'];
+				$delete=lang('delete');
 				$next_function="delete";
 			}// no safety question
 		}// not invoice or invoice and last number, so can be deleted
 		if ($f[strtoupper($_POST['paperwork'].'_customer_private')]=="1"){
-			$f['n_fn']=substr($f['n_fn'],0,35)." ".$lang['private'];
+			$f['n_fn']=substr($f['n_fn'],0,35)." ".lang('private');
 		}// paperwork for private address
 		else{ 
-			$f['n_fn']=substr($f['org_name'],0,35)." ".$lang['company'];
+			$f['n_fn']=substr($f['org_name'],0,35)." ".lang('company');
 		}//paperwork for company address
 		
 		$liste.="<td>".$f[strtoupper($_POST['paperwork']).'_ID']."</td>".
@@ -117,11 +117,11 @@ if ($result!=false) {
 		
 		if ($next_function=='really_delete'){
 			$liste.='<img src="../pixelegg/images/error.png"
-						alt="'.$lang[$next_function].'?" title="'.$lang[$next_function].'?" width="70%">';
+						alt="'.lang($next_function).'?" title="'.lang($next_function).'?" width="70%">';
 		}// safety question
 		elseif ($next_function=='delete'){
 			$liste.='<img src="../pixelegg/images/trash.png"
-						alt="'.$lang[$next_function].'?" title="'.$lang[$next_function].'?" width="75%">';
+						alt="'.lang($next_function).'?" title="'.lang($next_function).'?" width="75%">';
 		}//before safety question
 		else {
 			
@@ -133,7 +133,7 @@ if ($result!=false) {
 					<td><a href="paperwork_change.php?paperwork='.$_POST['paperwork'].'&paperwork_id=';
 		$liste.=$f[strtoupper($_POST['paperwork']).'_ID'].'&next_function=overview&contact_id=::'.$f[strtoupper($_POST['paperwork']).'_CUSTOMER'].'">
 						<img src="../pixelegg/images/edit.png" 
-						alt="'.$lang['change'].'" title="'.$lang['change'].'" width="75%"></a></td>
+						alt="'.lang('change').'" title="'.lang('change').'" width="75%"></a></td>
 			';
 		}// if paperwork should be able to be deleted or changed
 		else {
@@ -142,23 +142,23 @@ if ($result!=false) {
 		$liste.='<td><a href="paperwork_print.php?paperwork='.$_POST['paperwork'].'&print=0&paperwork_id=';
 		$liste.=$f[strtoupper($_POST['paperwork']).'_ID'].'" target="_blank">
 						<img src="../pixelegg/images/prieview.png" 
-						alt="'.$lang['preview'].'" title="'.$lang['preview'].'" width="75%"></a></td>';
+						alt="'.lang('preview').'" title="'.lang('preview').'" width="75%"></a></td>';
 		$liste.='<td><a href="paperwork_print.php?paperwork='.$_POST['paperwork'].'&paperwork_id=';
 		if ($f[strtoupper($_POST['paperwork']).'_PRINTED']=="1") {
 				$liste.=$f[strtoupper($_POST['paperwork']).'_ID'].'" target="_blank">
 						<img src="../pixelegg/images/print.png" style="opacity: 0.5;filter: alpha(opacity=50);" 
-						alt="'.$lang['print_again'].'" title="'.$lang['print_again'].'" width="75%"></a></td>';
+						alt="'.lang('print_again').'" title="'.lang('print_again').'" width="75%"></a></td>';
 		} // had been printed
 		else {
 			$liste.=$f[strtoupper($_POST['paperwork']).'_ID'].'" target="_blank">
-					<img src="../pixelegg/images/print.png" alt="'.$lang['print'].
-			'" title="'.$lang['print'].'" width="75%"></a></td>';
+					<img src="../pixelegg/images/print.png" alt="'.lang('print').
+			'" title="'.lang('print').'" width="75%"></a></td>';
 		}// had not been printed
 		if ($config['email_'.$_POST['paperwork']]!="none" && $config['email_'.$_POST['paperwork']]!=""){
 			$liste.='<td><a href="paperwork_mail.php?paperwork='.$_POST['paperwork'].'&paperwork_id=';
 			$liste.=$f[strtoupper($_POST['paperwork']).'_ID'].'&file_type='.$config['email_'.$_POST['paperwork']].'">
 							<img src="../pixelegg/images/email.png" 
-							alt="'.$lang['send_email'].'" title="'.$lang['send_email'].'" width="75%"></a></td>';
+							alt="'.lang('send_email').'" title="'.lang('send_email').'" width="75%"></a></td>';
 		}// the can is an template to use	
 		$liste.="</tr>";
 	}//endwhile
@@ -166,7 +166,7 @@ if ($result!=false) {
 	$result->close();
 }//endwhile
 $tpl->assign('paperworklist', $liste);
-$tpl->assign("paperwork", $lang[$_POST['paperwork']]);
+$tpl->assign("paperwork", lang($_POST['paperwork']));
 $tpl->assign("paperwork_type", $_POST['paperwork']);
 $tpl->assign("OK", $OK);
 $tpl->assign("error", $error);

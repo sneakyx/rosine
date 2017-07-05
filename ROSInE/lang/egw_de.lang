@@ -1,0 +1,180 @@
+main_menue	rosine	de	Hauptmenü
+page_buttons	rosine	de	{$backward} {$from} bis {$to} von insgesamt {$max} {$foreward}
+just_write_invoices	rosine	de	Rechnungen einfach schreiben!
+// for main menue
+main_menue	rosine	de	Hauptmenü
+configurations	rosine	de	Einstellungen
+offers	rosine	de	Angebote
+make_new_offer	rosine	de	Neues Angebot erstellen
+offer_list	rosine	de	Angebotsliste
+orders	rosine	de	Bestellungen
+input_new_order	rosine	de	Neue Bestellung eingeben
+orders_list	rosine	de	Liste der Bestellungen
+delivery_notes	rosine	de	Lieferscheine
+generate_new_delivery_note	rosine	de	Neuen Lieferschein anlegen
+delivery_note_list	rosine	de	Lieferscheinliste
+invoices	rosine	de	Rechnungen
+generate_new_invoice	rosine	de	Neue Rechnung anlegen
+invoice_list	rosine	de	Rechnungsliste
+payments	rosine	de	Zahlungen
+input_new_payment	rosine	de	Zahlungseingänge verbuchen
+unpaid_invoices	rosine	de	offene Rechnungen
+dunnings	rosine	de	Mahnungen
+articles	rosine	de	Artikel
+article	rosine	de	Artikel
+taxes	rosine	de	Steuersätze
+number	rosine	de	Nummer
+stock_locations	rosine	de	Lagerorte
+generate_articles	rosine	de	Artikel erstellen
+articles_list	rosine	de	Artikelliste
+// for articles
+insert_new_article	rosine	de	Neuen Artikel einfügen
+insert_again_new_article	rosine	de	Weiteren Artikel einfügen
+change_article	rosine	de	Artikel ändern
+notes	rosine	de	Hinweise
+article_number	rosine	de	Artikelnummer
+unity	rosine	de	Einheit
+article_name	rosine	de	Artikelbezeichnung
+price	rosine	de	Preis
+tax	rosine	de	MwSt
+stock_location	rosine	de	Lagerort
+stock	rosine	de	Bestand
+
+// error messages
+number_missing	rosine	de	Nummer fehlt
+name_missing	rosine	de	Name fehlt
+
+// OK messages
+article_inserted	rosine	de	Artikel eingefügt
+article_changed	rosine	de	Artikel geändert!
+article_deleted	rosine	de	Artikel gelöscht
+// for lists
+delete	rosine	de	löschen
+change	rosine	de	ändern
+really_delete	rosine	de	wirklich löschen
+make_new	rosine	de	neu erstellen
+
+// for taxes
+tax_deleted	rosine	de	Steuersatz gelöscht
+tax_id	rosine	de	Nummer
+tax_name	rosine	de	Bezeichnung
+tax_percentage	rosine	de	Prozentsatz
+insert_new_tax	rosine	de	Neue Steuer einfügen
+insert_again_new_tax	rosine	de	Weitere Steuer einfügen
+tax_changed	rosine	de	Steuersatz geändert
+tax_inserted	rosine	de	Steuersatz eingefügt
+change_tax	rosine	de	Steuersatz ändern
+
+// for locations
+location_deleted	rosine	de	Lagerort gelöscht
+location_id	rosine	de	Lagernummer
+location_name	rosine	de	Lagername
+insert_new_location	rosine	de	Neuen Lagerort hinzufügen
+insert_again_new_location	rosine	de	Weiteren Lagerort einfügen
+location_changed	rosine	de	Lagerort geändert
+location_inserted	rosine	de	Lagerort eingefügt
+change_location	rosine	de	Lagerort ändern
+
+
+//for offers / orders etc
+cancel	rosine	de	Abbrechen
+next_step	rosine	de	Weiter
+what_s_next	rosine	de	Und jetzt?
+favorite_articles	rosine	de	Beliebte Artikel
+offer	rosine	de	Angebot
+order	rosine	de	Bestellung
+delivery	rosine	de	Lieferung
+invoice	rosine	de	Rechnung
+customer	rosine	de	Kunde
+insert_into_paperwork	rosine	de	Artikel in {$paperwork} einfügen
+change_paperwork	rosine	de	{$paperwork} ändern
+paperwork_for_customer	rosine	de	{$paperwork} für Kunde
+ammount	rosine	de	Menge
+nothing_found	rosine	de	nichts gefunden
+paperwork_inserted	rosine	de	{$paperwork} eingefügt
+added']=' hinzugefügt!';
+numbers_corrected	rosine	de	Nummern korrigiert
+paperwork_positions_deleted	rosine	de	Artikel in %paperwork% gelöscht 
+paperwork_deleted	rosine	de	%paperwork% gelöscht 
+posi_id	rosine	de	Position
+ready	rosine	de	Fertig
+print	rosine	de	drucken
+print_again	rosine	de	nochmal drucken
+offer_number	rosine	de	Nummer
+private	rosine	de	(Privat)
+company	rosine	de	(Firma)
+date	rosine	de	Datum
+status	rosine	de	Status
+add_articles_from_other_tables	rosine	de	Artikel aus anderen Tabellen einfügen
+from_paperwork	rosine	de	Aus %paperwork%: %ID1%
+change_item_in_paperwork	rosine	de	{$paperwork}-Artikel ändern
+item_text	rosine	de	Artikeltext
+position	rosine	de	Position
+plus	rosine	de	zzgl.
+item_changed	rosine	de	Position geändert!
+customer_list	rosine	de	Kundenliste
+more_functions	rosine	de	weitere Funktionen
+functions	rosine	de	Funktionen
+preview	rosine	de	Vorschau
+customers_with_most_sales	rosine	de	Alle Kunden sortiert nach Umsatz (nor working yet!)
+customers_with_most_paperwork	rosine	de	Alle Kunden sortiert nach den meisten {$paperwork}
+sorted_in_alphabetic_order	rosine	de	Alle Kunden alphabetisch sortiert
+last_customers	rosine	de	Die zuletzt verwendeten Kunden
+customer_name_or_number	rosine	de	Kundenname oder Nummer
+choose_invoice_for_payment	rosine	de	Zahlung eintragen
+insert_payment	rosine	de	Zahlung einfügen
+unpayed_ammount	rosine	de	unbezahlter Betrag: 
+from	rosine	de	von
+and	rosine	de	und
+payment_inserted	rosine	de	Zahlung eingefügt!
+payed_money	rosine	de	Zahlung
+invoice_payed	rosine	de	Rechnung ist bezahlt!
+ammount_due	rosine	de	Betrag
+terms	rosine	de	Bedingungen
+ammount_netto	rosine	de	Gesamt (netto)
+ammount_tax	rosine	de	MwSt
+ammount_brutto	rosine	de	Gesamt
+customer_id	rosine	de	Kundennummer
+work	rosine	de	bearbeiten
+please_choose_paperwork	rosine	de	Bitte wählen Sie die Aufgabe aus!
+money	rosine	de	Betrag
+what_is_packed	rosine	de	Folgendes muss noch eingepackt und gespeichert werden!
+more_fields	rosine	de	weitere Felder
+save	rosine	de	speichern
+select_note	rosine	de	Hinweistext auswählen
+nothing_to_show	rosine	de	Nichts vorhanden!
+tax_nr	rosine	de	Steuernummer:
+invoice_number	rosine	de	Nummer
+offer_number	rosine	de	Nummer
+order_number	rosine	de	Nummer
+delivery_number	rosine	de	Nummer
+all_customers_with_open_offers	rosine	de	Nur Kunden mit offenen Angeboten
+all_customers_with_open_orders	rosine	de	Nur Kunden mit offenen Bestellungen
+all_customers_with_open_deliveries	rosine	de	Nur Kunden mit offenen Lieferungen
+all_customers_with_open_invoices	rosine	de	Nur Kunden mit offenen Rechnungen
+drafts	rosine	de	Vorlagen
+draft	rosine	de	Vorlage
+
+// for configuration
+user	rosine	de	Benutzer
+user_id	rosine	de	Benutzernummer
+value	rosine	de	Wert
+config	rosine	de	Einstellung
+everybody	rosine	de	Jeder
+no_user	rosine	de	keiner
+standard_value	rosine	de	Standardwert
+deleted	rosine	de	gelöscht
+missing	rosine	de	%value% fehlt! 
+change_config	rosine	de	Konfiguration ändern
+insert_config	rosine	de	Konfiguration einfügen
+config_changed	rosine	de	Konfiguration geändert
+
+// for sending emails
+send_email	rosine	de	E-Mail senden
+send_email_for	rosine	de	E-Mail senden für
+email_sent	rosine	de	E-Mail gesendet
+to	rosine	de	An
+cc	rosine	de	Kopie
+bcc	rosine	de	Blindkopie
+unit_price	rosine	de	Einzelpreis
+description	rosine	de	Beschreibung

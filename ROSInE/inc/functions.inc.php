@@ -8,7 +8,7 @@
 *  This program is free software; you can redistribute it and/or modify it *
 *  under the terms of the GNU General Public License as published by the   *
 *  Free Software Foundation; version 2 of the License.                     *
-*  date of this file: 2017-02-13   		 								*
+*  date of this file: 2017-07-05    		 								*
 \**************************************************************************/
 
 
@@ -68,12 +68,12 @@ function rosine_create_items_list($singular,$ID){
 			if ($result!=false) {
 				$liste="<table id='rosine_tabelle'>";
 				$liste.="<tr><th></th>
-						<th>".$GLOBALS['lang']['posi_id']."<br> ".$GLOBALS['lang']['delete']."</th>
-						<th width='55%'>".$GLOBALS['lang']['article']."</th>
-						<th>".$GLOBALS['lang']['ammount']."</th>
-						<th>".$GLOBALS['lang']['price']."</th></tr>";
+						<th>".lang('posi_id')."<br> ".lang('delete')."</th>
+						<th width='55%'>".lang('article')."</th>
+						<th>".lang('ammount')."</th>
+						<th>".lang('price')."</th></tr>";
 				while($f = $result->fetch_array()) {
-					$liste.='<td><p class="rosine_back" style="margin:0px;"><a href="paperwork_item_change.php?paperwork='.$singular.'&paperwork_id='.$ID.'&posi_id='.$f['POSI_ID'].'" >'.$GLOBALS['lang']['change'].'</a></p></td>';
+					$liste.='<td><p class="rosine_back" style="margin:0px;"><a href="paperwork_item_change.php?paperwork='.$singular.'&paperwork_id='.$ID.'&posi_id='.$f['POSI_ID'].'" >'.lang('change').'</a></p></td>';
 					$liste.='<td><input type="checkbox" name="delete['.$f['POSI_ID'].']" value="'.$f['POSI_ID'].'"> '.$f['POSI_ID']."</td>".
 							"<td><center>".$f['ART_NUMBER'].': '.$f['POSI_TEXT'].'</center></td>
 									<td>'.str_replace(".000", "", $f['POSI_AMMOUNT']).' '.$f['POSI_UNIT'].'</td>
@@ -149,11 +149,11 @@ function rosine_add_paperworklist($singular,$customer){
 	}// if it is draft, use also drafts for every customer
 	$result=rosine_database_query( $query, 406);
 	$zeile='<select name="'.$singular.'">';
-	$zeile.='<option selected value="" >'.$GLOBALS['lang'][$singular].'</option>';
+	$zeile.='<option selected value="" >'.lang($singular).'</option>';
 	if ($result!=false){
 		while ($f=$result->fetch_array()){
 			$zeile.='<option value="'.$f[$singular.'_id'].'" title="'.str_replace(",000","",str_replace(".",",",str_replace(',', '; ', $f['contents']))).
-			'">'.$GLOBALS['lang'][$singular].':'.$f[$singular.'_id'].' - '.$GLOBALS['lang']['articles'].
+			'">'.lang($singular).':'.$f[$singular.'_id'].' - '.lang('articles').
 			':'.$f['ammount'].' ('.$f['money'].'€)</option>';
 
 		}//end while

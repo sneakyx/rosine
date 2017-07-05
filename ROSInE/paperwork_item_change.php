@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2016-12-29  										    *
+ *  date of this file: 2017-07-05  										    *
  \**************************************************************************/
 include ('inc/head.inc.php');
 
@@ -16,7 +16,6 @@ switch ($_POST['next_function']){
 	case "changed":
 		// form was filled, now it has to be changed
 		$tpl->load("paperwork_item_changed.html");
-		$lang = $tpl->loadLanguage($lang);
 		
 		$set='POSI_AMMOUNT='.$_POST['posi_ammount'].', POSI_UNIT="'.$_POST['posi_unit'].'", POSI_PRICE='.$_POST['posi_price'].
 			', POSI_LOCATION='.$_POST['posi_location'].',POSI_SERIAL="'.$_POST['posi_serial'].'", POSI_TEXT="'.$_POST['posi_text'].
@@ -27,9 +26,13 @@ switch ($_POST['next_function']){
 		$query=str_replace("%set%", $set, $query);
 		$result=rosine_database_query($query,101);
 		if ($result!=false) {
-			$OK.=$lang['item_changed'].' ' .$lang[$_POST['paperwork']].': '.$_POST['paperwork_id'].' - '.$lang['position'].': '.$_POST['posi_id'];
+			$OK.=lang('item_changed').' ' .
+				lang($_POST['paperwork']).': '.
+				$_POST['paperwork_id'].' - '.
+				lang('position').': '.
+				$_POST['posi_id'];
 		}//no error in mysql
-		$tpl->assign("what_to_do", $lang['item_changed']);
+		$tpl->assign("what_to_do", lang('item_changed'));
 		$tpl->assign("paperwork_id", $_POST['paperwork_id']);
 		$tpl->assign("customer_id", $_POST['customer_id']);
 		$tpl->assign("paperworks", rosine_get_plural($_POST['paperwork']));
@@ -64,8 +67,8 @@ switch ($_POST['next_function']){
 		$tpl->assign('selector_stock', rosine_create_location_list($f['POSI_LOCATION']));
 		$tpl->assign('hidden_fields',$hidden);
 		$_POST['next_function']="changed";
-		$tpl->assign("what_to_do", $lang['change_item_in_paperwork']);
-		$tpl->assign('paperwork', $lang[$_GET['paperwork']]);
+		$tpl->assign("what_to_do", lang('change_item_in_paperwork'));
+		$tpl->assign('paperwork', lang($_GET['paperwork']));
 		$tpl->assign("paperwork_id", $_GET['paperwork_id']);
 		$tpl->assign ("posi_id",$_GET['posi_id']);
 		

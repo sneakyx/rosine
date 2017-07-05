@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2017-02-20  										    *
+ *  date of this file: 2017-07-05  										    *
  \**************************************************************************/
 
 /*
@@ -25,8 +25,7 @@ include ('inc/head.inc.php');
 */
 
 $tpl->load($config['print_template_'.$_GET['paperwork']]);
-$lang = $tpl->loadLanguage($lang);
-$tpl->assign('paperwork', $lang[$_GET['paperwork']]);
+
 
 // get fields from database (just the fields for the full page)
 $tpl->set_config($config);

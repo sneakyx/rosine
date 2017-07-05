@@ -7,7 +7,7 @@
 *  This program is free software; you can redistribute it and/or modify it *
 *  under the terms of the GNU General Public License as published by the   *
 *  Free Software Foundation; version 2 of the License.                     *
-*  date of this file: 2017-02-13  										    *
+*  date of this file: 2017-07-05  										    *
 \**************************************************************************/
 // paperwork list, add items etc
 switch ($_POST['next_function']) {
@@ -32,7 +32,7 @@ switch ($_POST['next_function']) {
 				substr($_POST['contact_id'],2).
 				','.$customer_private.',0,"empty","'.date("Y-m-d-H-i-s").'","'.$_POST["note_text"].'")',0);
 				if ($result!=false)
-					$OK.=$lang['paperwork_inserted'];
+					$OK.=lang('paperwork_inserted');
 						
 					/*
 					 * although case insert ends here, after inserting empty paperwork,
@@ -44,7 +44,7 @@ switch ($_POST['next_function']) {
 	case "overview":
 	case "change":
 		$tpl->load("paperworks.html");
-		$lang[] = $config['language'];
+
 		$lang = $tpl->loadLanguage($lang);
 
 		$input_fields.='<input type="hidden" name="contact_id" value="'.$_POST['contact_id'].'"> ';
@@ -68,10 +68,10 @@ switch ($_POST['next_function']) {
 				switch ($result['lines']){
 					//how many lines were returned?
 					case 0:
-						$_POST['articles'][$i].=' '.$lang['not_found'];
+						$_POST['articles'][$i].=' '.lang('not_found');
 						break;
 					case 1:
-						$_POST['articles'][$i]= $result['ART_NAME'].$lang['added'];
+						$_POST['articles'][$i]= $result['ART_NAME'].lang('added');
 						$_POST['ammount'][$i].= " ".$result['ART_UNIT'];
 						break;
 					default:
@@ -81,8 +81,8 @@ switch ($_POST['next_function']) {
 				}//end switch $result['lines']
 			}// if field is not empty
 			else {
-				$_POST['articles'][$i]=$lang['article'].($i+1);
-				$_POST['ammount'][$i]=$lang['ammount'];
+				$_POST['articles'][$i]=lang('article').($i+1);
+				$_POST['ammount'][$i]=lang('ammount');
 
 			}// if field is empty
 			$input_fields.='<div class="rosine_paperwork_input_line">';
@@ -180,7 +180,6 @@ switch ($_POST['next_function']) {
 	default:
 		// Step 0 - show address to choose
 		$tpl->load("paperworks_select_customer.html");
-		$lang[] = $config['language'];
 		$lang = $tpl->loadLanguage($lang);
 
 		// search settings
@@ -288,10 +287,10 @@ switch ($_POST['next_function']) {
 					}//if paperwork list is selected
 					if ($f['n_family']!="")
 						$input_fields.='<button name="contact_id" value="P-'.$f["contact_id"].
-						'" type="submit" >'.$f['n_fn'].' - '.$f['adr_two_locality'].' ['.$f['contact_id'].'] '.$lang['private'].$money.'</button>';
+						'" type="submit" >'.$f['n_fn'].' - '.$f['adr_two_locality'].' ['.$f['contact_id'].'] '.lang('private').$money.'</button>';
 						if ($f['org_name']!="")
 							$input_fields.='<button name="contact_id" value="F-'.$f["contact_id"].
-							'" type="submit" >'.$f['org_name'].' - '.$f['adr_one_locality'].' ['.$f['contact_id'].'] '.$lang['company'].$money.'</button>';
+							'" type="submit" >'.$f['org_name'].' - '.$f['adr_one_locality'].' ['.$f['contact_id'].'] '.lang('company').$money.'</button>';
 							$input_fields.="&nbsp;|&nbsp; ";
 				}//endwhile
 				$result->close();
@@ -321,9 +320,9 @@ switch ($_POST['next_function']) {
 $tpl->assign("OK", $OK);
 $tpl->assign("error", $error);
 $tpl->assign("input_fields", $input_fields);
-$tpl->assign("paperwork", $lang[$_POST['paperwork']]);
-$tpl->assign("additional", '<h3>'.$lang['favorite_articles'].'</h3>
-	{$input_favorites}<h3>'.$lang["add_articles_from_other_tables"].'</h3>
+$tpl->assign("paperwork", lang($_POST['paperwork']));
+$tpl->assign("additional", '<h3>'.lang('favorite_articles').'</h3>
+	{$input_favorites}<h3>'.lang("add_articles_from_other_tables").'</h3>
 		{$offer_list} {$order_list} {$delivery_list} {$drafts_list}');
 switch ($_POST['paperwork']) {
 	case "invoice":

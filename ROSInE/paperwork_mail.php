@@ -8,7 +8,7 @@
 *  This program is free software; you can redistribute it and/or modify it *
 *  under the terms of the GNU General Public License as published by the   *
 *  Free Software Foundation; version 2 of the License.                     *
-*  date of this file: 2017-02-28 										   *
+*  date of this file: 2017-07-05 										   *
 \**************************************************************************/
 use EGroupware\Api;
 include ('inc/head.inc.php');
@@ -17,15 +17,14 @@ switch ($_POST['next_function']) {
 	
 	case "sent":
 		$tpl->load("paperwork_email_sent.html");
-		$lang[] = $config['language'];
-		$lang = $tpl->loadLanguage($lang);	
  		$emailsend = new Api\Mailer();
  		$emailsend->setFrom("info@rothaarsystems.de");
  		$emailsend->addAddress($_POST['to']);
  		$emailsend->addAddress($_POST['cc'],"","cc");
  		$emailsend->addAddress($_POST['bcc'],"","bcc");
  		$emailsend->setBody($_POST['emailtext']);
- 		$emailsend->addHeader("subject",$lang[$_POST['paperwork']]."  ".$_POST['paperwork_id']);
+ 		$emailsend->addHeader("subject",lang($_POST['paperwork']).
+ 					"  ".$_POST['paperwork_id']);
  		$emailsend->send();
  		$tpl->assign("paperwork_id", $_POST['paperwork_id']);
  		$tpl->assign("paperwork_type", $_POST["paperwork"]);
@@ -36,10 +35,9 @@ switch ($_POST['next_function']) {
 		 * show E-Mail before send
 		 */
 		$tpl->load("paperwork_email.html");
-		$lang[] = $config['language'];
-		$lang = $tpl->loadLanguage($lang);
-		$tpl->assign("what_to_do", $lang['send_email_for']."  ".
-				$lang[$_POST["paperwork"]]." ".$_POST["paperwork_id"]);
+		
+		$tpl->assign("what_to_do", lang('send_email_for')."  ".
+				lang($_POST["paperwork"])." ".$_POST["paperwork_id"]);
 		$tpl->assign("paperwork", $_POST["paperwork"]);
 		$tpl->assign("paperwork_id", $_POST["paperwork_id"]);
 		$tpl->assign("cc",$config[$_POST["paperwork"].'_cc']);
@@ -74,7 +72,7 @@ switch ($_POST['next_function']) {
 			$rosine_db_query['get_articles_from_paperwork_with_all'].
 				" %singular%_ID=".$_GET['paperwork_id'].
 				' ORDER BY POSI_ID ASC'));
-		$emailtext->assign('paperwork', $lang[$_GET['paperwork']]);
+		$emailtext->assign('paperwork', lang($_GET['paperwork']));
 		$emailtext->assign_full_file();
 		$tpl->assign("emailtext", $emailtext->return_html());
 		$tpl->assign("next_function", "sent");

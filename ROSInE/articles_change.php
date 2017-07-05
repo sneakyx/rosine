@@ -12,7 +12,7 @@
 include ('inc/head.inc.php');
 
 $tpl->load("insert_article.html");
-$lang = $tpl->loadLanguage($lang);
+
 
 
 switch ($_POST['next_function']){
@@ -21,12 +21,12 @@ switch ($_POST['next_function']){
 		if (!$_POST['stock'])
 			$_POST['stock']="0";
 		$tpl->assign("next_function", "new");
-		$tpl->assign("what_to_do", $lang['insert_again_new_article']);
+		$tpl->assign("what_to_do", lang('insert_again_new_article'));
 		if ($_POST['number']==""){
-			$error.=$lang['number_missing']."<br>";
+			$error.=lang('number_missing')."<br>";
 		}//endif
 		if ($_POST['article_name']==""){
-			$error.=$lang['name_missing']."<br>";
+			$error.=lang('name_missing')."<br>";
 		}//endif
 		if ($error==""){
 			// in Tabelle einfügen!
@@ -51,7 +51,7 @@ switch ($_POST['next_function']){
 			}//endif error detected
 			else {
 				//no error in mysql
-				$OK=$lang['article_inserted']." ".$lang['article_number'].":".$_POST['number'];
+				$OK=lang('article_inserted')." ".lang('article_number').":".$_POST['number'];
 				// this is to empty the values
 				$tpl->assign("number", "");
 				$tpl->assign("unity", "");
@@ -66,7 +66,7 @@ switch ($_POST['next_function']){
 
 	case "change":
 		//this is diretly sent from articles.php to change a specific article
-		$tpl->assign("what_to_do", $lang['change_article']);
+		$tpl->assign("what_to_do", lang('change_article'));
 		$tpl->assign("next_function", "changed");
 		$result=rosine_database_query( 
 			$rosine_db_query['get_articles']. ' ART_NUMBER="'.$_POST['number'].'" LIMIT 1',102);
@@ -105,13 +105,13 @@ switch ($_POST['next_function']){
 							 CHANGED="'.date("Y-m-d-H-i-s").'"		
 							 WHERE ART_NUMBER="'.$_POST['oldnumber'].'"',104);
 		if ($result!=false) {
-			$OK.=$lang['article_changed'];	
+			$OK.=lang('article_changed');	
 		}
 		
 	
 	default:
 		// this file is 1. loaded, no inserted articles before
-		$tpl->assign("what_to_do", $lang['insert_new_article']);
+		$tpl->assign("what_to_do", lang('insert_new_article'));
 		$tpl->assign( "next_function", "new" );
 		// this is to empty the values
 		$tpl->assign("number", "");

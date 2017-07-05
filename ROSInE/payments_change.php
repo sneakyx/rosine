@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2016-08-27 										    *
+ *  date of this file: 2017-07-05 										    *
  \**************************************************************************/
 include ('inc/head.inc.php');
 
@@ -34,7 +34,7 @@ switch ($_POST['next_function']) {
 					$_POST['payment_ammount'].',"'.
 					$_POST['note'].'")',101);
 			if ($result!=false){
-				$OK.=$lang['payment_inserted'].' '.$lang['invoice'].' '.$_POST['invoice_id'];
+				$OK.=lang('payment_inserted').' '.lang('invoice').' '.$_POST['invoice_id'];
 			}//endif
 				
 			$result=rosine_database_query($rosine_db_query['get_open_money'].$_POST['invoice_id'],102);
@@ -43,7 +43,7 @@ switch ($_POST['next_function']) {
 				// 
 				$row=$result->fetch_row();
 				if ($row[0] >= $row[1]){
-					$OK.="<br>".$lang['invoice_payed'];
+					$OK.="<br>".lang('invoice_payed');
 					rosine_set_status_paperwork("invoice", $_POST['invoice_id'], "paid");
 				}// invoice is payed
 				
@@ -68,8 +68,8 @@ switch ($_POST['next_function']) {
 			$input_fields.='<select name="invoice_id" size="10">';
 						
 			while($f = $result->fetch_array()) {
-				$input_fields.='<option value="'.$f['invoice_id'].'">'.$lang['invoice'].' '.$f['invoice_id'].' - '.
-					$f['name'].' ('.$f['invoice_customer'].') '.$lang['unpayed_ammount'].number_format(($f['invoice_ammount']-$f['already_paid']),2,".","").' '.$lang['from'].' '.$f['invoice_ammount'].$config['currency'].'</option>
+				$input_fields.='<option value="'.$f['invoice_id'].'">'.lang('invoice').' '.$f['invoice_id'].' - '.
+					$f['name'].' ('.$f['invoice_customer'].') '.lang('unpayed_ammount').number_format(($f['invoice_ammount']-$f['already_paid']),2,".","").' '.lang('from').' '.$f['invoice_ammount'].$config['currency'].'</option>
 							';
 			}//endwhile
 			$input_fields.='</select>';
@@ -100,7 +100,7 @@ switch ($_POST['next_function']) {
 $tpl->assign("OK", $OK);
 $tpl->assign("error", $error);
 $tpl->assign("input_fields", $input_fields);
-$tpl->assign("paperwork", $lang['payment']);
+$tpl->assign("paperwork", lang('payment'));
 $tpl->assign("date",date("Y-m-d"));
 
 // $tpl->assign("this_number",rosine_get_real_number("payment",$_POST['payment_id']));
