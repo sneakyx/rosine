@@ -109,7 +109,39 @@ if ($result!=false) {
 				"<td>".$f[strtoupper($_POST['paperwork']).'_DATE']."</td>".
 				"<td>".$f['n_fn']."</td>".
 				"<td>".$f[strtoupper($_POST['paperwork']).'_AMMOUNT'].$config['currency']."</td>".
-				"<td>".$f[strtoupper($_POST['paperwork']).'_STATUS']."</td>";
+				"<td>";
+		switch (substr($f[strtoupper($_POST['paperwork'].'_STATUS')],0,2)){
+			case "in":
+				$liste.='<img src="../pixelegg/images/billed.png"
+						alt="'.lang("billed").'"title="'.lang("billed").'" width="15%"> '.lang('billed');
+			break;
+			
+			case "em":
+				$liste.='<img src="../pixelegg/images/leaf.svg"
+						alt="'.lang("empty").'"title="'.lang("empty").'" width="15%"> '.lang('empty');
+			break;
+			
+			case "ch":
+				$liste.='<img src="../pixelegg/images/infolog.png"
+						alt="'.lang("changed").'"title="'.lang("changed").'" width="15%"> '.lang('changed');
+			break;
+			
+			case "de":
+				$liste.='<img src="../pixelegg/images/milestone.svg"
+						alt="'.lang("delivered").'"title="'.lang("delivered").'" width="15%"> '.lang('delivered');
+			break;
+				
+			default:
+				$liste.=lang($f[strtoupper($_POST['paperwork'].'_STATUS')]);
+					
+		}
+		
+		$sub_nr = intval(substr($_POST['paperwork'].'_STATUS',2));
+		if ($sub_nr > 0){
+			$liste.=$sub_nr;
+		}
+		$liste.="</td>";
+		
 		if ($f[strtoupper($_POST['paperwork']).'_STATUS']=="changed" | $f[strtoupper($_POST['paperwork']).'_STATUS']=="empty"){
 					$liste.='<td>
 					<a href="?paperwork='.$_POST['paperwork'].'&number=';

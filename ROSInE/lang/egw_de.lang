@@ -1,7 +1,6 @@
 main_menue	rosine	de	Hauptmenü
 page_buttons	rosine	de	{$backward} {$from} bis {$to} von insgesamt {$max} {$foreward}
 just_write_invoices	rosine	de	Rechnungen einfach schreiben!
-// for main menue
 main_menue	rosine	de	Hauptmenü
 configurations	rosine	de	Einstellungen
 offers	rosine	de	Angebote
@@ -27,7 +26,6 @@ number	rosine	de	Nummer
 stock_locations	rosine	de	Lagerorte
 generate_articles	rosine	de	Artikel erstellen
 articles_list	rosine	de	Artikelliste
-// for articles
 insert_new_article	rosine	de	Neuen Artikel einfügen
 insert_again_new_article	rosine	de	Weiteren Artikel einfügen
 change_article	rosine	de	Artikel ändern
@@ -39,22 +37,21 @@ price	rosine	de	Preis
 tax	rosine	de	MwSt
 stock_location	rosine	de	Lagerort
 stock	rosine	de	Bestand
-
-// error messages
+not_found	de	nicht gefunden
+billed	de	berechnet
+empty	de	leer
 number_missing	rosine	de	Nummer fehlt
 name_missing	rosine	de	Name fehlt
-
-// OK messages
+changed	de	geändert
+delivered	de	geliefert
+old	de	alt
 article_inserted	rosine	de	Artikel eingefügt
 article_changed	rosine	de	Artikel geändert!
 article_deleted	rosine	de	Artikel gelöscht
-// for lists
 delete	rosine	de	löschen
 change	rosine	de	ändern
 really_delete	rosine	de	wirklich löschen
 make_new	rosine	de	neu erstellen
-
-// for taxes
 tax_deleted	rosine	de	Steuersatz gelöscht
 tax_id	rosine	de	Nummer
 tax_name	rosine	de	Bezeichnung
@@ -64,8 +61,6 @@ insert_again_new_tax	rosine	de	Weitere Steuer einfügen
 tax_changed	rosine	de	Steuersatz geändert
 tax_inserted	rosine	de	Steuersatz eingefügt
 change_tax	rosine	de	Steuersatz ändern
-
-// for locations
 location_deleted	rosine	de	Lagerort gelöscht
 location_id	rosine	de	Lagernummer
 location_name	rosine	de	Lagername
@@ -74,9 +69,6 @@ insert_again_new_location	rosine	de	Weiteren Lagerort einfügen
 location_changed	rosine	de	Lagerort geändert
 location_inserted	rosine	de	Lagerort eingefügt
 change_location	rosine	de	Lagerort ändern
-
-
-//for offers / orders etc
 cancel	rosine	de	Abbrechen
 next_step	rosine	de	Weiter
 what_s_next	rosine	de	Und jetzt?
@@ -154,8 +146,6 @@ all_customers_with_open_deliveries	rosine	de	Nur Kunden mit offenen Lieferungen
 all_customers_with_open_invoices	rosine	de	Nur Kunden mit offenen Rechnungen
 drafts	rosine	de	Vorlagen
 draft	rosine	de	Vorlage
-
-// for configuration
 user	rosine	de	Benutzer
 user_id	rosine	de	Benutzernummer
 value	rosine	de	Wert
@@ -168,8 +158,6 @@ missing	rosine	de	%value% fehlt!
 change_config	rosine	de	Konfiguration ändern
 insert_config	rosine	de	Konfiguration einfügen
 config_changed	rosine	de	Konfiguration geändert
-
-// for sending emails
 send_email	rosine	de	E-Mail senden
 send_email_for	rosine	de	E-Mail senden für
 email_sent	rosine	de	E-Mail gesendet

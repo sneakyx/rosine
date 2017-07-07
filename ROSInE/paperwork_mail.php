@@ -8,7 +8,7 @@
 *  This program is free software; you can redistribute it and/or modify it *
 *  under the terms of the GNU General Public License as published by the   *
 *  Free Software Foundation; version 2 of the License.                     *
-*  date of this file: 2017-07-05 										   *
+*  date of this file: 2017-07-07 										   *
 \**************************************************************************/
 use EGroupware\Api;
 include ('inc/head.inc.php');
@@ -17,6 +17,8 @@ switch ($_POST['next_function']) {
 	
 	case "sent":
 		$tpl->load("paperwork_email_sent.html");
+		$lang = $tpl->loadLanguage($lang);
+		
  		$emailsend = new Api\Mailer();
  		$emailsend->setFrom("info@rothaarsystems.de");
  		$emailsend->addAddress($_POST['to']);
@@ -35,6 +37,7 @@ switch ($_POST['next_function']) {
 		 * show E-Mail before send
 		 */
 		$tpl->load("paperwork_email.html");
+		$lang = $tpl->loadLanguage($lang);
 		
 		$tpl->assign("what_to_do", lang('send_email_for')."  ".
 				lang($_POST["paperwork"])." ".$_POST["paperwork_id"]);
