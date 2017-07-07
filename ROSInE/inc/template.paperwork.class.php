@@ -140,6 +140,7 @@ class Rosine_Paperwork_Template extends Rosine_Template
 			$this->assign('year', substr($row[strtoupper($this->post['paperwork'].'_DATE')], 0,4));
 			$this->assign('customer_id', $row['contact_id']);
 			$this->assign("paperwork_terms", $row[strtoupper($this->post['paperwork'].'_NOTE')]);
+			$this->assign("paperwork", lang($this->post['paperwork']));
 			$result->close();
 			// now get the items
 			$result=rosine_database_query($this->sql_row,102);
