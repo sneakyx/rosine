@@ -7,7 +7,7 @@
 *  This program is free software; you can redistribute it and/or modify it *
 *  under the terms of the GNU General Public License as published by the   *
 *  Free Software Foundation; version 2 of the License.                     *
-*  date of this file: 2017-02-13  										    *
+*  date of this file: 2017-07-15  										    *
 \**************************************************************************/
 
 // mysql to get config
@@ -44,7 +44,7 @@ $rosine_db_query['most_used_articles']="SELECT art_name, count(p.art_number) as 
 $rosine_db_query['paperwork_not_used']='SELECT r.%singular%_id AS %singular%_id, GROUP_CONCAT(concat (p.posi_ammount, " ", a.art_name)) AS contents, r.changed AS changed, COUNT(p.posi_id) AS ammount, r.%singular%_ammount AS money FROM '.$rosine_db_prefix.'%plural% AS r JOIN '.$rosine_db_prefix.'%plural%_positions as p on r.%singular%_id = p.%singular%_id JOIN '.$rosine_db_prefix.'articles AS a ON a.art_number=p.art_number WHERE %where% AND (%singular%_customer=%customer% ) GROUP BY %singular%_id ORDER BY changed DESC';
 
 // mysql for paperwork
-$rosine_db_query['insert_paperwork']="INSERT INTO ".$rosine_db_prefix."%plural% (%SINGULAR%_ID,%SINGULAR%_DATE,%SINGULAR%_CUSTOMER,%SINGULAR%_CUSTOMER_PRIVATE,%SINGULAR%_AMMOUNT,%SINGULAR%_STATUS,`GENERATED`,%SINGULAR%_NOTE) VALUES ";
+$rosine_db_query['insert_paperwork']="INSERT INTO ".$rosine_db_prefix."%plural% (%SINGULAR%_ID,%SINGULAR%_DATE,%SINGULAR%_CUSTOMER,%SINGULAR%_CUSTOMER_PRIVATE,%SINGULAR%_AMMOUNT,%SINGULAR%_STATUS,`GENERATED`,%SINGULAR%_NOTE, %SINGULAR%_TEMPLATE) VALUES ";
 $rosine_db_query['get_highest_number']="SELECT MAX(%singular%_id) AS maximum FROM ".$rosine_db_prefix."%plural% WHERE %1%";
 $rosine_db_query['insert_article_into_paperwork']='INSERT INTO '.$rosine_db_prefix.'%plural%_positions (%SINGULAR%_ID, POSI_ID, ART_NUMBER, POSI_AMMOUNT, POSI_UNIT, POSI_PRICE, POSI_LOCATION, POSI_SERIAL, POSI_TEXT, POSI_TAX) VALUES ';
 $rosine_db_query['get_articles_from_paperwork']="SELECT * FROM ".$rosine_db_prefix;
@@ -72,6 +72,7 @@ $rosine_db_query['customer_with_most_paperwork']="SELECT e.* , count( r.%SINGULA
 $rosine_db_query['last_customers']="SELECT r.%SINGULAR%_ID, e . * FROM ".$egw_db_prefix."addressbook AS e JOIN ".$rosine_db_prefix."%plural% AS r ON e.contact_id = r.%SINGULAR%_CUSTOMER WHERE %where% ORDER BY r.%SINGULAR%_ID DESC ";
 $rosine_db_query['customer_with_most_sales']="";
 $rosine_db_query['customers_with_open_paperwork']='SELECT e.*, r.%SINGULAR%_CUSTOMER_PRIVATE as private, r.%SINGULAR%_AMMOUNT as ammount FROM '.$egw_db_prefix.'addressbook AS e JOIN '.$rosine_db_prefix.'%plural% AS r ON e.contact_id = r.%SINGULAR%_CUSTOMER WHERE r.%SINGULAR%_STATUS = "changed" AND %where% ';
+$rosine_db_query['get_paperwork_template']='SELECT %SINGULAR%_TEMPLATE FROM '.$rosine_db_prefix.'%plural% WHERE %SINGULAR%_ID=';
 
 //mysql for payments
 $rosine_db_query['get_unpaid_invoices']='SELECT e.n_fn AS name, i.INVOICE_CUSTOMER AS invoice_customer, i.INVOICE_ID AS invoice_id, i.INVOICE_AMMOUNT_BRUTTO AS invoice_ammount, sum( p.PAYMENT_AMMOUNT ) AS already_paid FROM '.$rosine_db_prefix.'invoices AS i NATURAL LEFT JOIN '.$rosine_db_prefix.'payments AS p JOIN '.$egw_db_prefix.'addressbook as e ON i.INVOICE_CUSTOMER=e.contact_id WHERE i.invoice_status = "changed" GROUP BY i.INVOICE_ID ORDER BY i.INVOICE_ID';

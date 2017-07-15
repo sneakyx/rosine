@@ -7,7 +7,7 @@
 	*  This program is free software; you can redistribute it and/or modify it *
 	*  under the terms of the GNU General Public License as published by the   *
 	*  Free Software Foundation; version 2 of the License.                     *
-	*  Date of this file: 2017-02-22                                           *
+	*  Date of this file: 2017-07-15                                           *
 	\**************************************************************************/
 // rosine drafts noch hinzufügen!
 $phpgw_baseline = array(
@@ -50,6 +50,7 @@ $phpgw_baseline = array(
 						'DELIVERY_AMMOUNT' => array('type' => 'decimal','precision' => '8','scale' => '2'),
 						'DELIVERY_AMMOUNT_BRUTTO' => array('type' => 'decimal','precision' => '8','scale' => '2'),
 						'DELIVERY_NOTE' => array('type' => 'text'),
+						'DELIVERY_TEMPLATE' => array('type' => 'varchar','precision' => '100'),
 						'DELIVERY_STATUS' => array('type' => 'varchar','precision' => '10','nullable' => False),
 						'DELIVERY_PRINTED' => array('type' => 'int','precision' => '1','default' => '0','nullable' => False),
 						'GENERATED' => array('type' => 'varchar','precision' => '100'),
@@ -79,6 +80,47 @@ $phpgw_baseline = array(
 				'ix' => array(),
 				'uc' => array()
 		),
+		
+		'rosine_drafts' => array(
+				'fd' => array(
+						'DRAFT_ID' => array('type' => 'auto','nullable' => False),
+						'DRAFT_DATE' => array('type' => 'date'),
+						'DRAFT_CUSTOMER' => array('type' => 'int','precision' => '4'),
+						'DRAFT_CUSTOMER_PRIVATE' => array('type' => 'int','precision' => '1','default' => '1','nullable' => False),
+						'DRAFT_AMMOUNT' => array('type' => 'decimal','precision' => '8','scale' => '2'),
+						'DRAFT_AMMOUNT_BRUTTO' => array('type' => 'decimal','precision' => '8','scale' => '2'),
+						'DRAFT_NOTE' => array('type' => 'text'),
+						'DRAFT_TEMPLATE' => array('type' => 'varchar','precision' => '100'),
+						'DRAFT_STATUS' => array('type' => 'varchar','precision' => '10','nullable' => False),
+						'DRAFT_PRINTED' => array('type' => 'int','precision' => '1','default' => '0','nullable' => False),
+						'GENERATED' => array('type' => 'varchar','precision' => '100'),
+						'CHANGED' => array('type' => 'varchar','precision' => '100')
+				),
+				'pk' => array('DRAFT_ID'),
+				'fk' => array(),
+				'ix' => array(),
+				'uc' => array()
+		),
+		'rosine_drafts_positions' => array(
+				'fd' => array(
+						'DRAFT_ID' => array('type' => 'int','precision' => '4','nullable' => False),
+						'POSI_ID' => array('type' => 'int','precision' => '4','nullable' => False),
+						'ART_NUMBER' => array('type' => 'varchar','precision' => '40','nullable' => False),
+						'POSI_AMMOUNT' => array('type' => 'decimal','precision' => '9','scale' => '3'),
+						'POSI_UNIT' => array('type' => 'varchar','precision' => '20'),
+						'POSI_PRICE' => array('type' => 'decimal','precision' => '8','scale' => '2'),
+						'POSI_LOCATION' => array('type' => 'int','precision' => '2'),
+						'POSI_SERIAL' => array('type' => 'varchar','precision' => '40'),
+						'POSI_TEXT' => array('type' => 'varchar','precision' => '1255'),
+						'POSI_TAX' => array('type' => 'int','precision' => '1','nullable' => False),
+						'DONE' => array('type' => 'int','precision' => '1','default' => '0')
+				),
+				'pk' => array('DRAFT_ID','POSI_ID'),
+				'fk' => array(),
+				'ix' => array(),
+				'uc' => array()
+		),
+		
 		'rosine_invoices' => array(
 				'fd' => array(
 						'INVOICE_ID' => array('type' => 'auto','nullable' => False),
@@ -88,6 +130,7 @@ $phpgw_baseline = array(
 						'INVOICE_AMMOUNT' => array('type' => 'decimal','precision' => '8','scale' => '2'),
 						'INVOICE_AMMOUNT_BRUTTO' => array('type' => 'decimal','precision' => '8','scale' => '2'),
 						'INVOICE_NOTE' => array('type' => 'text'),
+						'INVOICE_TEMPLATE' => array('type' => 'varchar','precision' => '100'),
 						'INVOICE_STATUS' => array('type' => 'varchar','precision' => '10','nullable' => False),
 						'INVOICE_PRINTED' => array('type' => 'int','precision' => '1','default' => '0'),
 						'GENERATED' => array('type' => 'varchar','precision' => '100'),
@@ -150,6 +193,7 @@ $phpgw_baseline = array(
 						'OFFER_AMMOUNT' => array('type' => 'decimal','precision' => '8','scale' => '2'),
 						'OFFER_AMMOUNT_BRUTTO' => array('type' => 'decimal','precision' => '8','scale' => '2'),
 						'OFFER_NOTE' => array('type' => 'varchar','precision' => '1100'),
+						'OFFER_TEMPLATE' => array('type' => 'varchar','precision' => '100'),
 						'OFFER_STATUS' => array('type' => 'varchar','precision' => '10','nullable' => False),
 						'OFFER_PRINTED' => array('type' => 'int','precision' => '1','default' => '0'),
 						'GENERATED' => array('type' => 'varchar','precision' => '100'),
@@ -188,6 +232,7 @@ $phpgw_baseline = array(
 						'ORDER_AMMOUNT' => array('type' => 'decimal','precision' => '8','scale' => '2'),
 						'ORDER_AMMOUNT_BRUTTO' => array('type' => 'decimal','precision' => '8','scale' => '2'),
 						'ORDER_NOTE' => array('type' => 'varchar','precision' => '1100'),
+						'ORDER_TEMPLATE' => array('type' => 'varchar','precision' => '100'),
 						'ORDER_STATUS' => array('type' => 'varchar','precision' => '10','nullable' => False),
 						'ORDER_PRINTED' => array('type' => 'int','precision' => '1','default' => '0'),
 						'GENERATED' => array('type' => 'varchar','precision' => '100'),

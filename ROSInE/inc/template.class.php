@@ -5,7 +5,7 @@
  * changes to this file made by André Scholz                                      *
  * --------------------------------------------                                   *
  * For licence see upper webpage                                                  *
- * Date of this file: 2017-02-22                                                  *
+ * Date of this file: 2017-05-17                                                  *
  \********************************************************************************/
 
 class Rosine_Template
@@ -157,6 +157,15 @@ class Rosine_Template
 	public function set_templateDir($templateDir){
 		$this->templateDir=$templateDir;
 	}// end function set_templateDir
+	
+	/**
+	 * returns the variable templateDir
+	 *
+	 */
+	public function get_templateDir(){
+		return $this->templateDir;
+	}// end function get_templateDir
+	
     
     public function rosine_setup_templates($renew="no"){
         echo 'This seems a new installation or this template is missing! Trying to copy it from the defaults!<br>';

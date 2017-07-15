@@ -1,3 +1,17 @@
+# FROM 2017-02-22 to 2017-07-15
+INSERT IGNORE INTO `egroupware`.`rosine_config` (`config` ,`user_id` ,`value`) VALUES 
+	('invoice_sort_list', '0', 'sorted_in_alphabetic_order'),
+	('delivery_sort_list', '0', 'sorted_in_alphabetic_order'),
+	('order_sort_list', '0', 'sorted_in_alphabetic_order'),
+	('offer_sort_list', '0', 'sorted_in_alphabetic_order')	;
+	
+ALTER TABLE `rosine_deliveries` ADD `DELIVERY_TEMPLATE` VARCHAR( 250 ) NULL DEFAULT NULL AFTER `DELIVERY_STATUS`;
+ALTER TABLE `rosine_drafts` ADD `DRAFTS_TEMPLATE` VARCHAR( 250 ) NULL DEFAULT NULL AFTER `DRAFT_STATUS` ;
+ALTER TABLE `rosine_invoices` ADD `INVOICE_TEMPLATE` VARCHAR( 250 ) NULL DEFAULT NULL AFTER `INVOICE_STATUS` ;
+ALTER TABLE `rosine_offers` ADD `OFFER_TEMPLATE` VARCHAR( 250 ) NULL DEFAULT NULL AFTER `OFFER_STATUS` ;
+ALTER TABLE `rosine_orders` ADD `ORDER_TEMPLATE` VARCHAR( 250 ) NULL DEFAULT NULL AFTER `ORDER_STATUS` ;
+ALTER TABLE `rosine_drafts` CHANGE `DRaFT_ID` `DRAFT_ID` INT( 11 ) NOT NULL AUTO_INCREMENT ;
+
 # FROM 2017-02-20 to 2017-02-22
 INSERT IGNORE INTO `rosine_config` (`config`, `user_id`, `value`) VALUES
 			('email_delivery',0, 'txt'),
@@ -38,7 +52,7 @@ INSERT IGNORE INTO `rosine_config` (`config`, `user_id`, `value`) VALUES
 
 # FROM 2017-02-11 to 2017-02-13
 CREATE TABLE IF NOT EXISTS `rosine_drafts` (
-  `DRaFT_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `DRAFT_ID` int(11) NOT NULL AUTO_INCREMENT,
   `DRAFT_DATE` date DEFAULT NULL,
   `DRAFT_CUSTOMER` int(11) DEFAULT NULL,
   `DRAFT_CUSTOMER_PRIVATE` tinyint(4) NOT NULL DEFAULT '1',
@@ -76,16 +90,16 @@ INSERT IGNORE INTO `rosine_config` (`config`, `user_id`, `value`) VALUES
 
 # FROM 2016-12-30 to 2017-01-02
 
-INSERT INTO `rosine_config` (`config`, `user_id`, `value`) VALUES
+INSERT IGNORE INTO `rosine_config` (`config`, `user_id`, `value`) VALUES
 ('overwrite_templates', 0, 'no');
 
 # FROM 2017-01-02 to 2017-01-14
 
-INSERT INTO `egroupware`.`rosine_notes` (`NOTE_ID` , `LANGUAGE` , `NOTE_TEXT`) VALUES
+INSERT IGNORE INTO `egroupware`.`rosine_notes` (`NOTE_ID` , `LANGUAGE` , `NOTE_TEXT`) VALUES
  ( '100', 'de.php', '%SINGULAR1% %ID1% vom %date%:'), 
 ('100', 'en.php', '%SINGULAR1% %ID1% from %date%:');
 
-INSERT INTO `egroupware`.`rosine_config` (`config` ,`user_id` ,`value`) VALUES 
+INSERT IGNORE INTO `egroupware`.`rosine_config` (`config` ,`user_id` ,`value`) VALUES 
 ('insert_delivery_into_paperwork', '0', '100'), 
 ('insert_offer_into_paperwork', '0', '100'),
 ('insert_order_into_paperwork', '0', '100'), 

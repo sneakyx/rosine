@@ -12,7 +12,7 @@
 include ('inc/head.inc.php');
 
 $tpl->load("insert_article.html");
-
+$lang = $tpl->loadLanguage($lang);
 
 
 switch ($_POST['next_function']){

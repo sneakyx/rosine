@@ -4,7 +4,7 @@ to do list:
 - correct update function
 - list for open delivery notes
 - correct query for last customers when search for customers
-- 
+- add internal notes to paperwork
 - different colors for offer, order, invoice and delivery note
 - 
 - icons for printed, delivered and so on...
@@ -14,6 +14,18 @@ to do list:
 suggestions? Write me an E-Mail: info@rothaarsystems.de
 
 ------------------------------------------------------------------------
+2017-07-15
+- some minor language errors deleted
+- added function: default sort list paperwork added - see also update.sql!
+- added function selector for print-templates- You have to update Your database-see update.sql!
+
+2017-07-10
+- some minor language errors deleted
+
+2017-07-08
+- icons for paperwork status (beta)
+- some minor language errors deleted
+
 2017-07-07
 - minor errors deleted
 

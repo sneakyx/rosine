@@ -7,7 +7,7 @@
 *  This program is free software; you can redistribute it and/or modify it *
 *  under the terms of the GNU General Public License as published by the   *
 *  Free Software Foundation; version 2 of the License.                     *
-*  date of this file: 2017-07-05  										    *
+*  date of this file: 2017-07-15  										    *
 \**************************************************************************/
 // paperwork list, add items etc
 switch ($_POST['next_function']) {
@@ -30,7 +30,8 @@ switch ($_POST['next_function']) {
 		$result=rosine_database_query($query.'('.
 				$_POST['paperwork_id'].', now(), '.
 				substr($_POST['contact_id'],2).
-				','.$customer_private.',0,"empty","'.date("Y-m-d-H-i-s").'","'.$_POST["note_text"].'")',0);
+				','.$customer_private.',0,"empty","'.date("Y-m-d-H-i-s").'","'.$_POST["note_text"].
+				'","'.$_POST['template'].'")',0);
 				if ($result!=false)
 					$OK.=lang('paperwork_inserted');
 						
@@ -181,7 +182,29 @@ switch ($_POST['next_function']) {
 		// Step 0 - show address to choose
 		$tpl->load("paperworks_select_customer.html");
 		$lang = $tpl->loadLanguage($lang);
+		
+		//choose template for invoice
+		$input_fields.=lang("please_choose_print_template").'<select name="template">';		
+				$dir = $tpl->get_templateDir();
 
+				if ( $handle = opendir($dir) )
+				{
+					// read directory
+					while (($file = readdir($handle)) !== false)
+					{
+						// list only if there is a print template file
+						if (substr($file, 0,5)=="print" && substr($file, -4)=="html" && !strpos($file,"row")){
+							if ($file==$config['print_template_'.$_POST['paperwork']]){
+								$input_fields.= "<option value='$file' selected>$file</option>";
+							}
+							else {
+								$input_fields.= "<option value='$file'>$file</option>";
+							}
+						}
+					}
+					closedir($handle);
+				}
+		$input_fields.='</select><br><br>';
 		// search settings
 		if ($_POST['searchstring']!=''){
 			if (intval($_POST['searchstring']==0)){
@@ -210,11 +233,22 @@ switch ($_POST['next_function']) {
 		$sort_select['customers_with_open_order']="";
 		$sort_select['customers_with_open_delivery']="";
 		$sort_select['customers_with_open_invoice']="";
+		
+		if ($_POST['sort_list']==""){
+			// if there was no selection made - check it from database
+			if ($config[$_POST['paperwork'].'_sort_list']){
+				// if there's a default in database
+				$_POST['sort_list']=$config[$_POST['paperwork'].'_sort_list'];
+			}// there's a default in database
+			else{
+				//there's no default in database
+				$_POST['sort_list']="sorted_in_alphabetic_order";
+			}
+		}
 		$sort_select[$_POST['sort_list']]="selected";
-		if ($_POST['sort_list']=="" || $_POST['sort_list']=="sorted_in_alphabetic_order"){
+		if ($_POST['sort_list']=="sorted_in_alphabetic_order"){
 			$sort=" ORDER BY concat( COALESCE( n_fn , '' ) , COALESCE( org_name , '' ) , COALESCE( n_family , '' ) , COALESCE( n_given , '' ) ) ";
 			$sql_query=$rosine_db_query['get_customers']." ".$where.$sort;
-			$sort_select['sorted_in_alphabetic_order']="selected";
 			$sql_query=rosine_correct_query($_POST['paperwork'], $sql_query);
 			$ammount_query=str_replace('SELECT * ', 'SELECT COUNT(*) ', $sql_query);
 		}// default sort
@@ -297,6 +331,7 @@ switch ($_POST['next_function']) {
 			} //endelse no error in mysql search for customers
 				
 		}// endelse no error in customer ammount search
+		
 		// show drop down list for paperwork notes
 		$standard_note=rosine_get_field_database(rosine_correct_query($_POST['paperwork'],
 				str_replace("%language%", $config['language'],
@@ -312,6 +347,9 @@ switch ($_POST['next_function']) {
 		$result->close();
 		$note_field.='</select>';
 		$tpl->assign("note_field", $note_field);
+		
+		
+		
 		$tpl->assign("next_function", '<input type="hidden" name="next_function" value="change">');
 
 }//end switch next_function
