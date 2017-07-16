@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2017-07-15  										    *
+ *  date of this file: 2017-07-16  										    *
  \**************************************************************************/
 
 /*
@@ -30,7 +30,7 @@ $template=rosine_get_field_database(
 if (!$template){
 	//if template is template is empty -> use standard template
 	// this is just for old entries in database!
-	$config['print_template_'.$_POST['paperwork']];
+	$template=$config['print_template_'.$_POST['paperwork']];
 }
 
 $tpl->load($template);

@@ -14,6 +14,9 @@ to do list:
 suggestions? Write me an E-Mail: info@rothaarsystems.de
 
 ------------------------------------------------------------------------
+2017-07-16
+- use standard template for print didn't work
+
 2017-07-15
 - some minor language errors deleted
 - added function: default sort list paperwork added - see also update.sql!
