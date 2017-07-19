@@ -7,7 +7,7 @@
 *  This program is free software; you can redistribute it and/or modify it *
 *  under the terms of the GNU General Public License as published by the   *
 *  Free Software Foundation; version 2 of the License.                     *
-*  date of this file: 2017-07-15  										    *
+*  date of this file: 2017-07-19  										    *
 \**************************************************************************/
 // paperwork list, add items etc
 switch ($_POST['next_function']) {
@@ -359,8 +359,8 @@ $tpl->assign("OK", $OK);
 $tpl->assign("error", $error);
 $tpl->assign("input_fields", $input_fields);
 $tpl->assign("paperwork", lang($_POST['paperwork']));
-$tpl->assign("additional", '<h3>'.lang('favorite_articles').'</h3>
-	{$input_favorites}<h3>'.lang("add_articles_from_other_tables").'</h3>
+$tpl->assign("additional", '<h3 class="'.$_POST['paperwork'].'">'.lang('favorite_articles').'</h3>
+	{$input_favorites}<h3 class="'.$_POST['paperwork'].'">'.lang("add_articles_from_other_tables").'</h3>
 		{$offer_list} {$order_list} {$delivery_list} {$drafts_list}');
 switch ($_POST['paperwork']) {
 	case "invoice":

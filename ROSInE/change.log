@@ -5,8 +5,6 @@ to do list:
 - list for open delivery notes
 - correct query for last customers when search for customers
 - add internal notes to paperwork
-- different colors for offer, order, invoice and delivery note
-- 
 - icons for printed, delivered and so on...
 - javascript insert payments ammount into field
 - GOBD
@@ -14,6 +12,13 @@ to do list:
 suggestions? Write me an E-Mail: info@rothaarsystems.de
 
 ------------------------------------------------------------------------
+2017-07-18 to 2017-07-19
+- different colors for offer, order, invoice and delivery note
+- config change didn't work
+- in footer was a non-working-link (payments)
+- You have to update Your templates- set in configuration "update-templates" to "yes" 
+	(and copy the printpaperwork-Templates back- they aren't lost, they were backuped) 
+
 2017-07-16
 - use standard template for print didn't work
 

@@ -2,7 +2,7 @@
 {include file="head.html"}
 <form action="#" method="POST">
 <div id="rosine_paperwork_form_new" class="rosine_paperwork">
-	<h3>{L_PAPERWORK_FOR_CUSTOMER}  <b>{$customer}</b> [{$ID}]</h3>	
+	<h3 class="{$paperwork_type}">{L_PAPERWORK_FOR_CUSTOMER}  <b>{$customer}</b> [{$ID}]</h3>	
 	
 <p ><button class="rosine_button_next" style="float:left; padding:9px; margin-left:20%">{L_SAVE}</button></p>
 	<p class="rosine_back" style="float:left; padding:10px;margin-left:20%;">
@@ -15,12 +15,12 @@
 	
 	<br>
 	<br><br>
-	<h3>{L_WHAT_IS_PACKED}</h3>
+	<h3 class="{$paperwork_type}">{L_WHAT_IS_PACKED}</h3>
 	<br>
 	{$check_fields}
 	<br>
 	<br>
-	<h3>{L_FAVORITE_ARTICLES} {L_AND} {L_MORE_FIELDS}</h3>
+	<h3 class="{$paperwork_type}">{L_FAVORITE_ARTICLES} {L_AND} {L_MORE_FIELDS}</h3>
 	{$input_fields}
 	{$additional}
 	{$next_function}	

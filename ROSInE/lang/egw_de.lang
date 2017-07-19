@@ -146,6 +146,7 @@ all_customers_with_open_deliveries	rosine	de	Nur Kunden mit offenen Lieferungen
 all_customers_with_open_invoices	rosine	de	Nur Kunden mit offenen Rechnungen
 drafts	rosine	de	Vorlagen
 draft	rosine	de	Vorlage
+draft_number	rosine	de	Nummer
 user	rosine	de	Benutzer
 user_id	rosine	de	Benutzernummer
 value	rosine	de	Wert
@@ -167,3 +168,4 @@ bcc	rosine	de	Blindkopie
 unit_price	rosine	de	Einzelpreis
 description	rosine	de	Beschreibung
 please_choose_print_template	rosine	de	Bitte Druckvorlage wählen!
+statistics	rosine	de	Auswertungen

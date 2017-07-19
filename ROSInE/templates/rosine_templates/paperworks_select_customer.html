@@ -2,7 +2,7 @@
 {include file="head.html"}
 
 <div id="rosine_paperwork_form_new" class="rosine_paperwork">
-	<h3>{L_CUSTOMER_LIST}</h3>
+	<h3 class="{$paperwork_type}">{L_CUSTOMER_LIST}</h3>
 	<p id="rosine_table_note"> {L_PAGE_BUTTONS}  </p>
 	
 	<form action="#" method="post">
@@ -14,7 +14,7 @@
 	</form>
 	<br><form action="#" method="POST">
 	
-	<h3>{L_MORE_FUNCTIONS}</h3>
+	<h3 class="{$paperwork_type}">{L_MORE_FUNCTIONS}</h3>
 	<p id="rosine_paperwork_search_customers">
 	<br>
 	<select name="sort_list" size="1">	

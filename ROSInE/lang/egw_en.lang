@@ -152,8 +152,6 @@ all_customers_with_open_deliveries	 rosine	 en	 Only customers with open deliver
 all_customers_with_open_invoices	 rosine	 en	 Only customers with open invoices
 drafts	 rosine	 en	 drafts
 draft	 rosine	 en	 draft
-
-// for configuration
 user	 rosine	 en	 User
 user_id	 rosine	 en	 User ID
 value	 rosine	 en	 Value
@@ -165,8 +163,6 @@ deleted	 rosine	 en	 deleted
 missing	 rosine	 en	 %value% missing! 
 change_config	 rosine	 en	 change config
 insert_config	 rosine	 en	 insert_config
-
-// for sending emails
 send_email	 rosine	 en	 send email
 send_email_for	 rosine	 en	 Send E-Mail for
 email_sent	 rosine	 en	 email sent
@@ -176,3 +172,4 @@ bcc	 rosine	 en	 bcc
 unit_price	 rosine	 en	 unit price
 description	 rosine	 en	 description
 please_choose_print_template	rosine	en	Please choose template for printing!
+statistics	rosine	en statistics

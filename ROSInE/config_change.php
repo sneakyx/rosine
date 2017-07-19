@@ -7,7 +7,7 @@
 *  This program is free software; you can redistribute it and/or modify it *
 *  under the terms of the GNU General Public License as published by the   *
 *  Free Software Foundation; version 2 of the License.                     *
-*  date of this file: 2017-01-07 										   *
+*  date of this file: 2017-07-19 										   *
 \**************************************************************************/
 include ('inc/head.inc.php');
 
@@ -18,15 +18,15 @@ switch ($_POST['next_function']){
 
 	case "new":
 		$tpl->assign("next_function", "new");
-		$tpl->assign("what_to_do", $lang['insert_again_new_location']);
+		$tpl->assign("what_to_do", lang('insert_again_new_config'));
 		if ($_POST['configuration']==""){
-			$error.=str_replace('%value%', $lang['config'], $lang['missing'])."<br>";
+			$error.=str_replace('%value%', lang('config'), lang('missing'))."<br>";
 		}//endif
 		if ($_POST['user_id']==""){
-			$error.=str_replace('%value%', $lang['user'], $lang['missing'])."<br>";
+			$error.=str_replace('%value%', lang('user'), lang('missing'))."<br>";
 		}//endif
 		if ($_POST['value']==""){
-			$error.=str_replace('%value%', $lang['value'], $lang['missing'])."<br>";
+			$error.=str_replace('%value%', lang('value'), lang('missing'))."<br>";
 		}//endif
 		
 		if ($error==""){
@@ -45,7 +45,7 @@ switch ($_POST['next_function']){
 			}
 			else {
 				//no error in mysql
-				$OK=$lang['config_inserted']." ".$lang['config'].":".$_POST['config'];
+				$OK=lang('config_inserted')." ".lang('config').":".$_POST['config'];
 				// this is to empty the values
 				$tpl->assign("config", "");
 				$tpl->assign("user_id","");
@@ -55,11 +55,11 @@ switch ($_POST['next_function']){
 			
 		}// error=0;
 				
-		break; // location is inserted
+	break; // location is inserted
 
 	case "change":
 		//this is if diretly sent to a special config
-		$tpl->assign("what_to_do", $lang['change_config']);
+		$tpl->assign("what_to_do", lang('change_config'));
 		$tpl->assign("next_function", "changed");
 		$result=rosine_database_query( 
 				$rosine_db_query['get_configurations']. ' config="'.$_POST['config'].'" and user_id='.$_POST['user_id'].' LIMIT 1',102);
@@ -82,7 +82,7 @@ switch ($_POST['next_function']){
 			$tpl->assign("value", $row['value']);
 			$result->close();
 		}// error in mysql 
-		break;
+	break;
 
 	case "changed":
 		/*
@@ -100,7 +100,7 @@ switch ($_POST['next_function']){
 				 value="'.$_POST['value'].'"
 				 WHERE config="'.$_POST['oldconfig'].'" and user_id='.$_POST['olduser_id'],104);
 		if ($result!=false) {
-			$OK.=$lang['config_changed'];
+			$OK.=lang('config_changed');
 		}//endif
 
 
@@ -112,7 +112,7 @@ switch ($_POST['next_function']){
 		$tpl->assign("value","");
 		$tpl->assign("user_id", "");
 		$tpl->assign("olduser_id", $_POST['olduser_id']);
-		$tpl->assign("what_to_do", $lang['insert_config']);
+		$tpl->assign("what_to_do", lang('insert_config'));
 }//end case select what happens with the data
 $tpl->assign("error", $error);
 $tpl->assign("OK", $OK);

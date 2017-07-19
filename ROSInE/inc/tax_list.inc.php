@@ -7,11 +7,11 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2016-08-26  										    *
+ *  date of this file: 2017-07-19  										    *
  \**************************************************************************/
 
 $liste.='<table id="rosine_tabelle">';
-$liste.='<tr>
+$liste.='<tr class="article">
 				<th>'.$lang['tax_id'].'</th>
 				<th>'.$lang['tax_name'].'</th>
 				<th>'.$lang['tax_percentage'].'</th>
@@ -20,7 +20,7 @@ $liste.='<tr>
 			</tr>';
 
 while($f = $result->fetch_array()) {
-	$liste.="<tr>";
+	$liste.="<tr class='article'>";
 	if ($_POST['next_function']=="delete" & $_POST['tax_id']==$f['TAX_ID']){
 		//Sicherheitsabfrage!
 		$next_function="really_delete";

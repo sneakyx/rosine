@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2017-07-05  										    *
+ *  date of this file: 2017-07-19  										    *
  \**************************************************************************/
 
 $tpl->load("paperworklist.html");
@@ -71,7 +71,7 @@ $tpl->assign("max", $max_rows);
 
 if ($result!=false) {
 	$liste.='<table id="rosine_tabelle">';
-	$liste.='<tr>
+	$liste.='<tr class="'.$_POST['paperwork'].'">
 			<th>'.lang($_POST['paperwork'].'_number').'</th>
 			<th>'.lang('date').'</th>		
 			<th>'.lang('customer').'</th>
@@ -81,7 +81,7 @@ if ($result!=false) {
 		</tr>';
 
 	while($f = $result->fetch_array()) {
-		$liste.="<tr>";
+		$liste.='<tr class="'.$_POST['paperwork'].'" >';
 		if ($max_rows!=$f[strtoupper($_POST['paperwork']).'_ID']&& $_POST['paperwork']=='invoice'){
 			$delete="";
 			$next_function="";

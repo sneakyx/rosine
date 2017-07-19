@@ -7,11 +7,11 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2017-07-05  										    *
+ *  date of this file: 2017-07-19  										    *
  \**************************************************************************/
 
 $liste.='<table id="rosine_tabelle">';
-$liste.='<tr>
+$liste.='<tr class="article">
 		<th>'.lang('config').'</th>
 		<th>'.lang('user').'</th>
 		<th>'.lang('value').'</th>
@@ -20,7 +20,7 @@ $liste.='<tr>
 	</tr>';
 
 while($f = $result->fetch_array()) {
-	$liste.="<tr>";
+	$liste.="<tr class='article'>";
 	if ($_POST['next_function']=="delete" & $_POST['config']==$f['config'] & $_POST['user_id']==$f['user_id']){
 		//Sicherheitsabfrage!
 		$next_function="really_delete";
@@ -46,7 +46,7 @@ while($f = $result->fetch_array()) {
 	$liste.='<td>';
 	if ($f['user_id'] != "0") {
 			$liste.='<form action="#" method="post">
-				<input type="hidden" name="type" value="type">
+				<input type="hidden" name="type" value="config">
 				<input type="hidden" name="next_function" value="'.$next_function.'">
 				<input type="submit" title="'.$delete.'" value="'.$delete.'">
 						<input type="hidden" name="config" value="'.$f['config'].'">
@@ -57,7 +57,7 @@ while($f = $result->fetch_array()) {
 			</td>
 			<td>
 			<form action="config_change.php" method="post">
-				<input type="hidden" name="type" value="type">
+				<input type="hidden" name="type" value="config">
 				<input type="hidden" name="next_function" value="change">
 				<input type="submit" title="'.lang('change').'" value="'.lang('change').'">
 				<input type="hidden" name="config" value="'.$f['config'].'">
