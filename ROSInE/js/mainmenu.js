@@ -15,7 +15,7 @@ function LadeSeite4() {
 return;
 }
 function LadeSeite5() {
-	window.location = "payments.php";
+	window.location = "payments_change.php";
 return;
 }
 function LadeSeite6() {
