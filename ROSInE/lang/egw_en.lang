@@ -114,7 +114,7 @@ customer_list	 rosine	 en	 customer list
 more_functions	 rosine	 en	 more functions
 functions	 rosine	 en	 Functions
 preview	 rosine	 en	 preview
-customers_with_most_sales	 rosine	 en	 All customers sorted by sales (not working yet)
+customers_with_most_sales	 rosine	 en	 All customers sorted by sales
 customers_with_most_paperwork	rosine	en	All customers sorted with most {$paperwork}
 sorted_in_alphabetic_order	rosine	en	All customers sorted in alphabetic order
 last_customers	 rosine	 en	 last used customers

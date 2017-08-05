@@ -3,7 +3,7 @@ change.log
 to do list:
 - correct update function
 - list for open delivery notes
-- correct query for last customers when search for customers
+
 - add internal notes to paperwork
 - icons for printed, delivered and so on...
 - javascript insert payments ammount into field
@@ -12,6 +12,11 @@ to do list:
 suggestions? Write me an E-Mail: info@rothaarsystems.de
 
 ------------------------------------------------------------------------
+2017-08-05
+- error in main menu (you have to update the templates!)
+- correct query for last customers when search for customers
+- all customers sorted by sales works now
+
 2017-07-25
 - error in main menue
 

@@ -352,7 +352,7 @@ function rosine_database_query ($query, $error_number='00'){
 	 */
 	global $rosine_db;
 	$result=$rosine_db->query($query);
-	//	echo "<br>".$query."<br>";
+		//echo "<br>".$query."<br>"; // this ist just for  debug
 	if ($rosine_db->errno!=0){
 		// Error in mysql detected
 		$result=false;

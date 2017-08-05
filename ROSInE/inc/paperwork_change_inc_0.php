@@ -7,7 +7,7 @@
 *  This program is free software; you can redistribute it and/or modify it *
 *  under the terms of the GNU General Public License as published by the   *
 *  Free Software Foundation; version 2 of the License.                     *
-*  date of this file: 2017-07-19  										    *
+*  date of this file: 2017-08-05  										    *
 \**************************************************************************/
 // paperwork list, add items etc
 switch ($_POST['next_function']) {
@@ -262,8 +262,8 @@ switch ($_POST['next_function']) {
 			else{
 				$sql_query=str_replace("%where%", $where, $rosine_db_query[$_POST['sort_list']]." ");
 			}// just other sort
-			$sql_query=rosine_correct_query($_POST['paperwork'], $sql_query);
-			$ammount_query=str_replace('SELECT ', 'SELECT COUNT(*), ', $sql_query);
+			$sql_query=rosine_correct_query($_POST['paperwork'], $sql_query); 
+			$ammount_query="SELECT COUNT(*) FROM ( $sql_query )  AS SUB0";
 		}// other sort or open paperwork
 
 		$tpl->assign_array('sort', $sort_select);

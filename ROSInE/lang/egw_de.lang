@@ -108,7 +108,7 @@ customer_list	rosine	de	Kundenliste
 more_functions	rosine	de	weitere Funktionen
 functions	rosine	de	Funktionen
 preview	rosine	de	Vorschau
-customers_with_most_sales	rosine	de	Alle Kunden sortiert nach Umsatz (nor working yet!)
+customers_with_most_sales	rosine	de	Alle Kunden sortiert nach Umsatz
 customers_with_most_paperwork	rosine	de	Alle Kunden sortiert nach den meisten {$paperwork}
 sorted_in_alphabetic_order	rosine	de	Alle Kunden alphabetisch sortiert
 last_customers	rosine	de	Die zuletzt verwendeten Kunden
