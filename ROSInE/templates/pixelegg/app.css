@@ -245,6 +245,12 @@ aside{
 	background-color: var(--article);
 }
 
+.rosine_hidden{
+	visibility: hidden;
+}
+.rosine_visible{
+	visibility: visible;
+}
 
 #boxes h3{
 	color: white;

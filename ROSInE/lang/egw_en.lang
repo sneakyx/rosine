@@ -173,3 +173,5 @@ unit_price	 rosine	 en	 unit price
 description	 rosine	 en	 description
 please_choose_print_template	rosine	en	Please choose template for printing!
 statistics	rosine	en statistics
+get_customer_with_most_sales	en	rosine	Get customers with most sales
+get_most_used_articles	en	rosine	Get most used articles

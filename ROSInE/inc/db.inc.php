@@ -80,7 +80,7 @@ $rosine_db_query['last_customers']="SELECT   *
 									GROUP BY contact_id";
 
 
-$rosine_db_query['customer_with_most_sales']="SELECT SUM( r.INVOICE_AMMOUNT_BRUTTO ) AS money, e . *
+$rosine_db_query['customer_with_most_sales']="SELECT SUM( r.INVOICE_AMMOUNT_BRUTTO ) AS money, e.contact_id, e.n_family, e.n_given, e.org_name, e.adr_one_locality, e.adr_two_locality
 												FROM ".$egw_db_prefix."addressbook AS e
 												JOIN ".$rosine_db_prefix."invoices AS r ON e.contact_id = r.INVOICE_CUSTOMER
 												WHERE %where%
@@ -100,6 +100,10 @@ $rosine_db_query['get_configurations']='SELECT c.config as config, c.user_id as 
 $rosine_db_query['get_configuration_ammount']='SELECT COUNT(*) FROM '.$rosine_db_prefix.'config WHERE ';
 $rosine_db_query['delete_configuration']="DELETE FROM ".$rosine_db_prefix."config WHERE ";
 $rosine_db_query['update_configuration']="UPDATE ".$rosine_db_prefix."config SET ";
+
+//mysql for statistics
+$rosine_db_query['statistics']['get_customer_with_most_sales']=$rosine_db_query['customer_with_most_sales'];
+$rosine_db_query['statistics']['get_most_used_articles']="SELECT * FROM rosine_invoices";
 
 $rosine_db = new mysqli(
 		$GLOBALS['egw_info']['server']['db_host'],

@@ -1,0 +1,24 @@
+{*Header einbinden*}
+{include file="head.html"}
+
+<div id="rosine_paperwork_form_new" class="rosine_paperwork">
+	<h3 class="statistic">{L_STATISTICS}</h3>
+	<p id="rosine_table_note" class="{$class_page_buttons}"> {L_PAGE_BUTTONS}  </p>
+	{$results}
+	<form action="#" method="POST" id="rosine_statistic">	
+	<select name="query" >	
+		{$queries}
+	</select>
+	<input type="submit" name="query_click" value=" {L_OK} " class="{$first_button}">
+	<p class="{$class_params}" >
+	{L_DATE}: {L_FROM}<input type="text" name="date_from" value="{$post[date_from]}">-----<input type="text" name="date_to" value="{$post[date_to]}"> 
+	{L_NUMBERS}:<input type=text" name="numbers" value="{$post[numbers]}"><br>
+	{$params}
+	<input type="submit" name="params_click" value=" {L_OK} ">
+	<input type="hidden" name="next_function" value="params">
+	</form>
+	</p>
+</div>
+
+{*Footer einbinden*}
+{include file="footer.html"}

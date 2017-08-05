@@ -42,7 +42,7 @@ function trimhtml (&$value, $key) {
 	if (is_numeric($newvalue)){
 		$value=floatval($newvalue);
 	}// change kommas in numbers to dot
-	//echo "$key=$value <br>"; //just a test function!
+	//echo "$key='$value'<br>"; //just a test function!
 }// function trimhtml
 array_walk_recursive($_GET, 'trimhtml');
 array_walk_recursive ($_POST, 'trimhtml');
