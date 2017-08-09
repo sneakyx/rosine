@@ -106,12 +106,30 @@ $rosine_db_query['statistics']['get_customer_with_most_sales']="SELECT SUM( r.IN
 												GROUP BY contact_id
 												ORDER BY money DESC ";
 $rosine_db_query['statistics']['get_articles_by_sales']="
-		SELECT SUM( i.POSI_PRICE * i.POSI_AMMOUNT) AS money, i.ART_NUMBER as article_number, COALESCE(NULLIF(a.ART_NAME, ''),'no_article') as description
+		SELECT SUM( i.POSI_PRICE * i.POSI_AMMOUNT) AS money, i.ART_NUMBER as article_number, COALESCE(NULLIF(a.ART_NAME, ''),'{L_NO_ARTICLE}') as description
 															FROM ".$rosine_db_prefix."invoices_positions AS i LEFT JOIN ".$rosine_db_prefix."articles AS a ON i.ART_NUMBER=a.ART_NUMBER
 															WHERE INVOICE_ID 
 																	IN ( SELECT INVOICE_ID FROM ".$rosine_db_prefix."invoices AS r WHERE %where%)
 															GROUP BY i.ART_NUMBER
 															ORDER BY money DESC ";
+$rosine_db_query['statistics']['get_articles_by_ammount']="SELECT SUM( i.POSI_AMMOUNT ) AS ammount, i.ART_NUMBER AS article_number, COALESCE( NULLIF( a.ART_NAME, '' ) , '{L_NO_ARTICLE}' ) AS description
+														FROM ".$rosine_db_prefix."invoices_positions AS i
+														LEFT JOIN rosine_articles AS a ON i.ART_NUMBER = a.ART_NUMBER
+														WHERE INVOICE_ID
+														IN (
+														
+														SELECT INVOICE_ID
+														FROM ".$rosine_db_prefix."invoices AS r";
+$rosine_db_query['statistics']['get_laziest_customers']="SELECT e.contact_id AS customer_id, e.n_family AS name, e.n_given, 
+					e.org_name, e.adr_one_locality, e.adr_two_locality, (
+					SUM( DATEDIFF( COALESCE( NULLIF( p.PAYMENT_DATE, '' ) , CURDATE( ) ) , r.INVOICE_DATE ) ) / COUNT( * )) AS days
+					FROM ".$rosine_db_prefix."invoices AS r
+					JOIN ".$egw_db_prefix."addressbook AS e ON r.INVOICE_CUSTOMER = e.contact_id
+					LEFT JOIN ".$rosine_db_prefix."payments AS p ON r.INVOICE_ID = p.INVOICE_ID
+					WHERE %where%
+					GROUP BY r.INVOICE_CUSTOMER
+					ORDER BY days DESC
+					";
 
 $rosine_db = new mysqli(
 		$GLOBALS['egw_info']['server']['db_host'],

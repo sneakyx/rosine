@@ -171,4 +171,6 @@ please_choose_print_template	rosine	de	Bitte Druckvorlage wählen!
 statistics	rosine	de	Auswertungen
 get_customer_with_most_sales	rosine	de	Kunden mit den meisten Umsätzen anzeigen
 get_articles_by_sales	rosine	de	Artikel mit dem größten Umsatz anzeigen
+get_articles_by_ammount	rosine	de	Die meistverkauften Artikel anzeigen
+get_laziest_customers	rosine	de	Kunden mit der schlechtesten Zahlungsmoral anzeigen (beta!)
 no_article	rosine	de	Der Artikeltext ist nicht mehr vorhanden

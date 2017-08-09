@@ -175,4 +175,6 @@ please_choose_print_template	rosine	en	Please choose template for printing!
 statistics	rosine	en statistics
 get_customer_with_most_sales	rosine	en	Get customers with most sales
 get_get_articles_by_sales	rosine	en	Show articles sorted by most sales
+get_articles_by_ammount	rosine	en	Show most sold articles
+get_laziest_customers	rosine	en	Show customers that pay very late (beta!)
 no_article	rosine	en	The articletext was deleted
