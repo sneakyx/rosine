@@ -133,12 +133,16 @@ switch ($_POST['next_function']){
 		else {
 			$tpl->assign("foreward", "");
 		}//endelse
-		$results.="<pre>";
-		while($f = $result->fetch_row()) {
-			$formating=str_repeat("%s \t", count($f))."\n";
-			$results.=vsprintf ($formating, $f);
+		$results.="<table id='rosine_tabelle'><tr>";
+		foreach($result->fetch_fields() as $f) {
+			$results.=vsprintf ("<th>%s</th>\n", $f->name);
 		}
-		$results.="</pre>";
+		$results.="</tr>";
+		while($f = $result->fetch_row()) {
+			$formating=str_repeat("<td>%s</td>", count($f))."\n";
+			$results.="<tr>".vsprintf ($formating, $f)."</tr>";
+		}
+		$results.="</table>";
 	break;
 		
 	default:
