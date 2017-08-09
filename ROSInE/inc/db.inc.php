@@ -105,11 +105,12 @@ $rosine_db_query['statistics']['get_customer_with_most_sales']="SELECT SUM( r.IN
 												WHERE %where%
 												GROUP BY contact_id
 												ORDER BY money DESC ";
-$rosine_db_query['statistics']['get_articles_by_sales']="SELECT SUM( POSI_PRICE ) AS money, ART_NUMBER as article_number, POSI_TEXT as description
-															FROM ".$rosine_db_prefix."invoices_positions
+$rosine_db_query['statistics']['get_articles_by_sales']="
+		SELECT SUM( i.POSI_PRICE * i.POSI_AMMOUNT) AS money, i.ART_NUMBER as article_number, COALESCE(NULLIF(a.ART_NAME, ''),'no_article') as description
+															FROM ".$rosine_db_prefix."invoices_positions AS i LEFT JOIN ".$rosine_db_prefix."articles AS a ON i.ART_NUMBER=a.ART_NUMBER
 															WHERE INVOICE_ID 
 																	IN ( SELECT INVOICE_ID FROM ".$rosine_db_prefix."invoices AS r WHERE %where%)
-															GROUP BY ART_NUMBER
+															GROUP BY i.ART_NUMBER
 															ORDER BY money DESC ";
 
 $rosine_db = new mysqli(

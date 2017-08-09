@@ -175,3 +175,4 @@ please_choose_print_template	rosine	en	Please choose template for printing!
 statistics	rosine	en statistics
 get_customer_with_most_sales	rosine	en	Get customers with most sales
 get_get_articles_by_sales	rosine	en	Show articles sorted by most sales
+no_article	rosine	en	The articletext was deleted
