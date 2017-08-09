@@ -169,5 +169,5 @@ unit_price	rosine	de	Einzelpreis
 description	rosine	de	Beschreibung
 please_choose_print_template	rosine	de	Bitte Druckvorlage wählen!
 statistics	rosine	de	Auswertungen
-get_customer_with_most_sales	de	rosine	Kunden mit den meisten Umsätzen anzeigen
-get_articles_by_sales	de	rosine	Artikel mit dem größten Umsatz anzeigen
+get_customer_with_most_sales	rosine	de	Kunden mit den meisten Umsätzen anzeigen
+get_articles_by_sales	rosine	de	Artikel mit dem größten Umsatz anzeigen

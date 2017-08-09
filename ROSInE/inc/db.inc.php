@@ -99,8 +99,13 @@ $rosine_db_query['delete_configuration']="DELETE FROM ".$rosine_db_prefix."confi
 $rosine_db_query['update_configuration']="UPDATE ".$rosine_db_prefix."config SET ";
 
 //mysql for statistics
-$rosine_db_query['statistics']['get_customer_with_most_sales']=$rosine_db_query['customer_with_most_sales'];
-$rosine_db_query['statistics']['get_articles_by_sales']="SELECT SUM( POSI_PRICE ) AS money, ART_NUMBER, POSI_TEXT
+$rosine_db_query['statistics']['get_customer_with_most_sales']="SELECT SUM( r.INVOICE_AMMOUNT_BRUTTO ) AS money, e.contact_id as customer_id, e.n_family as name, e.n_given, e.org_name, e.adr_one_locality, e.adr_two_locality
+												FROM ".$egw_db_prefix."addressbook AS e
+												JOIN ".$rosine_db_prefix."invoices AS r ON e.contact_id = r.INVOICE_CUSTOMER
+												WHERE %where%
+												GROUP BY contact_id
+												ORDER BY money DESC ";
+$rosine_db_query['statistics']['get_articles_by_sales']="SELECT SUM( POSI_PRICE ) AS money, ART_NUMBER as article_number, POSI_TEXT as description
 															FROM ".$rosine_db_prefix."invoices_positions
 															WHERE INVOICE_ID 
 																	IN ( SELECT INVOICE_ID FROM ".$rosine_db_prefix."invoices AS r WHERE %where%)

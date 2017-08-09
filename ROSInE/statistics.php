@@ -7,17 +7,25 @@
 *  This program is free software; you can redistribute it and/or modify it *
 *  under the terms of the GNU General Public License as published by the   *
 *  Free Software Foundation; version 2 of the License.                     *
-*  date of this file: 2017-08-05 										   *
+*  date of this file: 2017-08-08 										   *
 \**************************************************************************/
 include ('inc/head.inc.php');
 
 $tpl->load("show_statistics.html");
+$lang = $tpl->loadLanguage($lang);
 //standard values
 $results="";
 $params="";
 $queries="";
 $first_button="rosine_hidden";
 $value="";
+// standard-values for search-queries- TODO:this should be changed, so that every field used in template should be set to "" if variable is empty
+if (!$_POST["date_from"])
+	$_POST["date_from"]="";
+if (!$_POST["date_to"])
+	$_POST["date_to"]="";
+if (!$_POST["numbers"])
+	$_POST['numbers']="";
 
 foreach ($rosine_db_query['statistics'] as $key=>$value){
 	//puts the queries in template
@@ -121,21 +129,21 @@ switch ($_POST['next_function']){
 		}//endif
 		$result=rosine_database_query($sql_query." LIMIT $from,".$config['items_per_page'] , 103);
 		if ($from >0) {//if there's apossibility to go back
-			$tpl->assign("backward", '<a href="?type='.$_POST['type'].'&from='.($from-$config['items_per_page']).'">&lt;&lt;</a>');
+			$tpl->assign("backward", '<a href="?from='.($from-$config['items_per_page']).'">&lt;&lt;</a>');
 		}//endif
 		else {
 			$tpl->assign("backward", "");
 		}//endelse
 		
 		if ($from < $max_rows-$config['items_per_page']){ //if you can click next
-			$tpl->assign("foreward", '<a href="?type='.$_POST['type'].'&from='.($from+$config['items_per_page']).'">&gt;&gt;</a>');
+			$tpl->assign("foreward", '<a href="?from='.($from+$config['items_per_page']).'">&gt;&gt;</a>');
 		}//endif
 		else {
 			$tpl->assign("foreward", "");
 		}//endelse
 		$results.="<table id='rosine_tabelle'><tr>";
 		foreach($result->fetch_fields() as $f) {
-			$results.=vsprintf ("<th>%s</th>\n", $f->name);
+			$results.=vsprintf ("<th>{L_%s}</th>\n", strtoupper($f->name));
 		}
 		$results.="</tr>";
 		while($f = $result->fetch_row()) {
@@ -153,15 +161,17 @@ switch ($_POST['next_function']){
 		$first_button="";
 		
 }//end case select what happens with the data
+$tpl->assign("results", $results);
+$tpl->assign("queries", $queries);
+$tpl->assign_array("post", $_POST);
 $lang = $tpl->loadLanguage($lang);
 $tpl->assign('from', $from);
 $tpl->assign("to", ($from+$config['items_per_page']));
 $tpl->assign("max", $max_rows);
 $tpl->assign("first_button", $first_button);
 $tpl->assign("params", $params);
-$tpl->assign("results", $results);
-$tpl->assign("queries", $queries);
-$tpl->assign_array("post", $_POST);
+
+
 $tpl->assign("error", $error);
 $tpl->assign("OK", $OK);
 $tpl->display();
