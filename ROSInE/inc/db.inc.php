@@ -7,7 +7,7 @@
 *  This program is free software; you can redistribute it and/or modify it *
 *  under the terms of the GNU General Public License as published by the   *
 *  Free Software Foundation; version 2 of the License.                     *
-*  date of this file: 2017-08-05  										    *
+*  date of this file: 2017-08-08  										    *
 \**************************************************************************/
 
 // mysql to get config
@@ -100,7 +100,12 @@ $rosine_db_query['update_configuration']="UPDATE ".$rosine_db_prefix."config SET
 
 //mysql for statistics
 $rosine_db_query['statistics']['get_customer_with_most_sales']=$rosine_db_query['customer_with_most_sales'];
-$rosine_db_query['statistics']['get_most_used_articles']="SELECT * FROM rosine_invoices";
+$rosine_db_query['statistics']['get_articles_by_sales']="SELECT SUM( POSI_PRICE ) AS money, ART_NUMBER, POSI_TEXT
+															FROM ".$rosine_db_prefix."invoices_positions
+															WHERE INVOICE_ID 
+																	IN ( SELECT INVOICE_ID FROM ".$rosine_db_prefix."invoices AS r WHERE %where%)
+															GROUP BY ART_NUMBER
+															ORDER BY money DESC ";
 
 $rosine_db = new mysqli(
 		$GLOBALS['egw_info']['server']['db_host'],

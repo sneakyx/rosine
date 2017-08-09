@@ -170,4 +170,4 @@ description	rosine	de	Beschreibung
 please_choose_print_template	rosine	de	Bitte Druckvorlage wählen!
 statistics	rosine	de	Auswertungen
 get_customer_with_most_sales	de	rosine	Kunden mit den meisten Umsätzen anzeigen
-get_most_used_articles	de	rosine	Meist benutzte Artikel anzeigen
+get_articles_by_sales	de	rosine	Artikel mit dem größten Umsatz anzeigen

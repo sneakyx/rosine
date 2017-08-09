@@ -174,4 +174,4 @@ description	 rosine	 en	 description
 please_choose_print_template	rosine	en	Please choose template for printing!
 statistics	rosine	en statistics
 get_customer_with_most_sales	en	rosine	Get customers with most sales
-get_most_used_articles	en	rosine	Get most used articles
+get_get_artciles_by_sales	en	rosine	Show articles sorted by most sales
