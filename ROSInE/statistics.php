@@ -129,14 +129,14 @@ switch ($_POST['next_function']){
 		}//endif
 		$result=rosine_database_query($sql_query." LIMIT $from,".$config['items_per_page'] , 103);
 		if ($from >0) {//if there's apossibility to go back
-			$tpl->assign("backward", '<a href="?from='.($from-$config['items_per_page']).'">&lt;&lt;</a>');
+			$tpl->assign("backward", "<a href='?next_function=show&query={$_POST["query"]}&numbers={$_POST['numbers']}&date_from={$_POST['date_from']}&date_to={$_POST['date_to']}&from=".($from-$config['items_per_page'])."'>&lt;&lt;</a>");
 		}//endif
 		else {
 			$tpl->assign("backward", "");
 		}//endelse
 		
 		if ($from < $max_rows-$config['items_per_page']){ //if you can click next
-			$tpl->assign("foreward", '<a href="?from='.($from+$config['items_per_page']).'">&gt;&gt;</a>');
+			$tpl->assign("foreward", "<a href='?next_function=show&query={$_POST["query"]}&numbers={$_POST['numbers']}&date_from={$_POST['date_from']}&date_to={$_POST['date_to']}&from=".($from+$config['items_per_page'])."'>&gt;&gt;</a>");
 		}//endif
 		else {
 			$tpl->assign("foreward", "");

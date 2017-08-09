@@ -128,8 +128,7 @@ $rosine_db_query['statistics']['get_laziest_customers']="SELECT e.contact_id AS 
 					LEFT JOIN ".$rosine_db_prefix."payments AS p ON r.INVOICE_ID = p.INVOICE_ID
 					WHERE %where%
 					GROUP BY r.INVOICE_CUSTOMER
-					ORDER BY days DESC
-					";
+					ORDER BY days DESC	";
 
 $rosine_db = new mysqli(
 		$GLOBALS['egw_info']['server']['db_host'],
