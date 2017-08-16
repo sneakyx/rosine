@@ -12,6 +12,9 @@ to do list:
 suggestions? Write me an E-Mail: info@rothaarsystems.de
 
 ------------------------------------------------------------------------
+2017-08-16
+- minor error in select_customer template- You have to update the templates! 
+
 2017-08-08
 - query for last customers corrected
 - statistics-articles sorted by most sales
