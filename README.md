@@ -1,9 +1,11 @@
 # rosine
 A. Introduction
  
-This is a fork of php Rechnung also known as PHP Invoice by (Edy Corak).
+This program is for writing and managing offers, orders, delivery notes, invoices and payments.
 It fits neatly in Egroupware and uses the Egroupware address book (no secondary addressbook nessesary).
-You can write invoices and offers and can also manage articles.
+The goal was to make it accesable by touch screen - this is why the layout is bigger than in egroupware.
+In the beginning, it was a fork of php Rechnung also known as PHP Invoice by (Edy Corak)- but it is now completly rewritten, but you can import the phpinvoice data.
+
 See pictures: https://sourceforge.net/projects/rosin/
 
 B. Installation
@@ -18,7 +20,7 @@ The installation goes in 5 steps
 B.2.1. Download
 
 Usually, you have to download the files from https://github.com/sneakyx/rosine - Klick on "Clone or Download" and then on "Download ZIP"
-If you use the version from sourceforge, this is a very old version!
+Don't use the source forge version, it is older!
 The downloaded file contains one folder "rosine-master", in this directory is another directory called "ROSInE" - everything that is in this folder, you have to copy to Your egroupware folder ( /usr/share/egroupware/rosine )- don't call the folder "ROSInE"!
 
 B.2.2. Change for HTML5
@@ -72,3 +74,6 @@ http://www.webmasterpro.de/coding/article/php-ein-eigenes-template-system.html
 
 - Chris Coyier for the article "make an editable/printable HTML Invoice
 https://css-tricks.com/html-invoice/
+
+And, of course, egroupware GmbH for making such a great groupware tool!
+http://www.egroupware.org/
