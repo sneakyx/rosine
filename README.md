@@ -2,8 +2,8 @@
 A. Introduction
  
 This program is for writing and managing offers, orders, delivery notes, invoices and payments.
-It fits neatly in Egroupware and uses the Egroupware address book (no secondary addressbook nessesary).
-The goal was to make it accesable by touch screen - this is why the layout is bigger than in egroupware.
+It fits neatly in EGroupware and uses the EGroupware address book (no secondary addressbook nessesary).
+The goal was to make it accesable by touch screen - this is why the layout is bigger than in EGroupware.
 In the beginning, it was a fork of php Rechnung also known as PHP Invoice by (Edy Corak)- but it is now completly rewritten, but you can import the phpinvoice data.
 
 See pictures: https://sourceforge.net/projects/rosin/
@@ -25,7 +25,7 @@ The downloaded file contains one folder "rosine-master", in this directory is an
 
 B.2.2. Change for HTML5
 
-I'm sorry, I had to do this, because my first customer wanted to use a tablet and PCs with touch screen to use the app, this is the reason my app has so big buttons- usually egroupware doesn't work on HTML 5, so there is one file to change- The other apps aren't affected- I tested it!
+I'm sorry, I had to do this, because my first customer wanted to use a tablet and PCs with touch screen to use the app, this is the reason my app has so big buttons- usually EGroupware doesn't work on HTML 5, so there is one file to change- The other apps aren't affected- I tested it!
 nano /usr/share/egroupware/pixelegg/head.tpl
 Line 1 has to be:
 
