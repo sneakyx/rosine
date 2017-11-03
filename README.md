@@ -75,5 +75,5 @@ http://www.webmasterpro.de/coding/article/php-ein-eigenes-template-system.html
 - Chris Coyier for the article "make an editable/printable HTML Invoice
 https://css-tricks.com/html-invoice/
 
-And, of course, egroupware GmbH for making such a great groupware tool!
+And, of course, EGroupware GmbH for making such a great groupware tool!
 http://www.egroupware.org/
