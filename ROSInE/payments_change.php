@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2017-07-05 										    *
+ *  date of this file: 2018-01-06 										    *
  \**************************************************************************/
 include ('inc/head.inc.php');
 
@@ -23,45 +23,50 @@ switch ($_POST['next_function']) {
 			 * this ist just for the use in the next functions
 			 */
 			//hier einfuegen 
-			$_POST['payment_id']=rosine_highest_number("payment")+1;
-			$result=rosine_database_query( 
-				$rosine_db_query['insert_payment'].
-						'('.
-					$_POST['payment_id'].','. 
-					$_POST['invoice_id'].',"'.
-					$_POST['payment_date'].'",'.
-					$_POST['meth_id'].','.
-					$_POST['payment_ammount'].',"'.
-					$_POST['note'].'")',101);
-			if ($result!=false){
-				$OK.=lang('payment_inserted').' '.lang('invoice').' '.$_POST['invoice_id'];
-			}//endif
-				
-			$result=rosine_database_query($rosine_db_query['get_open_money'].$_POST['invoice_id'],102);
-
-			if ($result!=false){
-				// 
-				$row=$result->fetch_row();
-				if ($row[0] >= $row[1]){
-					$OK.="<br>".lang('invoice_payed');
-					rosine_set_status_paperwork("invoice", $_POST['invoice_id'], "paid");
-				}// invoice is payed
-				
-			}// no error
-				
-					/*
-					 * although case insert_payment ends here, 
-					 * you can add directly another payment,
-					 * so this break isn't used!
-					 *
-					 */
-							
+			if ($_POST['invoice_id']){
+    			$_POST['payment_id']=rosine_highest_number("payment")+1;
+    			$result=rosine_database_query( 
+    				$rosine_db_query['insert_payment'].
+    						"(
+        			    {$config['company']}, 
+        			    {$_POST['payment_id']}, 
+        			    {$_POST['invoice_id']},
+        				'{$_POST['payment_date']}',
+    					{$_POST['meth_id']},
+    					'{$_POST['payment_ammount']}',
+    					'{$_POST['notes']}')",101);
+    			if ($result!=false){
+    				$OK.=lang('payment_inserted').' '.lang('invoice').' '.$_POST['invoice_id'];
+    			}//endif
+    			$query=	rosine_correct_query('', $rosine_db_query['get_open_money'].$_POST['invoice_id']);
+    			$result=rosine_database_query($query,102);
+    
+    			if ($result!=false){
+    				// 
+    				$row=$result->fetch_row();
+    				if ($row[0] >= $row[1]){
+    					$OK.="<br>".lang('invoice_payed');
+    					rosine_set_status_paperwork("invoice", $_POST['invoice_id'], "paid");
+    				}// invoice is payed
+    				
+    			}// no error
+    				
+    					/*
+    					 * although case insert_payment ends here, 
+    					 * you can add directly another payment,
+    					 * so this break isn't used!
+    					 *
+    					 */
+			}
+			else {
+			    $error.=lang('invoice_is_missing');
+			}
 //	break; //insert_payment 
 	
 	default:
 		// Step 0 - show address to choose	
 
-		$result=rosine_database_query($rosine_db_query['get_unpaid_invoices'],104);
+		$result=rosine_database_query(rosine_correct_query('', $rosine_db_query['get_unpaid_invoices']),104);
 
 		if ($result!=false) {
 					//no error in mysql get customers

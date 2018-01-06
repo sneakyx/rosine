@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2017-07-19  										    *
+ *  date of this file: 2018-01-06  										    *
  \**************************************************************************/
 
 $tpl->load("paperworklist.html");
@@ -30,7 +30,7 @@ if ($_POST['next_function']=="really_delete"){
 }// really delete
 
 // get ammount of paperworks in database
-$result=rosine_database_query(str_replace("%paperwork%", rosine_get_plural($_POST['paperwork']), $rosine_db_query['get_ammount_of_paperworks'])." 1",112);
+$result=rosine_database_query(rosine_correct_query($_POST['paperwork'],  $rosine_db_query['get_ammount_of_paperworks'])." 1",112);
 $liste="";
 if ($result!=false) {
 	$g = $result->fetch_array();

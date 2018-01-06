@@ -7,9 +7,9 @@
 	*  This program is free software; you can redistribute it and/or modify it *
 	*  under the terms of the GNU General Public License as published by the   *
 	*  Free Software Foundation; version 2 of the License.                     *
-	*  Date of this file: 2017-07-15                                           *
+	*  Date of this file: 2018-01-06                                           *
 	\**************************************************************************/
-// rosine drafts noch hinzufügen!
+
 $phpgw_baseline = array(
 
 		'rosine_articles' => array(
@@ -41,267 +41,276 @@ $phpgw_baseline = array(
 				'ix' => array(),
 				'uc' => array()
 		),
-		'rosine_deliveries' => array(
-				'fd' => array(
-						'DELIVERY_ID' => array('type' => 'auto','nullable' => False),
-						'DELIVERY_DATE' => array('type' => 'date'),
-						'DELIVERY_CUSTOMER' => array('type' => 'int','precision' => '4'),
-						'DELIVERY_CUSTOMER_PRIVATE' => array('type' => 'int','precision' => '1','default' => '1','nullable' => False),
-						'DELIVERY_AMMOUNT' => array('type' => 'decimal','precision' => '8','scale' => '2'),
-						'DELIVERY_AMMOUNT_BRUTTO' => array('type' => 'decimal','precision' => '8','scale' => '2'),
-						'DELIVERY_NOTE' => array('type' => 'text'),
-						'DELIVERY_TEMPLATE' => array('type' => 'varchar','precision' => '100'),
-						'DELIVERY_STATUS' => array('type' => 'varchar','precision' => '10','nullable' => False),
-						'DELIVERY_PRINTED' => array('type' => 'int','precision' => '1','default' => '0','nullable' => False),
-						'GENERATED' => array('type' => 'varchar','precision' => '100'),
-						'CHANGED' => array('type' => 'varchar','precision' => '100')
-				),
-				'pk' => array('DELIVERY_ID'),
-				'fk' => array(),
-				'ix' => array(),
-				'uc' => array()
-		),
-		'rosine_deliveries_positions' => array(
-				'fd' => array(
-						'DELIVERY_ID' => array('type' => 'int','precision' => '4','nullable' => False),
-						'POSI_ID' => array('type' => 'int','precision' => '4','nullable' => False),
-						'ART_NUMBER' => array('type' => 'varchar','precision' => '40','nullable' => False),
-						'POSI_AMMOUNT' => array('type' => 'decimal','precision' => '9','scale' => '3'),
-						'POSI_UNIT' => array('type' => 'varchar','precision' => '20'),
-						'POSI_PRICE' => array('type' => 'decimal','precision' => '8','scale' => '2'),
-						'POSI_LOCATION' => array('type' => 'int','precision' => '2'),
-						'POSI_SERIAL' => array('type' => 'varchar','precision' => '40'),
-						'POSI_TEXT' => array('type' => 'varchar','precision' => '1255'),
-						'POSI_TAX' => array('type' => 'int','precision' => '1','nullable' => False),
-						'DONE' => array('type' => 'int','precision' => '1','default' => '0')
-				),
-				'pk' => array('DELIVERY_ID','POSI_ID'),
-				'fk' => array(),
-				'ix' => array(),
-				'uc' => array()
-		),
-		
-		'rosine_drafts' => array(
-				'fd' => array(
-						'DRAFT_ID' => array('type' => 'auto','nullable' => False),
-						'DRAFT_DATE' => array('type' => 'date'),
-						'DRAFT_CUSTOMER' => array('type' => 'int','precision' => '4'),
-						'DRAFT_CUSTOMER_PRIVATE' => array('type' => 'int','precision' => '1','default' => '1','nullable' => False),
-						'DRAFT_AMMOUNT' => array('type' => 'decimal','precision' => '8','scale' => '2'),
-						'DRAFT_AMMOUNT_BRUTTO' => array('type' => 'decimal','precision' => '8','scale' => '2'),
-						'DRAFT_NOTE' => array('type' => 'text'),
-						'DRAFT_TEMPLATE' => array('type' => 'varchar','precision' => '100'),
-						'DRAFT_STATUS' => array('type' => 'varchar','precision' => '10','nullable' => False),
-						'DRAFT_PRINTED' => array('type' => 'int','precision' => '1','default' => '0','nullable' => False),
-						'GENERATED' => array('type' => 'varchar','precision' => '100'),
-						'CHANGED' => array('type' => 'varchar','precision' => '100')
-				),
-				'pk' => array('DRAFT_ID'),
-				'fk' => array(),
-				'ix' => array(),
-				'uc' => array()
-		),
-		'rosine_drafts_positions' => array(
-				'fd' => array(
-						'DRAFT_ID' => array('type' => 'int','precision' => '4','nullable' => False),
-						'POSI_ID' => array('type' => 'int','precision' => '4','nullable' => False),
-						'ART_NUMBER' => array('type' => 'varchar','precision' => '40','nullable' => False),
-						'POSI_AMMOUNT' => array('type' => 'decimal','precision' => '9','scale' => '3'),
-						'POSI_UNIT' => array('type' => 'varchar','precision' => '20'),
-						'POSI_PRICE' => array('type' => 'decimal','precision' => '8','scale' => '2'),
-						'POSI_LOCATION' => array('type' => 'int','precision' => '2'),
-						'POSI_SERIAL' => array('type' => 'varchar','precision' => '40'),
-						'POSI_TEXT' => array('type' => 'varchar','precision' => '1255'),
-						'POSI_TAX' => array('type' => 'int','precision' => '1','nullable' => False),
-						'DONE' => array('type' => 'int','precision' => '1','default' => '0')
-				),
-				'pk' => array('DRAFT_ID','POSI_ID'),
-				'fk' => array(),
-				'ix' => array(),
-				'uc' => array()
-		),
-		
-		'rosine_invoices' => array(
-				'fd' => array(
-						'INVOICE_ID' => array('type' => 'auto','nullable' => False),
-						'INVOICE_DATE' => array('type' => 'date'),
-						'INVOICE_CUSTOMER' => array('type' => 'int','precision' => '4'),
-						'INVOICE_CUSTOMER_PRIVATE' => array('type' => 'int','precision' => '1','default' => '1','nullable' => False),
-						'INVOICE_AMMOUNT' => array('type' => 'decimal','precision' => '8','scale' => '2'),
-						'INVOICE_AMMOUNT_BRUTTO' => array('type' => 'decimal','precision' => '8','scale' => '2'),
-						'INVOICE_NOTE' => array('type' => 'text'),
-						'INVOICE_TEMPLATE' => array('type' => 'varchar','precision' => '100'),
-						'INVOICE_STATUS' => array('type' => 'varchar','precision' => '10','nullable' => False),
-						'INVOICE_PRINTED' => array('type' => 'int','precision' => '1','default' => '0'),
-						'GENERATED' => array('type' => 'varchar','precision' => '100'),
-						'CHANGED' => array('type' => 'varchar','precision' => '100')
-				),
-				'pk' => array('INVOICE_ID'),
-				'fk' => array(),
-				'ix' => array(),
-				'uc' => array()
-		),
-		'rosine_invoices_positions' => array(
-				'fd' => array(
-						'INVOICE_ID' => array('type' => 'int','precision' => '4','nullable' => False),
-						'POSI_ID' => array('type' => 'int','precision' => '4','nullable' => False),
-						'ART_NUMBER' => array('type' => 'varchar','precision' => '40','nullable' => False),
-						'POSI_AMMOUNT' => array('type' => 'decimal','precision' => '9','scale' => '3'),
-						'POSI_UNIT' => array('type' => 'varchar','precision' => '20'),
-						'POSI_PRICE' => array('type' => 'decimal','precision' => '8','scale' => '2'),
-						'POSI_LOCATION' => array('type' => 'int','precision' => '2'),
-						'POSI_SERIAL' => array('type' => 'varchar','precision' => '40'),
-						'POSI_TEXT' => array('type' => 'varchar','precision' => '1255'),
-						'POSI_TAX' => array('type' => 'int','precision' => '1','nullable' => False),
-						'DONE' => array('type' => 'int','precision' => '1','default' => '0')
-				),
-				'pk' => array('INVOICE_ID','POSI_ID'),
-				'fk' => array(),
-				'ix' => array(),
-				'uc' => array()
-		),
-		'rosine_locations' => array(
-				'fd' => array(
-						'LOC_ID' => array('type' => 'int','precision' => '2','nullable' => False),
-						'LOC_NAME' => array('type' => 'varchar','precision' => '255','nullable' => False),
-						'LOC_NOTE' => array('type' => 'varchar','precision' => '1100'),
-						'GENERATED' => array('type' => 'varchar','precision' => '100'),
-						'CHANGED' => array('type' => 'varchar','precision' => '100')
-				),
-				'pk' => array('LOC_ID'),
-				'fk' => array(),
-				'ix' => array(),
-				'uc' => array()
-		),
-		'rosine_notes' => array(
-				'fd' => array(
-						'NOTE_ID' => array('type' => 'auto','nullable' => False),
-						'LANGUAGE' => array('type' => 'varchar','precision' => '60','nullable' => False),
-						'NOTE_TEXT' => array('type' => 'text')
-				),
-				'pk' => array('NOTE_ID','LANGUAGE'),
-				'fk' => array(),
-				'ix' => array(),
-				'uc' => array()
-		),
-		'rosine_offers' => array(
-				'fd' => array(
-						'OFFER_ID' => array('type' => 'auto','nullable' => False),
-						'OFFER_DATE' => array('type' => 'date'),
-						'OFFER_CUSTOMER' => array('type' => 'int','precision' => '4'),
-						'OFFER_CUSTOMER_PRIVATE' => array('type' => 'int','precision' => '1','default' => '1','nullable' => False),
-						'OFFER_AMMOUNT' => array('type' => 'decimal','precision' => '8','scale' => '2'),
-						'OFFER_AMMOUNT_BRUTTO' => array('type' => 'decimal','precision' => '8','scale' => '2'),
-						'OFFER_NOTE' => array('type' => 'varchar','precision' => '1100'),
-						'OFFER_TEMPLATE' => array('type' => 'varchar','precision' => '100'),
-						'OFFER_STATUS' => array('type' => 'varchar','precision' => '10','nullable' => False),
-						'OFFER_PRINTED' => array('type' => 'int','precision' => '1','default' => '0'),
-						'GENERATED' => array('type' => 'varchar','precision' => '100'),
-						'CHANGED' => array('type' => 'varchar','precision' => '100')
-				),
-				'pk' => array('OFFER_ID'),
-				'fk' => array(),
-				'ix' => array(),
-				'uc' => array()
-		),
-		'rosine_offers_positions' => array(
-				'fd' => array(
-						'OFFER_ID' => array('type' => 'int','precision' => '4','nullable' => False),
-						'POSI_ID' => array('type' => 'int','precision' => '4','nullable' => False),
-						'ART_NUMBER' => array('type' => 'varchar','precision' => '40','nullable' => False),
-						'POSI_AMMOUNT' => array('type' => 'decimal','precision' => '9','scale' => '3'),
-						'POSI_UNIT' => array('type' => 'varchar','precision' => '20'),
-						'POSI_PRICE' => array('type' => 'decimal','precision' => '8','scale' => '2'),
-						'POSI_LOCATION' => array('type' => 'int','precision' => '2'),
-						'POSI_SERIAL' => array('type' => 'varchar','precision' => '40'),
-						'POSI_TEXT' => array('type' => 'varchar','precision' => '1255'),
-						'POSI_TAX' => array('type' => 'int','precision' => '1','nullable' => False),
-						'DONE' => array('type' => 'int','precision' => '1','default' => '0')
-				),
-				'pk' => array('OFFER_ID','POSI_ID'),
-				'fk' => array(),
-				'ix' => array(),
-				'uc' => array()
-		),
-		'rosine_orders' => array(
-				'fd' => array(
-						'ORDER_ID' => array('type' => 'auto','nullable' => False),
-						'ORDER_DATE' => array('type' => 'date'),
-						'ORDER_CUSTOMER' => array('type' => 'int','precision' => '4'),
-						'ORDER_CUSTOMER_PRIVATE' => array('type' => 'int','precision' => '1','default' => '1','nullable' => False),
-						'ORDER_AMMOUNT' => array('type' => 'decimal','precision' => '8','scale' => '2'),
-						'ORDER_AMMOUNT_BRUTTO' => array('type' => 'decimal','precision' => '8','scale' => '2'),
-						'ORDER_NOTE' => array('type' => 'varchar','precision' => '1100'),
-						'ORDER_TEMPLATE' => array('type' => 'varchar','precision' => '100'),
-						'ORDER_STATUS' => array('type' => 'varchar','precision' => '10','nullable' => False),
-						'ORDER_PRINTED' => array('type' => 'int','precision' => '1','default' => '0'),
-						'GENERATED' => array('type' => 'varchar','precision' => '100'),
-						'CHANGED' => array('type' => 'varchar','precision' => '100')
-				),
-				'pk' => array('ORDER_ID'),
-				'fk' => array(),
-				'ix' => array(),
-				'uc' => array()
-		),
-		'rosine_orders_positions' => array(
-				'fd' => array(
-						'ORDER_ID' => array('type' => 'int','precision' => '4','nullable' => False),
-						'POSI_ID' => array('type' => 'int','precision' => '4','nullable' => False),
-						'ART_NUMBER' => array('type' => 'varchar','precision' => '40','nullable' => False),
-						'POSI_AMMOUNT' => array('type' => 'decimal','precision' => '9','scale' => '3'),
-						'POSI_UNIT' => array('type' => 'varchar','precision' => '20'),
-						'POSI_PRICE' => array('type' => 'decimal','precision' => '8','scale' => '2'),
-						'POSI_LOCATION' => array('type' => 'int','precision' => '2'),
-						'POSI_SERIAL' => array('type' => 'varchar','precision' => '40'),
-						'POSI_TEXT' => array('type' => 'varchar','precision' => '1255'),
-						'POSI_TAX' => array('type' => 'int','precision' => '1','nullable' => False),
-						'DONE' => array('type' => 'int','precision' => '1','default' => '0')
-				),
-				'pk' => array('ORDER_ID','POSI_ID'),
-				'fk' => array(),
-				'ix' => array(),
-				'uc' => array()
-		),
-		'rosine_payments' => array(
-				'fd' => array(
-						'PAYMENT_ID' => array('type' => 'auto','nullable' => False),
-						'INVOICE_ID' => array('type' => 'int','precision' => '4'),
-						'PAYMENT_DATE' => array('type' => 'date'),
-						'METH_ID' => array('type' => 'int','precision' => '4'),
-						'PAYMENT_AMMOUNT' => array('type' => 'decimal','precision' => '8','scale' => '2'),
-						'PAYMENT_NOTE' => array('type' => 'varchar','precision' => '512')
-				),
-				'pk' => array('PAYMENT_ID'),
-				'fk' => array(),
-				'ix' => array(),
-				'uc' => array()
-		),
-		'rosine_payments_methods' => array(
-				'fd' => array(
-						'METH_ID' => array('type' => 'int','precision' => '2','nullable' => False),
-						'METH_NAME' => array('type' => 'varchar','precision' => '255','nullable' => False),
-						'METH_NOTE' => array('type' => 'text'),
-						'GENERATED' => array('type' => 'varchar','precision' => '100'),
-						'CHANGED' => array('type' => 'varchar','precision' => '100')
-				),
-				'pk' => array('METH_ID'),
-				'fk' => array(),
-				'ix' => array(),
-				'uc' => array()
-		),
-		'rosine_taxes' => array(
-				'fd' => array(
-						'TAX_ID' => array('type' => 'int','precision' => '1','nullable' => False),
-						'TAX_NAME' => array('type' => 'varchar','precision' => '20'),
-						'TAX_PERCENTAGE' => array('type' => 'decimal','precision' => '4','scale' => '2','nullable' => False),
-						'GENERATED' => array('type' => 'varchar','precision' => '100','nullable' => False),
-						'CHANGED' => array('type' => 'varchar','precision' => '100','nullable' => False)
-				),
-				'pk' => array('TAX_ID'),
-				'fk' => array(),
-				'ix' => array(),
-				'uc' => array()
-		)
+    'rosine_deliveries' => array(
+        'fd' => array(
+            'COMPANY_ID' => array('type' => 'int','precision' => '1','default' => '0','nullable' => False),
+            'DELIVERY_ID' => array('type' => 'int','precision' => '4','nullable' => False),
+            'DELIVERY_DATE' => array('type' => 'date'),
+            'DELIVERY_CUSTOMER' => array('type' => 'int','precision' => '4'),
+            'DELIVERY_CUSTOMER_PRIVATE' => array('type' => 'int','precision' => '1','default' => '1','nullable' => False),
+            'DELIVERY_AMMOUNT' => array('type' => 'decimal','precision' => '8','scale' => '2'),
+            'DELIVERY_AMMOUNT_BRUTTO' => array('type' => 'decimal','precision' => '8','scale' => '2'),
+            'DELIVERY_NOTE' => array('type' => 'text'),
+            'DELIVERY_STATUS' => array('type' => 'varchar','precision' => '10','nullable' => False),
+            'DELIVERY_TEMPLATE' => array('type' => 'varchar','precision' => '250'),
+            'DELIVERY_PRINTED' => array('type' => 'int','precision' => '1','default' => '0','nullable' => False),
+            'GENERATED' => array('type' => 'varchar','precision' => '100'),
+            'CHANGED' => array('type' => 'varchar','precision' => '100')
+        ),
+        'pk' => array('COMPANY_ID','DELIVERY_ID'),
+        'fk' => array(),
+        'ix' => array(),
+        'uc' => array()
+    ),
+    'rosine_deliveries_positions' => array(
+        'fd' => array(
+            'COMPANY_ID' => array('type' => 'int','precision' => '1','default' => '1','nullable' => False),
+            'DELIVERY_ID' => array('type' => 'int','precision' => '4','nullable' => False),
+            'POSI_ID' => array('type' => 'int','precision' => '4','nullable' => False),
+            'ART_NUMBER' => array('type' => 'varchar','precision' => '40','nullable' => False),
+            'POSI_AMMOUNT' => array('type' => 'decimal','precision' => '9','scale' => '3'),
+            'POSI_UNIT' => array('type' => 'varchar','precision' => '20'),
+            'POSI_PRICE' => array('type' => 'decimal','precision' => '8','scale' => '2'),
+            'POSI_LOCATION' => array('type' => 'int','precision' => '2'),
+            'POSI_SERIAL' => array('type' => 'varchar','precision' => '40'),
+            'POSI_TEXT' => array('type' => 'varchar','precision' => '1255'),
+            'POSI_TAX' => array('type' => 'int','precision' => '1','nullable' => False),
+            'DONE' => array('type' => 'int','precision' => '1','default' => '0')
+        ),
+        'pk' => array('COMPANY_ID','DELIVERY_ID','POSI_ID'),
+        'fk' => array(),
+        'ix' => array(),
+        'uc' => array()
+    ),
+    'rosine_drafts' => array(
+        'fd' => array(
+            'COMPANY_ID' => array('type' => 'int','precision' => '1','default' => '1','nullable' => False),
+            'DRAFT_ID' => array('type' => 'int','precision' => '4','nullable' => False),
+            'DRAFT_DATE' => array('type' => 'date'),
+            'DRAFT_CUSTOMER' => array('type' => 'int','precision' => '4'),
+            'DRAFT_CUSTOMER_PRIVATE' => array('type' => 'int','precision' => '1','default' => '1','nullable' => False),
+            'DRAFT_AMMOUNT' => array('type' => 'decimal','precision' => '8','scale' => '2'),
+            'DRAFT_AMMOUNT_BRUTTO' => array('type' => 'decimal','precision' => '8','scale' => '2'),
+            'DRAFT_NOTE' => array('type' => 'text'),
+            'DRAFT_STATUS' => array('type' => 'varchar','precision' => '10','nullable' => False),
+            'DRAFT_TEMPLATE' => array('type' => 'varchar','precision' => '250'),
+            'DRAFT_PRINTED' => array('type' => 'int','precision' => '1','default' => '0','nullable' => False),
+            'GENERATED' => array('type' => 'varchar','precision' => '100'),
+            'CHANGED' => array('type' => 'varchar','precision' => '100')
+        ),
+        'pk' => array('COMPANY_ID','DRAFT_ID'),
+        'fk' => array(),
+        'ix' => array(),
+        'uc' => array()
+    ),
+    'rosine_drafts_positions' => array(
+        'fd' => array(
+            'COMPANY_ID' => array('type' => 'int','precision' => '1','default' => '1','nullable' => False),
+            'DRAFT_ID' => array('type' => 'int','precision' => '4','nullable' => False),
+            'POSI_ID' => array('type' => 'int','precision' => '4','nullable' => False),
+            'ART_NUMBER' => array('type' => 'varchar','precision' => '40','nullable' => False),
+            'POSI_AMMOUNT' => array('type' => 'decimal','precision' => '9','scale' => '3'),
+            'POSI_UNIT' => array('type' => 'varchar','precision' => '20'),
+            'POSI_PRICE' => array('type' => 'decimal','precision' => '8','scale' => '2'),
+            'POSI_LOCATION' => array('type' => 'int','precision' => '2'),
+            'POSI_SERIAL' => array('type' => 'varchar','precision' => '40'),
+            'POSI_TEXT' => array('type' => 'varchar','precision' => '1255'),
+            'POSI_TAX' => array('type' => 'int','precision' => '1','nullable' => False),
+            'DONE' => array('type' => 'int','precision' => '1','default' => '0')
+        ),
+        'pk' => array('COMPANY_ID','DRAFT_ID','POSI_ID'),
+        'fk' => array(),
+        'ix' => array(),
+        'uc' => array()
+    ),
+    'rosine_invoices' => array(
+        'fd' => array(
+            'COMPANY_ID' => array('type' => 'int','precision' => '1','default' => '1','nullable' => False),
+            'INVOICE_ID' => array('type' => 'int','precision' => '4','nullable' => False),
+            'INVOICE_DATE' => array('type' => 'date'),
+            'INVOICE_CUSTOMER' => array('type' => 'int','precision' => '4'),
+            'INVOICE_CUSTOMER_PRIVATE' => array('type' => 'int','precision' => '1','default' => '1','nullable' => False),
+            'INVOICE_AMMOUNT' => array('type' => 'decimal','precision' => '8','scale' => '2'),
+            'INVOICE_AMMOUNT_BRUTTO' => array('type' => 'decimal','precision' => '8','scale' => '2'),
+            'INVOICE_NOTE' => array('type' => 'text'),
+            'INVOICE_STATUS' => array('type' => 'varchar','precision' => '10','nullable' => False),
+            'INVOICE_TEMPLATE' => array('type' => 'varchar','precision' => '250'),
+            'INVOICE_PRINTED' => array('type' => 'int','precision' => '1','default' => '0'),
+            'GENERATED' => array('type' => 'varchar','precision' => '100'),
+            'CHANGED' => array('type' => 'varchar','precision' => '100')
+        ),
+        'pk' => array('COMPANY_ID','INVOICE_ID'),
+        'fk' => array(),
+        'ix' => array(),
+        'uc' => array()
+    ),
+    'rosine_invoices_positions' => array(
+        'fd' => array(
+            'COMPANY_ID' => array('type' => 'int','precision' => '1','default' => '1','nullable' => False),
+            'INVOICE_ID' => array('type' => 'int','precision' => '4','nullable' => False),
+            'POSI_ID' => array('type' => 'int','precision' => '4','nullable' => False),
+            'ART_NUMBER' => array('type' => 'varchar','precision' => '40','nullable' => False),
+            'POSI_AMMOUNT' => array('type' => 'decimal','precision' => '9','scale' => '3'),
+            'POSI_UNIT' => array('type' => 'varchar','precision' => '20'),
+            'POSI_PRICE' => array('type' => 'decimal','precision' => '8','scale' => '2'),
+            'POSI_LOCATION' => array('type' => 'int','precision' => '2'),
+            'POSI_SERIAL' => array('type' => 'varchar','precision' => '40'),
+            'POSI_TEXT' => array('type' => 'varchar','precision' => '1255'),
+            'POSI_TAX' => array('type' => 'int','precision' => '1','nullable' => False),
+            'DONE' => array('type' => 'int','precision' => '1','default' => '0')
+        ),
+        'pk' => array('COMPANY_ID','INVOICE_ID','POSI_ID'),
+        'fk' => array(),
+        'ix' => array(),
+        'uc' => array()
+    ),
+    'rosine_locations' => array(
+        'fd' => array(
+            'LOC_ID' => array('type' => 'int','precision' => '2','nullable' => False),
+            'LOC_NAME' => array('type' => 'varchar','precision' => '255','nullable' => False),
+            'LOC_NOTE' => array('type' => 'varchar','precision' => '1100'),
+            'GENERATED' => array('type' => 'varchar','precision' => '100'),
+            'CHANGED' => array('type' => 'varchar','precision' => '100')
+        ),
+        'pk' => array('LOC_ID'),
+        'fk' => array(),
+        'ix' => array(),
+        'uc' => array()
+    ),
+    'rosine_notes' => array(
+        'fd' => array(
+            'NOTE_ID' => array('type' => 'auto','nullable' => False),
+            'LANGUAGE' => array('type' => 'varchar','precision' => '60','nullable' => False),
+            'NOTE_TEXT' => array('type' => 'text')
+        ),
+        'pk' => array('NOTE_ID','LANGUAGE'),
+        'fk' => array(),
+        'ix' => array(),
+        'uc' => array()
+    ),
+    'rosine_offers' => array(
+        'fd' => array(
+            'COMPANY_ID' => array('type' => 'int','precision' => '1','default' => '1','nullable' => False),
+            'OFFER_ID' => array('type' => 'int','precision' => '4','nullable' => False),
+            'OFFER_DATE' => array('type' => 'date'),
+            'OFFER_CUSTOMER' => array('type' => 'int','precision' => '4'),
+            'OFFER_CUSTOMER_PRIVATE' => array('type' => 'int','precision' => '1','default' => '1','nullable' => False),
+            'OFFER_AMMOUNT' => array('type' => 'decimal','precision' => '8','scale' => '2'),
+            'OFFER_AMMOUNT_BRUTTO' => array('type' => 'decimal','precision' => '8','scale' => '2'),
+            'OFFER_NOTE' => array('type' => 'varchar','precision' => '1100'),
+            'OFFER_STATUS' => array('type' => 'varchar','precision' => '10','nullable' => False),
+            'OFFER_TEMPLATE' => array('type' => 'varchar','precision' => '250'),
+            'OFFER_PRINTED' => array('type' => 'int','precision' => '1','default' => '0'),
+            'GENERATED' => array('type' => 'varchar','precision' => '100'),
+            'CHANGED' => array('type' => 'varchar','precision' => '100')
+        ),
+        'pk' => array('COMPANY_ID','OFFER_ID'),
+        'fk' => array(),
+        'ix' => array(),
+        'uc' => array()
+    ),
+    'rosine_offers_positions' => array(
+        'fd' => array(
+            'COMPANY_ID' => array('type' => 'int','precision' => '1','default' => '1','nullable' => False),
+            'OFFER_ID' => array('type' => 'int','precision' => '4','nullable' => False),
+            'POSI_ID' => array('type' => 'int','precision' => '4','nullable' => False),
+            'ART_NUMBER' => array('type' => 'varchar','precision' => '40','nullable' => False),
+            'POSI_AMMOUNT' => array('type' => 'decimal','precision' => '9','scale' => '3'),
+            'POSI_UNIT' => array('type' => 'varchar','precision' => '20'),
+            'POSI_PRICE' => array('type' => 'decimal','precision' => '8','scale' => '2'),
+            'POSI_LOCATION' => array('type' => 'int','precision' => '2'),
+            'POSI_SERIAL' => array('type' => 'varchar','precision' => '40'),
+            'POSI_TEXT' => array('type' => 'varchar','precision' => '1255'),
+            'POSI_TAX' => array('type' => 'int','precision' => '1','nullable' => False),
+            'DONE' => array('type' => 'int','precision' => '1','default' => '0')
+        ),
+        'pk' => array('COMPANY_ID','OFFER_ID','POSI_ID'),
+        'fk' => array(),
+        'ix' => array(),
+        'uc' => array()
+    ),
+    'rosine_orders' => array(
+        'fd' => array(
+            'COMPANY_ID' => array('type' => 'int','precision' => '1','default' => '1','nullable' => False),
+            'ORDER_ID' => array('type' => 'int','precision' => '4','nullable' => False),
+            'ORDER_DATE' => array('type' => 'date'),
+            'ORDER_CUSTOMER' => array('type' => 'int','precision' => '4'),
+            'ORDER_CUSTOMER_PRIVATE' => array('type' => 'int','precision' => '1','default' => '1','nullable' => False),
+            'ORDER_AMMOUNT' => array('type' => 'decimal','precision' => '8','scale' => '2'),
+            'ORDER_AMMOUNT_BRUTTO' => array('type' => 'decimal','precision' => '8','scale' => '2'),
+            'ORDER_NOTE' => array('type' => 'varchar','precision' => '1100'),
+            'ORDER_STATUS' => array('type' => 'varchar','precision' => '10','nullable' => False),
+            'ORDER_TEMPLATE' => array('type' => 'varchar','precision' => '250'),
+            'ORDER_PRINTED' => array('type' => 'int','precision' => '1','default' => '0'),
+            'GENERATED' => array('type' => 'varchar','precision' => '100'),
+            'CHANGED' => array('type' => 'varchar','precision' => '100')
+        ),
+        'pk' => array('COMPANY_ID','ORDER_ID'),
+        'fk' => array(),
+        'ix' => array(),
+        'uc' => array()
+    ),
+    'rosine_orders_positions' => array(
+        'fd' => array(
+            'COMPANY_ID' => array('type' => 'int','precision' => '1','default' => '1','nullable' => False),
+            'ORDER_ID' => array('type' => 'int','precision' => '4','nullable' => False),
+            'POSI_ID' => array('type' => 'int','precision' => '4','nullable' => False),
+            'ART_NUMBER' => array('type' => 'varchar','precision' => '40','nullable' => False),
+            'POSI_AMMOUNT' => array('type' => 'decimal','precision' => '9','scale' => '3'),
+            'POSI_UNIT' => array('type' => 'varchar','precision' => '20'),
+            'POSI_PRICE' => array('type' => 'decimal','precision' => '8','scale' => '2'),
+            'POSI_LOCATION' => array('type' => 'int','precision' => '2'),
+            'POSI_SERIAL' => array('type' => 'varchar','precision' => '40'),
+            'POSI_TEXT' => array('type' => 'varchar','precision' => '1255'),
+            'POSI_TAX' => array('type' => 'int','precision' => '1','nullable' => False),
+            'DONE' => array('type' => 'int','precision' => '1','default' => '0')
+        ),
+        'pk' => array('COMPANY_ID','ORDER_ID','POSI_ID'),
+        'fk' => array(),
+        'ix' => array(),
+        'uc' => array()
+    ),
+    'rosine_payments' => array(
+        'fd' => array(
+            'COMPANY_ID' => array('type' => 'int','precision' => '1','default' => '1','nullable' => False),
+            'PAYMENT_ID' => array('type' => 'int','precision' => '4','nullable' => False),
+            'INVOICE_ID' => array('type' => 'int','precision' => '4'),
+            'PAYMENT_DATE' => array('type' => 'date'),
+            'METH_ID' => array('type' => 'int','precision' => '4'),
+            'PAYMENT_AMMOUNT' => array('type' => 'decimal','precision' => '8','scale' => '2'),
+            'PAYMENT_NOTE' => array('type' => 'varchar','precision' => '512')
+        ),
+        'pk' => array('COMPANY_ID','PAYMENT_ID'),
+        'fk' => array(),
+        'ix' => array(),
+        'uc' => array()
+    ),
+    'rosine_payments_methods' => array(
+        'fd' => array(
+            'METH_ID' => array('type' => 'int','precision' => '2','nullable' => False),
+            'METH_NAME' => array('type' => 'varchar','precision' => '255','nullable' => False),
+            'METH_NOTE' => array('type' => 'text'),
+            'GENERATED' => array('type' => 'varchar','precision' => '100'),
+            'CHANGED' => array('type' => 'varchar','precision' => '100')
+        ),
+        'pk' => array('METH_ID'),
+        'fk' => array(),
+        'ix' => array(),
+        'uc' => array()
+    ),
+    'rosine_taxes' => array(
+        'fd' => array(
+            'TAX_ID' => array('type' => 'int','precision' => '1','nullable' => False),
+            'TAX_NAME' => array('type' => 'varchar','precision' => '20'),
+            'TAX_PERCENTAGE' => array('type' => 'decimal','precision' => '4','scale' => '2','nullable' => False),
+            'GENERATED' => array('type' => 'varchar','precision' => '100','nullable' => False),
+            'CHANGED' => array('type' => 'varchar','precision' => '100','nullable' => False)
+        ),
+        'pk' => array('TAX_ID'),
+        'fk' => array(),
+        'ix' => array(),
+        'uc' => array()
+    )
 		
 		);
 

@@ -105,4 +105,52 @@ INSERT IGNORE INTO `egroupware`.`rosine_config` (`config` ,`user_id` ,`value`) V
 ('insert_order_into_paperwork', '0', '100'), 
 ('insert_invoice_into_paperwork', '0', '100');
 
+# FROM 2017-01-14 to 2018-01-06
+INSERT INTO `egroupware`.`rosine_config` (`config` ,`user_id` ,`value`) VALUES 
+( 'company', '0', '1');
 
+ALTER TABLE `rosine_deliveries` ADD `COMPANY_ID` TINYINT NOT NULL DEFAULT '1' FIRST ;
+ALTER TABLE `rosine_deliveries` CHANGE `DELIVERY_ID` `DELIVERY_ID` INT( 11 ) NOT NULL ;
+ALTER TABLE `rosine_deliveries` DROP PRIMARY KEY , ADD PRIMARY KEY ( `COMPANY_ID` , `DELIVERY_ID` ) ;
+
+ALTER TABLE `rosine_drafts` ADD `COMPANY_ID` TINYINT NOT NULL DEFAULT '1' FIRST ;
+ALTER TABLE `rosine_drafts` CHANGE `DRAFT_ID` `DRAFT_ID` INT( 11 ) NOT NULL ;
+ALTER TABLE `rosine_drafts` DROP PRIMARY KEY , ADD PRIMARY KEY ( `COMPANY_ID` , `DRAFT_ID` ) ;
+
+ALTER TABLE `rosine_invoices` ADD `COMPANY_ID` TINYINT NOT NULL DEFAULT '1' FIRST ;
+ALTER TABLE `rosine_invoices` CHANGE `INVOICE_ID` `INVOICE_ID` INT( 11 ) NOT NULL ;
+ALTER TABLE `rosine_invoices` DROP PRIMARY KEY , ADD PRIMARY KEY ( `COMPANY_ID` , `INVOICE_ID` ) ;
+
+ALTER TABLE `rosine_offers` ADD `COMPANY_ID` TINYINT NOT NULL DEFAULT '1' FIRST ;
+ALTER TABLE `rosine_offers` CHANGE `OFFER_ID` `OFFER_ID` INT( 11 ) NOT NULL ;
+ALTER TABLE `rosine_offers` DROP PRIMARY KEY , ADD PRIMARY KEY ( `COMPANY_ID` , `OFFER_ID` ) ;
+
+ALTER TABLE `rosine_orders` ADD `COMPANY_ID` TINYINT NOT NULL DEFAULT '1' FIRST ;
+ALTER TABLE `rosine_orders` CHANGE `ORDER_ID` `ORDER_ID` INT( 11 ) NOT NULL ;
+ALTER TABLE `rosine_orders` DROP PRIMARY KEY , ADD PRIMARY KEY ( `COMPANY_ID` , `ORDER_ID` ) ;
+
+ALTER TABLE `rosine_payments` ADD `COMPANY_ID` TINYINT NOT NULL DEFAULT '1' FIRST ;
+ALTER TABLE `rosine_payments` CHANGE `PAYMENT_ID` `PAYMENT_ID` INT( 11 ) NOT NULL ;
+ALTER TABLE `rosine_payments` DROP PRIMARY KEY , ADD PRIMARY KEY ( `COMPANY_ID` , `PAYMENT_ID` ) ;
+
+ALTER TABLE `rosine_deliveries_positions` ADD `COMPANY_ID` TINYINT NOT NULL DEFAULT '1' FIRST ;
+ALTER TABLE `rosine_deliveries_positions` CHANGE `DELIVERY_ID` `DELIVERY_ID` INT( 11 ) NOT NULL ;
+ALTER TABLE `rosine_deliveries_positions` DROP PRIMARY KEY , ADD PRIMARY KEY ( `COMPANY_ID` , `DELIVERY_ID`, `POSI_ID` ) ;
+
+ALTER TABLE `rosine_drafts_positions` ADD `COMPANY_ID` TINYINT NOT NULL DEFAULT '1' FIRST ;
+ALTER TABLE `rosine_drafts_positions` CHANGE `DRAFT_ID` `DRAFT_ID` INT( 11 ) NOT NULL ;
+ALTER TABLE `rosine_drafts_positions` DROP PRIMARY KEY , ADD PRIMARY KEY ( `COMPANY_ID` , `DRAFT_ID`, `POSI_ID` ) ;
+
+ALTER TABLE `rosine_invoices_positions` ADD `COMPANY_ID` TINYINT NOT NULL DEFAULT '1' FIRST ;
+ALTER TABLE `rosine_invoices_positions` CHANGE `INVOICE_ID` `INVOICE_ID` INT( 11 ) NOT NULL ;
+ALTER TABLE `rosine_invoices_positions` DROP PRIMARY KEY , ADD PRIMARY KEY ( `COMPANY_ID` , `INVOICE_ID`, `POSI_ID` ) ;
+
+ALTER TABLE `rosine_offers_positions` ADD `COMPANY_ID` TINYINT NOT NULL DEFAULT '1' FIRST ;
+ALTER TABLE `rosine_offers_positions` CHANGE `OFFER_ID` `OFFER_ID` INT( 11 ) NOT NULL ;
+ALTER TABLE `rosine_offers_positions` DROP PRIMARY KEY , ADD PRIMARY KEY ( `COMPANY_ID` , `OFFER_ID`, `POSI_ID` ) ;
+
+ALTER TABLE `rosine_orders_positions` ADD `COMPANY_ID` TINYINT NOT NULL DEFAULT '1' FIRST ;
+ALTER TABLE `rosine_orders_positions` CHANGE `ORDER_ID` `ORDER_ID` INT( 11 ) NOT NULL ;
+ALTER TABLE `rosine_orders_positions` DROP PRIMARY KEY , ADD PRIMARY KEY ( `COMPANY_ID` , `ORDER_ID`, `POSI_ID` ) ;
+
+ALTER TABLE `rosine_drafts` CHANGE `DRAFTS_TEMPLATE` `DRAFT_TEMPLATE` VARCHAR( 250 ) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL ;

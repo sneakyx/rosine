@@ -7,7 +7,7 @@
 *  This program is free software; you can redistribute it and/or modify it *
 *  under the terms of the GNU General Public License as published by the   *
 *  Free Software Foundation; version 2 of the License.                     *
-*  date of this file: 2017-08-05  										    *
+*  date of this file: 2018-01-06  										    *
 \**************************************************************************/
 // paperwork list, add items etc
 switch ($_POST['next_function']) {
@@ -27,13 +27,16 @@ switch ($_POST['next_function']) {
 
 		$_POST['paperwork_id']=rosine_highest_number($_POST['paperwork'])+1;
 		$query=rosine_correct_query($_POST['paperwork'], $rosine_db_query['insert_paperwork']);
-		$result=rosine_database_query($query.'('.
-				$_POST['paperwork_id'].', now(), '.
-				substr($_POST['contact_id'],2).
-				','.$customer_private.',0,"empty","'.date("Y-m-d-H-i-s").'","'.$_POST["note_text"].
-				'","'.$_POST['template'].'")',0);
-				if ($result!=false)
-					$OK.=lang('paperwork_inserted');
+		$result=rosine_database_query("$query  (
+		    {$config['company']},
+		    {$_POST['paperwork_id']},
+            now(),
+			".substr($_POST['contact_id'],2)." ,
+			{$customer_private},0,'empty','".date("Y-m-d-H-i-s")."',
+				    '{$_POST['note_text']}',
+                    '{$_POST['template']}')",0); //TODO:Is this line correct?
+			if ($result!=false)
+			    $OK.=lang('paperwork_inserted');
 						
 					/*
 					 * although case insert ends here, after inserting empty paperwork,
@@ -120,7 +123,7 @@ switch ($_POST['next_function']) {
 		if ($_POST['note_text']!=""){
 			rosine_database_query(rosine_correct_query($_POST['paperwork'],
 					$rosine_db_query['update_paperwork_note'],
-					$_POST['note_text']).$_POST['paperwork_id'], 804);
+					$_POST['note_text']).$_POST['paperwork_id'], 804);   
 		}// insert new text if it's not empty!
 
 
@@ -135,40 +138,39 @@ switch ($_POST['next_function']) {
 			$customer_details = $result->fetch_array();
 			$result->close();
 			//are there items to delete?
-			array_walk ($_POST[delete], 'rosine_delete_positions',str_replace("%paperwork%",
-					rosine_get_plural($_POST['paperwork']),$rosine_db_query['delete_article_from_paperwork']).
-					' '.strtoupper($_POST['paperwork']).'_ID= '.$_POST['paperwork_id'].' AND POSI_ID=%value%');
-					// is there anything to add from other tables?
-					if ($_POST['offer']!=""){
-						rosine_add_complete_paperwork("offer", $_POST['offer'], $_POST['paperwork'], $_POST['paperwork_id']);
-					}// if there is an offer to add
-					if ($_POST['order']!=""){
-						rosine_add_complete_paperwork("order", $_POST['order'], $_POST['paperwork'], $_POST['paperwork_id']);
-					}// if there is an order to add
-					if ($_POST['delivery']!=""){
-						rosine_add_complete_paperwork("delivery", $_POST['delivery'], $_POST['paperwork'], $_POST['paperwork_id']);
-					}// if there is an delivery to add
-					if ($_POST['draft']!=""){
-						rosine_add_complete_paperwork("draft", $_POST['draft'], $_POST['paperwork'], $_POST['paperwork_id']);
-					}// if there is an delivery to add
-					// correct numbers
-					rosine_correct_numbers($_POST['paperwork'], $_POST['paperwork_id']);
-					$liste=rosine_create_items_list($_POST['paperwork'], $_POST['paperwork_id']);
-					$tpl->assign("paperwork_list", $liste);
-					$tpl->assign("next_function", '<input type="hidden" name="next_function" value="change">');
-					if ($customer_private==1) {
-						$tpl->assign("customer", $customer_details['n_fn']);
-					}// paperwork goes to private address
-					else {
-						$tpl->assign("customer", $customer_details['org_name']);
-					}//paperwork goes to company address
-						
-					$tpl->assign("ID", $customer_details['contact_id']);
-					$tpl->assign("note_text", rosine_get_field_database(rosine_correct_query($_POST['paperwork'],
-							$rosine_db_query['get_paperworks'].'%SINGULAR%_ID='.
-							$_POST['paperwork_id']), strtoupper($_POST['paperwork'])."_NOTE"));
-					// update paperwork_ammount in table rosine paperwork
-					rosine_update_ammount_paperwork($_POST['paperwork'], $_POST['paperwork_id']);
+			array_walk ($_POST[delete], 'rosine_delete_positions',rosine_correct_query($_POST['paperwork'], $rosine_db_query['delete_article_from_paperwork'].
+					' '.strtoupper($_POST['paperwork']).'_ID= '.$_POST['paperwork_id'].' AND POSI_ID=%value%'));
+			// is there anything to add from other tables?
+			if ($_POST['offer']!=""){
+				rosine_add_complete_paperwork("offer", $_POST['offer'], $_POST['paperwork'], $_POST['paperwork_id']);
+			}// if there is an offer to add
+/*			if ($_POST['order']!=""){
+				rosine_add_complete_paperwork("order", $_POST['order'], $_POST['paperwork'], $_POST['paperwork_id']);
+			}// if there is an order to add
+			if ($_POST['delivery']!=""){
+				rosine_add_complete_paperwork("delivery", $_POST['delivery'], $_POST['paperwork'], $_POST['paperwork_id']);
+			}// if there is an delivery to add
+			if ($_POST['draft']!=""){
+				rosine_add_complete_paperwork("draft", $_POST['draft'], $_POST['paperwork'], $_POST['paperwork_id']);
+			}// if there is an delivery to add
+	*/		// correct numbers
+			rosine_correct_numbers($_POST['paperwork'], $_POST['paperwork_id']);
+			$liste=rosine_create_items_list($_POST['paperwork'], $_POST['paperwork_id']);
+			$tpl->assign("paperwork_list", $liste);
+			$tpl->assign("next_function", '<input type="hidden" name="next_function" value="change">');
+			if ($customer_private==1) {
+				$tpl->assign("customer", $customer_details['n_fn']);
+			}// paperwork goes to private address
+			else {
+				$tpl->assign("customer", $customer_details['org_name']);
+			}//paperwork goes to company address
+				
+			$tpl->assign("ID", $customer_details['contact_id']);
+			$tpl->assign("note_text", rosine_get_field_database(rosine_correct_query($_POST['paperwork'],
+					$rosine_db_query['get_paperworks'].'%SINGULAR%_ID='.
+					$_POST['paperwork_id']), strtoupper($_POST['paperwork'])."_NOTE"));
+			// update paperwork_ammount in table rosine paperwork
+			rosine_update_ammount_paperwork($_POST['paperwork'], $_POST['paperwork_id']);
 						
 		}// no error in mysql for getting customer details
 		break;

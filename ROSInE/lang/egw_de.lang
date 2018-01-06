@@ -174,3 +174,4 @@ get_articles_by_sales	rosine	de	Artikel mit dem größten Umsatz anzeigen
 get_articles_by_ammount	rosine	de	Die meistverkauften Artikel anzeigen
 get_laziest_customers	rosine	de	Kunden mit der schlechtesten Zahlungsmoral anzeigen (beta!)
 no_article	rosine	de	Der Artikeltext ist nicht mehr vorhanden
+invoice_is_missing	de	Rechnungsnummer fehlt!

@@ -8,7 +8,7 @@
 *  This program is free software; you can redistribute it and/or modify it *
 *  under the terms of the GNU General Public License as published by the   *
 *  Free Software Foundation; version 2 of the License.                     *
-*  date of this file: 2017-07-15    		 								*
+*  date of this file: 2018-01-06    		 								*
 \**************************************************************************/
 
 
@@ -62,9 +62,9 @@ function rosine_create_items_list($singular,$ID){
 	 * $ID - the ID of the order/offer etc
 	 */
 	$plural=rosine_get_plural($singular);
-	$result=rosine_database_query(
-			$GLOBALS['rosine_db_query']['get_articles_from_paperwork'].$plural.
-			"_positions WHERE ".strtoupper($singular)."_ID=".$ID,205);
+	$result=rosine_database_query(rosine_correct_query($singular, 
+			"{$GLOBALS['rosine_db_query']['get_articles_from_paperwork']}%plural%_positions WHERE %SINGULAR%_ID=$ID 
+                AND COMPANY_ID=%company%"),205);
 			if ($result!=false) {
 				$liste="<table id='rosine_tabelle'>";
 				$liste.="<tr><th></th>
@@ -103,6 +103,8 @@ function rosine_add_complete_paperwork($singular1,$ID1,$singular2,$ID2,$complete
 	$query=str_replace("%singular2%",$singular2,$query);
 	$query=str_replace("%plural1%", $plural1, $query);
 	$query=str_replace("%plural2%", $plural2, $query);
+	$query=rosine_correct_query($singular1, $query);
+	
 	if ($singular1==$singular2){
 		$query=str_replace("%infotext%", "", $query);
 	}// if a paperwork is just copied - not yet implemented
@@ -117,22 +119,24 @@ function rosine_add_complete_paperwork($singular1,$ID1,$singular2,$ID2,$complete
 	$query=str_replace("%date%",rosine_get_field_database(rosine_correct_query($singular1,
 			$GLOBALS['rosine_db_query']['get_paperworks'].' '.strtoupper($singular1).
 			'_ID='.$ID1), strtoupper($singular1).'_DATE',801),$query);
-			$query=str_replace("%SINGULAR1%",$GLOBALS['lang'][$singular1],$query);
-			$query0=str_replace("%singular%", $singular2, $GLOBALS['rosine_db_query']['get_highest_number']);
-			$query0=str_replace("%plural%",$plural2,$query0);
-			$query0=str_replace("%1%", $singular2."_id=".$ID2, $query0);
-			$result0=rosine_database_query( $query0,401);
-
-			$max=$result0->fetch_row();
-			$max[0]+=1;
-			$result0->close;
-			$query=str_replace("%max%", $max[0], $query);
-			$query=explode(";", $query);
-
-			array_walk($query, 'rosine_database_query');
-			if ($complete){
-				rosine_set_status_paperwork($singular1,$ID1,substr($singular2,0,2)." ".$ID2);
-			}// if the complete paperwork is added, we have to set the new status
+	$query=str_replace("%SINGULAR1%",$GLOBALS['lang'][$singular1],$query);
+	$query0=str_replace("%singular%", $singular2, $GLOBALS['rosine_db_query']['get_highest_number']);
+	$query0=str_replace("%plural%",$plural2,$query0);
+	$query0=str_replace("%1%", $singular2."_id=".$ID2, $query0);
+	$query0=rosine_correct_query($singular1, $query0);
+	$result0=rosine_database_query( $query0,401);
+    if ($result0) {
+    	$max=$result0->fetch_row();
+    	$max[0]+=1;
+    	$result0->close;
+    	$query=str_replace("%max%", $max[0], $query);
+    	$query=explode(";", $query);
+    
+    	array_walk($query, 'rosine_database_query');
+    	if ($complete){
+    		rosine_set_status_paperwork($singular1,$ID1,substr($singular2,0,2)." ".$ID2);
+    	}// if the complete paperwork is added, we have to set the new status
+    }//there's a result
 
 }//endfunc add complete paperwork
 
@@ -147,6 +151,7 @@ function rosine_add_paperworklist($singular,$customer){
 		$query=str_replace("%customer%", $customer." OR ". $singular."_customer=0", $query);
 		$query=str_replace("%where%", '1', $query);
 	}// if it is draft, use also drafts for every customer
+	//echo "<br>".$query."<br>";
 	$result=rosine_database_query( $query, 406);
 	$zeile='<select name="'.$singular.'">';
 	$zeile.='<option selected value="" >'.lang($singular).'</option>';
@@ -176,22 +181,28 @@ function rosine_paperwork_add_article($singular, $ammount,$ID, $where,$unity="")
 	$lines=$result->num_rows;
 	if ($lines==1){
 		$f = $result->fetch_array();
-		if (! $f['ART_STOCKNR'])
+		if (! $f['ART_STOCKNR']) {
 			$f['ART_STOCKNR']="0";
-			$query=rosine_correct_query($singular, $GLOBALS['rosine_db_query']['insert_article_into_paperwork']).
-			'("'.$ID.'", "'.
-			(rosine_highest_number($singular." positions",$ID)+1).'", "'.
-			$f['ART_NUMBER'].'", '.
-			$ammount.', "';
-			if ($unity!="")
-				$query.=$unity.'",';
-				else
-					$query.=$f['ART_UNIT'].'", ';
-					$query.=$f['ART_PRICE'].', '.
-							$f['ART_STOCKNR'].',
-				"","'. //theres no possibility to add Seriennummer (yet)
-				$f['ART_NAME'].'",'.
-				$f['ART_TAX'].')';
+		}
+		$query=$GLOBALS['rosine_db_query']['insert_article_into_paperwork'].
+		    "(%company%,
+            '$ID', '".
+            (rosine_highest_number($singular." positions",$ID)+1)."', 
+            '{$f['ART_NUMBER']}',
+        	$ammount, '";
+		if ($unity!=""){
+		    $query.="$unity.',";
+		}
+		else {
+		    $query.="{$f['ART_UNIT']}', ";
+		}
+		$query.="{$f['ART_PRICE']},
+		{$f['ART_STOCKNR']},
+			'',
+			'{$f['ART_NAME']}',
+			{$f['ART_TAX']})";
+			
+		$query=rosine_correct_query($singular,$query); 
 				$result2=rosine_database_query($query,501);
 	}// endif affected rows is exactly 1
 
@@ -264,11 +275,13 @@ function rosine_get_plural($singular){
 function rosine_correct_query($singular,$query,$paperwork=""){
 	//correction of query with singular and plural
 	$plural=rosine_get_plural($singular);
+	$query=str_replace("%company%", $GLOBALS['config']['company'], $query);
 	$query=str_replace("%singular%", $singular, $query);
 	$query=str_replace("%plural%", $plural, $query);
 	$query=str_replace("%SINGULAR%", strtoupper($singular), $query);
 	$query=str_replace("%PLURAL%", strtoupper($plural), $query);
 	$query=str_replace("%paperwork%", $paperwork, $query);
+	
 	return $query;
 
 }//endfunction correct query
@@ -292,10 +305,9 @@ function rosine_correct_numbers ($singular, $ID){
 
 	$plural=rosine_get_plural($singular);
 
-	$query=str_replace("%singular%", $singular, $query);
-	$query=str_replace("%plural%", $plural, $query);
+    $query=rosine_correct_query($singular, $query);
 	$query=str_replace("%id%", $ID, $query);
-	$result=rosine_database_query($query,800);
+	$result=rosine_database_query($query,927);
 
 	$max=rosine_highest_number($singular." positions", $ID);
 	if ($max>0){
@@ -329,20 +341,23 @@ function rosine_highest_number ($singular, $ID=0){
 	$query=$GLOBALS['rosine_db_query']['get_highest_number'];
 	$query=str_replace("%singular%", $singular2, $query);
 	$query=str_replace("%plural%", $plural.$plural2, $query);
-	if ($ID==0)
-		$query=str_replace("%1%", "1", $query);
-		else
-			$query=str_replace("%1%", $singular."_id =".$ID, $query);
-			$result=rosine_database_query($query,"100");
-			if ($result!=false){
-				$result=$result->fetch_row();
-				$returned=$result['0'];
-			}// there was no error getting the hightest number
-			else {
-				$returned= "-1";
-			}// there was an error
-
-			return $returned;
+	if ($ID==0){
+	    $query=str_replace("%1%", "1", $query);
+	}
+	else {
+		$query=str_replace("%1%", $singular."_id =".$ID, $query);
+	}
+	$query=rosine_correct_query($singular, $query);
+	$result=rosine_database_query($query,"100");
+	if ($result!=false){
+		$result=$result->fetch_row();
+		$returned=$result['0'];
+	}// there was no error getting the hightest number
+	else {
+		$returned= "-1";
+	}// there was an error
+    
+	return $returned;
 
 }//endfunctiuon rosine_highest_number
 

@@ -7,7 +7,7 @@
 *  This program is free software; you can redistribute it and/or modify it *
 *  under the terms of the GNU General Public License as published by the   *
 *  Free Software Foundation; version 2 of the License.                     *
-*  date of this file: 2017-07-07  										    *
+*  date of this file: 2018-01-06  										    *
 \**************************************************************************/
 class Rosine_Paperwork_Template extends Rosine_Template 
 {
@@ -18,11 +18,7 @@ class Rosine_Paperwork_Template extends Rosine_Template
 	 */
 	private $row_template='';
 	
-	/**
-	 * configuration array
-	 * @var array
-	 */
-	private $config = array();
+
 	
 	/**
 	 * array which consists of $_POST variables
@@ -46,11 +42,7 @@ class Rosine_Paperwork_Template extends Rosine_Template
 		$this->row_template=$row_template;
 	}// end function set_row_template
 	
-	public function set_config($config){
-		$this->config=$config;
-	}// end function set_config
-	
-	
+
 	public function set_post($post){
 		$this->post=$post;
 	}// end function set_post
@@ -150,7 +142,7 @@ class Rosine_Paperwork_Template extends Rosine_Template
 				$sum_tax=0;
 				$rows="";
 				while($f = $result->fetch_array()) {
-					$row = new Rosine_Template();
+					$row = new Rosine_Template($this->config);
 					$row->set_templateDir($this->templateDir);
 					$row->load($this->row_template);
 					$row->assign('item_id', $f['POSI_ID']);
@@ -200,7 +192,6 @@ class Rosine_Paperwork_Template extends Rosine_Template
 		$this->assign('paperwork_id', $this->post['paperwork_id']);
 		$this->assign("paperwork_prefix", $this->config[$this->post['paperwork'].'_prefix']);
 		$this->assign('tax_percentage', $tax_percentage);
-		$this->assign_array('config', $this->config);		
 	}//end of function replace all
 }
 

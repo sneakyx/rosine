@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2017-07-16  										    *
+ *  date of this file: 2018-01-06  										    *
  \**************************************************************************/
 
 /*
@@ -37,7 +37,7 @@ $tpl->load($template);
 $lang = $tpl->loadLanguage($lang);
 
 // get fields from database (just the fields for the full page)
-$tpl->set_config($config);
+//$tpl->set_config($config);
 $tpl->set_post($_POST);
 $tpl->set_row_template(str_replace('.html', '_row.html', $config['print_template_'.$_GET['paperwork']]));
 $tpl->set_sql_paperwork(rosine_correct_query($_POST['paperwork'],

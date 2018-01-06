@@ -33,7 +33,7 @@ while($f = $result->fetch_array()) {
 	}// endelse
 	$liste.='<td>'.$f['config'].'</td>';
 	if ($f['user_id'] != "0") {
-		if ($f['account_name']="" || $f['account_name']="NULL"){
+		if ($f['account_name']=="" || $f['account_name']=="NULL"){
 			$f['account_name']=lang('no_user');
 		}// no valid user name available
 		$liste.='<td style="text-align:center;">'.$f['account_name'].' ('.$f['user_id'].')</td>';

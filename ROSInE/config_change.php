@@ -7,7 +7,7 @@
 *  This program is free software; you can redistribute it and/or modify it *
 *  under the terms of the GNU General Public License as published by the   *
 *  Free Software Foundation; version 2 of the License.                     *
-*  date of this file: 2017-07-19 										   *
+*  date of this file: 2018-01-06 										   *
 \**************************************************************************/
 include ('inc/head.inc.php');
 
@@ -19,7 +19,7 @@ switch ($_POST['next_function']){
 	case "new":
 		$tpl->assign("next_function", "new");
 		$tpl->assign("what_to_do", lang('insert_again_new_config'));
-		if ($_POST['configuration']==""){
+		if ($_POST['config']==""){
 			$error.=str_replace('%value%', lang('config'), lang('missing'))."<br>";
 		}//endif
 		if ($_POST['user_id']==""){

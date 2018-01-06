@@ -5,7 +5,7 @@
  * changes to this file made by André Scholz                                      *
  * --------------------------------------------                                   *
  * For licence see upper webpage                                                  *
- * Date of this file: 2017-05-17                                                  *
+ * Date of this file: 2018-01-06                                                 *
  \********************************************************************************/
 
 class Rosine_Template
@@ -130,24 +130,38 @@ class Rosine_Template
      * @var       string
      */
     private $template = "";
-
+   
+    /**
+     * configuration array
+     * @var array
+     */
+    protected $config = array();
 
     /**
      * Die Pfade festlegen.
      *
      * @access    public
      */
-    public function __construct($tpl_dir = "", $lang_dir = "") {
+    public function __construct($config=null, $tpl_dir = null, $lang_dir = null) {
         // Template Ordner
-        if ( !empty($tpl_dir) ) {
+        if ( $tpl_dir ) {
             $this->templateDir = $tpl_dir;
         }
 
         // Sprachdatei Ordner
-        if ( !empty($lang_dir) ) {
+        if ($lang_dir ) {
             $this->languageDir = $lang_dir;
         }
+        if ($config){
+            $this->config=$config;
+        }
     }
+    
+    public function set_config($config){
+        $this->config=$config;
+    }// end function set_config
+    
+    
     /**
      * sets the variable templateDir
      *
@@ -249,6 +263,8 @@ class Rosine_Template
 
         // Funktionen parsen
         $this->parseFunctions();
+        $this->assign_array('config', $this->config);
+        
     }
 
     /**

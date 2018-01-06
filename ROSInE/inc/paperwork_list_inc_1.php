@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2017-07-19  										    *
+ *  date of this file: 2018-01-06  										    *
  \**************************************************************************/
 $tpl->load("paperworklist.html");
 $lang = $tpl->loadLanguage($lang);
@@ -129,6 +129,7 @@ if ($result!=false) {
 $tpl->assign('paperworklist', $liste);
 $tpl->assign("paperwork", lang($_POST['paperwork']));
 $tpl->assign("paperwork_type", $_POST['paperwork']);
+$tpl->set_config($config);
 $tpl->assign("OK", $OK);
 $tpl->assign("error", $error);
 $tpl->display();

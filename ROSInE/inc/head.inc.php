@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2017-06-29  										    *
+ *  date of this file: 2018-01-06 										    *
  \**************************************************************************/
 
 
@@ -60,10 +60,10 @@ while ($f= $result->fetch_array()) {
 $result->close;
 //things for every template
 if ($rosine_load_template_paperwork){
-	$tpl = new Rosine_Paperwork_Template();
+	$tpl = new Rosine_Paperwork_Template($config);
 }// load special class
 else {
-	$tpl = new Rosine_Template();
+	$tpl = new Rosine_Template($config);
 }// normal class
 
 $tpl->set_templateDir(substr($GLOBALS['egw_info']['server']['backup_dir'],0,strrpos($GLOBALS['egw_info']['server']['backup_dir'], '/')).'/rosine/templates/');

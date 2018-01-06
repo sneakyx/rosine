@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2017-07-05  										    *
+ *  date of this file: 2018-01-06  										    *
  \**************************************************************************/
 /*
  * This form works the following way:
@@ -36,13 +36,18 @@ switch ($_POST['next_function']) {
 			$_POST['note_text']=rosine_get_field_database(rosine_correct_query($_POST['paperwork'], 
 				str_replace("%language%", $config['language'], 
 				$rosine_db_query['get_standard_note'])), "text",700);
+			
 			$query=rosine_correct_query($_POST['paperwork'], $rosine_db_query['insert_paperwork']);
-			$result=rosine_database_query($query.'('.
-					$_POST['paperwork_id'].', now(), '.
-					$_POST['contact_id'].
-				','.$customer_private.',0,"empty","'.date("Y-m-d-H-i-s").'","'.$_POST["note_text"].'")',0);
+			$result=rosine_database_query("$query  (
+		    {$config['company']},
+		    {$_POST['paperwork_id']},
+            now(),
+			".substr($_POST['contact_id'],2)." ,
+			{$customer_private},0,'empty','".date("Y-m-d-H-i-s")."',
+				    '{$_POST['note_text']}',
+                    '{$_POST['template']}')",0); // is this line correct?
 			if ($result!=false)
-				$OK.=lang('paperwork_inserted');
+			    $OK.=lang('paperwork_inserted');
 			
 				/* 
 				 * although case insert ends here, after inserting empty paperwork, 
@@ -130,7 +135,7 @@ switch ($_POST['next_function']) {
 			 */
 			// get data from "old" paperwork
 			$result= rosine_database_query(rosine_correct_query($GLOBALS['_POST']['old_paperwork'], $GLOBALS['rosine_db_query']['get_articles_from_paperwork'].
-				'%plural%_positions WHERE %SINGULAR%_ID='.$GLOBALS['_POST']['old_paperwork_id'].
+				'%plural%_positions WHERE COMPANY_ID=%company% AND %SINGULAR%_ID='.$GLOBALS['_POST']['old_paperwork_id'].
 					' AND POSI_ID='.$value),"6-".$value);
 			$GLOBALS['_POST']['old_posi_ammount'][$value]=str_replace(',','.',$GLOBALS['_POST']['old_posi_ammount'][$value]);
 			if ($result){
