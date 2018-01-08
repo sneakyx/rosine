@@ -12,6 +12,9 @@ to do list:
 suggestions? Write me an E-Mail: info@rothaarsystems.de
 
 ------------------------------------------------------------------------
+2018-01-08
+- solved: offers and deliveries couldn't be inserted to invoices
+
 2018-01-06
 - added: multi-client capability
 You have to update Your database, see update.sql!

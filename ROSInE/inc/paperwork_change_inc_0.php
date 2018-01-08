@@ -7,7 +7,7 @@
 *  This program is free software; you can redistribute it and/or modify it *
 *  under the terms of the GNU General Public License as published by the   *
 *  Free Software Foundation; version 2 of the License.                     *
-*  date of this file: 2018-01-06  										    *
+*  date of this file: 2018-01-08  										    *
 \**************************************************************************/
 // paperwork list, add items etc
 switch ($_POST['next_function']) {
@@ -144,7 +144,7 @@ switch ($_POST['next_function']) {
 			if ($_POST['offer']!=""){
 				rosine_add_complete_paperwork("offer", $_POST['offer'], $_POST['paperwork'], $_POST['paperwork_id']);
 			}// if there is an offer to add
-/*			if ($_POST['order']!=""){
+			if ($_POST['order']!=""){
 				rosine_add_complete_paperwork("order", $_POST['order'], $_POST['paperwork'], $_POST['paperwork_id']);
 			}// if there is an order to add
 			if ($_POST['delivery']!=""){
@@ -153,7 +153,7 @@ switch ($_POST['next_function']) {
 			if ($_POST['draft']!=""){
 				rosine_add_complete_paperwork("draft", $_POST['draft'], $_POST['paperwork'], $_POST['paperwork_id']);
 			}// if there is an delivery to add
-	*/		// correct numbers
+			// correct numbers
 			rosine_correct_numbers($_POST['paperwork'], $_POST['paperwork_id']);
 			$liste=rosine_create_items_list($_POST['paperwork'], $_POST['paperwork_id']);
 			$tpl->assign("paperwork_list", $liste);

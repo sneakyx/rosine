@@ -106,6 +106,8 @@ INSERT IGNORE INTO `egroupware`.`rosine_config` (`config` ,`user_id` ,`value`) V
 ('insert_invoice_into_paperwork', '0', '100');
 
 # FROM 2017-01-14 to 2018-01-06
+UPDATE `egw_applications` SET `app_tables` = 'rosine_articles,rosine_config,rosine_deliveries,rosine_deliveries_positions,rosine_invoices,rosine_invoices_positions,rosine_locations,rosine_notes,rosine_offers,rosine_offers_positions,rosine_orders,rosine_orders_positions,rosine_payments,rosine_payments_methods,rosine_taxes,rosine_drafts,rosine_drafts_positions', `app_version` = '2018-01-06' WHERE `egw_applications`.`app_id` = 58;
+
 INSERT INTO `egroupware`.`rosine_config` (`config` ,`user_id` ,`value`) VALUES 
 ( 'company', '0', '1');
 
