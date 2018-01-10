@@ -7,7 +7,7 @@
 *  This program is free software; you can redistribute it and/or modify it *
 *  under the terms of the GNU General Public License as published by the   *
 *  Free Software Foundation; version 2 of the License.                     *
-*  date of this file: 2017-08-08 										   *
+*  date of this file: 2017-08-10 										   *
 \**************************************************************************/
 include ('inc/head.inc.php');
 
@@ -109,6 +109,7 @@ switch ($_POST['next_function']){
 		}//there were numbers added
 		
 		$sql_query=str_replace("%where%", $where, $sql_query);
+		$sql_query=str_replace("%company%", $config['company'], $sql_query);
 
 		// get ammount of articles in database
 		
