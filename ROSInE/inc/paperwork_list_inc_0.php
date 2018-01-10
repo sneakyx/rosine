@@ -40,7 +40,7 @@ if ($result!=false) {
  * correct the from-variable and the items per page-variable
  * if from is to slow and items-per-page is to high
  */
-$from=(intval($_GET['from']));
+$from=(intval($_POST['from']));
 if ($from < 0){
 	$from=0;
 }//endif
@@ -51,20 +51,28 @@ $result=rosine_database_query(rosine_correct_query($_POST['paperwork'],
 				$rosine_db_query['get_paperworks'],$_POST['paperwork']).
 				"1 ORDER BY ".strtoupper($_POST['paperwork'])."_ID DESC LIMIT $from,".
 				$config['items_per_page'],120);
-if ($from >0) {//zurueckblaettern anzeigen wenn moeglich
-	$tpl->assign("backward", '<a href="?from='.($from-$config['items_per_page']).
-			'&paperwork='.$_POST['paperwork'].'">&lt;&lt;</a>');
-}//endif
-else {
-	$tpl->assign("backward", "");
-}//endelse
-if ($from < $max_rows-$config['items_per_page']){ //vorblaettern anzeigen wenn notwendig
-	$tpl->assign("foreward", '<a href="?from='.($from+$config['items_per_page']).'&paperwork='.$_POST['paperwork'].'">&gt;&gt;</a>');
-}//endif
-else {
-	$tpl->assign("foreward", "");
-}//endelse
 
+if ($from >0) {//page(s) back
+	$backward= '<a href="?from='.($from-$config['items_per_page']).
+			'&paperwork='.$_POST['paperwork'].'">&lt;&lt;</a>';
+	if ($from > $config['items_per_page']*10){
+	    $backward=' <a href="?from='.($from-intval($config['items_per_page']*10)).'&paperwork='.$_POST['paperwork'].'">&lt;&lt;&lt;</a> '.$backward;
+	}
+}//endif
+else {
+	$backward="";
+}//endelse
+if ($from < $max_rows-$config['items_per_page']){ //page(s) forward
+	$foreward= '<a href="?from='.($from+$config['items_per_page']).'&paperwork='.$_POST['paperwork'].'">&gt;&gt;</a>';
+	if ($from < $max_rows-$config['items_per_page']*10){
+	    $foreward.=' <a href="?from='.($from+$config['items_per_page']*10).'&paperwork='.$_POST['paperwork'].'">&gt;&gt;&gt;</a>';
+	}
+}//endif
+else {
+	$foreward="";
+}//endelse
+$tpl->assign("backward", $backward);
+$tpl->assign("foreward", $foreward);
 $tpl->assign('from', $from);
 $tpl->assign("to", ($from+$config['items_per_page']));
 $tpl->assign("max", $max_rows);
