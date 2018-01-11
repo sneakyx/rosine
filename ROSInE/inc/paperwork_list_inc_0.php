@@ -30,7 +30,8 @@ if ($_POST['next_function']=="really_delete"){
 }// really delete
 
 // get ammount of paperworks in database
-$result=rosine_database_query(rosine_correct_query($_POST['paperwork'],  $rosine_db_query['get_ammount_of_paperworks'])." 1",112);
+$query=str_replace("%1%","1", rosine_correct_query($_POST['paperwork'],  $rosine_db_query['get_highest_number']));
+$result=rosine_database_query($query,112);
 $liste="";
 if ($result!=false) {
 	$g = $result->fetch_array();
