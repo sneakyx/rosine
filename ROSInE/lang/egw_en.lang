@@ -1,4 +1,4 @@
-page_buttons	rosine	en	{$backward} {$from} to {$to} - of {$max} {$foreward}
+page_buttons	rosine	en	{$backward} {$paperwork} {$from} to {$to} - of {$max} {$foreward}
 just_write_invoices	 rosine	 en	 Just write invoices!
 // for main menue
 main_menue	 rosine	 en	 main menu

@@ -1,5 +1,5 @@
 main_menue	rosine	de	Hauptmenü
-page_buttons	rosine	de	{$backward} {$from} bis {$to} von insgesamt {$max} {$foreward}
+page_buttons	rosine	de	{$backward} {$paperwork} {$from} bis {$to} von insgesamt {$max} {$foreward}
 just_write_invoices	rosine	de	Rechnungen einfach schreiben!
 main_menue	rosine	de	Hauptmenü
 configurations	rosine	de	Einstellungen

@@ -1,10 +1,10 @@
 {*Header einbinden*}
 {include file="head.html"}
 <div>
-<span id="rosine_table_note"><form action="paperwork_list.php" method="POST">{$paperwork} 
+<span id="rosine_table_note"><form action="paperwork_list.php" method="POST"> 
 <input type="hidden" name="paperwork" value="{$paperwork_type}">
-<input type="text" name="from" placeholder="{L_NUMBER}" width="5">
- {L_PAGE_BUTTONS} <a href="paperwork_change.php?paperwork={$paperwork_type}">{L_MAKE_NEW}</a> 
+ {L_PAGE_BUTTONS} <a href="paperwork_change.php?paperwork={$paperwork_type}"><img src="../pixelegg/images/new.png"
+						alt="{L_MAKE_NEW}" title="{L_MAKE_NEW}" width="15px"></a> 
  
 
 </form>

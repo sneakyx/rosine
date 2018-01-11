@@ -40,8 +40,13 @@ if ($result!=false) {
  * correct the from-variable and the items per page-variable
  * if from is to slow and items-per-page is to high
  */
-$from=(intval($_POST['from']));
-if ($from < 0){
+if ($_POST['from']==""){
+    $from = $max_rows-$config['items_per_page'];
+}
+else {
+    $from=(intval($_POST['from']));
+}
+if ($from < 0 or $from=="first"){
 	$from=0;
 }//endif
 if ($max_rows<$from+$config['items_per_page']) {
@@ -49,31 +54,40 @@ if ($max_rows<$from+$config['items_per_page']) {
 }
 $result=rosine_database_query(rosine_correct_query($_POST['paperwork'], 
 				$rosine_db_query['get_paperworks'],$_POST['paperwork']).
-				"1 ORDER BY ".strtoupper($_POST['paperwork'])."_ID DESC LIMIT $from,".
+				strtoupper($_POST['paperwork'])."_ID > $from ORDER BY ".strtoupper($_POST['paperwork'])."_ID ASC LIMIT ".
 				$config['items_per_page'],120);
 
-if ($from >0) {//page(s) back
+if ($from >1) {//page(s) back
 	$backward= '<a href="?from='.($from-$config['items_per_page']).
-			'&paperwork='.$_POST['paperwork'].'">&lt;&lt;</a>';
+			'&paperwork='.$_POST['paperwork'].'"><img src="../pixelegg/images/left.png"
+						alt="'.$config['items_per_page'].lang("back").'"title="'.$config['items_per_page'].lang("back").'" width="15px"></a>';
 	if ($from > $config['items_per_page']*10){
-	    $backward=' <a href="?from='.($from-intval($config['items_per_page']*10)).'&paperwork='.$_POST['paperwork'].'">&lt;&lt;&lt;</a> '.$backward;
+	    $backward=' <a href="?from='.($from-intval($config['items_per_page']*10)).'&paperwork='.$_POST['paperwork'].'"><img src="../pixelegg/images/left-grey.png"
+						alt="'.($config['items_per_page']*10).lang("back").'"title="'.($config['items_per_page']*10).lang("back").'" width="15px"></a> '.$backward;
 	}
+	$backward=' <a href="?from=first&paperwork='.$_POST['paperwork'].'"><img src="../pixelegg/images/first.png"
+						alt="'.lang("first").'"title="'.lang("first").'" width="15px"></a> '.$backward;
 }//endif
 else {
 	$backward="";
 }//endelse
 if ($from < $max_rows-$config['items_per_page']){ //page(s) forward
-	$foreward= '<a href="?from='.($from+$config['items_per_page']).'&paperwork='.$_POST['paperwork'].'">&gt;&gt;</a>';
+	$forward= '<a href="?from='.($from+$config['items_per_page']).
+			'&paperwork='.$_POST['paperwork'].'"><img src="../pixelegg/images/right.png"
+						alt="'.$config['items_per_page'].lang("forward").'"title="'.$config['items_per_page'].lang("forward").'" width="15px"></a>';
 	if ($from < $max_rows-$config['items_per_page']*10){
-	    $foreward.=' <a href="?from='.($from+$config['items_per_page']*10).'&paperwork='.$_POST['paperwork'].'">&gt;&gt;&gt;</a>';
+	    $forward.=' <a href="?from='.($from+intval($config['items_per_page']*10)).'&paperwork='.$_POST['paperwork'].'"><img src="../pixelegg/images/right-grey.png"
+						alt="'.($config['items_per_page']*10).lang("forward").'"title="'.($config['items_per_page']*10).lang("forward").'" width="15px"></a> ';
 	}
+	$forward.=' <a href="?from='.($max_rows-$config['items_per_page']).'&paperwork='.$_POST['paperwork'].'"><img src="../pixelegg/images/last.png"
+						alt="'.lang("last").'"title="'.lang("last").'" width="15px"></a> ';
 }//endif
 else {
-	$foreward="";
+	$forward="";
 }//endelse
 $tpl->assign("backward", $backward);
-$tpl->assign("foreward", $foreward);
-$tpl->assign('from', $from);
+$tpl->assign("foreward", $forward);
+$tpl->assign('from', "<input type='text' name='from' placeholder='".($from+1)."' size='5'>");
 $tpl->assign("to", ($from+$config['items_per_page']));
 $tpl->assign("max", $max_rows);
 
