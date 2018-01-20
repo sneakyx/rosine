@@ -12,6 +12,11 @@ to do list:
 suggestions? Write me an E-Mail: info@rothaarsystems.de
 
 ------------------------------------------------------------------------
+2018-01-20
+- corrected: setup/update.sql was wrong order
+- corrected: sending deliveries as email config fields didn't work
+
+
 2018-01-11
 - corrected: buttons for pages
 - corrected: count paperwork

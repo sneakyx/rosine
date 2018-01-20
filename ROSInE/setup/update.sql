@@ -1,54 +1,19 @@
-# FROM 2017-02-22 to 2017-07-15
-INSERT IGNORE INTO `egroupware`.`rosine_config` (`config` ,`user_id` ,`value`) VALUES 
-	('invoice_sort_list', '0', 'sorted_in_alphabetic_order'),
-	('delivery_sort_list', '0', 'sorted_in_alphabetic_order'),
-	('order_sort_list', '0', 'sorted_in_alphabetic_order'),
-	('offer_sort_list', '0', 'sorted_in_alphabetic_order')	;
-	
-ALTER TABLE `rosine_deliveries` ADD `DELIVERY_TEMPLATE` VARCHAR( 250 ) NULL DEFAULT NULL AFTER `DELIVERY_STATUS`;
-ALTER TABLE `rosine_drafts` ADD `DRAFTS_TEMPLATE` VARCHAR( 250 ) NULL DEFAULT NULL AFTER `DRAFT_STATUS` ;
-ALTER TABLE `rosine_invoices` ADD `INVOICE_TEMPLATE` VARCHAR( 250 ) NULL DEFAULT NULL AFTER `INVOICE_STATUS` ;
-ALTER TABLE `rosine_offers` ADD `OFFER_TEMPLATE` VARCHAR( 250 ) NULL DEFAULT NULL AFTER `OFFER_STATUS` ;
-ALTER TABLE `rosine_orders` ADD `ORDER_TEMPLATE` VARCHAR( 250 ) NULL DEFAULT NULL AFTER `ORDER_STATUS` ;
-ALTER TABLE `rosine_drafts` CHANGE `DRaFT_ID` `DRAFT_ID` INT( 11 ) NOT NULL AUTO_INCREMENT ;
+# FROM 2016-12-30 to 2017-01-02
 
-# FROM 2017-02-20 to 2017-02-22
 INSERT IGNORE INTO `rosine_config` (`config`, `user_id`, `value`) VALUES
-			('email_delivery',0, 'txt'),
-			('email_invoice',0, 'none'),
-			('email_order',0, 'none'),
-			('email_offer',0, 'none'),
-			('email_draft',0, 'none');
+('overwrite_templates', 0, 'no');
 
-# FROM 2017-02-18 to 2017-02-20
-INSERT IGNORE INTO `rosine_config` (`config`, `user_id`, `value`) VALUES
-			('email_template_delivery',0, 'email_delivery.txt');
+# FROM 2017-01-02 to 2017-01-14
 
-# FROM 2017-02-16 to 2017-02-18
 INSERT IGNORE INTO `egroupware`.`rosine_notes` (`NOTE_ID` , `LANGUAGE` , `NOTE_TEXT`) VALUES
- ( '101', 'de.php', ''), 
-('101', 'en.php', '');
+ ( '100', 'de.php', '%SINGULAR1% %ID1% vom %date%:'), 
+('100', 'en.php', '%SINGULAR1% %ID1% from %date%:');
 
-
-# FROM 2017-02-13 to 2017-02-16
-INSERT IGNORE INTO `rosine_config` (`config`, `user_id`, `value`) VALUES
-			('invoice_bcc',0, ''),
-			('delivery_bcc',0,''),
-			('order_bcc', 0, ''),
-			('offer_bcc', 0, '');
-INSERT IGNORE INTO `rosine_config` (`config`, `user_id`, `value`) VALUES
-			('invoice_cc',0, 'your@email.adress'),
-			('delivery_cc',0,'your@email.adress'),
-			('order_cc', 0, 'your@email.adress'),
-			('offer_cc', 0, 'your@email.adress');
-
-
-INSERT IGNORE INTO `rosine_config` (`config`, `user_id`, `value`) VALUES
-			('draft_change_form',0, '0'),
-			('draft_list_form',0,'0'),
-			('print_template_draft', 0, 'print_paperwork.html'),
-			('insert_draft_into_paperwork', '0', '101');
-
+INSERT IGNORE INTO `egroupware`.`rosine_config` (`config` ,`user_id` ,`value`) VALUES 
+('insert_delivery_into_paperwork', '0', '100'), 
+('insert_offer_into_paperwork', '0', '100'),
+('insert_order_into_paperwork', '0', '100'), 
+('insert_invoice_into_paperwork', '0', '100');
 
 # FROM 2017-02-11 to 2017-02-13
 CREATE TABLE IF NOT EXISTS `rosine_drafts` (
@@ -81,31 +46,68 @@ CREATE TABLE IF NOT EXISTS `rosine_drafts_positions` (
   PRIMARY KEY (`DRAFT_ID`,`POSI_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+
+# FROM 2017-02-13 to 2017-02-16
+INSERT IGNORE INTO `rosine_config` (`config`, `user_id`, `value`) VALUES
+			('invoice_bcc',0, ''),
+			('delivery_bcc',0,''),
+			('order_bcc', 0, ''),
+			('offer_bcc', 0, '');
+INSERT IGNORE INTO `rosine_config` (`config`, `user_id`, `value`) VALUES
+			('invoice_cc',0, 'your@email.adress'),
+			('delivery_cc',0,'your@email.adress'),
+			('order_cc', 0, 'your@email.adress'),
+			('offer_cc', 0, 'your@email.adress');
+
+
+INSERT IGNORE INTO `rosine_config` (`config`, `user_id`, `value`) VALUES
+			('draft_change_form',0, '0'),
+			('draft_list_form',0,'0'),
+			('print_template_draft', 0, 'print_paperwork.html'),
+			('insert_draft_into_paperwork', '0', '101');
+			
+# FROM 2017-02-16 to 2017-02-18
+INSERT IGNORE INTO `egroupware`.`rosine_notes` (`NOTE_ID` , `LANGUAGE` , `NOTE_TEXT`) VALUES
+ ( '101', 'de.php', ''), 
+('101', 'en.php', '');			
+			
+# FROM 2017-02-18 to 2017-02-20
+INSERT IGNORE INTO `rosine_config` (`config`, `user_id`, `value`) VALUES
+			('email_template_delivery',0, 'email_delivery.txt');
+
+
+
+# FROM 2017-02-22 to 2017-07-15
+INSERT IGNORE INTO `egroupware`.`rosine_config` (`config` ,`user_id` ,`value`) VALUES 
+	('invoice_sort_list', '0', 'sorted_in_alphabetic_order'),
+	('delivery_sort_list', '0', 'sorted_in_alphabetic_order'),
+	('order_sort_list', '0', 'sorted_in_alphabetic_order'),
+	('offer_sort_list', '0', 'sorted_in_alphabetic_order')	;
+	
+ALTER TABLE `rosine_deliveries` ADD `DELIVERY_TEMPLATE` VARCHAR( 250 ) NULL DEFAULT NULL AFTER `DELIVERY_STATUS`;
+ALTER TABLE `rosine_invoices` ADD `INVOICE_TEMPLATE` VARCHAR( 250 ) NULL DEFAULT NULL AFTER `INVOICE_STATUS` ;
+ALTER TABLE `rosine_offers` ADD `OFFER_TEMPLATE` VARCHAR( 250 ) NULL DEFAULT NULL AFTER `OFFER_STATUS` ;
+ALTER TABLE `rosine_orders` ADD `ORDER_TEMPLATE` VARCHAR( 250 ) NULL DEFAULT NULL AFTER `ORDER_STATUS` ;
+
+ALTER TABLE `rosine_drafts` ADD `DRAFT_TEMPLATE` VARCHAR( 250 ) NULL DEFAULT NULL AFTER `DRAFT_STATUS` ;
+ALTER TABLE `rosine_drafts` CHANGE `DRAFT_ID` `DRAFT_ID` INT( 11 ) NOT NULL AUTO_INCREMENT ;
+
 INSERT IGNORE INTO `rosine_config` (`config`, `user_id`, `value`) VALUES
 			('draft_change_form',0, '0'),
 			('draft_list_form',0,'0'),
 			('print_template_draft', 0, 'print_paperwork.html'),
 			('insert_draft_into_paperwork', '0', '100');
 
-
-# FROM 2016-12-30 to 2017-01-02
-
+# FROM 2017-02-20 to 2017-02-22
 INSERT IGNORE INTO `rosine_config` (`config`, `user_id`, `value`) VALUES
-('overwrite_templates', 0, 'no');
+			('email_delivery',0, 'txt'),
+			('email_invoice',0, 'none'),
+			('email_order',0, 'none'),
+			('email_offer',0, 'none'),
+			('email_draft',0, 'none');
 
-# FROM 2017-01-02 to 2017-01-14
-
-INSERT IGNORE INTO `egroupware`.`rosine_notes` (`NOTE_ID` , `LANGUAGE` , `NOTE_TEXT`) VALUES
- ( '100', 'de.php', '%SINGULAR1% %ID1% vom %date%:'), 
-('100', 'en.php', '%SINGULAR1% %ID1% from %date%:');
-
-INSERT IGNORE INTO `egroupware`.`rosine_config` (`config` ,`user_id` ,`value`) VALUES 
-('insert_delivery_into_paperwork', '0', '100'), 
-('insert_offer_into_paperwork', '0', '100'),
-('insert_order_into_paperwork', '0', '100'), 
-('insert_invoice_into_paperwork', '0', '100');
-
-# FROM 2017-01-14 to 2018-01-06
+# FROM 2017-02-22 to 2018-01-06
 UPDATE `egw_applications` SET `app_tables` = 'rosine_articles,rosine_config,rosine_deliveries,rosine_deliveries_positions,rosine_invoices,rosine_invoices_positions,rosine_locations,rosine_notes,rosine_offers,rosine_offers_positions,rosine_orders,rosine_orders_positions,rosine_payments,rosine_payments_methods,rosine_taxes,rosine_drafts,rosine_drafts_positions', `app_version` = '2018-01-06' WHERE `egw_applications`.`app_id` = 58;
 
 INSERT INTO `egroupware`.`rosine_config` (`config` ,`user_id` ,`value`) VALUES 

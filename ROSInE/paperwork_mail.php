@@ -61,10 +61,11 @@ switch ($_POST['next_function']) {
 		}// there is an customer in database
 		$emailtext= new Rosine_Paperwork_Template();
 		$emailtext->set_templateDir(substr($GLOBALS['egw_info']['server']['backup_dir'],0,strrpos($GLOBALS['egw_info']['server']['backup_dir'], '/')).'/rosine/templates/');
+		$emailtext->set_config($config);
+		
 		$emailtext->load($config['email_template_'.$_GET['paperwork']]);
 		$emailtext->replaceLangVars($lang);
 		
-		$emailtext->set_config($config);
 		$emailtext->set_post($_POST);
 		$emailtext->set_row_template(str_replace('.txt', '_row.txt', 
 				$config['email_template_'.$_POST['paperwork']]));
