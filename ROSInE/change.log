@@ -12,6 +12,11 @@ to do list:
 suggestions? Write me an E-Mail: info@rothaarsystems.de
 
 ------------------------------------------------------------------------
+2018-04-19
+- corrected: if standard template is overwritten, the row is set correctly
+- added: now you can add a sum for every tax class via sum_all_netto_single['percentage'] and
+sum_all_brutto_single['percentage'] 
+
 2018-01-20
 - corrected: setup/update.sql was wrong order
 - corrected: sending deliveries as email config fields didn't work

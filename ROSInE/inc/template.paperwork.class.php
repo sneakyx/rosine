@@ -63,8 +63,12 @@ class Rosine_Paperwork_Template extends Rosine_Template
  * $day = day of paperwork (2 digits)
  *
  * $sum_all_netto = sum of all articles without tax
+ * $sum_all_netto_single[percentage] = sum of all articles with that specific tax
  * $sum_all_brutto = sum of all articles with tax
+ * $sum_all_brutto_single[percentage] = sum of all articles (brutto) with that specific tax
  * $sum_tax = sum of all article_tax
+ * $sum_tax_signle[percentage] = sum of article tax (but only this specific tax class)
+ * 
  * $tpl = kind of paperwork (offer, order, etc)
  * $customer_name = the name that should be on the invoice as recipient
  * $customer_org = organisation of customer
@@ -166,8 +170,11 @@ class Rosine_Paperwork_Template extends Rosine_Template
 					$row->assign('item_serial', 'POSI_SERIAL');
 					$row->assign('item_text', $f['POSI_TEXT']);
 					$sum_all_brutto+=$items_brutto;
+					$sum_all_brutto_single[$f['TAX_PERCENTAGE']]+=$items_brutto;
 					$sum_all_netto+=$items_netto;
+					$sum_all_netto_single[$f['TAX_PERCENTAGE']]+=$items_netto;
 					$sum_tax+=$items_tax;
+					$sum_tax_single[$f['TAX_PERCENTAGE']]+=$items_tax;
 					$rows.=$row->return_html();
 					$tax_percentage=$f['TAX_PERCENTAGE'];
 				}// get every item line by line from this paperwork id
@@ -187,6 +194,8 @@ class Rosine_Paperwork_Template extends Rosine_Template
 		// put page together 
 		$this->assign('sum_all_netto', number_format($sum_all_netto,2,",","."));
 		$this->assign('sum_all_brutto', number_format($sum_all_brutto,2,",","."));
+		$this->assign_array('sum_all_netto_single', $sum_all_netto_single);
+		$this->assign_array('sum_all_brutto_single', $sum_all_brutto_single);
 		$this->assign('sum_tax', number_format($sum_tax,2,",","."));
 		$this->assign("rows", $rows);
 		$this->assign('paperwork_id', $this->post['paperwork_id']);
