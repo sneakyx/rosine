@@ -190,7 +190,21 @@ class Rosine_Paperwork_Template extends Rosine_Template
 		else {
 			$this->assign('print', '');
 		}// only preview
+		// set kommas and dots right for single items 
+		foreach ($sum_all_netto_single as &$single){
+		    $single=number_format($single,2,",",".");
+		}
+		unset ($single);
+		foreach ($sum_all_brutto_single as &$single){
+		    $single=number_format($single,2,",",".");
+		}
+		unset ($single);
+		foreach ($sum_all_tax_single as &$single){
+		    $single=number_format($single,2,",",".");
+		}
+		unset ($single);
 		// put page together 
+		
 		$this->assign('sum_all_netto', number_format($sum_all_netto,2,",","."));
 		$this->assign('sum_all_brutto', number_format($sum_all_brutto,2,",","."));
 		$this->assign_array('sum_all_netto_single', $sum_all_netto_single);

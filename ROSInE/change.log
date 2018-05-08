@@ -12,6 +12,10 @@ to do list:
 suggestions? Write me an E-Mail: info@rothaarsystems.de
 
 ------------------------------------------------------------------------
+2018-05-07
+- kommas and dots set for every tax class
+
+
 2018-04-19
 - corrected: if standard template is overwritten, the row is set correctly
 - added: now you can add a sum for every tax class via sum_all_netto_single['percentage'] and
