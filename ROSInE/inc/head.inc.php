@@ -47,6 +47,19 @@ function trimhtml (&$value, $key) {
 array_walk_recursive($_GET, 'trimhtml');
 array_walk_recursive ($_POST, 'trimhtml');
 $_POST=(array_merge($_POST, $_GET));
+
+// reset null with 0, so that there are no errors
+foreach (
+    array(
+        'stock',
+        'price',
+    ) as $value) {
+
+    if (array_key_exists($value,$_POST) and $_POST[$value] == "") {
+        $_POST[$value] = 0;
+    }
+}
+
 include ('inc/db.inc.php');
 include ('inc/template.class.php');
 include_once ('inc/functions.inc.php'); // seems this is inserted by egroupware api
