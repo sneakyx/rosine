@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2016-08-27                                           *
+ *  date of this file: 2018-10-08                                           *
  * \**************************************************************************/
 include('inc/head.inc.php');
 
@@ -69,7 +69,8 @@ switch ($_POST['next_function']) {
         $tpl->assign("what_to_do", lang('change_article'));
         $tpl->assign("next_function", "changed");
         $result = rosine_database_query(
-            $rosine_db_query['get_articles'] . ' ART_NUMBER="' . $_POST['number'] . '" LIMIT 1', 102);
+            $rosine_db_query['get_articles'] . " ART_NUMBER LIKE '%{$_POST['number']}' LIMIT 1", 102);
+
         if ($result != false) {
             $row = $result->fetch_array();
             $tpl->assign("number", $row['ART_NUMBER'] .

@@ -8,7 +8,7 @@
 *  This program is free software; you can redistribute it and/or modify it *
 *  under the terms of the GNU General Public License as published by the   *
 *  Free Software Foundation; version 2 of the License.                     *
-*  date of this file: 2018-01-06    		 								*
+*  date of this file: 2018-10-08    		 								*
 \**************************************************************************/
 
 
@@ -224,6 +224,7 @@ function rosine_set_paperwork_printed($singular,$ID){
 }// end function set paperwork_printed
 
 function rosine_most_used_articles($singular, $location="",$unity=""){
+    $liste="";
 	$query=rosine_correct_query($singular, $GLOBALS['rosine_db_query']['most_used_articles']. $GLOBALS['config']['favorite_articles']);
 	if ($location!=0) // when there is a limitation by stocknr
 		$query=str_replace("WHERE 1", "WHERE a.ART_STOCKNR=".$location, $query);
