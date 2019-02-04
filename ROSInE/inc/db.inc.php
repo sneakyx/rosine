@@ -11,9 +11,8 @@
 \**************************************************************************/
 
 // mysql to get config
-$rosine_db_query['get_config']='SELECT * FROM '.$rosine_db_prefix.
-'config WHERE user_id =0 OR user_id ='.$GLOBALS['egw_info']['user']['account_id'].
-' GROUP BY config desc';
+$rosine_db_query['get_config']="SELECT * FROM {$rosine_db_prefix}config WHERE user_id =0 OR user_id ={$GLOBALS['egw_info']['user']['account_id']} 
+     ORDER BY user_id DESC;";
 //mysql for articles
 $rosine_db_query['insert_article']="INSERT INTO ".$rosine_db_prefix."articles (ART_NUMBER, ART_UNIT, ART_NAME, ART_PRICE, ART_TAX, ART_STOCKNR, ART_INSTOCK, ART_NOTE, `GENERATED`, CHANGED) VALUES ";
 $rosine_db_query['get_articles']="SELECT * FROM ".$rosine_db_prefix."articles WHERE ";
@@ -145,6 +144,5 @@ if ($rosine_db->connect_error) {
 } // die if database error
 
 $rosine_db->query('SET NAMES "utf8"');
-$rosine_db->query('SET sql_mode=""');
-
+//$rosine_db->query('SET sql_mode="STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"');
 ?>
