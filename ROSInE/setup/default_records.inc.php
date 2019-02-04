@@ -13,6 +13,7 @@ $oProc->query("
 			INSERT IGNORE INTO `rosine_config` (`config`, `user_id`, `value`) VALUES
 			('articles_per_page', 0, '10'),
 			('articles_per_page', 1, '11'),
+			('company', 0, '1'),                                                                         
 			('company_bic', 0, 'GENODEM1BB1'),
 			('company_city', 0, 'City'),
 			('company_country', 0, 'Deutschland'),
