@@ -119,7 +119,7 @@ $rosine_db_query['statistics']['get_articles_by_ammount']="SELECT SUM( i.POSI_AM
 														IN (
 														
 														SELECT INVOICE_ID
-														FROM ".$rosine_db_prefix."invoices AS r";
+														FROM ".$rosine_db_prefix."invoices AS r )";
 $rosine_db_query['statistics']['get_laziest_customers']="SELECT e.contact_id AS customer_id, e.n_family AS name, e.n_given, 
 					e.org_name, e.adr_one_locality, e.adr_two_locality, (
 					SUM( DATEDIFF( COALESCE( NULLIF( p.PAYMENT_DATE, '' ) , CURDATE( ) ) , r.INVOICE_DATE ) ) / COUNT( * )) AS days

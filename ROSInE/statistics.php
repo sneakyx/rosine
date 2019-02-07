@@ -107,13 +107,16 @@ switch ($_POST['next_function']){
 			}//endforeach
 			$where.=")";
 		}//there were numbers added
-		
+
+
 		$sql_query=str_replace("%where%", $where, $sql_query);
+
+
 		$sql_query=str_replace("%company%", $config['company'], $sql_query);
 
 		// get ammount of articles in database
-		
-		$max_rows=rosine_get_field_database("SELECT COUNT(*) FROM ( $sql_query )  AS SUB0", '0',102);
+		$result=rosine_database_query($sql_query , 103);
+
 		$liste='';
 		/*
 		 * correct the from-variable and the items per page-variable
@@ -128,7 +131,6 @@ switch ($_POST['next_function']){
 			//if the number is to high
 			$config['items_per_page']=$max_rows-$from;
 		}//endif
-		$result=rosine_database_query($sql_query." LIMIT $from,".$config['items_per_page'] , 103);
 		if ($from >0) {//if there's apossibility to go back
 			$tpl->assign("backward", "<a href='?next_function=show&query={$_POST["query"]}&numbers={$_POST['numbers']}&date_from={$_POST['date_from']}&date_to={$_POST['date_to']}&from=".($from-$config['items_per_page'])."'>&lt;&lt;</a>");
 		}//endif
