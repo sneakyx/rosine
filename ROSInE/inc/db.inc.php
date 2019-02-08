@@ -7,12 +7,12 @@
 *  This program is free software; you can redistribute it and/or modify it *
 *  under the terms of the GNU General Public License as published by the   *
 *  Free Software Foundation; version 2 of the License.                     *
-*  date of this file: 2018-01-06  										    *
+*  date of this file: 2019-02-08  										    *
 \**************************************************************************/
 
 // mysql to get config
 $rosine_db_query['get_config']="SELECT * FROM {$rosine_db_prefix}config WHERE user_id =0 OR user_id ={$GLOBALS['egw_info']['user']['account_id']} 
-     ORDER BY user_id DESC;";
+     ORDER BY user_id ASC;";
 //mysql for articles
 $rosine_db_query['insert_article']="INSERT INTO ".$rosine_db_prefix."articles (ART_NUMBER, ART_UNIT, ART_NAME, ART_PRICE, ART_TAX, ART_STOCKNR, ART_INSTOCK, ART_NOTE, `GENERATED`, CHANGED) VALUES ";
 $rosine_db_query['get_articles']="SELECT * FROM ".$rosine_db_prefix."articles WHERE ";

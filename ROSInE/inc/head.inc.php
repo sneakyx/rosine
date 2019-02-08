@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify it *
  *  under the terms of the GNU General Public License as published by the   *
  *  Free Software Foundation; version 2 of the License.                     *
- *  date of this file: 2018-01-06                                            *
+ *  date of this file: 2019-02-08                                            *
  * \**************************************************************************/
 
 
@@ -69,12 +69,8 @@ include('inc/template.paperwork.class.php');
 $result = rosine_database_query($rosine_db_query['get_config'], 1);
 $config = [];
 while ($f = $result->fetch_array()) {
-    if (!in_array($f['config'], $config)) {
-        // add it only to array when it's not aleready there (no override for user-special config)
+   // systemwide config will be overwritten by user config
         $config[$f['config']] = $f['value'];
-
-        //echo $f['config'].": ".$f['value']."<br>"; // this is just to get an output for the configuration in the database
-    }
 }// put config into array
 $result->close;
 //things for every template
