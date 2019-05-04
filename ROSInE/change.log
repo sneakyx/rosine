@@ -12,6 +12,9 @@ to do list:
 suggestions? Write me an E-Mail: info@rothaarsystems.de
 
 ------------------------------------------------------------------------
+2019-05-04
+- add column amount in statistic
+
 2019-02-08
 - error in reading config
 
@@ -43,7 +46,7 @@ sum_all_brutto_single['percentage']
 - corrected: count paperwork
 
 2018-01-10
-- added: paperwork mor possibilities to move foreward/backwards
+- added: paperwork mor possibilities to move forward/backwards
 - corrected: statistics didn't work
 
 2018-01-08

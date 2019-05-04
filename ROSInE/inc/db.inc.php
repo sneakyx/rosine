@@ -7,7 +7,7 @@
 *  This program is free software; you can redistribute it and/or modify it *
 *  under the terms of the GNU General Public License as published by the   *
 *  Free Software Foundation; version 2 of the License.                     *
-*  date of this file: 2019-02-08  										    *
+*  date of this file: 2019-05-04										    *
 \**************************************************************************/
 
 // mysql to get config
@@ -99,9 +99,10 @@ $rosine_db_query['update_configuration']="UPDATE ".$rosine_db_prefix."config SET
 $rosine_db_query['insert_configuration']="INSERT INTO {$rosine_db_prefix}config (config,user_id,value) VALUES ";
 
 //mysql for statistics
-$rosine_db_query['statistics']['get_customer_with_most_sales']="SELECT SUM( r.INVOICE_AMMOUNT_BRUTTO ) AS money, e.contact_id as customer_id, e.n_family as name, e.n_given, e.org_name, e.adr_one_locality, e.adr_two_locality
+$rosine_db_query['statistics']['get_customer_with_most_sales']="SELECT SUM(rip.POSI_AMMOUNT) AS amount, SUM( r.INVOICE_AMMOUNT_BRUTTO ) AS money, e.contact_id as customer_id, e.n_family as name, e.n_given, e.org_name, e.adr_one_locality, e.adr_two_locality
 												FROM ".$egw_db_prefix."addressbook AS e
 												JOIN ".$rosine_db_prefix."invoices AS r ON e.contact_id = r.INVOICE_CUSTOMER
+												LEFT JOIN {$rosine_db_prefix}invoices_positions AS rip ON r.INVOICE_ID=rip.INVOICE_ID
 												WHERE r.COMPANY_ID=%company% AND %where%
 												GROUP BY contact_id
 												ORDER BY money DESC ";

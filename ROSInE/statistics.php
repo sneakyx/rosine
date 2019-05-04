@@ -7,7 +7,7 @@
 *  This program is free software; you can redistribute it and/or modify it *
 *  under the terms of the GNU General Public License as published by the   *
 *  Free Software Foundation; version 2 of the License.                     *
-*  date of this file: 2017-08-10 										   *
+*  date of this file: 2019-05-04 										   *
 \**************************************************************************/
 include ('inc/head.inc.php');
 
@@ -144,16 +144,22 @@ switch ($_POST['next_function']){
 		else {
 			$tpl->assign("foreward", "");
 		}//endelse
-		$results.="<table id='rosine_tabelle'><tr>";
-		foreach($result->fetch_fields() as $f) {
-			$results.=vsprintf ("<th>{L_%s}</th>\n", strtoupper($f->name));
+
+
+		if (empty($result)===false) {
+			$results.="<table id='rosine_tabelle'><tr>";
+			foreach ($result->fetch_fields() as $f) {
+				$results .= vsprintf("<th>{L_%s}</th>\n", strtoupper($f->name));
+			}
+			$results.="</tr>";
+			while($f = $result->fetch_row()) {
+				$formating=str_repeat("<td>%s</td>", count($f))."\n";
+				$results.="<tr>".vsprintf ($formating, $f)."</tr>";
+			}
+			$results.="</table>";
+		} else {
+			$results .= "No row!";
 		}
-		$results.="</tr>";
-		while($f = $result->fetch_row()) {
-			$formating=str_repeat("<td>%s</td>", count($f))."\n";
-			$results.="<tr>".vsprintf ($formating, $f)."</tr>";
-		}
-		$results.="</table>";
 	break;
 		
 	default:
