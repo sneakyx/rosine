@@ -2,7 +2,7 @@
 A. Introduction
  
 This program is for writing and managing offers, orders, delivery notes, invoices and payments.
-It fits neatly in EGroupware and uses the EGroupware address book (no secondary addressbook nessesary).
+It fits neatly in EGroupware and uses the EGroupware address book (no secondary addressbook necessary).
 The goal was to make it accesable by touch screen - this is why the layout is bigger than in EGroupware.
 In the beginning, it was a fork of php Rechnung also known as PHP Invoice by (Edy Corak)- but it is now completly rewritten, but you can import the phpinvoice data.
 
