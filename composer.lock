@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b822c3f54352108bdf414fa259b48b28",
+    "content-hash": "42037d2ffc9b36a49fb4d806f22203d7",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -7198,6 +7198,51 @@
                 "source": "https://github.com/webmozarts/assert/tree/1.9.1"
             },
             "time": "2020-07-08T17:02:28+00:00"
+        },
+        {
+            "name": "zurb/foundation",
+            "version": "v6.6.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/foundation/foundation-sites.git",
+                "reference": "0f9fea524fec599999fdd952d55de94635f75227"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/foundation/foundation-sites/zipball/0f9fea524fec599999fdd952d55de94635f75227",
+                "reference": "0f9fea524fec599999fdd952d55de94635f75227",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Foundation Yetinauts",
+                    "email": "contact@get.foundation",
+                    "homepage": "https://get.foundation"
+                }
+            ],
+            "description": "The most advanced responsive front-end framework in the world.",
+            "homepage": "https://get.foundation",
+            "keywords": [
+                "JS",
+                "css",
+                "framework",
+                "mobile-first",
+                "responsive",
+                "sass",
+                "scss"
+            ],
+            "support": {
+                "email": "contact@get.foundation",
+                "forum": "https://foundation.discourse.group",
+                "issues": "https://github.com/foundation/foundation-sites/issues",
+                "source": "https://github.com/foundation/foundation-sites/tree/v6.6.3"
+            },
+            "time": "2020-04-08T23:27:51+00:00"
         }
     ],
     "packages-dev": [

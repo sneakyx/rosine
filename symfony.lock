@@ -503,5 +503,8 @@
     },
     "webmozart/assert": {
         "version": "1.9.1"
+    },
+    "zurb/foundation": {
+        "version": "v6.6.3"
     }
 }
