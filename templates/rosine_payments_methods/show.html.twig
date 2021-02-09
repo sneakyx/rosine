@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}RosinePaymentsMethods{% endblock %}
+
+{% block body %}
+    <h1>RosinePaymentsMethods</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>MethId</th>
+                <td>{{ rosine_payments_method.methId }}</td>
+            </tr>
+            <tr>
+                <th>MethName</th>
+                <td>{{ rosine_payments_method.methName }}</td>
+            </tr>
+            <tr>
+                <th>MethNote</th>
+                <td>{{ rosine_payments_method.methNote }}</td>
+            </tr>
+            <tr>
+                <th>Generated</th>
+                <td>{{ rosine_payments_method.generated }}</td>
+            </tr>
+            <tr>
+                <th>Changed</th>
+                <td>{{ rosine_payments_method.changed }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('rosine_payments_methods_index') }}">back to list</a>
+
+    <a href="{{ path('rosine_payments_methods_edit', {'methId': rosine_payments_method.methId}) }}">edit</a>
+
+    {{ include('rosine_payments_methods/_delete_form.html.twig') }}
+{% endblock %}

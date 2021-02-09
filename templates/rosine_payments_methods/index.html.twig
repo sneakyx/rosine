@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}RosinePaymentsMethods index{% endblock %}
+
+{% block body %}
+    <h1>RosinePaymentsMethods index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>MethId</th>
+                <th>MethName</th>
+                <th>MethNote</th>
+                <th>Generated</th>
+                <th>Changed</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for rosine_payments_method in rosine_payments_methods %}
+            <tr>
+                <td>{{ rosine_payments_method.methId }}</td>
+                <td>{{ rosine_payments_method.methName }}</td>
+                <td>{{ rosine_payments_method.methNote }}</td>
+                <td>{{ rosine_payments_method.generated }}</td>
+                <td>{{ rosine_payments_method.changed }}</td>
+                <td>
+                    <a href="{{ path('rosine_payments_methods_show', {'methId': rosine_payments_method.methId}) }}">show</a>
+                    <a href="{{ path('rosine_payments_methods_edit', {'methId': rosine_payments_method.methId}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('rosine_payments_methods_new') }}">Create new</a>
+{% endblock %}
