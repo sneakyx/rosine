@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}RosineTaxes index{% endblock %}
+
+{% block body %}
+    <h1>RosineTaxes index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>TaxId</th>
+                <th>TaxName</th>
+                <th>TaxPercentage</th>
+                <th>Generated</th>
+                <th>Changed</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for rosine_tax in rosine_taxes %}
+            <tr>
+                <td>{{ rosine_tax.taxId ? 'Yes' : 'No' }}</td>
+                <td>{{ rosine_tax.taxName }}</td>
+                <td>{{ rosine_tax.taxPercentage }}</td>
+                <td>{{ rosine_tax.generated }}</td>
+                <td>{{ rosine_tax.changed }}</td>
+                <td>
+                    <a href="{{ path('rosine_taxes_show', {'taxId': rosine_tax.taxId}) }}">show</a>
+                    <a href="{{ path('rosine_taxes_edit', {'taxId': rosine_tax.taxId}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('rosine_taxes_new') }}">Create new</a>
+{% endblock %}

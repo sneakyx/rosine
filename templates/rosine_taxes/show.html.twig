@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}RosineTaxes{% endblock %}
+
+{% block body %}
+    <h1>RosineTaxes</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>TaxId</th>
+                <td>{{ rosine_tax.taxId ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>TaxName</th>
+                <td>{{ rosine_tax.taxName }}</td>
+            </tr>
+            <tr>
+                <th>TaxPercentage</th>
+                <td>{{ rosine_tax.taxPercentage }}</td>
+            </tr>
+            <tr>
+                <th>Generated</th>
+                <td>{{ rosine_tax.generated }}</td>
+            </tr>
+            <tr>
+                <th>Changed</th>
+                <td>{{ rosine_tax.changed }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('rosine_taxes_index') }}">back to list</a>
+
+    <a href="{{ path('rosine_taxes_edit', {'taxId': rosine_tax.taxId}) }}">edit</a>
+
+    {{ include('rosine_taxes/_delete_form.html.twig') }}
+{% endblock %}
