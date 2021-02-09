@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}RosineNotes index{% endblock %}
+
+{% block body %}
+    <h1>RosineNotes index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>NoteId</th>
+                <th>Language</th>
+                <th>NoteText</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for rosine_note in rosine_notes %}
+            <tr>
+                <td>{{ rosine_note.noteId }}</td>
+                <td>{{ rosine_note.language }}</td>
+                <td>{{ rosine_note.noteText }}</td>
+                <td>
+                    <a href="{{ path('rosine_notes_show', {'noteId': rosine_note.noteId}) }}">show</a>
+                    <a href="{{ path('rosine_notes_edit', {'noteId': rosine_note.noteId}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('rosine_notes_new') }}">Create new</a>
+{% endblock %}

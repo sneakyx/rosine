@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New RosineArticles{% endblock %}
+
+{% block body %}
+    <h1>Create new RosineArticles</h1>
+
+    {{ include('rosine_articles/_form.html.twig') }}
+
+    <a href="{{ path('rosine_articles_index') }}">back to list</a>
+{% endblock %}

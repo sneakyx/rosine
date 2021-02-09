@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}RosinePayments index{% endblock %}
+
+{% block body %}
+    <h1>RosinePayments index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>CompanyId</th>
+                <th>PaymentId</th>
+                <th>InvoiceId</th>
+                <th>PaymentDate</th>
+                <th>MethId</th>
+                <th>PaymentAmmount</th>
+                <th>PaymentNote</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for rosine_payment in rosine_payments %}
+            <tr>
+                <td>{{ rosine_payment.companyId ? 'Yes' : 'No' }}</td>
+                <td>{{ rosine_payment.paymentId }}</td>
+                <td>{{ rosine_payment.invoiceId }}</td>
+                <td>{{ rosine_payment.paymentDate ? rosine_payment.paymentDate|date('Y-m-d') : '' }}</td>
+                <td>{{ rosine_payment.methId }}</td>
+                <td>{{ rosine_payment.paymentAmmount }}</td>
+                <td>{{ rosine_payment.paymentNote }}</td>
+                <td>
+                    <a href="{{ path('rosine_payments_show', {'companyId': rosine_payment.companyId}) }}">show</a>
+                    <a href="{{ path('rosine_payments_edit', {'companyId': rosine_payment.companyId}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('rosine_payments_new') }}">Create new</a>
+{% endblock %}

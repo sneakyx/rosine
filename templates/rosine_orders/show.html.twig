@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}RosineOrders{% endblock %}
+
+{% block body %}
+    <h1>RosineOrders</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>CompanyId</th>
+                <td>{{ rosine_order.companyId ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>OrderId</th>
+                <td>{{ rosine_order.orderId }}</td>
+            </tr>
+            <tr>
+                <th>OrderDate</th>
+                <td>{{ rosine_order.orderDate ? rosine_order.orderDate|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>OrderCustomer</th>
+                <td>{{ rosine_order.orderCustomer }}</td>
+            </tr>
+            <tr>
+                <th>OrderCustomerPrivate</th>
+                <td>{{ rosine_order.orderCustomerPrivate ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>OrderAmmount</th>
+                <td>{{ rosine_order.orderAmmount }}</td>
+            </tr>
+            <tr>
+                <th>OrderAmmountBrutto</th>
+                <td>{{ rosine_order.orderAmmountBrutto }}</td>
+            </tr>
+            <tr>
+                <th>OrderNote</th>
+                <td>{{ rosine_order.orderNote }}</td>
+            </tr>
+            <tr>
+                <th>OrderStatus</th>
+                <td>{{ rosine_order.orderStatus }}</td>
+            </tr>
+            <tr>
+                <th>OrderTemplate</th>
+                <td>{{ rosine_order.orderTemplate }}</td>
+            </tr>
+            <tr>
+                <th>OrderPrinted</th>
+                <td>{{ rosine_order.orderPrinted ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Generated</th>
+                <td>{{ rosine_order.generated }}</td>
+            </tr>
+            <tr>
+                <th>Changed</th>
+                <td>{{ rosine_order.changed }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('rosine_orders_index') }}">back to list</a>
+
+    <a href="{{ path('rosine_orders_edit', {'companyId': rosine_order.companyId}) }}">edit</a>
+
+    {{ include('rosine_orders/_delete_form.html.twig') }}
+{% endblock %}

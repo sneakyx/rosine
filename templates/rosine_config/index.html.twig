@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}RosineConfig index{% endblock %}
+
+{% block body %}
+    <h1>RosineConfig index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Config</th>
+                <th>UserId</th>
+                <th>Value</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for rosine_config in rosine_configs %}
+            <tr>
+                <td>{{ rosine_config.config }}</td>
+                <td>{{ rosine_config.userId }}</td>
+                <td>{{ rosine_config.value }}</td>
+                <td>
+                    <a href="{{ path('rosine_config_show', {'config': rosine_config.config}) }}">show</a>
+                    <a href="{{ path('rosine_config_edit', {'config': rosine_config.config}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('rosine_config_new') }}">Create new</a>
+{% endblock %}

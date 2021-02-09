@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}RosineLocations{% endblock %}
+
+{% block body %}
+    <h1>RosineLocations</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>LocId</th>
+                <td>{{ rosine_location.locId }}</td>
+            </tr>
+            <tr>
+                <th>LocName</th>
+                <td>{{ rosine_location.locName }}</td>
+            </tr>
+            <tr>
+                <th>LocNote</th>
+                <td>{{ rosine_location.locNote }}</td>
+            </tr>
+            <tr>
+                <th>Generated</th>
+                <td>{{ rosine_location.generated }}</td>
+            </tr>
+            <tr>
+                <th>Changed</th>
+                <td>{{ rosine_location.changed }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('rosine_locations_index') }}">back to list</a>
+
+    <a href="{{ path('rosine_locations_edit', {'locId': rosine_location.locId}) }}">edit</a>
+
+    {{ include('rosine_locations/_delete_form.html.twig') }}
+{% endblock %}

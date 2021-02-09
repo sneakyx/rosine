@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}RosineOffers index{% endblock %}
+
+{% block body %}
+    <h1>RosineOffers index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>CompanyId</th>
+                <th>OfferId</th>
+                <th>OfferDate</th>
+                <th>OfferCustomer</th>
+                <th>OfferCustomerPrivate</th>
+                <th>OfferAmmount</th>
+                <th>OfferAmmountBrutto</th>
+                <th>OfferNote</th>
+                <th>OfferStatus</th>
+                <th>OfferTemplate</th>
+                <th>OfferPrinted</th>
+                <th>Generated</th>
+                <th>Changed</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for rosine_offer in rosine_offers %}
+            <tr>
+                <td>{{ rosine_offer.companyId ? 'Yes' : 'No' }}</td>
+                <td>{{ rosine_offer.offerId }}</td>
+                <td>{{ rosine_offer.offerDate ? rosine_offer.offerDate|date('Y-m-d') : '' }}</td>
+                <td>{{ rosine_offer.offerCustomer }}</td>
+                <td>{{ rosine_offer.offerCustomerPrivate ? 'Yes' : 'No' }}</td>
+                <td>{{ rosine_offer.offerAmmount }}</td>
+                <td>{{ rosine_offer.offerAmmountBrutto }}</td>
+                <td>{{ rosine_offer.offerNote }}</td>
+                <td>{{ rosine_offer.offerStatus }}</td>
+                <td>{{ rosine_offer.offerTemplate }}</td>
+                <td>{{ rosine_offer.offerPrinted ? 'Yes' : 'No' }}</td>
+                <td>{{ rosine_offer.generated }}</td>
+                <td>{{ rosine_offer.changed }}</td>
+                <td>
+                    <a href="{{ path('rosine_offers_show', {'companyId': rosine_offer.companyId}) }}">show</a>
+                    <a href="{{ path('rosine_offers_edit', {'companyId': rosine_offer.companyId}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="14">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('rosine_offers_new') }}">Create new</a>
+{% endblock %}

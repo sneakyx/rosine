@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}RosineDraftsPositions{% endblock %}
+
+{% block body %}
+    <h1>RosineDraftsPositions</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>CompanyId</th>
+                <td>{{ rosine_drafts_position.companyId ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>DraftId</th>
+                <td>{{ rosine_drafts_position.draftId }}</td>
+            </tr>
+            <tr>
+                <th>PosiId</th>
+                <td>{{ rosine_drafts_position.posiId }}</td>
+            </tr>
+            <tr>
+                <th>ArtNumber</th>
+                <td>{{ rosine_drafts_position.artNumber }}</td>
+            </tr>
+            <tr>
+                <th>PosiAmmount</th>
+                <td>{{ rosine_drafts_position.posiAmmount }}</td>
+            </tr>
+            <tr>
+                <th>PosiUnit</th>
+                <td>{{ rosine_drafts_position.posiUnit }}</td>
+            </tr>
+            <tr>
+                <th>PosiPrice</th>
+                <td>{{ rosine_drafts_position.posiPrice }}</td>
+            </tr>
+            <tr>
+                <th>PosiLocation</th>
+                <td>{{ rosine_drafts_position.posiLocation }}</td>
+            </tr>
+            <tr>
+                <th>PosiSerial</th>
+                <td>{{ rosine_drafts_position.posiSerial }}</td>
+            </tr>
+            <tr>
+                <th>PosiText</th>
+                <td>{{ rosine_drafts_position.posiText }}</td>
+            </tr>
+            <tr>
+                <th>PosiTax</th>
+                <td>{{ rosine_drafts_position.posiTax ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Done</th>
+                <td>{{ rosine_drafts_position.done ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('rosine_drafts_positions_index') }}">back to list</a>
+
+    <a href="{{ path('rosine_drafts_positions_edit', {'companyId': rosine_drafts_position.companyId}) }}">edit</a>
+
+    {{ include('rosine_drafts_positions/_delete_form.html.twig') }}
+{% endblock %}

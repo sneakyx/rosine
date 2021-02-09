@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}RosineDeliveries{% endblock %}
+
+{% block body %}
+    <h1>RosineDeliveries</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>CompanyId</th>
+                <td>{{ rosine_delivery.companyId ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>DeliveryId</th>
+                <td>{{ rosine_delivery.deliveryId }}</td>
+            </tr>
+            <tr>
+                <th>DeliveryDate</th>
+                <td>{{ rosine_delivery.deliveryDate ? rosine_delivery.deliveryDate|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>DeliveryCustomer</th>
+                <td>{{ rosine_delivery.deliveryCustomer }}</td>
+            </tr>
+            <tr>
+                <th>DeliveryCustomerPrivate</th>
+                <td>{{ rosine_delivery.deliveryCustomerPrivate ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>DeliveryAmmount</th>
+                <td>{{ rosine_delivery.deliveryAmmount }}</td>
+            </tr>
+            <tr>
+                <th>DeliveryAmmountBrutto</th>
+                <td>{{ rosine_delivery.deliveryAmmountBrutto }}</td>
+            </tr>
+            <tr>
+                <th>DeliveryNote</th>
+                <td>{{ rosine_delivery.deliveryNote }}</td>
+            </tr>
+            <tr>
+                <th>DeliveryStatus</th>
+                <td>{{ rosine_delivery.deliveryStatus }}</td>
+            </tr>
+            <tr>
+                <th>DeliveryTemplate</th>
+                <td>{{ rosine_delivery.deliveryTemplate }}</td>
+            </tr>
+            <tr>
+                <th>DeliveryPrinted</th>
+                <td>{{ rosine_delivery.deliveryPrinted ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Generated</th>
+                <td>{{ rosine_delivery.generated }}</td>
+            </tr>
+            <tr>
+                <th>Changed</th>
+                <td>{{ rosine_delivery.changed }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('rosine_deliveries_index') }}">back to list</a>
+
+    <a href="{{ path('rosine_deliveries_edit', {'companyId': rosine_delivery.companyId}) }}">edit</a>
+
+    {{ include('rosine_deliveries/_delete_form.html.twig') }}
+{% endblock %}

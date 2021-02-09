@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit RosineDraftsPositions{% endblock %}
+
+{% block body %}
+    <h1>Edit RosineDraftsPositions</h1>
+
+    {{ include('rosine_drafts_positions/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('rosine_drafts_positions_index') }}">back to list</a>
+
+    {{ include('rosine_drafts_positions/_delete_form.html.twig') }}
+{% endblock %}

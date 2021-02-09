@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}RosineDeliveriesPositions index{% endblock %}
+
+{% block body %}
+    <h1>RosineDeliveriesPositions index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>CompanyId</th>
+                <th>DeliveryId</th>
+                <th>PosiId</th>
+                <th>ArtNumber</th>
+                <th>PosiAmmount</th>
+                <th>PosiUnit</th>
+                <th>PosiPrice</th>
+                <th>PosiLocation</th>
+                <th>PosiSerial</th>
+                <th>PosiText</th>
+                <th>PosiTax</th>
+                <th>Done</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for rosine_deliveries_position in rosine_deliveries_positions %}
+            <tr>
+                <td>{{ rosine_deliveries_position.companyId ? 'Yes' : 'No' }}</td>
+                <td>{{ rosine_deliveries_position.deliveryId }}</td>
+                <td>{{ rosine_deliveries_position.posiId }}</td>
+                <td>{{ rosine_deliveries_position.artNumber }}</td>
+                <td>{{ rosine_deliveries_position.posiAmmount }}</td>
+                <td>{{ rosine_deliveries_position.posiUnit }}</td>
+                <td>{{ rosine_deliveries_position.posiPrice }}</td>
+                <td>{{ rosine_deliveries_position.posiLocation }}</td>
+                <td>{{ rosine_deliveries_position.posiSerial }}</td>
+                <td>{{ rosine_deliveries_position.posiText }}</td>
+                <td>{{ rosine_deliveries_position.posiTax ? 'Yes' : 'No' }}</td>
+                <td>{{ rosine_deliveries_position.done ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('rosine_deliveries_positions_show', {'companyId': rosine_deliveries_position.companyId}) }}">show</a>
+                    <a href="{{ path('rosine_deliveries_positions_edit', {'companyId': rosine_deliveries_position.companyId}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="13">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('rosine_deliveries_positions_new') }}">Create new</a>
+{% endblock %}

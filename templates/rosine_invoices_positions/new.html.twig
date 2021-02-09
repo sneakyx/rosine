@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New RosineInvoicesPositions{% endblock %}
+
+{% block body %}
+    <h1>Create new RosineInvoicesPositions</h1>
+
+    {{ include('rosine_invoices_positions/_form.html.twig') }}
+
+    <a href="{{ path('rosine_invoices_positions_index') }}">back to list</a>
+{% endblock %}

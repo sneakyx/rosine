@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}RosineArticles index{% endblock %}
+
+{% block body %}
+    <h1>RosineArticles index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ArtNumber</th>
+                <th>ArtName</th>
+                <th>ArtUnit</th>
+                <th>ArtPrice</th>
+                <th>ArtTax</th>
+                <th>ArtStocknr</th>
+                <th>ArtInstock</th>
+                <th>ArtNote</th>
+                <th>Generated</th>
+                <th>Changed</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for rosine_article in rosine_articles %}
+            <tr>
+                <td>{{ rosine_article.artNumber }}</td>
+                <td>{{ rosine_article.artName }}</td>
+                <td>{{ rosine_article.artUnit }}</td>
+                <td>{{ rosine_article.artPrice }}</td>
+                <td>{{ rosine_article.artTax ? 'Yes' : 'No' }}</td>
+                <td>{{ rosine_article.artStocknr }}</td>
+                <td>{{ rosine_article.artInstock }}</td>
+                <td>{{ rosine_article.artNote }}</td>
+                <td>{{ rosine_article.generated }}</td>
+                <td>{{ rosine_article.changed }}</td>
+                <td>
+                    <a href="{{ path('rosine_articles_show', {'artNumber': rosine_article.artNumber}) }}">show</a>
+                    <a href="{{ path('rosine_articles_edit', {'artNumber': rosine_article.artNumber}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="11">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('rosine_articles_new') }}">Create new</a>
+{% endblock %}

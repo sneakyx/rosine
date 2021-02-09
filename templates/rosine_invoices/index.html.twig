@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}RosineInvoices index{% endblock %}
+
+{% block body %}
+    <h1>RosineInvoices index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>CompanyId</th>
+                <th>InvoiceId</th>
+                <th>InvoiceDate</th>
+                <th>InvoiceCustomer</th>
+                <th>InvoiceCustomerPrivate</th>
+                <th>InvoiceAmmount</th>
+                <th>InvoiceAmmountBrutto</th>
+                <th>InvoiceNote</th>
+                <th>InvoiceStatus</th>
+                <th>InvoiceTemplate</th>
+                <th>InvoicePrinted</th>
+                <th>Generated</th>
+                <th>Changed</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for rosine_invoice in rosine_invoices %}
+            <tr>
+                <td>{{ rosine_invoice.companyId ? 'Yes' : 'No' }}</td>
+                <td>{{ rosine_invoice.invoiceId }}</td>
+                <td>{{ rosine_invoice.invoiceDate ? rosine_invoice.invoiceDate|date('Y-m-d') : '' }}</td>
+                <td>{{ rosine_invoice.invoiceCustomer }}</td>
+                <td>{{ rosine_invoice.invoiceCustomerPrivate ? 'Yes' : 'No' }}</td>
+                <td>{{ rosine_invoice.invoiceAmmount }}</td>
+                <td>{{ rosine_invoice.invoiceAmmountBrutto }}</td>
+                <td>{{ rosine_invoice.invoiceNote }}</td>
+                <td>{{ rosine_invoice.invoiceStatus }}</td>
+                <td>{{ rosine_invoice.invoiceTemplate }}</td>
+                <td>{{ rosine_invoice.invoicePrinted ? 'Yes' : 'No' }}</td>
+                <td>{{ rosine_invoice.generated }}</td>
+                <td>{{ rosine_invoice.changed }}</td>
+                <td>
+                    <a href="{{ path('rosine_invoices_show', {'companyId': rosine_invoice.companyId}) }}">show</a>
+                    <a href="{{ path('rosine_invoices_edit', {'companyId': rosine_invoice.companyId}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="14">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('rosine_invoices_new') }}">Create new</a>
+{% endblock %}

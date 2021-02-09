@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}RosineOrders index{% endblock %}
+
+{% block body %}
+    <h1>RosineOrders index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>CompanyId</th>
+                <th>OrderId</th>
+                <th>OrderDate</th>
+                <th>OrderCustomer</th>
+                <th>OrderCustomerPrivate</th>
+                <th>OrderAmmount</th>
+                <th>OrderAmmountBrutto</th>
+                <th>OrderNote</th>
+                <th>OrderStatus</th>
+                <th>OrderTemplate</th>
+                <th>OrderPrinted</th>
+                <th>Generated</th>
+                <th>Changed</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for rosine_order in rosine_orders %}
+            <tr>
+                <td>{{ rosine_order.companyId ? 'Yes' : 'No' }}</td>
+                <td>{{ rosine_order.orderId }}</td>
+                <td>{{ rosine_order.orderDate ? rosine_order.orderDate|date('Y-m-d') : '' }}</td>
+                <td>{{ rosine_order.orderCustomer }}</td>
+                <td>{{ rosine_order.orderCustomerPrivate ? 'Yes' : 'No' }}</td>
+                <td>{{ rosine_order.orderAmmount }}</td>
+                <td>{{ rosine_order.orderAmmountBrutto }}</td>
+                <td>{{ rosine_order.orderNote }}</td>
+                <td>{{ rosine_order.orderStatus }}</td>
+                <td>{{ rosine_order.orderTemplate }}</td>
+                <td>{{ rosine_order.orderPrinted ? 'Yes' : 'No' }}</td>
+                <td>{{ rosine_order.generated }}</td>
+                <td>{{ rosine_order.changed }}</td>
+                <td>
+                    <a href="{{ path('rosine_orders_show', {'companyId': rosine_order.companyId}) }}">show</a>
+                    <a href="{{ path('rosine_orders_edit', {'companyId': rosine_order.companyId}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="14">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('rosine_orders_new') }}">Create new</a>
+{% endblock %}

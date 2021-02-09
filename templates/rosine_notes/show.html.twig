@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}RosineNotes{% endblock %}
+
+{% block body %}
+    <h1>RosineNotes</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>NoteId</th>
+                <td>{{ rosine_note.noteId }}</td>
+            </tr>
+            <tr>
+                <th>Language</th>
+                <td>{{ rosine_note.language }}</td>
+            </tr>
+            <tr>
+                <th>NoteText</th>
+                <td>{{ rosine_note.noteText }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('rosine_notes_index') }}">back to list</a>
+
+    <a href="{{ path('rosine_notes_edit', {'noteId': rosine_note.noteId}) }}">edit</a>
+
+    {{ include('rosine_notes/_delete_form.html.twig') }}
+{% endblock %}

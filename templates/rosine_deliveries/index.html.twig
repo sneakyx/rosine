@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}RosineDeliveries index{% endblock %}
+
+{% block body %}
+    <h1>RosineDeliveries index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>CompanyId</th>
+                <th>DeliveryId</th>
+                <th>DeliveryDate</th>
+                <th>DeliveryCustomer</th>
+                <th>DeliveryCustomerPrivate</th>
+                <th>DeliveryAmmount</th>
+                <th>DeliveryAmmountBrutto</th>
+                <th>DeliveryNote</th>
+                <th>DeliveryStatus</th>
+                <th>DeliveryTemplate</th>
+                <th>DeliveryPrinted</th>
+                <th>Generated</th>
+                <th>Changed</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for rosine_delivery in rosine_deliveries %}
+            <tr>
+                <td>{{ rosine_delivery.companyId ? 'Yes' : 'No' }}</td>
+                <td>{{ rosine_delivery.deliveryId }}</td>
+                <td>{{ rosine_delivery.deliveryDate ? rosine_delivery.deliveryDate|date('Y-m-d') : '' }}</td>
+                <td>{{ rosine_delivery.deliveryCustomer }}</td>
+                <td>{{ rosine_delivery.deliveryCustomerPrivate ? 'Yes' : 'No' }}</td>
+                <td>{{ rosine_delivery.deliveryAmmount }}</td>
+                <td>{{ rosine_delivery.deliveryAmmountBrutto }}</td>
+                <td>{{ rosine_delivery.deliveryNote }}</td>
+                <td>{{ rosine_delivery.deliveryStatus }}</td>
+                <td>{{ rosine_delivery.deliveryTemplate }}</td>
+                <td>{{ rosine_delivery.deliveryPrinted ? 'Yes' : 'No' }}</td>
+                <td>{{ rosine_delivery.generated }}</td>
+                <td>{{ rosine_delivery.changed }}</td>
+                <td>
+                    <a href="{{ path('rosine_deliveries_show', {'companyId': rosine_delivery.companyId}) }}">show</a>
+                    <a href="{{ path('rosine_deliveries_edit', {'companyId': rosine_delivery.companyId}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="14">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('rosine_deliveries_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New RosinePayments{% endblock %}
+
+{% block body %}
+    <h1>Create new RosinePayments</h1>
+
+    {{ include('rosine_payments/_form.html.twig') }}
+
+    <a href="{{ path('rosine_payments_index') }}">back to list</a>
+{% endblock %}

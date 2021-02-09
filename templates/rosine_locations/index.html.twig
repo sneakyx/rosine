@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}RosineLocations index{% endblock %}
+
+{% block body %}
+    <h1>RosineLocations index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>LocId</th>
+                <th>LocName</th>
+                <th>LocNote</th>
+                <th>Generated</th>
+                <th>Changed</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for rosine_location in rosine_locations %}
+            <tr>
+                <td>{{ rosine_location.locId }}</td>
+                <td>{{ rosine_location.locName }}</td>
+                <td>{{ rosine_location.locNote }}</td>
+                <td>{{ rosine_location.generated }}</td>
+                <td>{{ rosine_location.changed }}</td>
+                <td>
+                    <a href="{{ path('rosine_locations_show', {'locId': rosine_location.locId}) }}">show</a>
+                    <a href="{{ path('rosine_locations_edit', {'locId': rosine_location.locId}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('rosine_locations_new') }}">Create new</a>
+{% endblock %}

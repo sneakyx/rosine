@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}RosineArticles{% endblock %}
+
+{% block body %}
+    <h1>RosineArticles</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>ArtNumber</th>
+                <td>{{ rosine_article.artNumber }}</td>
+            </tr>
+            <tr>
+                <th>ArtName</th>
+                <td>{{ rosine_article.artName }}</td>
+            </tr>
+            <tr>
+                <th>ArtUnit</th>
+                <td>{{ rosine_article.artUnit }}</td>
+            </tr>
+            <tr>
+                <th>ArtPrice</th>
+                <td>{{ rosine_article.artPrice }}</td>
+            </tr>
+            <tr>
+                <th>ArtTax</th>
+                <td>{{ rosine_article.artTax ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>ArtStocknr</th>
+                <td>{{ rosine_article.artStocknr }}</td>
+            </tr>
+            <tr>
+                <th>ArtInstock</th>
+                <td>{{ rosine_article.artInstock }}</td>
+            </tr>
+            <tr>
+                <th>ArtNote</th>
+                <td>{{ rosine_article.artNote }}</td>
+            </tr>
+            <tr>
+                <th>Generated</th>
+                <td>{{ rosine_article.generated }}</td>
+            </tr>
+            <tr>
+                <th>Changed</th>
+                <td>{{ rosine_article.changed }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('rosine_articles_index') }}">back to list</a>
+
+    <a href="{{ path('rosine_articles_edit', {'artNumber': rosine_article.artNumber}) }}">edit</a>
+
+    {{ include('rosine_articles/_delete_form.html.twig') }}
+{% endblock %}

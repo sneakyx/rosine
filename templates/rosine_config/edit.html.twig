@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit RosineConfig{% endblock %}
+
+{% block body %}
+    <h1>Edit RosineConfig</h1>
+
+    {{ include('rosine_config/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('rosine_config_index') }}">back to list</a>
+
+    {{ include('rosine_config/_delete_form.html.twig') }}
+{% endblock %}

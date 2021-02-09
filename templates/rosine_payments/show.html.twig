@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}RosinePayments{% endblock %}
+
+{% block body %}
+    <h1>RosinePayments</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>CompanyId</th>
+                <td>{{ rosine_payment.companyId ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>PaymentId</th>
+                <td>{{ rosine_payment.paymentId }}</td>
+            </tr>
+            <tr>
+                <th>InvoiceId</th>
+                <td>{{ rosine_payment.invoiceId }}</td>
+            </tr>
+            <tr>
+                <th>PaymentDate</th>
+                <td>{{ rosine_payment.paymentDate ? rosine_payment.paymentDate|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>MethId</th>
+                <td>{{ rosine_payment.methId }}</td>
+            </tr>
+            <tr>
+                <th>PaymentAmmount</th>
+                <td>{{ rosine_payment.paymentAmmount }}</td>
+            </tr>
+            <tr>
+                <th>PaymentNote</th>
+                <td>{{ rosine_payment.paymentNote }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('rosine_payments_index') }}">back to list</a>
+
+    <a href="{{ path('rosine_payments_edit', {'companyId': rosine_payment.companyId}) }}">edit</a>
+
+    {{ include('rosine_payments/_delete_form.html.twig') }}
+{% endblock %}

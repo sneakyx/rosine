@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}RosineInvoices{% endblock %}
+
+{% block body %}
+    <h1>RosineInvoices</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>CompanyId</th>
+                <td>{{ rosine_invoice.companyId ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>InvoiceId</th>
+                <td>{{ rosine_invoice.invoiceId }}</td>
+            </tr>
+            <tr>
+                <th>InvoiceDate</th>
+                <td>{{ rosine_invoice.invoiceDate ? rosine_invoice.invoiceDate|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>InvoiceCustomer</th>
+                <td>{{ rosine_invoice.invoiceCustomer }}</td>
+            </tr>
+            <tr>
+                <th>InvoiceCustomerPrivate</th>
+                <td>{{ rosine_invoice.invoiceCustomerPrivate ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>InvoiceAmmount</th>
+                <td>{{ rosine_invoice.invoiceAmmount }}</td>
+            </tr>
+            <tr>
+                <th>InvoiceAmmountBrutto</th>
+                <td>{{ rosine_invoice.invoiceAmmountBrutto }}</td>
+            </tr>
+            <tr>
+                <th>InvoiceNote</th>
+                <td>{{ rosine_invoice.invoiceNote }}</td>
+            </tr>
+            <tr>
+                <th>InvoiceStatus</th>
+                <td>{{ rosine_invoice.invoiceStatus }}</td>
+            </tr>
+            <tr>
+                <th>InvoiceTemplate</th>
+                <td>{{ rosine_invoice.invoiceTemplate }}</td>
+            </tr>
+            <tr>
+                <th>InvoicePrinted</th>
+                <td>{{ rosine_invoice.invoicePrinted ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Generated</th>
+                <td>{{ rosine_invoice.generated }}</td>
+            </tr>
+            <tr>
+                <th>Changed</th>
+                <td>{{ rosine_invoice.changed }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('rosine_invoices_index') }}">back to list</a>
+
+    <a href="{{ path('rosine_invoices_edit', {'companyId': rosine_invoice.companyId}) }}">edit</a>
+
+    {{ include('rosine_invoices/_delete_form.html.twig') }}
+{% endblock %}
