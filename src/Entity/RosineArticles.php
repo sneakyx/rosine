@@ -84,16 +84,26 @@ class RosineArticles
      */
     private $changed;
 
+    /**
+     * @return string|null
+     */
     public function getArtNumber(): ?string
     {
         return $this->artNumber;
     }
 
+    /**
+     * @return string|null
+     */
     public function getArtName(): ?string
     {
         return $this->artName;
     }
 
+    /**
+     * @param string $artName
+     * @return $this
+     */
     public function setArtName(string $artName): self
     {
         $this->artName = $artName;
@@ -101,11 +111,19 @@ class RosineArticles
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
+
     public function getArtUnit(): ?string
     {
         return $this->artUnit;
     }
 
+    /**
+     * @param string|null $artUnit
+     * @return $this
+     */
     public function setArtUnit(?string $artUnit): self
     {
         $this->artUnit = $artUnit;
@@ -113,11 +131,18 @@ class RosineArticles
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getArtPrice(): ?string
     {
         return $this->artPrice;
     }
 
+    /**
+     * @param string|null $artPrice
+     * @return $this
+     */
     public function setArtPrice(?string $artPrice): self
     {
         $this->artPrice = $artPrice;
@@ -125,11 +150,18 @@ class RosineArticles
         return $this;
     }
 
+    /**
+     * @return bool|null
+     */
     public function getArtTax(): ?bool
     {
         return $this->artTax;
     }
 
+    /**
+     * @param bool|null $artTax
+     * @return $this
+     */
     public function setArtTax(?bool $artTax): self
     {
         $this->artTax = $artTax;
@@ -137,11 +169,18 @@ class RosineArticles
         return $this;
     }
 
+    /**
+     * @return int|null
+     */
     public function getArtStocknr(): ?int
     {
         return $this->artStocknr;
     }
 
+    /**
+     * @param int $artStocknr
+     * @return $this
+     */
     public function setArtStocknr(int $artStocknr): self
     {
         $this->artStocknr = $artStocknr;
@@ -149,11 +188,18 @@ class RosineArticles
         return $this;
     }
 
+    /**
+     * @return int|null
+     */
     public function getArtInstock(): ?int
     {
         return $this->artInstock;
     }
 
+    /**
+     * @param int|null $artInstock
+     * @return $this
+     */
     public function setArtInstock(?int $artInstock): self
     {
         $this->artInstock = $artInstock;
@@ -161,11 +207,18 @@ class RosineArticles
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getArtNote(): ?string
     {
         return $this->artNote;
     }
 
+    /**
+     * @param string|null $artNote
+     * @return $this
+     */
     public function setArtNote(?string $artNote): self
     {
         $this->artNote = $artNote;
@@ -173,11 +226,18 @@ class RosineArticles
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getGenerated(): ?string
     {
         return $this->generated;
     }
 
+    /**
+     * @param string|null $generated
+     * @return $this
+     */
     public function setGenerated(?string $generated): self
     {
         $this->generated = $generated;
@@ -185,11 +245,18 @@ class RosineArticles
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getChanged(): ?string
     {
         return $this->changed;
     }
 
+    /**
+     * @param string|null $changed
+     * @return $this
+     */
     public function setChanged(?string $changed): self
     {
         $this->changed = $changed;

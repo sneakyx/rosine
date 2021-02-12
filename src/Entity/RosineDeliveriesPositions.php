@@ -13,9 +13,9 @@ use Doctrine\ORM\Mapping as ORM;
 class RosineDeliveriesPositions
 {
     /**
-     * @var bool
+     * @var int
      *
-     * @ORM\Column(name="COMPANY_ID", type="boolean", nullable=false, options={"default"="1"})
+     * @ORM\Column(name="COMPANY_ID", type="integer", nullable=false, options={"default"="1"})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      */
@@ -102,26 +102,42 @@ class RosineDeliveriesPositions
      */
     private $done = '0';
 
-    public function getCompanyId(): ?bool
+    /**
+     * @return int
+     */
+    public function getCompanyId(): ?int
     {
         return $this->companyId;
     }
 
+    /**
+     * @return int|null
+     */
     public function getDeliveryId(): ?int
     {
         return $this->deliveryId;
     }
 
+    /**
+     * @return int|null
+     */
     public function getPosiId(): ?int
     {
         return $this->posiId;
     }
 
+    /**
+     * @return string|null
+     */
     public function getArtNumber(): ?string
     {
         return $this->artNumber;
     }
 
+    /**
+     * @param string $artNumber
+     * @return $this
+     */
     public function setArtNumber(string $artNumber): self
     {
         $this->artNumber = $artNumber;
@@ -129,11 +145,18 @@ class RosineDeliveriesPositions
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getPosiAmmount(): ?string
     {
         return $this->posiAmmount;
     }
 
+    /**
+     * @param string|null $posiAmmount
+     * @return $this
+     */
     public function setPosiAmmount(?string $posiAmmount): self
     {
         $this->posiAmmount = $posiAmmount;
@@ -141,11 +164,18 @@ class RosineDeliveriesPositions
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getPosiUnit(): ?string
     {
         return $this->posiUnit;
     }
 
+    /**
+     * @param string|null $posiUnit
+     * @return $this
+     */
     public function setPosiUnit(?string $posiUnit): self
     {
         $this->posiUnit = $posiUnit;
@@ -153,11 +183,18 @@ class RosineDeliveriesPositions
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getPosiPrice(): ?string
     {
         return $this->posiPrice;
     }
 
+    /**
+     * @param string|null $posiPrice
+     * @return $this
+     */
     public function setPosiPrice(?string $posiPrice): self
     {
         $this->posiPrice = $posiPrice;
@@ -165,11 +202,18 @@ class RosineDeliveriesPositions
         return $this;
     }
 
+    /**
+     * @return int|null
+     */
     public function getPosiLocation(): ?int
     {
         return $this->posiLocation;
     }
 
+    /**
+     * @param int|null $posiLocation
+     * @return $this
+     */
     public function setPosiLocation(?int $posiLocation): self
     {
         $this->posiLocation = $posiLocation;
@@ -177,11 +221,18 @@ class RosineDeliveriesPositions
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getPosiSerial(): ?string
     {
         return $this->posiSerial;
     }
 
+    /**
+     * @param string|null $posiSerial
+     * @return $this
+     */
     public function setPosiSerial(?string $posiSerial): self
     {
         $this->posiSerial = $posiSerial;
@@ -189,11 +240,18 @@ class RosineDeliveriesPositions
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getPosiText(): ?string
     {
         return $this->posiText;
     }
 
+    /**
+     * @param string|null $posiText
+     * @return $this
+     */
     public function setPosiText(?string $posiText): self
     {
         $this->posiText = $posiText;
@@ -201,11 +259,18 @@ class RosineDeliveriesPositions
         return $this;
     }
 
-    public function getPosiTax(): ?bool
+    /**
+     * @return int|null
+     */
+    public function getPosiTax(): ?int
     {
         return $this->posiTax;
     }
 
+    /**
+     * @param bool $posiTax
+     * @return $this
+     */
     public function setPosiTax(bool $posiTax): self
     {
         $this->posiTax = $posiTax;
@@ -213,17 +278,22 @@ class RosineDeliveriesPositions
         return $this;
     }
 
+    /**
+     * @return bool|null
+     */
     public function getDone(): ?bool
     {
         return $this->done;
     }
 
+    /**
+     * @param bool|null $done
+     * @return $this
+     */
     public function setDone(?bool $done): self
     {
         $this->done = $done;
 
         return $this;
     }
-
-
 }

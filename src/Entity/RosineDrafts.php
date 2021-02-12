@@ -13,9 +13,9 @@ use Doctrine\ORM\Mapping as ORM;
 class RosineDrafts
 {
     /**
-     * @var bool
+     * @var int
      *
-     * @ORM\Column(name="COMPANY_ID", type="boolean", nullable=false, options={"default"="1"})
+     * @ORM\Column(name="COMPANY_ID", type="integer", nullable=false, options={"default"="1"})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      */
@@ -107,21 +107,34 @@ class RosineDrafts
      */
     private $changed;
 
-    public function getCompanyId(): ?bool
+    /**
+     * @return int|null
+     */
+    public function getCompanyId(): ?int
     {
         return $this->companyId;
     }
 
+    /**
+     * @return int|null
+     */
     public function getDraftId(): ?int
     {
         return $this->draftId;
     }
 
+    /**
+     * @return \DateTimeInterface|null
+     */
     public function getDraftDate(): ?\DateTimeInterface
     {
         return $this->draftDate;
     }
 
+    /**
+     * @param \DateTimeInterface|null $draftDate
+     * @return $this
+     */
     public function setDraftDate(?\DateTimeInterface $draftDate): self
     {
         $this->draftDate = $draftDate;
@@ -129,11 +142,18 @@ class RosineDrafts
         return $this;
     }
 
+    /**
+     * @return int|null
+     */
     public function getDraftCustomer(): ?int
     {
         return $this->draftCustomer;
     }
 
+    /**
+     * @param int|null $draftCustomer
+     * @return $this
+     */
     public function setDraftCustomer(?int $draftCustomer): self
     {
         $this->draftCustomer = $draftCustomer;
@@ -141,11 +161,18 @@ class RosineDrafts
         return $this;
     }
 
+    /**
+     * @return bool|null
+     */
     public function getDraftCustomerPrivate(): ?bool
     {
         return $this->draftCustomerPrivate;
     }
 
+    /**
+     * @param bool $draftCustomerPrivate
+     * @return $this
+     */
     public function setDraftCustomerPrivate(bool $draftCustomerPrivate): self
     {
         $this->draftCustomerPrivate = $draftCustomerPrivate;
@@ -153,11 +180,18 @@ class RosineDrafts
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getDraftAmmount(): ?string
     {
         return $this->draftAmmount;
     }
 
+    /**
+     * @param string|null $draftAmmount
+     * @return $this
+     */
     public function setDraftAmmount(?string $draftAmmount): self
     {
         $this->draftAmmount = $draftAmmount;
@@ -165,11 +199,18 @@ class RosineDrafts
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getDraftAmmountBrutto(): ?string
     {
         return $this->draftAmmountBrutto;
     }
 
+    /**
+     * @param string|null $draftAmmountBrutto
+     * @return $this
+     */
     public function setDraftAmmountBrutto(?string $draftAmmountBrutto): self
     {
         $this->draftAmmountBrutto = $draftAmmountBrutto;
@@ -177,11 +218,18 @@ class RosineDrafts
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getDraftNote(): ?string
     {
         return $this->draftNote;
     }
 
+    /**
+     * @param string|null $draftNote
+     * @return $this
+     */
     public function setDraftNote(?string $draftNote): self
     {
         $this->draftNote = $draftNote;
@@ -189,11 +237,18 @@ class RosineDrafts
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getDraftStatus(): ?string
     {
         return $this->draftStatus;
     }
 
+    /**
+     * @param string $draftStatus
+     * @return $this
+     */
     public function setDraftStatus(string $draftStatus): self
     {
         $this->draftStatus = $draftStatus;
@@ -201,11 +256,18 @@ class RosineDrafts
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getDraftTemplate(): ?string
     {
         return $this->draftTemplate;
     }
 
+    /**
+     * @param string|null $draftTemplate
+     * @return $this
+     */
     public function setDraftTemplate(?string $draftTemplate): self
     {
         $this->draftTemplate = $draftTemplate;
@@ -213,11 +275,18 @@ class RosineDrafts
         return $this;
     }
 
+    /**
+     * @return bool|null
+     */
     public function getDraftPrinted(): ?bool
     {
         return $this->draftPrinted;
     }
 
+    /**
+     * @param bool $draftPrinted
+     * @return $this
+     */
     public function setDraftPrinted(bool $draftPrinted): self
     {
         $this->draftPrinted = $draftPrinted;
@@ -225,11 +294,18 @@ class RosineDrafts
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getGenerated(): ?string
     {
         return $this->generated;
     }
 
+    /**
+     * @param string|null $generated
+     * @return $this
+     */
     public function setGenerated(?string $generated): self
     {
         $this->generated = $generated;
@@ -237,11 +313,18 @@ class RosineDrafts
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getChanged(): ?string
     {
         return $this->changed;
     }
 
+    /**
+     * @param string|null $changed
+     * @return $this
+     */
     public function setChanged(?string $changed): self
     {
         $this->changed = $changed;

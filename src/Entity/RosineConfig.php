@@ -37,21 +37,34 @@ class RosineConfig
      */
     private $value;
 
+    /**
+     * @return string|null
+     */
     public function getConfig(): ?string
     {
         return $this->config;
     }
 
+    /**
+     * @return int|null
+     */
     public function getUserId(): ?int
     {
         return $this->userId;
     }
 
+    /**
+     * @return string|null
+     */
     public function getValue(): ?string
     {
         return $this->value;
     }
 
+    /**
+     * @param string $value
+     * @return $this
+     */
     public function setValue(string $value): self
     {
         $this->value = $value;
