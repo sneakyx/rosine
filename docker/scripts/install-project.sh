@@ -36,7 +36,7 @@ fi
 docker compose -f docker-compose.initial.yml --env-file ./local/.env.docker.local down
 echo "
 --------------------------------------------------------------------------------
-3. add other files
+3. add other files"
 
 echo "*******************************************************************************"
 printf "%*s\n" $[40] "$PROJECT_NAME" # center name
@@ -44,6 +44,6 @@ printf "%*s\n" $[40] "$PROJECT_NAME" # center name
 echo "                 was succesfully installed
 *******************************************************************************
 start with
-docker compose -f ${ACTUAL_DIR}/docker/docker-compose.develop.yml --env-file ${ACTUAL_DIR}/local/.env.docker.local up --force-recreate --build
+docker compose -f ${ACTUAL_DIR}/docker/docker-compose.develop.yml --env-file ${ACTUAL_DIR}/docker/local/.env.docker.local up --force-recreate --build -d
 "
 cd $ACTUAL_DIR
