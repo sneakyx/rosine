@@ -1,0 +1,17 @@
+version: '3.7'
+
+services:
+  rosine-initial:
+    build:
+      context: ./
+      dockerfile: dev.Dockerfile
+    container_name: rosine-initial
+    environment:
+      TZ: "Europe/Berlin"
+    entrypoint: ['/bin/sh', '-c']
+    command:
+      - |
+        cd /var/www/html
+        composer install
+    volumes:
+      - "${ROSINE_PROJECT_FOLDER}:/var/www/html"

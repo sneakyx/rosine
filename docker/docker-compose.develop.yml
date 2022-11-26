@@ -1,0 +1,20 @@
+version: "3.7"
+services:
+
+  rosine:
+    build:
+      context: ./
+      dockerfile: dev.Dockerfile
+    environment:
+      TZ: "Europe/Berlin"
+    ports:
+      - "${PORT_ROSINE_PROJECT}:8000"
+    volumes:
+      - ${SWAP_FOLDER}:/home/swap
+      - ${ROSINE_PROJECT_FOLDER}:/var/www/html
+    networks:
+      - backend
+
+networks:
+  backend:
+

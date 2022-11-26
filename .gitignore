@@ -1,3 +1,22 @@
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+/.env.*.local
+/config/secrets/prod/prod.decrypt.private.php
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###
+
+###> phpunit/phpunit ###
+/phpunit.xml
+.phpunit.result.cache
+###< phpunit/phpunit ###
+
 .idea
+# old config
 ROSinE/templates/rosine
 !ROSinE/templates/rosine/readme.txt
+
+# new structure
+docker/local
