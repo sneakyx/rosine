@@ -10,8 +10,20 @@ services:
     ports:
       - "${PORT_ROSINE_PROJECT}:8000"
     volumes:
-      - ${SWAP_FOLDER}:/home/swap
-      - ${ROSINE_PROJECT_FOLDER}:/var/www/html
+      - "${SWAP_FOLDER}:/home/swap"
+      - "${ROSINE_PROJECT_FOLDER}:/var/www/html"
+    networks:
+      - backend
+
+  database:
+    image: mariadb:10
+    environment:
+      TZ: "Europe/Berlin"
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+    ports:
+      - "${PORT_MARIADB}:3306"
+    volumes:
+      - "${ROSINE_MARIADB_FOLDER}:/var/lib/mysql"
     networks:
       - backend
 
