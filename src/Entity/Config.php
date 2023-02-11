@@ -5,12 +5,12 @@
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * RosineConfig
+ * Config
  *
  * @ORM\Table(name="rosine_config")
  * @ORM\Entity
  */
-class RosineConfig
+class Config
 {
     /**
      * @var string

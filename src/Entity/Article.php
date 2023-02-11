@@ -5,12 +5,12 @@
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * RosineArticles
+ * Article
  *
  * @ORM\Table(name="rosine_articles")
  * @ORM\Entity
  */
-class RosineArticles
+class Article
 {
     /**
      * @var string

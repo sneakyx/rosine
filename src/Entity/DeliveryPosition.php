@@ -5,12 +5,12 @@
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * RosineOrdersPositions
+ * DeliveryPosition
  *
- * @ORM\Table(name="rosine_orders_positions")
+ * @ORM\Table(name="rosine_deliveries_positions")
  * @ORM\Entity
  */
-class RosineOrdersPositions
+class DeliveryPosition
 {
     /**
      * @var bool
@@ -24,11 +24,11 @@ class RosineOrdersPositions
     /**
      * @var int
      *
-     * @ORM\Column(name="ORDER_ID", type="integer", nullable=false)
+     * @ORM\Column(name="DELIVERY_ID", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      */
-    private $orderId;
+    private $deliveryId;
 
     /**
      * @var int

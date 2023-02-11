@@ -5,12 +5,12 @@
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * RosinePaymentsMethods
+ * PaymentMethod
  *
  * @ORM\Table(name="rosine_payments_methods")
  * @ORM\Entity
  */
-class RosinePaymentsMethods
+class PaymentMethod
 {
     /**
      * @var int

@@ -5,12 +5,12 @@
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * EgwAddressbook
+ * Customer
  *
  * @ORM\Table(name="egw_addressbook", uniqueConstraints={@ORM\UniqueConstraint(name="egw_addressbook_account_id", columns={"account_id"})}, indexes={@ORM\Index(name="egw_addressbook_contact_owner", columns={"contact_owner"}), @ORM\Index(name="egw_addressbook_carddav_name", columns={"carddav_name"}), @ORM\Index(name="egw_addressbook_n_given_n_family", columns={"n_given", "n_family"}), @ORM\Index(name="egw_addressbook_n_fileas", columns={"n_fileas"}), @ORM\Index(name="egw_addressbook_contact_modified", columns={"contact_modified"}), @ORM\Index(name="egw_addressbook_n_family_n_given", columns={"n_family", "n_given"}), @ORM\Index(name="egw_addressbook_cat_id", columns={"cat_id"}), @ORM\Index(name="egw_addressbook_contact_uid", columns={"contact_uid"}), @ORM\Index(name="egw_addressbook_org_name_n_family_n_given", columns={"org_name", "n_family", "n_given"})})
  * @ORM\Entity
  */
-class EgwAddressbook
+class Customer
 {
     /**
      * @var int

@@ -5,12 +5,12 @@
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * RosineTaxes
+ * Tax
  *
  * @ORM\Table(name="rosine_taxes")
  * @ORM\Entity
  */
-class RosineTaxes
+class Tax
 {
     /**
      * @var bool
