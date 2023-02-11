@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Article{% endblock %}
+
+{% block body %}
+    <h1>Article</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>ArtNumber</th>
+                <td>{{ article.artNumber }}</td>
+            </tr>
+            <tr>
+                <th>ArtName</th>
+                <td>{{ article.artName }}</td>
+            </tr>
+            <tr>
+                <th>ArtUnit</th>
+                <td>{{ article.artUnit }}</td>
+            </tr>
+            <tr>
+                <th>ArtPrice</th>
+                <td>{{ article.artPrice }}</td>
+            </tr>
+            <tr>
+                <th>ArtTax</th>
+                <td>{{ article.artTax ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>ArtStocknr</th>
+                <td>{{ article.artStocknr }}</td>
+            </tr>
+            <tr>
+                <th>ArtInstock</th>
+                <td>{{ article.artInstock }}</td>
+            </tr>
+            <tr>
+                <th>ArtNote</th>
+                <td>{{ article.artNote }}</td>
+            </tr>
+            <tr>
+                <th>Generated</th>
+                <td>{{ article.generated }}</td>
+            </tr>
+            <tr>
+                <th>Changed</th>
+                <td>{{ article.changed }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_article_index') }}">back to list</a>
+
+    <a href="{{ path('app_article_edit', {'artNumber': article.artNumber}) }}">edit</a>
+
+    {{ include('article/_delete_form.html.twig') }}
+{% endblock %}

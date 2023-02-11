@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Article index{% endblock %}
+
+{% block body %}
+    <h1>Article index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ArtNumber</th>
+                <th>ArtName</th>
+                <th>ArtUnit</th>
+                <th>ArtPrice</th>
+                <th>ArtTax</th>
+                <th>ArtStocknr</th>
+                <th>ArtInstock</th>
+                <th>ArtNote</th>
+                <th>Generated</th>
+                <th>Changed</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for article in articles %}
+            <tr>
+                <td>{{ article.artNumber }}</td>
+                <td>{{ article.artName }}</td>
+                <td>{{ article.artUnit }}</td>
+                <td>{{ article.artPrice }}</td>
+                <td>{{ article.artTax ? 'Yes' : 'No' }}</td>
+                <td>{{ article.artStocknr }}</td>
+                <td>{{ article.artInstock }}</td>
+                <td>{{ article.artNote }}</td>
+                <td>{{ article.generated }}</td>
+                <td>{{ article.changed }}</td>
+                <td>
+                    <a href="{{ path('app_article_show', {'artNumber': article.artNumber}) }}">show</a>
+                    <a href="{{ path('app_article_edit', {'artNumber': article.artNumber}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="11">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_article_new') }}">Create new</a>
+{% endblock %}

@@ -19,329 +19,329 @@ class Customer
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $contactId;
+    private int $contactId;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="contact_tid", type="string", length=1, nullable=true, options={"default"="n"})
      */
-    private $contactTid = 'n';
+    private ?string $contactTid = 'n';
 
     /**
      * @var int
      *
      * @ORM\Column(name="contact_owner", type="bigint", nullable=false)
      */
-    private $contactOwner;
+    private int $contactOwner;
 
     /**
      * @var bool|null
      *
      * @ORM\Column(name="contact_private", type="boolean", nullable=true)
      */
-    private $contactPrivate = '0';
+    private string|bool|null $contactPrivate = '0';
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="cat_id", type="string", length=255, nullable=true)
      */
-    private $catId;
+    private ?string $catId;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="n_family", type="string", length=64, nullable=true)
      */
-    private $nFamily;
+    private ?string $nFamily;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="n_given", type="string", length=64, nullable=true)
      */
-    private $nGiven;
+    private ?string $nGiven;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="n_middle", type="string", length=64, nullable=true)
      */
-    private $nMiddle;
+    private ?string $nMiddle;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="n_prefix", type="string", length=64, nullable=true)
      */
-    private $nPrefix;
+    private ?string $nPrefix;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="n_suffix", type="string", length=64, nullable=true)
      */
-    private $nSuffix;
+    private ?string $nSuffix;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="n_fn", type="string", length=128, nullable=true)
      */
-    private $nFn;
+    private ?string $nFn;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="n_fileas", type="string", length=255, nullable=true)
      */
-    private $nFileas;
+    private ?string $nFileas;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="contact_bday", type="string", length=12, nullable=true)
      */
-    private $contactBday;
+    private ?string $contactBday;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="org_name", type="string", length=128, nullable=true)
      */
-    private $orgName;
+    private ?string $orgName;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="org_unit", type="string", length=64, nullable=true)
      */
-    private $orgUnit;
+    private ?string $orgUnit;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="contact_title", type="string", length=64, nullable=true)
      */
-    private $contactTitle;
+    private ?string $contactTitle;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="contact_role", type="string", length=64, nullable=true)
      */
-    private $contactRole;
+    private ?string $contactRole;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="contact_assistent", type="string", length=64, nullable=true)
      */
-    private $contactAssistent;
+    private ?string $contactAssistent;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="contact_room", type="string", length=64, nullable=true)
      */
-    private $contactRoom;
+    private ?string $contactRoom;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="adr_one_street", type="string", length=64, nullable=true)
      */
-    private $adrOneStreet;
+    private ?string $adrOneStreet;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="adr_one_street2", type="string", length=64, nullable=true)
      */
-    private $adrOneStreet2;
+    private ?string $adrOneStreet2;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="adr_one_locality", type="string", length=64, nullable=true)
      */
-    private $adrOneLocality;
+    private ?string $adrOneLocality;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="adr_one_region", type="string", length=64, nullable=true)
      */
-    private $adrOneRegion;
+    private ?string $adrOneRegion;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="adr_one_postalcode", type="string", length=64, nullable=true)
      */
-    private $adrOnePostalcode;
+    private ?string $adrOnePostalcode;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="adr_one_countryname", type="string", length=64, nullable=true)
      */
-    private $adrOneCountryname;
+    private ?string $adrOneCountryname;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="contact_label", type="text", length=65535, nullable=true)
      */
-    private $contactLabel;
+    private ?string $contactLabel;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="adr_two_street", type="string", length=64, nullable=true)
      */
-    private $adrTwoStreet;
+    private ?string $adrTwoStreet;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="adr_two_street2", type="string", length=64, nullable=true)
      */
-    private $adrTwoStreet2;
+    private ?string $adrTwoStreet2;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="adr_two_locality", type="string", length=64, nullable=true)
      */
-    private $adrTwoLocality;
+    private ?string $adrTwoLocality;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="adr_two_region", type="string", length=64, nullable=true)
      */
-    private $adrTwoRegion;
+    private ?string $adrTwoRegion;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="adr_two_postalcode", type="string", length=64, nullable=true)
      */
-    private $adrTwoPostalcode;
+    private ?string $adrTwoPostalcode;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="adr_two_countryname", type="string", length=64, nullable=true)
      */
-    private $adrTwoCountryname;
+    private ?string $adrTwoCountryname;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="tel_work", type="string", length=40, nullable=true)
      */
-    private $telWork;
+    private ?string $telWork;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="tel_cell", type="string", length=40, nullable=true)
      */
-    private $telCell;
+    private ?string $telCell;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="tel_fax", type="string", length=40, nullable=true)
      */
-    private $telFax;
+    private ?string $telFax;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="tel_assistent", type="string", length=40, nullable=true)
      */
-    private $telAssistent;
+    private ?string $telAssistent;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="tel_car", type="string", length=40, nullable=true)
      */
-    private $telCar;
+    private ?string $telCar;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="tel_pager", type="string", length=40, nullable=true)
      */
-    private $telPager;
+    private ?string $telPager;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="tel_home", type="string", length=40, nullable=true)
      */
-    private $telHome;
+    private ?string $telHome;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="tel_fax_home", type="string", length=40, nullable=true)
      */
-    private $telFaxHome;
+    private ?string $telFaxHome;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="tel_cell_private", type="string", length=40, nullable=true)
      */
-    private $telCellPrivate;
+    private ?string $telCellPrivate;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="tel_other", type="string", length=40, nullable=true)
      */
-    private $telOther;
+    private ?string $telOther;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="tel_prefer", type="string", length=32, nullable=true)
      */
-    private $telPrefer;
+    private ?string $telPrefer;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="contact_email", type="string", length=128, nullable=true)
      */
-    private $contactEmail;
+    private ?string $contactEmail;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="contact_email_home", type="string", length=128, nullable=true)
      */
-    private $contactEmailHome;
+    private ?string $contactEmailHome;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="contact_url", type="string", length=128, nullable=true)
      */
-    private $contactUrl;
+    private ?string $contactUrl;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="contact_url_home", type="string", length=128, nullable=true)
      */
-    private $contactUrlHome;
+    private ?string $contactUrlHome;
 
     /**
      * @var string|null
