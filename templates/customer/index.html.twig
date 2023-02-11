@@ -1,0 +1,159 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Customer index{% endblock %}
+
+{% block body %}
+    <h1>Customer index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ContactId</th>
+                <th>ContactTid</th>
+                <th>ContactOwner</th>
+                <th>ContactPrivate</th>
+                <th>CatId</th>
+                <th>NFamily</th>
+                <th>NGiven</th>
+                <th>NMiddle</th>
+                <th>NPrefix</th>
+                <th>NSuffix</th>
+                <th>NFn</th>
+                <th>NFileas</th>
+                <th>ContactBday</th>
+                <th>OrgName</th>
+                <th>OrgUnit</th>
+                <th>ContactTitle</th>
+                <th>ContactRole</th>
+                <th>ContactAssistent</th>
+                <th>ContactRoom</th>
+                <th>AdrOneStreet</th>
+                <th>AdrOneStreet2</th>
+                <th>AdrOneLocality</th>
+                <th>AdrOneRegion</th>
+                <th>AdrOnePostalcode</th>
+                <th>AdrOneCountryname</th>
+                <th>ContactLabel</th>
+                <th>AdrTwoStreet</th>
+                <th>AdrTwoStreet2</th>
+                <th>AdrTwoLocality</th>
+                <th>AdrTwoRegion</th>
+                <th>AdrTwoPostalcode</th>
+                <th>AdrTwoCountryname</th>
+                <th>TelWork</th>
+                <th>TelCell</th>
+                <th>TelFax</th>
+                <th>TelAssistent</th>
+                <th>TelCar</th>
+                <th>TelPager</th>
+                <th>TelHome</th>
+                <th>TelFaxHome</th>
+                <th>TelCellPrivate</th>
+                <th>TelOther</th>
+                <th>TelPrefer</th>
+                <th>ContactEmail</th>
+                <th>ContactEmailHome</th>
+                <th>ContactUrl</th>
+                <th>ContactUrlHome</th>
+                <th>ContactFreebusyUri</th>
+                <th>ContactCalendarUri</th>
+                <th>ContactNote</th>
+                <th>ContactTz</th>
+                <th>ContactGeo</th>
+                <th>ContactPubkey</th>
+                <th>ContactCreated</th>
+                <th>ContactCreator</th>
+                <th>ContactModified</th>
+                <th>ContactModifier</th>
+                <th>AccountId</th>
+                <th>ContactEtag</th>
+                <th>ContactUid</th>
+                <th>AdrOneCountrycode</th>
+                <th>AdrTwoCountrycode</th>
+                <th>CarddavName</th>
+                <th>ContactFiles</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for customer in customers %}
+            <tr>
+                <td>{{ customer.contactId }}</td>
+                <td>{{ customer.contactTid }}</td>
+                <td>{{ customer.contactOwner }}</td>
+                <td>{{ customer.contactPrivate ? 'Yes' : 'No' }}</td>
+                <td>{{ customer.catId }}</td>
+                <td>{{ customer.nFamily }}</td>
+                <td>{{ customer.nGiven }}</td>
+                <td>{{ customer.nMiddle }}</td>
+                <td>{{ customer.nPrefix }}</td>
+                <td>{{ customer.nSuffix }}</td>
+                <td>{{ customer.nFn }}</td>
+                <td>{{ customer.nFileas }}</td>
+                <td>{{ customer.contactBday }}</td>
+                <td>{{ customer.orgName }}</td>
+                <td>{{ customer.orgUnit }}</td>
+                <td>{{ customer.contactTitle }}</td>
+                <td>{{ customer.contactRole }}</td>
+                <td>{{ customer.contactAssistent }}</td>
+                <td>{{ customer.contactRoom }}</td>
+                <td>{{ customer.adrOneStreet }}</td>
+                <td>{{ customer.adrOneStreet2 }}</td>
+                <td>{{ customer.adrOneLocality }}</td>
+                <td>{{ customer.adrOneRegion }}</td>
+                <td>{{ customer.adrOnePostalcode }}</td>
+                <td>{{ customer.adrOneCountryname }}</td>
+                <td>{{ customer.contactLabel }}</td>
+                <td>{{ customer.adrTwoStreet }}</td>
+                <td>{{ customer.adrTwoStreet2 }}</td>
+                <td>{{ customer.adrTwoLocality }}</td>
+                <td>{{ customer.adrTwoRegion }}</td>
+                <td>{{ customer.adrTwoPostalcode }}</td>
+                <td>{{ customer.adrTwoCountryname }}</td>
+                <td>{{ customer.telWork }}</td>
+                <td>{{ customer.telCell }}</td>
+                <td>{{ customer.telFax }}</td>
+                <td>{{ customer.telAssistent }}</td>
+                <td>{{ customer.telCar }}</td>
+                <td>{{ customer.telPager }}</td>
+                <td>{{ customer.telHome }}</td>
+                <td>{{ customer.telFaxHome }}</td>
+                <td>{{ customer.telCellPrivate }}</td>
+                <td>{{ customer.telOther }}</td>
+                <td>{{ customer.telPrefer }}</td>
+                <td>{{ customer.contactEmail }}</td>
+                <td>{{ customer.contactEmailHome }}</td>
+                <td>{{ customer.contactUrl }}</td>
+                <td>{{ customer.contactUrlHome }}</td>
+                <td>{{ customer.contactFreebusyUri }}</td>
+                <td>{{ customer.contactCalendarUri }}</td>
+                <td>{{ customer.contactNote }}</td>
+                <td>{{ customer.contactTz }}</td>
+                <td>{{ customer.contactGeo }}</td>
+                <td>{{ customer.contactPubkey }}</td>
+                <td>{{ customer.contactCreated }}</td>
+                <td>{{ customer.contactCreator }}</td>
+                <td>{{ customer.contactModified }}</td>
+                <td>{{ customer.contactModifier }}</td>
+                <td>{{ customer.accountId }}</td>
+                <td>{{ customer.contactEtag }}</td>
+                <td>{{ customer.contactUid }}</td>
+                <td>{{ customer.adrOneCountrycode }}</td>
+                <td>{{ customer.adrTwoCountrycode }}</td>
+                <td>{{ customer.carddavName }}</td>
+                <td>{{ customer.contactFiles ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('app_customer_show', {'contactId': customer.contactId}) }}">show</a>
+                    <a href="{{ path('app_customer_edit', {'contactId': customer.contactId}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="65">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_customer_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,274 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Customer{% endblock %}
+
+{% block body %}
+    <h1>Customer</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>ContactId</th>
+                <td>{{ customer.contactId }}</td>
+            </tr>
+            <tr>
+                <th>ContactTid</th>
+                <td>{{ customer.contactTid }}</td>
+            </tr>
+            <tr>
+                <th>ContactOwner</th>
+                <td>{{ customer.contactOwner }}</td>
+            </tr>
+            <tr>
+                <th>ContactPrivate</th>
+                <td>{{ customer.contactPrivate ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>CatId</th>
+                <td>{{ customer.catId }}</td>
+            </tr>
+            <tr>
+                <th>NFamily</th>
+                <td>{{ customer.nFamily }}</td>
+            </tr>
+            <tr>
+                <th>NGiven</th>
+                <td>{{ customer.nGiven }}</td>
+            </tr>
+            <tr>
+                <th>NMiddle</th>
+                <td>{{ customer.nMiddle }}</td>
+            </tr>
+            <tr>
+                <th>NPrefix</th>
+                <td>{{ customer.nPrefix }}</td>
+            </tr>
+            <tr>
+                <th>NSuffix</th>
+                <td>{{ customer.nSuffix }}</td>
+            </tr>
+            <tr>
+                <th>NFn</th>
+                <td>{{ customer.nFn }}</td>
+            </tr>
+            <tr>
+                <th>NFileas</th>
+                <td>{{ customer.nFileas }}</td>
+            </tr>
+            <tr>
+                <th>ContactBday</th>
+                <td>{{ customer.contactBday }}</td>
+            </tr>
+            <tr>
+                <th>OrgName</th>
+                <td>{{ customer.orgName }}</td>
+            </tr>
+            <tr>
+                <th>OrgUnit</th>
+                <td>{{ customer.orgUnit }}</td>
+            </tr>
+            <tr>
+                <th>ContactTitle</th>
+                <td>{{ customer.contactTitle }}</td>
+            </tr>
+            <tr>
+                <th>ContactRole</th>
+                <td>{{ customer.contactRole }}</td>
+            </tr>
+            <tr>
+                <th>ContactAssistent</th>
+                <td>{{ customer.contactAssistent }}</td>
+            </tr>
+            <tr>
+                <th>ContactRoom</th>
+                <td>{{ customer.contactRoom }}</td>
+            </tr>
+            <tr>
+                <th>AdrOneStreet</th>
+                <td>{{ customer.adrOneStreet }}</td>
+            </tr>
+            <tr>
+                <th>AdrOneStreet2</th>
+                <td>{{ customer.adrOneStreet2 }}</td>
+            </tr>
+            <tr>
+                <th>AdrOneLocality</th>
+                <td>{{ customer.adrOneLocality }}</td>
+            </tr>
+            <tr>
+                <th>AdrOneRegion</th>
+                <td>{{ customer.adrOneRegion }}</td>
+            </tr>
+            <tr>
+                <th>AdrOnePostalcode</th>
+                <td>{{ customer.adrOnePostalcode }}</td>
+            </tr>
+            <tr>
+                <th>AdrOneCountryname</th>
+                <td>{{ customer.adrOneCountryname }}</td>
+            </tr>
+            <tr>
+                <th>ContactLabel</th>
+                <td>{{ customer.contactLabel }}</td>
+            </tr>
+            <tr>
+                <th>AdrTwoStreet</th>
+                <td>{{ customer.adrTwoStreet }}</td>
+            </tr>
+            <tr>
+                <th>AdrTwoStreet2</th>
+                <td>{{ customer.adrTwoStreet2 }}</td>
+            </tr>
+            <tr>
+                <th>AdrTwoLocality</th>
+                <td>{{ customer.adrTwoLocality }}</td>
+            </tr>
+            <tr>
+                <th>AdrTwoRegion</th>
+                <td>{{ customer.adrTwoRegion }}</td>
+            </tr>
+            <tr>
+                <th>AdrTwoPostalcode</th>
+                <td>{{ customer.adrTwoPostalcode }}</td>
+            </tr>
+            <tr>
+                <th>AdrTwoCountryname</th>
+                <td>{{ customer.adrTwoCountryname }}</td>
+            </tr>
+            <tr>
+                <th>TelWork</th>
+                <td>{{ customer.telWork }}</td>
+            </tr>
+            <tr>
+                <th>TelCell</th>
+                <td>{{ customer.telCell }}</td>
+            </tr>
+            <tr>
+                <th>TelFax</th>
+                <td>{{ customer.telFax }}</td>
+            </tr>
+            <tr>
+                <th>TelAssistent</th>
+                <td>{{ customer.telAssistent }}</td>
+            </tr>
+            <tr>
+                <th>TelCar</th>
+                <td>{{ customer.telCar }}</td>
+            </tr>
+            <tr>
+                <th>TelPager</th>
+                <td>{{ customer.telPager }}</td>
+            </tr>
+            <tr>
+                <th>TelHome</th>
+                <td>{{ customer.telHome }}</td>
+            </tr>
+            <tr>
+                <th>TelFaxHome</th>
+                <td>{{ customer.telFaxHome }}</td>
+            </tr>
+            <tr>
+                <th>TelCellPrivate</th>
+                <td>{{ customer.telCellPrivate }}</td>
+            </tr>
+            <tr>
+                <th>TelOther</th>
+                <td>{{ customer.telOther }}</td>
+            </tr>
+            <tr>
+                <th>TelPrefer</th>
+                <td>{{ customer.telPrefer }}</td>
+            </tr>
+            <tr>
+                <th>ContactEmail</th>
+                <td>{{ customer.contactEmail }}</td>
+            </tr>
+            <tr>
+                <th>ContactEmailHome</th>
+                <td>{{ customer.contactEmailHome }}</td>
+            </tr>
+            <tr>
+                <th>ContactUrl</th>
+                <td>{{ customer.contactUrl }}</td>
+            </tr>
+            <tr>
+                <th>ContactUrlHome</th>
+                <td>{{ customer.contactUrlHome }}</td>
+            </tr>
+            <tr>
+                <th>ContactFreebusyUri</th>
+                <td>{{ customer.contactFreebusyUri }}</td>
+            </tr>
+            <tr>
+                <th>ContactCalendarUri</th>
+                <td>{{ customer.contactCalendarUri }}</td>
+            </tr>
+            <tr>
+                <th>ContactNote</th>
+                <td>{{ customer.contactNote }}</td>
+            </tr>
+            <tr>
+                <th>ContactTz</th>
+                <td>{{ customer.contactTz }}</td>
+            </tr>
+            <tr>
+                <th>ContactGeo</th>
+                <td>{{ customer.contactGeo }}</td>
+            </tr>
+            <tr>
+                <th>ContactPubkey</th>
+                <td>{{ customer.contactPubkey }}</td>
+            </tr>
+            <tr>
+                <th>ContactCreated</th>
+                <td>{{ customer.contactCreated }}</td>
+            </tr>
+            <tr>
+                <th>ContactCreator</th>
+                <td>{{ customer.contactCreator }}</td>
+            </tr>
+            <tr>
+                <th>ContactModified</th>
+                <td>{{ customer.contactModified }}</td>
+            </tr>
+            <tr>
+                <th>ContactModifier</th>
+                <td>{{ customer.contactModifier }}</td>
+            </tr>
+            <tr>
+                <th>AccountId</th>
+                <td>{{ customer.accountId }}</td>
+            </tr>
+            <tr>
+                <th>ContactEtag</th>
+                <td>{{ customer.contactEtag }}</td>
+            </tr>
+            <tr>
+                <th>ContactUid</th>
+                <td>{{ customer.contactUid }}</td>
+            </tr>
+            <tr>
+                <th>AdrOneCountrycode</th>
+                <td>{{ customer.adrOneCountrycode }}</td>
+            </tr>
+            <tr>
+                <th>AdrTwoCountrycode</th>
+                <td>{{ customer.adrTwoCountrycode }}</td>
+            </tr>
+            <tr>
+                <th>CarddavName</th>
+                <td>{{ customer.carddavName }}</td>
+            </tr>
+            <tr>
+                <th>ContactFiles</th>
+                <td>{{ customer.contactFiles ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_customer_index') }}">back to list</a>
+
+    <a href="{{ path('app_customer_edit', {'contactId': customer.contactId}) }}">edit</a>
+
+    {{ include('customer/_delete_form.html.twig') }}
+{% endblock %}
