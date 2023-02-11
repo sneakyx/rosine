@@ -24,6 +24,7 @@ services:
       - "${PORT_MARIADB}:3306"
     volumes:
       - "${ROSINE_MARIADB_FOLDER}:/var/lib/mysql"
+      - "${SWAP_FOLDER}:/home/swap"
     networks:
       - backend
 
