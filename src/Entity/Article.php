@@ -2,12 +2,13 @@
 
 namespace App\Entity;
 
+use App\Repository\ArticleRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Article
  */
-#[ORM\Entity]
+#[ORM\Entity(repositoryClass: ArticleRepository::class)]
 #[ORM\Table(name: "rosine_articles")]
 class Article
 {
