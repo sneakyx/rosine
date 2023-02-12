@@ -23,4 +23,6 @@ RUN echo "#!/bin/bash \n\
 RUN chmod +x /bin/entrypoint.sh
 # change php setting for update and composer
 RUN sed -i -e '/memory_limit =/ s/= .*/= 256M/' /etc/php/8.1/cli/php.ini
+RUN curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.deb.sh' | sudo -E bash
+RUN apt-get install symfony-cli -y
 ENTRYPOINT ["/bin/entrypoint.sh"]
