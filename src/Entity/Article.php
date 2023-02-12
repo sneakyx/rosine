@@ -6,82 +6,73 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Article
- *
- * @ORM\Table(name="rosine_articles")
- * @ORM\Entity
  */
+#[ORM\Entity]
+#[ORM\Table(name: "rosine_articles")]
 class Article
 {
     /**
      * @var string
-     *
-     * @ORM\Column(name="ART_NUMBER", type="string", length=40, nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
+
+    #[ORM\Column(name: "ART_NUMBER", type: "string", length: 40, nullable: false)]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: "IDENTITY")]
     private string $artNumber;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="ART_NAME", type="string", length=255, nullable=false)
      */
+    #[ORM\Column(name: "ART_NAME", type: "string", length: 255, nullable: false)]
     private string $artName;
 
     /**
      * @var string|null
-     *
-     * @ORM\Column(name="ART_UNIT", type="string", length=20, nullable=true)
      */
+    #[ORM\Column(name: "ART_UNIT", type: "string", length: 20, nullable: true)]
     private ?string $artUnit;
 
     /**
      * @var string|null
-     *
-     * @ORM\Column(name="ART_PRICE", type="decimal", precision=8, scale=2, nullable=true)
      */
+    #[ORM\Column(name: "ART_PRICE", type: "decimal", precision: 8, scale: 2, nullable: true)]
     private ?string $artPrice;
 
     /**
      * @var bool|null
-     *
-     * @ORM\Column(name="ART_TAX", type="boolean", nullable=true, options={"default"="1"})
      */
+
+    #[ORM\Column(name: "ART_TAX", type: "boolean", nullable: true, options: ["default" => "1"])]
     private ?bool $artTax = true;
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="ART_STOCKNR", type="smallint", nullable=false, options={"default"="1"})
      */
-    private string|int $artStocknr = '1';
+    #[ORM\Column(name: "ART_STOCKNR", type: "smallint", nullable: false, options: ["default" => "1"])]
+    private int $artStocknr = 1;
 
     /**
      * @var int|null
-     *
-     * @ORM\Column(name="ART_INSTOCK", type="integer", nullable=true)
      */
+    #[ORM\Column(name: "ART_INSTOCK", type: "integer ", nullable: true)]
     private ?int $artInstock;
 
     /**
      * @var string|null
-     *
-     * @ORM\Column(name="ART_NOTE", type="string", length=1100, nullable=true)
      */
+    #[ORM\Column(name: "ART_NOTE", type: "string", length: 1100, nullable: true)]
     private ?string $artNote;
 
     /**
      * @var string|null
-     *
-     * @ORM\Column(name="GENERATED", type="string", length=100, nullable=true)
      */
+    #[ORM\Column(name: "GENERATED", type: "string", length: 100, nullable: true)]
     private ?string $generated;
 
     /**
      * @var string|null
-     *
-     * @ORM\Column(name="CHANGED", type="string", length=100, nullable=true)
      */
+    #[ORM\Column(name: "CHANGED", type: "string", length: 100, nullable: true)]
     private ?string $changed;
 
     /**
@@ -95,9 +86,10 @@ class Article
     /**
      * @param string $artNumber
      */
-    public function setArtNumber(string $artNumber): void
+    public function setArtNumber(string $artNumber): Article
     {
         $this->artNumber = $artNumber;
+        return $this;
     }
 
     /**
@@ -111,9 +103,10 @@ class Article
     /**
      * @param string $artName
      */
-    public function setArtName(string $artName): void
+    public function setArtName(string $artName): Article
     {
         $this->artName = $artName;
+        return $this;
     }
 
     /**
@@ -127,9 +120,10 @@ class Article
     /**
      * @param string|null $artUnit
      */
-    public function setArtUnit(?string $artUnit): void
+    public function setArtUnit(?string $artUnit): Article
     {
         $this->artUnit = $artUnit;
+        return $this;
     }
 
     /**
@@ -143,9 +137,10 @@ class Article
     /**
      * @param string|null $artPrice
      */
-    public function setArtPrice(?string $artPrice): void
+    public function setArtPrice(?string $artPrice): Article
     {
         $this->artPrice = $artPrice;
+        return $this;
     }
 
     /**
@@ -159,25 +154,27 @@ class Article
     /**
      * @param bool|null $artTax
      */
-    public function setArtTax(?bool $artTax): void
+    public function setArtTax(?bool $artTax): Article
     {
         $this->artTax = $artTax;
+        return $this;
     }
 
     /**
-     * @return int|string
+     * @return int
      */
-    public function getArtStocknr(): int|string
+    public function getArtStocknr(): int
     {
         return $this->artStocknr;
     }
 
     /**
-     * @param int|string $artStocknr
+     * @param int $artStocknr
      */
-    public function setArtStocknr(int|string $artStocknr): void
+    public function setArtStocknr(int $artStocknr): Article
     {
         $this->artStocknr = $artStocknr;
+        return $this;
     }
 
     /**
@@ -191,9 +188,10 @@ class Article
     /**
      * @param int|null $artInstock
      */
-    public function setArtInstock(?int $artInstock): void
+    public function setArtInstock(?int $artInstock): Article
     {
         $this->artInstock = $artInstock;
+        return $this;
     }
 
     /**
@@ -207,9 +205,10 @@ class Article
     /**
      * @param string|null $artNote
      */
-    public function setArtNote(?string $artNote): void
+    public function setArtNote(?string $artNote): Article
     {
         $this->artNote = $artNote;
+        return $this;
     }
 
     /**
@@ -223,9 +222,10 @@ class Article
     /**
      * @param string|null $generated
      */
-    public function setGenerated(?string $generated): void
+    public function setGenerated(?string $generated): Article
     {
         $this->generated = $generated;
+        return $this;
     }
 
     /**
@@ -239,9 +239,10 @@ class Article
     /**
      * @param string|null $changed
      */
-    public function setChanged(?string $changed): void
+    public function setChanged(?string $changed): Article
     {
         $this->changed = $changed;
+        return $this;
     }
 
 
