@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Exception;
 
 /**
  * Article
@@ -12,13 +13,22 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Table(name: "rosine_articles")]
 class Article
 {
+
+
+    /**
+     * @var int
+     */
+
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: "AUTO")]
+    #[ORM\Column(name: "ID", type: "integer", nullable: false)]
+    private int $id;
+
     /**
      * @var string
      */
 
     #[ORM\Column(name: "ART_NUMBER", type: "string", length: 40, nullable: false)]
-    #[ORM\Id]
-    #[ORM\GeneratedValue(strategy: "IDENTITY")]
     private string $artNumber;
 
     /**
@@ -55,7 +65,7 @@ class Article
     /**
      * @var int|null
      */
-    #[ORM\Column(name: "ART_INSTOCK", type: "integer ", nullable: true)]
+    #[ORM\Column(name: "ART_INSTOCK", type: "integer", nullable: true)]
     private ?int $artInstock;
 
     /**
@@ -86,6 +96,7 @@ class Article
 
     /**
      * @param string $artNumber
+     * @return Article
      */
     public function setArtNumber(string $artNumber): Article
     {
@@ -103,6 +114,7 @@ class Article
 
     /**
      * @param string $artName
+     * @return Article
      */
     public function setArtName(string $artName): Article
     {
@@ -120,6 +132,7 @@ class Article
 
     /**
      * @param string|null $artUnit
+     * @return Article
      */
     public function setArtUnit(?string $artUnit): Article
     {
@@ -137,6 +150,7 @@ class Article
 
     /**
      * @param string|null $artPrice
+     * @return Article
      */
     public function setArtPrice(?string $artPrice): Article
     {
@@ -154,6 +168,7 @@ class Article
 
     /**
      * @param bool|null $artTax
+     * @return Article
      */
     public function setArtTax(?bool $artTax): Article
     {
@@ -171,6 +186,7 @@ class Article
 
     /**
      * @param int $artStocknr
+     * @return Article
      */
     public function setArtStocknr(int $artStocknr): Article
     {
@@ -188,6 +204,7 @@ class Article
 
     /**
      * @param int|null $artInstock
+     * @return Article
      */
     public function setArtInstock(?int $artInstock): Article
     {
@@ -205,6 +222,7 @@ class Article
 
     /**
      * @param string|null $artNote
+     * @return Article
      */
     public function setArtNote(?string $artNote): Article
     {
@@ -222,6 +240,7 @@ class Article
 
     /**
      * @param string|null $generated
+     * @return Article
      */
     public function setGenerated(?string $generated): Article
     {
@@ -239,6 +258,7 @@ class Article
 
     /**
      * @param string|null $changed
+     * @return Article
      */
     public function setChanged(?string $changed): Article
     {
@@ -246,5 +266,12 @@ class Article
         return $this;
     }
 
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
 
 }
